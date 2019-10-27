@@ -1,0 +1,159 @@
+<template>
+    <div class="header-wrap">
+        <div class="layout">
+            <div class="log fl">
+                <img-icon type="logo" w=149 h=47 m="26 0 0 0"></img-icon>
+            </div>
+            <div class="nav fr">
+                <ul class="ul-01">
+                    <li class="tra" 
+                        v-for="(item,index) in navList" 
+                        :key="item.name" 
+                        :class="{active: index==activeIndex}"
+                        @click="onClick(item)"
+                        @mouseleave="onMouseOut"
+                        @mouseenter="onMouseOver(index)">
+                        <span>{{item.name}}</span>
+
+                        <ul class="ul-02" 
+                            :class="{'ul-03':item.children&&item.children.length>4}" 
+                            v-if="item.children&&hoverIndex==index">
+                            <li v-for="item02 in item.children">{{item02.name}}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <transition name="top">
+            <ul class="down-bg" :class="{}" v-show="isShowChild">
+                <!-- <li v-for="item02 in navList[1].children">{{item02.name}}</li> -->
+            </ul>
+        </transition>
+        
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            activeIndex: 0,
+            isShowChild: false,
+            hoverIndex: 0,
+        }
+    },
+    methods: {
+        onMouseOver(index) {
+            let mouseItem = this.navList[index]
+            this.hoverIndex = index
+
+            console.log('12')
+            if(mouseItem.children) {
+                this.isShowChild = true
+            }else{
+                this.isShowChild = false
+            }
+        },
+        onMouseOut() {
+            console.log('21')
+            this.isShowChild = false
+        },
+        onClick(item) {
+            console.log(12)
+        },
+        _initData() {
+            this.navList = [
+                { name: '首页', path: '' },
+                { name: '走进碧城', path: '', 
+                    children: [
+                        { name: '公司简介', path: '' },
+                        { name: '组织架构', path: '' },
+                        { name: '资质荣誉', path: '' },
+                    ] 
+                },
+                { name: '产品介绍', path: '',
+                    children: [
+                        { name: '产品1', path: '' },
+                        { name: '产品2', path: '' },
+                        { name: '产品3', path: '' },
+                        { name: '产品4', path: '' },
+                        { name: '产品5', path: '' },
+                    ]  
+                },
+                { name: '场景方案', path: '' },
+                { name: '合作伙伴', path: '' },
+                { name: '项目案例', path: '' },
+                { name: '联系我们', path: '' },
+            ]
+        }
+    },
+    computed: {
+        childLength() {
+            return this.navList[this.hoverIndex].children.length
+        }
+    },
+    created() {
+        this._initData()
+    }
+}
+</script>
+
+<style lang="stylus" scoped>
+$blue = #17a7da
+
+.header-wrap{
+    height:100px; position: relative; z-index: 10; background:#fff;
+    .nav{
+        .ul-01>li{
+            float:left; padding: 0 3px; margin:0 20px; line-height: 100px; cursor:pointer;
+            position: relative;
+            &:before{
+                content: "";height:3px; width:0%; position:absolute; top:0; left:50%; background: $blue; 
+                tra(); transition: all 0.3s ease; transform: translateX(-50%);
+            }
+            &.active,&:hover{
+                span {
+                    color: $blue;
+                }
+                &:before{
+                    width: 100%;    
+                }
+            }
+        }
+    }
+}
+
+.down-bg{
+    background:rgba(34,34,34,0.4); color: #fff; width:100%; position: absolute; top: 100px;height:70px; z-index:1;
+    &.moreRow{
+        height: 300px;
+    }
+}
+
+.ul-02{
+    top: 100%; width: 400px; left: 0; position: absolute; z-index: 1; color:#fff;
+    >li {
+        float:left; margin-right: 40px; line-height: 70px; height:70px;
+
+        &.active,&:hover{
+           color: $blue;
+        }
+    }
+}
+
+.ul-03 >li{
+    width: 160px;
+}
+
+.top-enter-active, .top-leave-active {
+  transition: top .5s;
+}
+.top-enter-to, .top-leave {
+    top: 0;
+}
+.top-enter, .top-leave-to{
+    top: -100%;
+}
+
+</style>

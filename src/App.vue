@@ -1,36 +1,32 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>    
+	<div id="app">
+		<m-header></m-header>
+		<router-view></router-view>
+		<m-footer></m-footer>
+	</div>    
 </template>
 
 <script>
+import MHeader from "./components/header"
+import MFooter from "./components/footer"
+
 
 export default {
-  name: 'app',
-  data() {
-    return {
-      msg: '112'
-    }
-  },
-  methods: {
-    onClick(value) {
-      this.msg="222"
-    }
-  },
-  components: {
-    
-  }
+	name: '',
+	data() {
+		return {
+			
+		}
+	},
+	methods: {
+	},
+	components: {
+		MHeader, MFooter
+	}	
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="stylus">
+@import 'common/stylus/index.styl';
+
 </style>
