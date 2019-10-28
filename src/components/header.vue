@@ -63,6 +63,7 @@ export default {
         },
         onClick(item) {
             //console.log(12)
+            this.$router.push(item.path)
         },
         _initData() {
             this.navList = [
@@ -83,7 +84,7 @@ export default {
                         { name: '产品5', path: '' },
                     ]
                 },
-                { name: '场景方案', path: '' },
+                { name: '场景方案', path: '/introduce' },
                 { name: '合作伙伴', path: '' },
                 { name: '项目案例', path: '' },
                 { name: '联系我们', path: '' },

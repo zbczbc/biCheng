@@ -14,7 +14,7 @@ body, html
   color: $color-text
 
 
-.clearfix:after
+.clearfix:after, .layout:after
   content:"."
   display:block
   height:0
@@ -178,21 +178,33 @@ textarea:focus:-ms-input-placeholder {
     }
 }
 
+$mHeaderHei = 50px;
+
+
 @media (max-width: 1024px) {
     .layout{
         width: 100%; padding:0 10px;
     }
     
     .header-wrap{
-        height: 50px;
+        height: mHeaderHei;
         .log{
             width: 100px;
             .image-box{
                 margin-top: 15px !important;
             }
         }
-        .nav{
-            display: none;
-        }
     }
+
+    .nav{ 
+        display: block; position:absolute; height:100%; position:fixed; height:100%; width:100%;
+        padding-top: $mHeaderHei;
+        .ul-01{
+            li {
+                display:block; width: 100%;
+                &.active{
+                }
+            }
+        }
+     }
 }

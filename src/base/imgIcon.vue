@@ -54,6 +54,9 @@ iconUrl($url) {
   &.menu {
       iconUrl('menu.png')
   }
+  &.mClose {
+      iconUrl('mClose.png')
+  }
 }
 
 

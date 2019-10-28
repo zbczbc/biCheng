@@ -18,13 +18,13 @@ export default new Router({
     mode: 'history',
     routes: [
         { path: '/', name: 'index', component: Index },
-        { path: '/main', name: 'introduce', component: Introduce },
+        { path: '/introduce', name: 'introduce', component: Introduce },
         { path: '/header',  name: 'org', component: Org},
-        { path: '/admin',  name: 'honor', component: Honor},
-        { path: '/admin',  name: 'production', component: Production},
-        { path: '/admin',  name: 'scene', component: Scene},
-        { path: '/admin',  name: 'partner', component: Partner},
-        { path: '/admin',  name: 'case', component: Case},
-        { path: '/admin',  name: 'contact', component: contact},
+        { path: '/honor',  name: 'honor', component: Honor},
+        { path: '/production',  name: 'production', component: Production},
+        { path: '/scene',  name: 'scene', component: Scene},
+        { path: '/partner',  name: 'partner', component: Partner},
+        { path: '/case',  name: 'case', component: Case},
+        { path: '/contact',  name: 'contact', component: contact},
     ]
 })
