@@ -24,5 +24,6 @@ module.exports = {
       .set("base", resolve("src/base"))
       .set("common", resolve("src/common"))
       .set("assets", resolve("src/assets"));
+
   }
 };

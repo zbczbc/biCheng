@@ -6,17 +6,17 @@
             </div>
             <div class="nav fr">
                 <ul class="ul-01">
-                    <li class="tra" 
-                        v-for="(item,index) in navList" 
-                        :key="item.name" 
+                    <li class="tra"
+                        v-for="(item,index) in navList"
+                        :key="item.name"
                         :class="{active: index==activeIndex}"
                         @click="onClick(item)"
                         @mouseleave="onMouseOut"
                         @mouseenter="onMouseOver(index)">
                         <span>{{item.name}}</span>
 
-                        <ul class="ul-02" 
-                            :class="{'ul-03':item.children&&item.children.length>4}" 
+                        <ul class="ul-02"
+                            :class="{'ul-03':item.children&&item.children.length>4}"
                             v-if="item.children&&hoverIndex==index">
                             <li v-for="item02 in item.children">{{item02.name}}</li>
                         </ul>
@@ -25,12 +25,14 @@
             </div>
         </div>
 
-        <transition name="top">
-            <ul class="down-bg" :class="{}" v-show="isShowChild">
-                <!-- <li v-for="item02 in navList[1].children">{{item02.name}}</li> -->
-            </ul>
-        </transition>
-        
+        <ul class="down-bg ani-hei" :class="bgClass">
+            <!-- <li v-for="item02 in navList[1].children">{{item02.name}}</li> -->
+        </ul>
+
+        <div class="icon por">
+            <img-icon type="menu" w=64 h=64 m="26 0 0 0"></img-icon>
+        </div>
+
     </div>
 </template>
 
@@ -47,8 +49,7 @@ export default {
         onMouseOver(index) {
             let mouseItem = this.navList[index]
             this.hoverIndex = index
-
-            console.log('12')
+            //console.log('12')
             if(mouseItem.children) {
                 this.isShowChild = true
             }else{
@@ -56,21 +57,21 @@ export default {
             }
         },
         onMouseOut() {
-            console.log('21')
+            //console.log('21')
             this.isShowChild = false
         },
         onClick(item) {
-            console.log(12)
+            //console.log(12)
         },
         _initData() {
             this.navList = [
                 { name: '首页', path: '' },
-                { name: '走进碧城', path: '', 
+                { name: '走进碧城', path: '',
                     children: [
                         { name: '公司简介', path: '' },
                         { name: '组织架构', path: '' },
                         { name: '资质荣誉', path: '' },
-                    ] 
+                    ]
                 },
                 { name: '产品介绍', path: '',
                     children: [
@@ -79,7 +80,7 @@ export default {
                         { name: '产品3', path: '' },
                         { name: '产品4', path: '' },
                         { name: '产品5', path: '' },
-                    ]  
+                    ]
                 },
                 { name: '场景方案', path: '' },
                 { name: '合作伙伴', path: '' },
@@ -89,8 +90,13 @@ export default {
         }
     },
     computed: {
-        childLength() {
-            return this.navList[this.hoverIndex].children.length
+        bgClass() {
+            let childNav = this.navList[this.hoverIndex].children
+            if( childNav ) {
+                return childNav.length > 4 ? 'moreRow' : 'oneRow'
+            }else{
+                return ""
+            }
         }
     },
     created() {
@@ -109,15 +115,15 @@ $blue = #17a7da
             float:left; padding: 0 3px; margin:0 20px; line-height: 100px; cursor:pointer;
             position: relative;
             &:before{
-                content: "";height:3px; width:0%; position:absolute; top:0; left:50%; background: $blue; 
-                tra(); transition: all 0.3s ease; transform: translateX(-50%);
+                content: "";height:3px; width:0%; position:absolute; top:0; left:50%; background: $blue;
+                transition: all 0.3s ease; transform: translateX(-50%);
             }
             &.active,&:hover{
                 span {
                     color: $blue;
                 }
                 &:before{
-                    width: 100%;    
+                    width: 100%;
                 }
             }
         }
@@ -125,9 +131,13 @@ $blue = #17a7da
 }
 
 .down-bg{
-    background:rgba(34,34,34,0.4); color: #fff; width:100%; position: absolute; top: 100px;height:70px; z-index:1;
+    background:rgba(34,34,34,0.4); color: #fff; width:100%; position: absolute; top: 100px; z-index:1;
+    height: 0;
     &.moreRow{
         height: 300px;
+    }
+    &.oneRow{
+        height: 70px;
     }
 }
 
@@ -146,14 +156,15 @@ $blue = #17a7da
     width: 160px;
 }
 
-.top-enter-active, .top-leave-active {
-  transition: top .5s;
+@media (max-width: 1366px) {
+    .header-wrap{
+        height: 70px;
+
+        .nav{
+            display: none;
+        }
+    }
 }
-.top-enter-to, .top-leave {
-    top: 0;
-}
-.top-enter, .top-leave-to{
-    top: -100%;
-}
+
 
 </style>
