@@ -61,7 +61,8 @@ export default {
             this.isShowChild = false
             this.hoverIndex = 0
         },
-        onClick(item) {
+        onClick(item) {   
+            
             //console.log(12)
         },
         _initData() {
