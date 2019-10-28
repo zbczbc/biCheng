@@ -169,5 +169,30 @@ textarea:focus:-ms-input-placeholder {
 
 
 .layout{
-  width:80%; max-width:1460px; margin:0 auto;
+  width:80%; max-width:1460px; margin:0 auto; box-sizing:border-box;
+}
+
+@media (min-width: 1024px) and (max-width: 1600px) { 
+    .header-wrap{
+        height: 100px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .layout{
+        width: 100%; padding:0 10px;
+    }
+    
+    .header-wrap{
+        height: 50px;
+        .log{
+            width: 100px;
+            .image-box{
+                margin-top: 15px !important;
+            }
+        }
+        .nav{
+            display: none;
+        }
+    }
 }

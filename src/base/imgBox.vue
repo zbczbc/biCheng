@@ -1,14 +1,18 @@
 
 <template>
   <div :style="setContainerStyle()" class="image-box">
-    <img v-if="ImageUrl&&!isLoadFail" class="image" :src="ImageUrl" @error="onError">
+    <img v-if="url&&!isLoadFail" class="image" :src="ImageUrl" @error="onError">
     <template v-else>
-      <img  class="image" v-if="isNeedDefault" src="../assets/icones/default.png" alt="">
+      <img  class="image" :src="imgURL" alt="">
     </template>
   </div>
 </template>
 <script type='text/ecmascript-6'>
 import { isUndefined,isString } from "common/js/util";
+
+const TYPE_MAP = {
+	logo: 'logo.png'
+}
 
 export default {
 	props: {
@@ -22,7 +26,8 @@ export default {
 		url: {
 			type: String
 		},
-		br: {}
+		br: {},
+		type: {}
 	},
 	data() {
 		return {
@@ -30,13 +35,9 @@ export default {
 		};
 	},
 	computed: {
-		ImageUrl() {
-            let _url = this.url
-			this.isLoadFail = false
-            if(isIdNumber(_url)){
-                _url = getPicture(_url)
-            }
-			return _url
+		imgURL() {
+			console.log('../assets/icones/'+TYPE_MAP[this.type])
+			return 'static/'+TYPE_MAP[this.type]
 		}
 	},
 	methods: {
@@ -68,6 +69,5 @@ export default {
 .image {
   display: block;
   width: 100%;
-  height: 100%;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <div class="header-wrap">
         <div class="layout">
-            <div class="log fl">
-                <img-icon type="logo" w=149 h=47 m="26 0 0 0"></img-icon>
+            <div class="log fl" >
+                <img-box type="logo" m="26 0 0 0"></img-box>
             </div>
             <div class="nav fr">
                 <ul class="ul-01">
@@ -30,7 +30,7 @@
         </ul>
 
         <div class="icon por">
-            <img-icon type="menu" w=64 h=64 m="26 0 0 0"></img-icon>
+            <img-icon type="menu" w=28 h=28 m="15 10 0 0"></img-icon>
         </div>
 
     </div>
@@ -49,7 +49,7 @@ export default {
         onMouseOver(index) {
             let mouseItem = this.navList[index]
             this.hoverIndex = index
-            //console.log('12')
+            
             if(mouseItem.children) {
                 this.isShowChild = true
             }else{
@@ -57,8 +57,9 @@ export default {
             }
         },
         onMouseOut() {
-            //console.log('21')
+           
             this.isShowChild = false
+            this.hoverIndex = 0
         },
         onClick(item) {
             //console.log(12)
@@ -109,7 +110,7 @@ export default {
 $blue = #17a7da
 
 .header-wrap{
-    height:100px; position: relative; z-index: 10; background:#fff;
+    position: relative; z-index: 10; background:#fff; position: fixed; width: 100%;
     .nav{
         .ul-01>li{
             float:left; padding: 0 3px; margin:0 20px; line-height: 100px; cursor:pointer;
@@ -156,15 +157,6 @@ $blue = #17a7da
     width: 160px;
 }
 
-@media (max-width: 1366px) {
-    .header-wrap{
-        height: 70px;
-
-        .nav{
-            display: none;
-        }
-    }
-}
 
 
 </style>
