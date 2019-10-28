@@ -28,7 +28,7 @@ export default {
       } else if (isUndefined(this.h)) {
         style += `height:100%;`;
       }
-      console.log(style)
+     
       return style;
     }
   }
@@ -36,9 +36,6 @@ export default {
 </script>
 <style scoped lang='stylus'>
 
-iconUrl($url) {
-    background-image: url('../assets/icones/' + $url);
-}
 
 .icon {
   display: block;
@@ -56,6 +53,9 @@ iconUrl($url) {
   }
   &.mClose {
       iconUrl('mClose.png')
+  }
+  &.play {
+      iconUrl('play.png')
   }
 }
 

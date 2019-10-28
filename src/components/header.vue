@@ -4,9 +4,9 @@
             <div class="log fl" >
                 <img-box type="logo" m="26 0 0 0"></img-box>
             </div>
-            <div class="nav fr">
+            <div class="nav fr ani-hei" :class="{open: navOpen}">
                 <ul class="ul-01">
-                    <li class="tra"
+                    <li 
                         v-for="(item,index) in navList"
                         :key="item.name"
                         :class="{active: index==activeIndex}"
@@ -30,7 +30,7 @@
         </ul>
 
         <div class="icon por">
-            <img-icon type="menu" w=28 h=28 m="15 10 0 0"></img-icon>
+            <img-icon type="menu" @onClick="navOpen=!navOpen" w=28 h=28 m="15 10 0 0"></img-icon>
         </div>
 
     </div>
@@ -43,6 +43,7 @@ export default {
             activeIndex: 0,
             isShowChild: false,
             hoverIndex: 0,
+            navOpen: false
         }
     },
     methods: {
@@ -109,28 +110,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '~common/stylus/header.styl';
+
 $blue = #17a7da
 
 .header-wrap{
     position: relative; z-index: 10; background:#fff; position: fixed; width: 100%;
-    .nav{
-        .ul-01>li{
-            float:left; padding: 0 3px; margin:0 20px; line-height: 100px; cursor:pointer;
-            position: relative;
-            &:before{
-                content: "";height:3px; width:0%; position:absolute; top:0; left:50%; background: $blue;
-                transition: all 0.3s ease; transform: translateX(-50%);
-            }
-            &.active,&:hover{
-                span {
-                    color: $blue;
-                }
-                &:before{
-                    width: 100%;
-                }
-            }
-        }
-    }
 }
 
 .down-bg{
@@ -159,6 +144,9 @@ $blue = #17a7da
     width: 160px;
 }
 
+.icon{ 
+    display: none;
+}
 
 
 </style>

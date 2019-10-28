@@ -5,6 +5,7 @@ import router from "./router"
 
 import base from 'common/mixins/base'
 import baseComponent from "base/index"
+import 'swiper/css/swiper.css'
 
 Vue.config.productionTip = false
 Vue.mixin(base)

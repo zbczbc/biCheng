@@ -1,6 +1,6 @@
 <template>
-<div>
- wox1
+<div class="introduce">
+我是
 <bread-nav style="100%"></bread-nav>
 
 </div>
@@ -9,6 +9,7 @@
 
 <script>
 import Breadnav from "../components/breadnav"
+
 export default {
     components:{
         Breadnav

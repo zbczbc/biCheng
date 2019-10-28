@@ -20,6 +20,19 @@ export default {
 	},
 	methods: {
 	},
+	created() {
+		window.onresize = () => {
+			let _w = window.innerWidth,
+				_h = window.innerHeight;
+				
+            if(_w < 768) {
+				this.$root.$emit('onChangeWindow', )
+			}else{
+				this.$root.$emit('onChangeWindow', )
+			}
+            
+        }
+	},
 	components: {
 		MHeader, MFooter
 	}	
