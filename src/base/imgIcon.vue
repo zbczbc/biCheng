@@ -56,6 +56,9 @@ export default {
   &.play {
       iconUrl('play.png')
   }
+  &.icon_11 {
+      iconUrl('icon_11.png')
+  }
 }
 
 

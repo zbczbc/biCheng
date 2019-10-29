@@ -1,9 +1,13 @@
 <template>
     <div class="footer-wrap">
-        <div class="links-box">
-            <span>法律声明</span>
-            <span>网站地图</span>
-            <span>技术支持</span>
+        <div class="layout">
+            <div class="links-box fl">
+                <span>法律声明</span>
+                <span>技术支持</span>
+            </div>
+            <div class="txt-box fr">
+                佛山市顺德区碧桂园物业发展有限公司版权所有 粤 icp 备 05055114 号-1
+            </div>
         </div>
     </div>
 </template>
@@ -35,11 +39,30 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
+
 .footer-wrap
-    height 70px; background #333; color #fff; 
+    height 70px; background #333; color #fff; overflow hidden
     .links-box
-        display: flex; align-items center
+        height 70px; display flex; align-items center; width 40%; 
         span   
-            padding  20px; 
+            padding 0 5%; display inline-block;
+            &:first-child
+                border-right 1px solid #fff;
+    .txt-box
+        line-height 70px; 
+
+@media (max-width: 768px) 
+    #app
+	    padding-top $mHeaderHei;
+    .footer-wrap
+        text-align: center;
+        .links-box
+            width: 100%; height: 40px; float: none; justify-content center;
+        .txt-box
+            line-height 20px; line1(); float: none; 
+
+
+
+
 </style>

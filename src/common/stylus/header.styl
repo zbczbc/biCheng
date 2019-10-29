@@ -1,5 +1,5 @@
 .header-wrap{
-    position: relative; z-index: 10; background:#fff; position: fixed; width: 100%;
+    z-index: 10; background:#fff; position: fixed; width: 100%; top: 0;
 
     .ul-02{
         top: 100%; width: 400px; left: 0; position: absolute; z-index: 1; color:#fff;
@@ -7,7 +7,7 @@
             float:left; margin-right: 40px; line-height: 70px; height:70px;
 
             &.active,&:hover{
-            color: $blue;
+                color: $blue;
             }
         }
     }
@@ -29,22 +29,16 @@
 
 }
 
-
-$mHeaderHei = 50px;
-$mGag = 10px;
 $border = 1px dashed #666;
 
 @media (max-width: 768px) {
-    .layout{
-        width: 100%; padding:0 $mGag;
-    }
 
     .header-wrap{
         height: $mHeaderHei;
 
         &.nav-open {
             .nav {
-                height:100%; padding-top: 100px;
+                height:100%; padding-top: $mHeaderHei;
                 .ul-01{
                     display block;
                 }
@@ -64,7 +58,7 @@ $border = 1px dashed #666;
         }
         .nav{
             position:absolute; height:0; position:fixed; height:0; width:100%;
-            left:0; overflow:hidden; background: #333; color:#fff; transform: translateY(-50px);
+            left:0; overflow:hidden; background: #333; color:#fff; 
             .ul-01{
                 padding: 0 10px; display none;
                 >li {
@@ -89,7 +83,7 @@ $border = 1px dashed #666;
             }
         }
         .m-top {
-            height: 50px;  position fixed; width 100%; top: 0; left:0;
+            height: $mHeaderHei;  position fixed; width 100%; top: 0; left:0;
         }
     }
 
@@ -121,8 +115,6 @@ $border = 1px dashed #666;
             }
         }
     }
-
-
 
 }
 

@@ -1,19 +1,30 @@
 //按钮鼠标浮上去
 $blue = #17a7da
+$mGag = 10px;
+$mHeaderHei = 60px;
+$color-text = #fff;
 
 tra()
  transition: all 0.3s ease;
 
 iconUrl(url) {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
     background-image: url('../assets/icones/' + url);
 }
 
 iconBg() {
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+    
 }
 
 r(num) {
     num = num * 1deg
     transform:rotate(num);
+}
+
+line1() {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

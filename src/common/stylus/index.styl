@@ -2,4 +2,37 @@
 @import "./base.styl"
 @import "./transition.styl"
 
+
+
+#app
+	padding-top 100px;
+
+@media (max-width: 768px) {
+    #app { 
+        padding-top: $mHeaderHei;
+        .index-banner{
+            .tit {
+                font-size: 20px;    
+            }
+            .sub-tit {
+                font-size: 16px; 
+            }
+            .sub-desc { 
+                font-size: 14px; height: 30px; line-height: 30px;  
+            }
+        
+        }    
+    }
+    .layout { max-width: 100%; padding: 0 $mGap; }
+          
+}
+    
+   
+
+    
+
+
+
+
+// @media (min-width: 769px) 
     

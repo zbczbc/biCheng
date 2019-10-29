@@ -34,6 +34,7 @@ export default {
 				this.$root.$emit('onChangeToPC', { _w, _h })
 			}
 
+			console.log(_h)
 			Vue.prototype.$device = { isM,  isPC}
 		}
 	},
@@ -53,5 +54,4 @@ export default {
 
 <style lang="stylus">
 @import 'common/stylus/index.styl';
-
 </style>
