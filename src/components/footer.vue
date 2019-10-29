@@ -1,6 +1,10 @@
 <template>
-    <div class="header-wrap layout">
-        
+    <div class="footer-wrap">
+        <div class="links-box">
+            <span>法律声明</span>
+            <span>网站地图</span>
+            <span>技术支持</span>
+        </div>
     </div>
 </template>
 
@@ -32,7 +36,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.header-wrap{
-    height:100px;
-}
+.footer-wrap
+    height 70px; background #333; color #fff; 
+    .links-box
+        display: flex; align-items center
+        span   
+            padding  20px; 
 </style>

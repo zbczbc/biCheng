@@ -4,9 +4,9 @@
             <div class="swiper-slide" v-for="item in list" :key="item.index">
                 <div class="bg-box"  :style="{backgroundImage: 'url(' + item.src + ')'}"></div>
                 <div class="text-box">
-                    <div class="tit">标题</div>
-                    <div class="sub-tit">标题</div>
-                    <div class="sub-desc">标题</div>
+                    <div class="tit">许明天一个精彩</div>
+                    <div class="sub-tit">智慧城市系统建设及服务商</div>
+                    <div class="sub-desc">把数字技术带入每个城市，让智慧触手可及</div>
                     <img-icon type="play" ></img-icon>
                 </div>
             </div>
