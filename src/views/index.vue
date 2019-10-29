@@ -59,25 +59,26 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import '~common/stylus/mixin.styl';
 
-.index-banner 
+
+.index-banner
     position fixed; height calc(100% - 150px); width 100%;  top 100px;
     .swiper-wrapper
-        height 100%; 
+        height 100%;
         .swiper-slide
             height 100%
     .swiper-button-next
-        right 30px; iconUrl('fff_left.png');
+        right 30px; color #fff;
+    .swiper-button-prev
+        left 20px; color #fff;
+
 .bg-box
     height 100%; width 100%; background-size cover; background-position center
 
 .text-box
-    position absolute; top 0; 
-
+    position absolute; top 0;
 
 
 
 
 </style>
-

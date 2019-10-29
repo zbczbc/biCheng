@@ -4,6 +4,16 @@ $blue = #17a7da
 tra()
  transition: all 0.3s ease;
 
-iconUrl($url) {
-    background-image: url('../assets/icones/' + $url);
+iconUrl(url) {
+    background-image: url('../assets/icones/' + url);
+}
+
+iconBg() {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+r(num) {
+    num = num * 1deg
+    transform:rotate(num);
 }

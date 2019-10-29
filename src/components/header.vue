@@ -1,38 +1,38 @@
 <template>
-    <div class="header-wrap">
+    <div class="header-wrap"  :class="{'nav-open': navOpen}">
         <div class="layout">
-            <div class="log fl" >
-                <img-box type="logo" m="26 0 0 0"></img-box>
+            <div class="log fl" v-if="!whiteLogVisible">
+                <img-box class="pc-logo" :type="logoType" m="26 0 0 0" @onClick="toIndex"></img-box>
             </div>
-            <div class="nav fr ani-hei" :class="{open: navOpen}">
+            <div class="nav fr ani-hei">
                 <ul class="ul-01">
-                    <li 
+                    <li
                         v-for="(item,index) in navList"
                         :key="item.name"
-                        :class="{active: index==activeIndex}"
-                        @click="onClick(item)"
+                        :class="{ active: index==activeIndex, open: item.children&&hoverIndex==index }"
+                        @click="onClickItem(item, index)"
                         @mouseleave="onMouseOut"
-                        @mouseenter="onMouseOver(index)">
+                        @mouseenter="onMouseOver(item, index)">
                         <span>{{item.name}}</span>
 
-                        <ul class="ul-02"
-                            :class="{'ul-03':item.children&&item.children.length>4}"
-                            v-if="item.children&&hoverIndex==index">
-                            <li v-for="item02 in item.children">{{item02.name}}</li>
-                        </ul>
+                        <transition name="height">
+                            <ul class="ul-02"
+                                :class="{'ul-03':item.children&&item.children.length>4}"
+                                v-show="item.children&&hoverIndex==index">
+                                <li v-for="item02 in item.children">{{item02.name}}</li>
+                            </ul>
+                        </transition>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <ul class="down-bg ani-hei" :class="bgClass">
-            <!-- <li v-for="item02 in navList[1].children">{{item02.name}}</li> -->
-        </ul>
+        <div class="down-bg ani-hei" :class="bgClass" v-if="!isM"></div>
 
-        <div class="icon por">
-            <img-icon type="menu" @onClick="navOpen=!navOpen" w=28 h=28 m="15 10 0 0"></img-icon>
+        <div class="m-top" v-if="isM">
+            <img-box v-if="whiteLogVisible" @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="10 0 0 10"></img-box>
+            <img-icon class="menu-icon por" type="menu" @onClick="monToggleNav" w=28 h=28 m="10 10 0 0"></img-icon>
         </div>
-
     </div>
 </template>
 
@@ -43,50 +43,76 @@ export default {
             activeIndex: 0,
             isShowChild: false,
             hoverIndex: 0,
-            navOpen: false
+            navOpen: false,
+            logoType: 'logo',
+            isM: false,
+            whiteLogVisible: false,
+            navList: []
         }
     },
     methods: {
-        onMouseOver(index) {
-            let mouseItem = this.navList[index]
+        onMouseOver(item, index) {
+            if(this.isM)  return
             this.hoverIndex = index
-            
-            if(mouseItem.children) {
+
+            if(item.children) {
                 this.isShowChild = true
             }else{
                 this.isShowChild = false
             }
         },
         onMouseOut() {
-           
             this.isShowChild = false
             this.hoverIndex = 0
         },
-        onClick(item) {   
-            
-            //console.log(12)
-            this.$router.push(item.path)
+        onClickItem(item, index) {
+            if(item.children) {
+                if(this.isM) {
+
+                    if(this.hoverIndex == index) {
+                        this.hoverIndex = 0
+                    }else{
+                        this.hoverIndex = index
+                    }
+                }
+            }else {
+                this.$router.push(item.path)
+            }
+        },
+        monToggleNav() {
+            this.navOpen = !this.navOpen
+
+            if(this.navOpen) {
+                this.logoType = 'mLogo'
+                this.whiteLogVisible = true
+            }else{
+                this.logoType = 'logo'
+            }
+
+        },
+        toIndex() {
+            this.$router.push('/')
         },
         _initData() {
             this.navList = [
-                { name: '首页', path: '' },
+                { name: '首页', path: '/' },
                 { name: '走进碧城', path: '',
                     children: [
-                        { name: '公司简介', path: '' },
-                        { name: '组织架构', path: '' },
-                        { name: '资质荣誉', path: '' },
+                        { name: '公司简介', path: '/contact' },
+                        { name: '组织架构', path: '/org' },
+                        { name: '资质荣誉', path: '/honer' },
                     ]
                 },
                 { name: '产品介绍', path: '',
                     children: [
-                        { name: '产品1', path: '' },
-                        { name: '产品2', path: '' },
-                        { name: '产品3', path: '' },
-                        { name: '产品4', path: '' },
-                        { name: '产品5', path: '' },
+                        { name: '产品1', path: '/product' },
                     ]
                 },
-                { name: '场景方案', path: '/introduce' },
+                { name: '场景方案', path: '/product',
+                    children: [
+                        { name: '方案一',  },
+                    ]
+                },
                 { name: '合作伙伴', path: '' },
                 { name: '项目案例', path: '' },
                 { name: '联系我们', path: '' },
@@ -105,48 +131,12 @@ export default {
     },
     created() {
         this._initData()
+
+        this.isM = this.$device.isM
     }
 }
 </script>
 
 <style lang="stylus" scoped>
 @import '~common/stylus/header.styl';
-
-$blue = #17a7da
-
-.header-wrap{
-    position: relative; z-index: 10; background:#fff; position: fixed; width: 100%;
-}
-
-.down-bg{
-    background:rgba(34,34,34,0.4); color: #fff; width:100%; position: absolute; top: 100px; z-index:1;
-    height: 0;
-    &.moreRow{
-        height: 300px;
-    }
-    &.oneRow{
-        height: 70px;
-    }
-}
-
-.ul-02{
-    top: 100%; width: 400px; left: 0; position: absolute; z-index: 1; color:#fff;
-    >li {
-        float:left; margin-right: 40px; line-height: 70px; height:70px;
-
-        &.active,&:hover{
-           color: $blue;
-        }
-    }
-}
-
-.ul-03 >li{
-    width: 160px;
-}
-
-.icon{ 
-    display: none;
-}
-
-
 </style>

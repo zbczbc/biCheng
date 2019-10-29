@@ -1,35 +1,137 @@
+.header-wrap{
+    position: relative; z-index: 10; background:#fff; position: fixed; width: 100%;
+
+    .ul-02{
+        top: 100%; width: 400px; left: 0; position: absolute; z-index: 1; color:#fff;
+        >li {
+            float:left; margin-right: 40px; line-height: 70px; height:70px;
+
+            &.active,&:hover{
+            color: $blue;
+            }
+        }
+    }
+
+    .ul-03 >li{
+        width: 160px;
+    }
+
+    .down-bg{
+        background:rgba(34,34,34,0.4); color: #fff; width:100%; position: absolute; top: 100px; z-index:1;
+        height: 0;
+        &.moreRow{
+            height: 300px;
+        }
+        &.oneRow{
+            height: 70px;
+        }
+    }
+
+}
+
+
 $mHeaderHei = 50px;
+$mGag = 10px;
+$border = 1px dashed #666;
 
 @media (max-width: 768px) {
     .layout{
-        width: 100%; padding:0 10px;
+        width: 100%; padding:0 $mGag;
     }
-    
+
     .header-wrap{
         height: $mHeaderHei;
+
+        &.nav-open {
+            .nav {
+                height:100%; padding-top: 100px;
+                .ul-01{
+                    display block;
+                }
+            }
+            .m-top {
+                border-bottom: $border;
+            }
+        }
         .log{
             width: 100px;
             .image-box{
-                margin-top: 15px !important;
+                margin-top: 10px !important;
             }
         }
-        .icon {
+        .menu-icon {
             display: block;
+        }
+        .nav{
+            position:absolute; height:0; position:fixed; height:0; width:100%;
+            left:0; overflow:hidden; background: #333; color:#fff; transform: translateY(-50px);
+            .ul-01{
+                padding: 0 10px; display none;
+                >li {
+                    display:block;  width: 100%;
+                    margin: 0; position: relative;
+                    >span {
+                        line-height: 40px; border-bottom: $border; display:block;  width: 100%; display: block;
+                    }
+                    &::after{
+                        content: ""; iconUrl('fff_right.png'); iconBg(); width: 10px; position: absolute; top: 10px; right: 10px; height: 20px;
+                    }
+                    &.open::after{
+                        r(90);
+                    }
+                    >ul{
+                        position: relative; padding-left: 20px;;
+                        li {
+                            height: 30px; line-height: 30px; float: none;
+                         }
+                    }
+                }
+            }
+        }
+        .m-top {
+            height: 50px;  position fixed; width 100%; top: 0; left:0;
         }
     }
 
-    .nav{ 
-        position:absolute; height:0; position:fixed; height:0; width:100%;
-        padding-top: $mHeaderHei; left:0; overflow:hidden; 
-        &.open{ 
-            height:100%; 
+
+}
+
+@media (min-width: 769px) {
+    .header-wrap{
+        height: 100px;
+        .menu-icon{
+            display: none;
         }
-        .ul-01{
-            padding: 0 10px;
-            li {
-                display:block; width: 100%; height: 30px; line-height: 30px; border-bottom: 1px solid #ccc;
-                margin: 0 ;
+        .nav{
+            .ul-01>li{
+                float:left; padding: 0 3px; margin:0 20px; line-height: 100px; cursor:pointer;
+                position: relative;
+                &:before{
+                    content: "";height:3px; width:0%; position:absolute; top:0; left:50%; background: $blue;
+                    transition: all 0.3s ease; transform: translateX(-50%);
+                }
+                &.active,&:hover{
+                    span {
+                        color: $blue;
+                    }
+                    &:before{
+                        width: 100%;
+                    }
+                }
             }
         }
-     }
+    }
+
+
+
 }
+
+// .height-enter-active, .height-leave-active {
+//    transition: transform .5s;
+// }
+// .height-enter-to, .height-leave {
+//     transform: translateY(0);
+// }
+// .height-enter, .height-leave-to{
+//     transform: translateY(-100%);
+// }
