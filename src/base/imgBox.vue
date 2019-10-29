@@ -11,7 +11,7 @@
 import { isUndefined,isString } from "common/js/util";
 
 const TYPE_MAP = {
-	logo: 'logo.png'
+	logo: 'logo.png',
 }
 
 export default {
@@ -36,8 +36,8 @@ export default {
 	},
 	computed: {
 		imgURL() {
-			console.log('../assets/icones/'+TYPE_MAP[this.type])
-			return 'static/'+TYPE_MAP[this.type]
+			let str = TYPE_MAP[this.type] || this.type+'.png'
+			return 'static/'+str
 		}
 	},
 	methods: {

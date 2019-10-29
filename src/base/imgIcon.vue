@@ -28,14 +28,13 @@ export default {
       } else if (isUndefined(this.h)) {
         style += `height:100%;`;
       }
-     
+
       return style;
     }
   }
 };
 </script>
 <style scoped lang='stylus'>
-
 
 .icon {
   display: block;

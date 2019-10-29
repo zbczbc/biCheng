@@ -25,5 +25,12 @@ module.exports = {
       .set("common", resolve("src/common"))
       .set("assets", resolve("src/assets"));
 
+  },
+  css: {
+    loaderOptions: {
+      stylus: {
+        import: resolve("src/common/stylus/mixin.styl")
+      },
+    }
   }
 };
