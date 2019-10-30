@@ -23,10 +23,11 @@ r(num) {
 }
 
 line1() {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+line(line) {
+    text-overflow: -o-ellipsis-lastline; overflow: hidden; text-overflow: ellipsis;
+    display: -webkit-box; -webkit-line-clamp: line; -webkit-box-orient: vertical;
 }
 
 $baseHeight=1080;
@@ -75,4 +76,7 @@ pb() {
 }
 pf() {
     position: fixed;
+}
+bg(value) {
+    background-color: value;
 }

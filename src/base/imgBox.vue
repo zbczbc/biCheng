@@ -1,7 +1,7 @@
 
 <template>
   <div :style="setContainerStyle()" class="image-box">
-    <img v-if="url&&!isLoadFail" class="image" :src="ImageUrl" @error="onError">
+    <img v-if="url&&!isLoadFail" class="image" :src="url" @error="onError">
     <template v-else>
       <img  class="image" :src="imgURL" alt="">
     </template>
