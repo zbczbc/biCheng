@@ -16,7 +16,7 @@
 
                     <div class="icons-group">
                         <div class="list" v-for="item in iconesGroup">
-                            <img-icon :type=item.type class="ilm" :w=item.w :h=item.h />
+                            <img-icon :type=item.type class="ilm" :w=item.w :h=item.h m="0 5 0 0"/>
                             <span class="ilm">{{item.label}}</span>
                         </div>
                     </div>
@@ -82,7 +82,7 @@ export default {
 <style lang="stylus" scoped>
 
 .index-banner
-    height calc(100vh - 171px); width 100%;
+    height calc(100vh - 171px); width 100%; color: #fff;
 
 .swiper-wrapper
     height 100%;
@@ -101,7 +101,7 @@ export default {
     height 100%; width 100%; background-size cover; background-position center
 
 .text-box
-    position absolute; top 20%; text-align center; width 100%;
+    position absolute; top 20%; text-align center; width 100%; 
     .tit
         font-size: px2vw(62);
     .sub-tit

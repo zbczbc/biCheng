@@ -102,7 +102,7 @@ export default {
                 { name: '首页', path: '/' },
                 { name: '走进碧城', path: '',
                     children: [
-                        { name: '公司简介', path: '/contact' },
+                        { name: '公司简介', path: '/introduce' },
                         { name: '组织架构', path: '/org' },
                         { name: '资质荣誉', path: '/honer' },
                     ]

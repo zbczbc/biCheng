@@ -1,6 +1,6 @@
 <template>
-    <div class="footer-wrap">
-        <div class="layout">
+    <div class="footer-wrap" :class="{'in-index': isIndex}">
+        <div class="layout" >
             <div class="f-main clearfix">
                 <div class="links">
                     <dl v-for="link in navList">
@@ -8,7 +8,10 @@
                         <dd v-for="item in link.children">{{item.name}}</dd>
                     </dl>
                 </div>
-                <div class="qr-code"></div>
+                <div class="qr-code pr">
+                    <img-box type="qr" class="ilt"></img-box>
+                    <p>扫一扫关注碧城智慧公众号</p>
+                </div>
             </div>
         </div>
         <div class="f-bottom">
@@ -68,6 +71,12 @@ export default {
             ]
         }
     },
+    computed: {
+        isIndex() {
+            console.log(this.$route.meta.index)
+            return this.$route.meta.index==0
+        }
+    },
     created() {
         this._initData()
     }
@@ -77,9 +86,17 @@ export default {
 <style lang="stylus">
 
 .footer-wrap
-    background #333; color #ccc; overflow hidden
+    background #333; color #999; overflow hidden
+    &.in-index{
+        .f-main { 
+            display: none 
+        }
+        .f-bottom {
+            border-top: 0px none;
+        }
+    }
     .f-bottom
-        height: 70px; border-top: 1px solid #ddd;
+        height: 70px; border-top: 1px solid $c51;
     .links-box
         height 70px; display flex; align-items center; width 40%;
         span
@@ -90,15 +107,29 @@ export default {
         line-height 70px;
 
 .f-main {
+    p(0 0 px2vh(60) 0);
     .links{
+        float: left;
         dl{
-            w(200px);f(left);p(100px 0 0 0); fz(16px); lh(35px);
+            w(px2vh(180));f(left);p(px2vh(77) 0 0 0); fz(16px); lh(30px);
+            &.nth-child(2) {
+                w(px2vh(200));
+            }
             dt{
-                font-size: 18px; c(#fff);
+                font-size: 16px; c(#fff); m(0 0 10px 0)
             }
         }
     }
+    .qr-code{
+        w(px2vw(180));h(px2vw(180)); float:right;
+        m(px2vw(70) 0 0 0); 
+        p{
+            font-size: 12px;m(10px 0 0 0);
+        }
+    }
 }
+
+
 
 
 @media (max-width: 768px)
@@ -108,6 +139,13 @@ export default {
             width: 100%; height: 40px; float: none; justify-content center;
         .txt-box
             line-height 20px; line1(); float: none;
+    .f-main
+        tc();
+        .links
+            display: none;
+        .qr-code
+            width: 50%; height 50%; display: inline-block; float: none;
+    
 
 
 

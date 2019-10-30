@@ -1,8 +1,9 @@
 //按钮鼠标浮上去
-$blue = #17a7da
+$blue = #17a7da 
 $mGag = 10px;
 $mHeaderHei = 60px;
 $color-text = #333;
+$c51 = #515151;
 
 tra()
  transition: all 0.3s ease;
@@ -14,7 +15,9 @@ iconUrl(url) {
 }
 
 iconBg() {
-
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 r(num) {
@@ -67,7 +70,6 @@ lh(number) {
 h(number) {
     height: number;
 }
-
 pr() {
     position: relative;
 }
@@ -79,3 +81,35 @@ pf() {
 }
 bg(value) { background-color: value; }
 c(value) { color: value }
+
+tc() { text-align: center; }
+
+flexcenter() {
+    align-items: center; justify-content: center;
+}
+
+disin() { display: inline-block; }
+
+computed(number, type=false) 
+    if type == 'h'
+        number = px2vh(number)
+    if type == 'w'
+        number = px2vw(number)
+    number * 1px
+
+pl(number, type)
+    padding-left computed(number, type);
+pt(number, type)
+    padding-top computed(number, type)
+mt(number, type)
+    margin-top computed(number, type);
+ml(number, type)
+    margin-left computed(number, type);
+fzt(number, type)
+    font-size computed(number, type);
+lht(number, type)
+    line-height computed(number, type);
+ht(number, type = false) 
+    height computed(number, type);
+wt(number, type = false) 
+    width computed(number, type);

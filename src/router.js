@@ -19,15 +19,15 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'index',
+            name: '首页',
             component: Index,
             meta: {
-                index: 0
+                index: 0,
             }
         },
         {
             path: '/introduce',
-            name: 'introduce',
+            name: '公司简介',
             component: Introduce,
             meta: {
                 index: 1
@@ -35,7 +35,7 @@ export default new Router({
         },
         {
             path: '/org',
-            name: 'org',
+            name: '组织架构',
             component: Org,
             meta: {
                 index: 1
@@ -43,7 +43,7 @@ export default new Router({
         },
         {
             path: '/honor',
-            name: 'honor',
+            name: '资质荣誉',
             component: Honor,
             meta: {
                 index: 1
@@ -51,7 +51,7 @@ export default new Router({
         },
         {
             path: '/product',
-            name: 'product',
+            name: '产品介绍',
             component: Product,
             meta: {
                 index: 2
@@ -59,7 +59,7 @@ export default new Router({
         },
         {
             path: '/scene',
-            name: 'scene',
+            name: '场景方案',
             component: Scene,
             meta: {
                 index: 4
@@ -67,7 +67,7 @@ export default new Router({
         },
         {
             path: '/partner',
-            name: 'partner',
+            name: '合作伙伴',
             component: Partner,
             meta: {
                 index: 5
@@ -75,7 +75,7 @@ export default new Router({
         },
         {
             path: '/case',
-            name: 'case',
+            name: '项目案例',
             component: Case,
             meta: {
                 index: 6
@@ -83,7 +83,7 @@ export default new Router({
         },
         {
             path: '/contact',
-            name: 'contact',
+            name: '联系我们',
             component: contact,
             meta: { index: 7 }
         },

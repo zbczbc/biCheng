@@ -3,7 +3,7 @@
         <div class="layout pr clearfix">
             <div class="image-box">
                 <div class="scale-img">
-                    <img :src=picList[activeIndex].src :h=600 />
+                    <img :src=picList[activeIndex].src />
                 </div>
                 <div class="thumb-img clearfix">
                     <div class="item pr" v-for="picture,index in picList" :class="{active: index==activeIndex}" @click="onClickList(picture, index)">
@@ -63,7 +63,7 @@ $lw = 420px;
         width: 45%; float:left; border-right: 1px solid #ccc; p(0 0 0 30px);
         .scale-img {
             img{
-                max-width: 300px; height: 500px;
+                width: 500px; height: 500px;
             }
         }
         .thumb-img {
