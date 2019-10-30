@@ -1,6 +1,7 @@
 <template>
 	<div id="app">
 		<m-header></m-header>
+		<bread-nav v-if="$route.meta.index!=0" />
 		<router-view></router-view>
 		<m-footer></m-footer>
 	</div>
@@ -9,6 +10,8 @@
 <script>
 import MHeader from "./components/header"
 import MFooter from "./components/footer"
+import BreadNav from "./components/breadnav"
+
 import Vue from "vue"
 
 
@@ -39,7 +42,6 @@ export default {
 		}
 	},
 	created() {
-
 		this.onResize()
 
 		window.onresize = () => {
@@ -47,7 +49,7 @@ export default {
         }
 	},
 	components: {
-		MHeader, MFooter
+		MHeader, MFooter, BreadNav
 	}
 }
 </script>

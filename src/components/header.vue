@@ -10,7 +10,7 @@
                         v-for="(item,index) in navList"
                         :key="item.name"
                         :class="{ active: index==activeIndex, open: item.children&&hoverIndex==index }"
-                        @click="onClickItem(item, index)"
+                        @click.stop="onClickItem(item, index)"
                         @mouseleave="onMouseOut"
                         @mouseenter="onMouseOver(item, index)">
                         <span>{{item.name}}</span>
@@ -19,7 +19,7 @@
                             <ul class="ul-02"
                                 :class="{'ul-03':item.children&&item.children.length>4}"
                                 v-show="item.children&&hoverIndex==index">
-                                <li v-for="item02 in item.children">{{item02.name}}</li>
+                                <li v-for="item02 in item.children" @click="onClickItem(item02, index)" >{{item02.name}}</li>
                             </ul>
                         </transition>
                     </li>
@@ -46,9 +46,9 @@ export default {
             navOpen: false,
             logoType: 'logo',
             isM: false,
-            whiteLogVisible: false,
             navList: [],
-            menuIconType: 'menu'
+            menuIconType: 'menu',
+            whiteLogVisible: false
         }
     },
     methods: {
@@ -78,6 +78,8 @@ export default {
                 }
             }else {
                 this.$router.push(item.path)
+                this.navOpen = false
+                this.logoType = "logo"
             }
         },
         monToggleNav() {
@@ -131,9 +133,18 @@ export default {
             }
         }
     },
+    watch: {
+        $route: {
+            immediate: true,
+            handler(route) {
+                if(route.meta.index >= 0) {
+                    this.activeIndex = route.meta.index
+                }
+            }
+        }
+    },
     created() {
         this._initData()
-
         this.isM = this.$device.isM
     }
 }

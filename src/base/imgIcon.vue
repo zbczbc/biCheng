@@ -68,6 +68,15 @@ export default {
   &.video-icon4 {
       iconUrl('video-icon4.png')
   }
+  &.address{
+     iconUrl('address.png')
+  }
+  &.left-gray{
+     iconUrl('left-gray.png')
+  }
+  &.right-gray{
+     iconUrl('right-gray.png')
+  }
 }
 
 

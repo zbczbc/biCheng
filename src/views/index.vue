@@ -3,6 +3,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="item,index in list" :key="item.index">
                 <template v-if="item.videoUrl">
+                    <div class="video-mask por"></div>
                     <video :src=item.videoUrl autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
                 </template>
                 <div v-else class="bg-box"  :style="{backgroundImage: 'url(' + item.src + ')'}"></div>
@@ -89,6 +90,8 @@ export default {
         height 100%
         video
             width 100%;
+        .video-mask
+            width 100%; height 100%; top: 0; left: 0; background: rgba(0,0,0,0.3);
 .swiper-button-next
     right 30px; color #fff;
 .swiper-button-prev

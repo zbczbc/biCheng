@@ -17,14 +17,75 @@ Vue.use(Router)
 export default new Router({
     mode: 'history',
     routes: [
-        { path: '/', name: 'index', component: Index },
-        { path: '/introduce', name: 'introduce', component: Introduce },
-        { path: '/header',  name: 'org', component: Org},
-        { path: '/honor',  name: 'honor', component: Honor},
-        { path: '/product',  name: 'product', component: Product},
-        { path: '/scene',  name: 'scene', component: Scene},
-        { path: '/partner',  name: 'partner', component: Partner},
-        { path: '/case',  name: 'case', component: Case},
-        { path: '/contact',  name: 'contact', component: contact},
+        {
+            path: '/',
+            name: 'index',
+            component: Index,
+            meta: {
+                index: 0
+            }
+        },
+        {
+            path: '/introduce',
+            name: 'introduce',
+            component: Introduce,
+            meta: {
+                index: 1
+            }
+        },
+        {
+            path: '/org',
+            name: 'org',
+            component: Org,
+            meta: {
+                index: 1
+            }
+        },
+        {
+            path: '/honor',
+            name: 'honor',
+            component: Honor,
+            meta: {
+                index: 1
+            }
+        },
+        {
+            path: '/product',
+            name: 'product',
+            component: Product,
+            meta: {
+                index: 2
+            }
+        },
+        {
+            path: '/scene',
+            name: 'scene',
+            component: Scene,
+            meta: {
+                index: 4
+            }
+        },
+        {
+            path: '/partner',
+            name: 'partner',
+            component: Partner,
+            meta: {
+                index: 5
+            }
+        },
+        {
+            path: '/case',
+            name: 'case',
+            component: Case,
+            meta: {
+                index: 6
+            }
+        },
+        {
+            path: '/contact',
+            name: 'contact',
+            component: contact,
+            meta: { index: 7 }
+        },
     ]
 })
