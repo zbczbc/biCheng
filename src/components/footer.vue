@@ -44,23 +44,21 @@ export default {
 .footer-wrap
     height 70px; background #333; color #fff; overflow hidden
     .links-box
-        height 70px; display flex; align-items center; width 40%; 
-        span   
+        height 70px; display flex; align-items center; width 40%;
+        span
             padding 0 5%; display inline-block;
             &:first-child
                 border-right 1px solid #fff;
     .txt-box
-        line-height 70px; 
+        line-height 70px;
 
-@media (max-width: 768px) 
-    #app
-	    padding-top $mHeaderHei;
+@media (max-width: 768px)
     .footer-wrap
         text-align: center;
         .links-box
             width: 100%; height: 40px; float: none; justify-content center;
         .txt-box
-            line-height 20px; line1(); float: none; 
+            line-height 20px; line1(); float: none;
 
 
 

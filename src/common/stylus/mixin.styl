@@ -14,7 +14,7 @@ iconUrl(url) {
 }
 
 iconBg() {
-    
+
 }
 
 r(num) {
@@ -27,4 +27,30 @@ line1() {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+$baseHeight=1080;
+$baseWidth=1920;
+
+px2vh(px) {
+    px/$baseHeight * 100vh ;
+}
+px2vw(px) {
+    px/$baseWidth * 100vw ;
+}
+
+m(t) {
+    margin: t;
+}
+p(t) {
+    padding: t;
+}
+t(type) {
+    text-align: type;
+}
+w(n) {
+    width: n;
+}
+f(type) {
+    float: type;
 }

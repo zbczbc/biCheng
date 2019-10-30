@@ -1,6 +1,6 @@
 <template>
     <div class="header-wrap"  :class="{'nav-open': navOpen}">
-        <div class="layout">
+        <div class="pr z10 layout">
             <div class="log fl" v-if="!whiteLogVisible">
                 <img-box class="pc-logo" :type="logoType" m="26 0 0 0" @onClick="toIndex"></img-box>
             </div>
@@ -29,9 +29,9 @@
 
         <div class="down-bg ani-hei" :class="bgClass" v-if="!isM"></div>
 
-        <div class="m-top" v-if="isM">
-            <img-box v-if="whiteLogVisible" @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="10 0 0 10"></img-box>
-            <img-icon class="menu-icon por" type="menu" @onClick="monToggleNav" w=28 h=28 m="10 10 0 0"></img-icon>
+        <div class="m-top z10" v-if="isM">
+            <img-box v-if="whiteLogVisible" @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="13 0 0 10"></img-box>
+            <img-icon class="menu-icon por" :type="menuIconType" @onClick="monToggleNav" w=28 h=28 m="15 10 0 0"></img-icon>
         </div>
     </div>
 </template>
@@ -47,7 +47,8 @@ export default {
             logoType: 'logo',
             isM: false,
             whiteLogVisible: false,
-            navList: []
+            navList: [],
+            menuIconType: 'menu'
         }
     },
     methods: {
@@ -84,6 +85,7 @@ export default {
 
             if(this.navOpen) {
                 this.logoType = 'mLogo'
+                //this.menuIconType = ""
                 this.whiteLogVisible = true
             }else{
                 this.logoType = 'logo'

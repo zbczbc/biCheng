@@ -56,8 +56,17 @@ export default {
   &.play {
       iconUrl('play.png')
   }
-  &.icon_11 {
-      iconUrl('icon_11.png')
+  &.video-icon1 {
+      iconUrl('video-icon1.png')
+  }
+  &.video-icon2 {
+      iconUrl('video-icon2.png')
+  }
+  &.video-icon3 {
+      iconUrl('video-icon3.png')
+  }
+  &.video-icon4 {
+      iconUrl('video-icon4.png')
   }
 }
 
