@@ -109,16 +109,26 @@ export default {
                 },
                 { name: '产品介绍', path: '',
                     children: [
-                        { name: '产品1', path: '/product' },
+                        { name: '大数据分析平台', path: '/product' },
                     ]
                 },
                 { name: '场景方案', path: '/product',
                     children: [
-                        { name: '方案一',  },
+                        { name: '产业园区',  },
+                        { name: '智慧社区',  },
+                        { name: '智慧酒店',  },
+                        { name: '智慧商业',  },
                     ]
                 },
                 { name: '合作伙伴', path: '' },
-                { name: '项目案例', path: '' },
+                { name: '项目案例', path: '' ,
+                    children: [
+                        { name: '产业园区',  },
+                        { name: '智慧社区',  },
+                        { name: '智慧酒店',  },
+                        { name: '智慧商业',  },
+                    ]
+                },
                 { name: '联系我们', path: '' },
             ]
         }
