@@ -32,5 +32,12 @@ module.exports = {
         import: resolve("src/common/stylus/mixin.styl")
       },
     }
+  },
+  configureWebpack: {
+    externals: {
+      "BMap": "BMap",
+      "BMap_Symbol_SHAPE_POINT": "BMap_Symbol_SHAPE_POINT"
+    }
   }
+
 };
