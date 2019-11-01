@@ -6,9 +6,9 @@
                 {{item.label}}<img-icon class="right-icon ilm" v-if="index<breadList.length-1" type="right-gray" w=13 h=13 />
             </router-link>
 
-            <ul class="oper-list fr">
-                <li class="fl" 
-                    v-for="item,index in operList" 
+            <ul class="oper-list fr" v-if="operVisible">
+                <li class="fl"
+                    v-for="item,index in operList"
                     @click="onItemClick(item, index)"
                     :class="{active: index==activeIndex}" >{{item.label}}</li>
             </ul>
@@ -21,7 +21,7 @@ export default {
     props: {
         value: {
             default: 0
-        }
+        },
     },
     data() {
         return {
@@ -35,7 +35,8 @@ export default {
                 { label: '组织架构' },
                 { label: '资质荣誉' },
             ],
-            activeIndex: 0
+            activeIndex: 0,
+            operVisible: false
         }
     },
     methods: {
@@ -84,7 +85,7 @@ export default {
 
     .oper-list{
         li {
-            padding: 0 20px; 
+            padding: 0 20px;
             &.active{
                 bg($blue); color:#fff;
             }

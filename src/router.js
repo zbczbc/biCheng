@@ -2,19 +2,16 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Index from './views/index'
-import Introduce from './views/introduce'
-import Org from './views/org'
-import Honor from './views/honor'
+import About from './views/about'
 import Product from './views/product'
 import Scene from './views/scene'
 import Partner from './views/partner'
 import Case from './views/case'
 import contact from './views/contact'
 
-
 Vue.use(Router)
 
-export default new Router({
+export const router = {
     mode: 'history',
     routes: [
         {
@@ -26,27 +23,11 @@ export default new Router({
             }
         },
         {
-            path: '/introduce',
-            name: '公司简介',
-            component: Introduce,
+            path: '/about',
+            name: '走进碧城',
+            component: About,
             meta: {
-                index: 1
-            }
-        },
-        {
-            path: '/org',
-            name: '组织架构',
-            component: Org,
-            meta: {
-                index: 1
-            }
-        },
-        {
-            path: '/honor',
-            name: '资质荣誉',
-            component: Honor,
-            meta: {
-                index: 1
+                index: 1,
             }
         },
         {
@@ -62,7 +43,7 @@ export default new Router({
             name: '场景方案',
             component: Scene,
             meta: {
-                index: 4
+                index: 3
             }
         },
         {
@@ -70,7 +51,7 @@ export default new Router({
             name: '合作伙伴',
             component: Partner,
             meta: {
-                index: 5
+                index: 4
             }
         },
         {
@@ -78,14 +59,18 @@ export default new Router({
             name: '项目案例',
             component: Case,
             meta: {
-                index: 6
+                index: 5
             }
         },
         {
             path: '/contact',
             name: '联系我们',
             component: contact,
-            meta: { index: 7 }
+            meta: {
+                index: 6
+            }
         },
     ]
-})
+}
+
+export default new Router(router)

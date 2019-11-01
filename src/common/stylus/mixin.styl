@@ -1,9 +1,11 @@
 //按钮鼠标浮上去
-$blue = #17a7da 
+$blue = #17a7da
 $mGag = 10px;
 $mHeaderHei = 60px;
 $color-text = #333;
 $c51 = #515151;
+$border = #eff1f4;
+$eb = #ebebeb;
 
 tra()
  transition: all 0.3s ease;
@@ -90,26 +92,68 @@ flexcenter() {
 
 disin() { display: inline-block; }
 
-computed(number, type=false) 
+computed(number, type)
     if type == 'h'
         number = px2vh(number)
     if type == 'w'
         number = px2vw(number)
     number * 1px
 
-pl(number, type)
+pl(number, type=false)
     padding-left computed(number, type);
-pt(number, type)
+pt(number, type=false)
     padding-top computed(number, type)
-mt(number, type)
+pbt(number, type=false)
+    padding-bottom computed(number, type)
+mt(number, type=false)
     margin-top computed(number, type);
-ml(number, type)
+ml(number, type=false)
     margin-left computed(number, type);
-fzt(number, type)
+mb(number, type=false)
+    margin-left computed(number, type);
+mr(number, type=false)
+    margin-left computed(number, type);
+fzt(number, type=false)
     font-size computed(number, type);
-lht(number, type)
+lht(number, type=false)
     line-height computed(number, type);
-ht(number, type = false) 
+ht(number, type = false)
     height computed(number, type);
-wt(number, type = false) 
+wt(number, type = false)
     width computed(number, type);
+
+
+// 媒体查询 方法
+calcmedia(type, pc, mobile=0)
+    @media (max-width: 768px) {
+        setMedia(type, mobile)
+    }
+    @media (min-width: 769px) {
+        setMedia(type, pc)
+    }
+
+setMedia(type, number)
+    if(number != 0)
+        if(type == "sz")
+            font-size: number * 1px
+        if(type == "pt")
+            padding-top: number
+        if(type == "mt")
+            margin-top: number
+        if(type == "h")
+            height: number
+        if(type == "p")
+            padding: number
+        if(type == "w")
+            width: number
+
+
+borderAni() {
+    transition: all 0.3s ease; transform: translateX(-50%); left:50%; width: 0;
+}
+bgray() {
+    border: 1px solid $border;
+}
+bbgray() {
+    border-bottom: 1px solid $border;
+}

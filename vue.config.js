@@ -21,6 +21,7 @@ module.exports = {
   productionSourceMap: false,
   chainWebpack: config => {
     config.resolve.alias
+      .set("@", resolve("src"))
       .set("base", resolve("src/base"))
       .set("common", resolve("src/common"))
       .set("assets", resolve("src/assets"));

@@ -37,6 +37,9 @@
 </template>
 
 <script>
+import { router } from "@/router"
+
+
 export default {
     data() {
         return {
@@ -97,40 +100,50 @@ export default {
         toIndex() {
             this.$router.push('/')
         },
+        _setNavList() {
+            let arr = router.routes
+
+            this.navList = arr.map(item => {
+                switch (item.meta.index) {
+                    case 1:
+                        item.children = [
+                            { name: '公司简介', id: '1' },
+                            { name: '组织架构', id: '2' },
+                            { name: '资质荣誉', id: '3' },
+                        ]
+                        break;
+                    case 2:
+                        item.children = [
+                            { name: '大数据分析平台', path: '/product' },
+                        ]
+                        break;
+                    case 3:
+                        item.children = [
+                            { name: '产业园区',  },
+                            { name: '智慧社区',  },
+                            { name: '智慧酒店',  },
+                            { name: '智慧商业',  },
+                        ]
+                        break;
+                    case 5:
+                        item.children = [
+                            { name: '产业园区',  },
+                            { name: '智慧社区',  },
+                            { name: '智慧酒店',  },
+                            { name: '智慧商业',  },
+                        ]
+                        break;
+                    default:
+                        break;
+                }
+                return item
+            })
+
+            console.log(this.navList)
+
+        },
         _initData() {
-            this.navList = [
-                { name: '首页', path: '/' },
-                { name: '走进碧城', path: '',
-                    children: [
-                        { name: '公司简介', path: '/introduce' },
-                        { name: '组织架构', path: '/org' },
-                        { name: '资质荣誉', path: '/honer' },
-                    ]
-                },
-                { name: '产品介绍', path: '',
-                    children: [
-                        { name: '大数据分析平台', path: '/product' },
-                    ]
-                },
-                { name: '场景方案', path: '/product',
-                    children: [
-                        { name: '产业园区',  },
-                        { name: '智慧社区',  },
-                        { name: '智慧酒店',  },
-                        { name: '智慧商业',  },
-                    ]
-                },
-                { name: '合作伙伴', path: '' },
-                { name: '项目案例', path: '' ,
-                    children: [
-                        { name: '产业园区',  },
-                        { name: '智慧社区',  },
-                        { name: '智慧酒店',  },
-                        { name: '智慧商业',  },
-                    ]
-                },
-                { name: '联系我们', path: '' },
-            ]
+
         }
     },
     computed: {
@@ -154,7 +167,9 @@ export default {
         }
     },
     created() {
+
         this._initData()
+        this._setNavList()
         this.isM = this.$device.isM
     }
 }
