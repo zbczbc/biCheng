@@ -124,22 +124,25 @@ wt(number, type = false)
 
 
 // 媒体查询 方法
-calcmedia(type, pc, mobile=0)
-    @media (max-width: 768px) {
+calcmedia(type, pc, mobile=false)
+    @media (max-width: 768px) 
+        if(mobile == false) 
+            mobile = pc
         setMedia(type, mobile)
-    }
-    @media (min-width: 769px) {
+  
+    @media (min-width: 769px) 
         setMedia(type, pc)
-    }
 
 setMedia(type, number)
-    if(number != 0)
+    
         if(type == "sz")
             font-size: number * 1px
         if(type == "pt")
             padding-top: number
         if(type == "mt")
             margin-top: number
+        if(type == "m")
+            margin: number
         if(type == "h")
             height: number
         if(type == "p")

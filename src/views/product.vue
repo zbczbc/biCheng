@@ -42,19 +42,29 @@
         </div>
         <div class="tab-content">
             <div class="tab-inner layout">
-                <img src="static/xq.jpg" class="full"/>
+                <img src="static/xq.jpg" class="full" v-show="tabIndex==0"/>
 
-                <div class="solve-box">
+                <div class="solve-box" v-show="tabIndex==2">
                     <div class="size24 tit">解决成果</div>
-                    <div class="list-con">
-                        <div class="list" v-for="item,index in solveList" :key=index>
-                            <div class="list-in">
-                                <div class="stit">0{{index}}</div>
-                                <p>{{item.label}}</p>
+                    <div class="list-con product-swiper">
+                        <div class="swiper-wrapper">
+                            <div class="list swiper-slide" v-for="item,index in solveList" :key=index>
+                                <div class="list-in">
+                                    <div class="stit size24">0{{index+1}}</div>
+                                    <p class="size16">{{item.label}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <template v-if="tabIndex==1">
+                    <div class="size24 tit">技术参数</div>
+                    <div class="tech-box bgfff">
+                        <img :src=techImg class="full"/>
+                    </div>
+                </template>
+                
             </div>
 
         </div>
@@ -63,6 +73,8 @@
 </template>
 
 <script>
+import Swiper from "swiper"
+
 export default {
     data() {
         return {
@@ -74,18 +86,26 @@ export default {
             ],
             activeIndex: 0,
             featureList: [
-                { icon: "static/product-04.png", label: '全新、高效的运行方式' },
-                { icon: "static/product-04.png", label: '5大场景需求' },
-                { icon: "static/product-04.png", label: '主动到你身边,给你想要' },
-                { icon: "static/product-04.png", label: '够能装、够好用' }
+                { icon: "static/product-icon1.png", label: '全新、高效的运行方式' },
+                { icon: "static/product-icon2.png", label: '5大场景需求' },
+                { icon: "static/product-icon3.png", label: '主动到你身边,给你想要' },
+                { icon: "static/product-icon4.png", label: '够能装、够好用' }
             ],
             tabIndex: 0,
-            solveList: []
+            solveList: [],
+            techImg: "static/product-2.jpg"
         }
     },
     methods: {
         onClickList(picture, index) {
             this.activeIndex = index
+        },
+        initSwiper() {
+            this.mySwiper&&this.mySwiper.destory()
+            this.mySwiper = new Swiper('.product-swiper', {
+                slidesPerView: this.slidesPerView
+            })
+            console.log(this.mySwiper, this.slidesPerView)
         },
         _initData() {
             this.tabsList = [
@@ -97,10 +117,32 @@ export default {
                 { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
                 { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
                 { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
+                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
+                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
+                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
+                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
+                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
+                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
             ]
         }
     },
+    watch: {
+        tabIndex(index){
+            if(index==2) {
+                this.slidesPerView = 5
+        
+                if(this.$device.isM) {
+                    this.slidesPerView = 1
+                }
+                console.log(222)
+                this.$nextTick(() => {
+                    this.initSwiper()
+                })
+            }
+        }
+    },
     created() {
+        
         this._initData()
     }
 }
@@ -201,19 +243,32 @@ $productWidth = 500px;
 }
 .tab-content{
     bg($border);
+    .tit{ 
+        calcmedia('m', 30px 0 20px 0, ) ; 
+    }
     .tab-inner{
         calcmedia('pt', 20px, 10px)
     }
     .solve-box{
         .list-con{
-            margin: 0 -10px;
+            margin: 0 -10px; overflow: hidden;  
             .list{
-                p(0, 10px); w(25%); f(left);
+                p(0, 10px); f(left); calcmedia('h', 200px, );p(0 10px); w(20%);
                 .list-in{
-                    bg(#fff); bgray(); p(0 20px);
+                    bg(#fff); bgray();  bg(#fff); p(0 10px); h(100%);
+                    .stit{
+                        c($blue); p(30px 0 25px);
+                    }
+                    P {
+                        lh(25px); 
+                    }
+
                 }
             }
         }
+    }
+    .tech-box{
+        calcmedia('p', px2vw(235), 10px)   
     }
 }
 </style>
