@@ -170,7 +170,7 @@ textarea:focus:-ms-input-placeholder {
 
 
 .layout{
-  width:95%; max-width:1460px; margin:0 auto; box-sizing:border-box;
+  width:90%; max-width:1460px; margin:0 auto; box-sizing:border-box;
 }
 
 
@@ -205,9 +205,9 @@ textarea:focus:-ms-input-placeholder {
     h(20px); bg($border);
 
 .size30
-  calcmedia('sz', 30, 16)
+  calcmedia('sz', px2vw(30), 16)
 .size24
-  calcmedia('sz', 24, 16)
+  calcmedia('sz', px2vw(24), 16)
 .size18
   calcmedia('sz', 18, 14)
 .size14
@@ -234,7 +234,7 @@ textarea:focus:-ms-input-placeholder {
     calcmedia('w', 60%, 90%);
     calcmedia('sz', 18, 14)
     m(0 auto); lh(33px);
-    max-width:100%;
+    max-width:100%; tc();
 }
 
 .tc

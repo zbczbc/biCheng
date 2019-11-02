@@ -60,6 +60,8 @@
         </div>
 
         <org v-if="pageId==2"></org>
+
+        <honor v-if="pageId==3"></honor>
     </div>
     
 </template>
@@ -67,6 +69,7 @@
 <script>
 import Scroll from 'base/scroll'
 import Org from "./about/org"
+import Honor from "./honor"
 
 export default {
     data() {
@@ -131,7 +134,7 @@ export default {
         this._initData()
     },
     components: {
-        Scroll, Org
+        Scroll, Org, Honor
     }
     
 }
