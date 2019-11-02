@@ -80,7 +80,11 @@ export default {
                     }
                 }
             }else {
-                this.$router.push(item.path)
+                let path = item.path
+                if(item.id) {
+                    path = `${item.path}?id=${item.id}`
+                }
+                this.$router.push(path)
                 this.navOpen = false
                 this.logoType = "logo"
             }
@@ -107,9 +111,9 @@ export default {
                 switch (item.meta.index) {
                     case 1:
                         item.children = [
-                            { name: '公司简介', id: '1' },
-                            { name: '组织架构', id: '2' },
-                            { name: '资质荣誉', id: '3' },
+                            { name: '公司简介', id: '1' , path: '/about'},
+                            { name: '组织架构', id: '2' , path: '/about'},
+                            { name: '资质荣誉', id: '3' , path: '/about'},
                         ]
                         break;
                     case 2:
@@ -119,18 +123,18 @@ export default {
                         break;
                     case 3:
                         item.children = [
-                            { name: '产业园区',  },
-                            { name: '智慧社区',  },
-                            { name: '智慧酒店',  },
-                            { name: '智慧商业',  },
+                            { name: '产业园区', id: '1' , path: '/scene' },
+                            { name: '智慧社区', id: '1' , path: '/scene' },
+                            { name: '智慧酒店', id: '1' , path: '/scene' },
+                            { name: '智慧商业', id: '1' , path: '/scene' },
                         ]
                         break;
                     case 5:
                         item.children = [
-                            { name: '产业园区',  },
-                            { name: '智慧社区',  },
-                            { name: '智慧酒店',  },
-                            { name: '智慧商业',  },
+                            { name: '产业园区', id: '1' , path: '/case' },
+                            { name: '智慧社区', id: '1' , path: '/case' },
+                            { name: '智慧酒店', id: '1' , path: '/case' },
+                            { name: '智慧商业', id: '1' , path: '/case' },
                         ]
                         break;
                     default:

@@ -61,6 +61,18 @@ export default {
         return `0`;
       }
     },
+    getCurrentPx(value, type) {
+      if (value) {
+        let num = `${parseInt(value) / baseWidth * getWindowWidth()} `
+        if(type == 'h') {
+          num = `${parseInt(value) /  baseHeight * getWindowHeight()} `
+        }
+        //console.log(parseInt(value), baseWidth,  getWindowWidth())
+        return num;
+      } else {
+        return `${0}`;
+      }
+    },
     setMarginValue(value, type) {
       if (value) {
         if (value === "auto") {
