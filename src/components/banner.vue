@@ -1,16 +1,23 @@
 <template>
-    <div class="banner" :style="{backgroundImage: 'url(' + url + ')'}">
-        <div class="tit">探索未来发展</div>
-        <div class="desc">帮助以智慧城市为新型可持续发展目标的集团提供全面的智慧城市系统建设及服务</div>
+    <div class="banner" :style="{backgroundImage: 'url(' + bannerInfo.url + ')'}">
+        <div class="tit">{{bannerInfo.title}}</div>
+        <div class="desc">{{bannerInfo.desc}}</div>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        title: {},
-        desc: {},
-        url: {}
+        bannerInfo: {
+            default: () => {
+                return {
+                    title: "",
+                    desc: "",
+                    url: ""
+                }
+            }
+        },
+        
     }
 }
 </script>

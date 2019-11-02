@@ -111,9 +111,9 @@ mt(number, type=false)
 ml(number, type=false)
     margin-left computed(number, type);
 mb(number, type=false)
-    margin-left computed(number, type);
+    margin-bottom computed(number, type);
 mr(number, type=false)
-    margin-left computed(number, type);
+    margin-right computed(number, type);
 fzt(number, type=false)
     font-size computed(number, type);
 lht(number, type=false)
@@ -144,6 +144,8 @@ setMedia(type, value)
             padding-left: value
         if(type == "mt")
             margin-top: value
+        if(type == "mb")
+            margin-bottom: value
         if(type == "m")
             margin: value
         if(type == "h")
@@ -160,6 +162,9 @@ setMedia(type, value)
             top: value
         if(type == "ty")
             transform: translateY(value)
+        if(type == "float")
+            float: value
+        
 
 
 borderAni() 
@@ -176,7 +181,13 @@ tranall(number=false)
     if(number==false)
         number = 1
 
-    transition: all number*1s ease
+    transition: all number*1s ease; cursor: pointer;
 
 abs() 
     position absolute; top 0; left 0; bottom 0; right 0; margin auto;
+
+transcale(number=false) 
+    if(number==false)
+        number = 1
+
+    transform: scale(number)

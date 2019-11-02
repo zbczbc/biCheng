@@ -1,6 +1,6 @@
 <template>
     <div class="introduce-page">
-        <banner :url=url />
+        <banner :bannerInfo=bannerInfo />
         <bread-nav  v-model=activeIndex />
         
         <div class="introduce-box">
@@ -75,7 +75,11 @@ export default {
                 { label: '组织架构', },
                 { label: '资质荣誉', }
             ],
-            url: 'static/about-banner.png',
+            bannerInfo: {
+                url: 'static/about-banner.png',
+                desc: '帮助以智慧城市为新型可持续发展目标的集团提供全面的智慧城市系统建设及服务',
+                title: "探索未来发展"
+            },
             activeIndex: 1,
             hoverIndex: -1
         }
