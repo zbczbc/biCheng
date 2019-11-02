@@ -1,5 +1,5 @@
 <template>
-  <div :style="getIconStyle()" @click="onClick">
+  <div class="img-icon" :style="getIconStyle()" @click="onClick">
     <i :class="[ 'icon', type || '' ]"></i>
   </div>
 </template>
@@ -36,13 +36,32 @@ export default {
 </script>
 <style scoped lang='stylus'>
 
+.img-icon {
+  &.hover .icon{
+    &.intro_1{
+      iconUrl('intro_1_h.png');
+    }
+    &.intro_2{
+      iconUrl('intro_2_h.png')
+    }
+    &.intro_3{
+      iconUrl('intro_3_h.png')
+    }
+    &.intro_4{
+      iconUrl('intro_4_h.png')
+    }
+    &.intro_5{
+      iconUrl('intro_5_h.png')
+    }
+  }  
+}
+
 .icon {
   display: block;
   width: 100%;
   height: 100%;
   background-size: 100% auto;
   background-repeat: no-repeat;
-
 
   &.logo {
       iconUrl('logo.png')
@@ -76,6 +95,21 @@ export default {
   }
   &.right-gray{
      iconUrl('right-gray.png')
+  }
+  &.intro_1{
+    iconUrl('intro_1.png');
+  }
+  &.intro_2{
+     iconUrl('intro_2.png')
+  }
+  &.intro_3{
+     iconUrl('intro_3.png')
+  }
+  &.intro_4{
+     iconUrl('intro_4.png')
+  }
+  &.intro_5{
+     iconUrl('intro_5.png')
   }
 }
 

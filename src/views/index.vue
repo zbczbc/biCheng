@@ -107,7 +107,7 @@ export default {
     .sub-tit
         font-size: px2vw(54); margin 20px 0 25px;
     .sub-desc
-        font-size: px2vw(24); padding 0 10px; iconUrl("tbg.png"); display: inline-block; border-radius: 44px;
+        font-size: px2vw(24); padding 0 10px; iconUrl("tbg.jpg"); display: inline-block; border-radius: 44px;
         height: 44px; line-height: 44px;
 
 .icons-group{

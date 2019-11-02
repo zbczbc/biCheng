@@ -81,7 +81,8 @@ pb() {
 pf() {
     position: fixed;
 }
-bg(value) { background-color: value; }
+bg(value) 
+    background-color: value; 
 c(value) { color: value }
 
 tc() { text-align: center; }
@@ -133,30 +134,49 @@ calcmedia(type, pc, mobile=false)
     @media (min-width: 769px) 
         setMedia(type, pc)
 
-setMedia(type, number)
+setMedia(type, value)
     
         if(type == "sz")
-            font-size: number * 1px
+            font-size: value * 1px
         if(type == "pt")
-            padding-top: number
+            padding-top: value
+        if(type == "pl")
+            padding-left: value
         if(type == "mt")
-            margin-top: number
+            margin-top: value
         if(type == "m")
-            margin: number
+            margin: value
         if(type == "h")
-            height: number
+            height: value
+         if(type == "lh")
+            line-height: value
         if(type == "p")
-            padding: number
+            padding: value
         if(type == "w")
-            width: number
+            width: value
+        if(type == "pr")
+            position: value
+        if(type == "t")
+            top: value
+        if(type == "ty")
+            transform: translateY(value)
 
 
-borderAni() {
+borderAni() 
     transition: all 0.3s ease; transform: translateX(-50%); left:50%; width: 0;
-}
-bgray() {
+
+bgray() 
     border: 1px solid $border;
-}
-bbgray() {
+
+bbgray() 
     border-bottom: 1px solid $border;
-}
+
+
+tranall(number=false) 
+    if(number==false)
+        number = 1
+
+    transition: all number*1s ease
+
+abs() 
+    position absolute; top 0; left 0; bottom 0; right 0; margin auto;
