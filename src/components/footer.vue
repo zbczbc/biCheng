@@ -140,11 +140,11 @@ export default {
         .txt-box
             line-height 20px; line1(); float: none;
     .f-main
-        tc();
+        tc(); p(0 0 10px 0);
         .links
             display: none;
         .qr-code
-            width: 50%; height 50%; display: inline-block; float: none;
+            width: 30%; height 30%; display: inline-block; float: none;
     
 
 

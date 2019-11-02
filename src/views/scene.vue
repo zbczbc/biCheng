@@ -1,8 +1,8 @@
 <template>
     <div class="case-page">
         <banner :bannerInfo=bannerInfo />
-        <div class="tit size30 fb">{{basicInfo.title}}</div>
-        <div class="desc size16">{{basicInfo.desc}}</div>
+        <div class="p-tit">{{basicInfo.title}}</div>
+        <div class="p-desc">{{basicInfo.desc}}</div>
         <div class="main-box layout">
             <div class="list clearfix" v-for="item,index in list" :key="index" :class="{reverse: index%2==0}">
                 <div class="img-w">
@@ -50,13 +50,7 @@ export default {
 <style lang="stylus" scoped>
 .case-page{
     tc();
-    .tit{
-        mt(100, 'h');mb(30, 'h');
-    }
-    .desc{
-        calcmedia('w', 60%, 90%);
-        m(0 auto); lh(33px);
-    }
+    
     .main-box{
         calcmedia('mt', 50px, 20px);
         .list{

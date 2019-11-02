@@ -94,10 +94,11 @@ export default {
 
             if(this.navOpen) {
                 this.logoType = 'mLogo'
-                //this.menuIconType = ""
+                this.menuIconType = "fff_close"
                 this.whiteLogVisible = true
             }else{
                 this.logoType = 'logo'
+                this.menuIconType = "menu"
             }
 
         },

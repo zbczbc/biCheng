@@ -3,7 +3,7 @@
         <banner :bannerInfo=bannerInfo />
         <bread-nav  v-model=activeIndex />
         
-        <div class="introduce-box">
+        <div class="introduce-box" v-if="pageId==1">
             <div class="intro-box1 layout">
                 <div class="img-w">
                     <img class="full" src="static/about-pic.jpg"/>
@@ -59,13 +59,14 @@
             </div>
         </div>
 
-
+        <org v-if="pageId==2"></org>
     </div>
     
 </template>
 
 <script>
 import Scroll from 'base/scroll'
+import Org from "./about/org"
 
 export default {
     data() {
@@ -81,7 +82,8 @@ export default {
                 title: "探索未来发展"
             },
             activeIndex: 1,
-            hoverIndex: -1
+            hoverIndex: -1,
+            pageId: 1
         }
     },
     methods: {
@@ -117,11 +119,19 @@ export default {
             return ret
         }
     },
+    watch: {
+        $route: {
+            immediate: true,
+            handler(route) {
+                this.pageId = route.query.id
+            }
+        }
+    },
     created() {
         this._initData()
     },
     components: {
-        Scroll
+        Scroll, Org
     }
     
 }
@@ -193,7 +203,7 @@ export default {
         }
         .list-group{
             calcmedia('p', 60px 20px 40px, 40px 20px 20px);
-            transform: translateY(-350px);
+            transform: translateY(-250px);
             bg(#fff);
             .list {
                 calcmedia('w',calc(50% - 80px), 100%); 

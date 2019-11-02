@@ -199,6 +199,8 @@ textarea:focus:-ms-input-placeholder {
     position absolute; top 0; left 0; bottom 0; right 0; margin auto;
 .full
     width 100%;
+.mfull
+   max-width 100%;
 .hr
     h(20px); bg($border);
 
@@ -221,4 +223,20 @@ textarea:focus:-ms-input-placeholder {
 
 .white
   color: #fff
+
+.p-tit{
+    mb(30, 'h'); tc();
+    calcmedia('sz', 30, 16); 
+    calcmedia('mt', 100px, 50px); 
+    font-weight: bold;
+}
+.p-desc{
+    calcmedia('w', 60%, 90%);
+    calcmedia('sz', 18, 14)
+    m(0 auto); lh(33px);
+    max-width:100%;
+}
+
+.tc
+  text-align: center;
 

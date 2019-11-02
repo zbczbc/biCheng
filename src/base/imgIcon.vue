@@ -111,6 +111,9 @@ export default {
   &.intro_5{
      iconUrl('intro_5.png')
   }
+  &.fff_close{
+     iconUrl('fff_close.png'); width: 20px; height: 20px;
+  }
 }
 
 
