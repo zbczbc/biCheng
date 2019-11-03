@@ -133,6 +133,7 @@ export default {
   &.contact-tel{
      iconUrl('contact-tel.png'); 
   }
+
 }
 
 

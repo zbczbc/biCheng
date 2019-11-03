@@ -2,13 +2,16 @@
 	<div id="app">
 		<m-header></m-header>
 		<router-view></router-view>
-		<m-footer></m-footer>
+		<m-footer @showDialog=showDialog></m-footer>
+		<index-dialog v-if="dialogVisible" ref="dialog"></index-dialog>
 	</div>
 </template>
 
 <script>
 import MHeader from "./components/header"
 import MFooter from "./components/footer"
+
+import IndexDialog from "@/views/home/indexDialog"
 
 import Vue from "vue"
 
@@ -17,7 +20,7 @@ export default {
 	name: '',
 	data() {
 		return {
-
+			dialogVisible: false
 		}
 	},
 	methods: {
@@ -35,8 +38,15 @@ export default {
 				this.$root.$emit('onChangeToPC', { _w, _h })
 			}
 
-			console.log(_h)
 			Vue.prototype.$device = { isM,  isPC}
+		},
+		showDialog(type) {
+			this.dialogVisible = true
+			this.$nextTick(() => {
+				if(Vue.prototype.$device.isPC) {
+					this.$refs.dialog.init(type)
+				}
+			})
 		}
 	},
 	created() {
@@ -44,10 +54,11 @@ export default {
 
 		window.onresize = () => {
 			this.onResize()
-        }
+		}
+
 	},
 	components: {
-		MHeader, MFooter
+		MHeader, MFooter, IndexDialog
 	}
 }
 </script>
