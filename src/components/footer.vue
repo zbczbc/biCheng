@@ -73,7 +73,6 @@ export default {
     },
     computed: {
         isIndex() {
-            console.log(this.$route.meta.index)
             return this.$route.meta.index==0
         }
     },
@@ -100,9 +99,11 @@ export default {
     .links-box
         height 70px; display flex; align-items center; width 40%;
         span
-            padding 0 5%; display inline-block;
+            padding 0 4%; display inline-block;
             &:first-child
                 border-right 1px solid #fff;
+            &:hover
+                cursor: pointer; color: $blue;
     .txt-box
         line-height 70px;
 

@@ -24,12 +24,16 @@ export default {
 
 <style lang="stylus" scoped>
 .banner{
-    ht(480); c(#fff); tc(); iconBg();
+    calcmedia('h', 480px, 250px)
+    c(#fff); tc(); iconBg();
     .tit{
-        fz(36px); p(200px 0 px2vw(30) 0)
+        calcmedia('sz', 36px, 16px);
+        calcmedia('p', 200px 0 px2vw(30) 0 , 70px 0 px2vw(30) 0);
     }
     .desc{
-        fz(18px); w(360px); lh(35px); disin(); max-width: 100%;
+        calcmedia('sz', 18px, 14px);
+        calcmedia('w', 360px, 90%);
+        lh(35px); disin(); max-width: 100%;
     }
 }
 </style>

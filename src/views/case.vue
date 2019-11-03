@@ -1,6 +1,8 @@
 <template>
     <div class="case-page">
         <banner :bannerInfo=bannerInfo />
+        <bread-nav  v-model=activeIndex :thirdList=tabList />
+
         <case-list v-for="item,index in list" :title=item.title :desc=item.desc :id=index></case-list>
     </div>
 </template>
@@ -12,6 +14,12 @@ import CaseList from "../components/caseList"
 export default {
     data() {
         return {
+            tabList: [
+                { label: '智慧园区', id: 1},
+                { label: '智慧社区', id: 2},
+                { label: '智慧酒店', id: 3}
+            ],
+            activeIndex: 0,
             list: [
                 { title: '智慧园区', desc: '助力园区智慧升级，构建产业创新生态',},
                 { title: '智慧社区', desc: '助力园区智慧升级，构建产业创新生态' },

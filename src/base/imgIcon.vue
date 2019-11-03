@@ -131,7 +131,10 @@ export default {
      iconUrl('contact-add.png'); 
   }
   &.contact-tel{
-     iconUrl('contact-tel.png'); 
+    iconUrl('contact-tel.png'); 
+  }
+  &.word{
+    iconUrl('word.png'); 
   }
 
 }

@@ -8,6 +8,7 @@ import Scene from './views/scene'
 import Partner from './views/partner'
 import Case from './views/case'
 import contact from './views/contact'
+import $ from 'jquery'
 
 Vue.use(Router)
 
@@ -73,4 +74,10 @@ export const router = {
     ]
 }
 
-export default new Router(router)
+let routers = new Router(router)
+
+routers.beforeEach((to, from, next) => {
+    $('html,body').animate({scrollTop: 0})
+    next()
+})
+export default routers

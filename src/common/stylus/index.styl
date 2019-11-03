@@ -76,13 +76,21 @@
     }
 }
 
+#app .bread-nav{
+    .menu{
+        w(100%);h(100%);p(0 10px);pb();z(9);bg($border);top:0;
+    }
+    .menu-list{
+        pb();w(100%);bg(#333);c(#fff);p(0 20px 20px);z(9); left:0; display:none;
+        .list{
+            border-bottom: 1px dashed #999; lhh(50px);
+            &.active{
+                color: $blue;
+            }
+        }
+    }
+}
+
 }
 
 
-
-
-
-
-
-
-// @media (min-width: 769px)

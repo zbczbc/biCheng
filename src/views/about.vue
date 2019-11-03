@@ -1,7 +1,7 @@
 <template>
     <div class="introduce-page">
-        <banner :bannerInfo=bannerInfo />
-        <bread-nav  v-model=activeIndex />
+        <banner :bannerInfo=bannerInfo  />
+        <bread-nav  v-model=activeIndex :thirdList=tabList  @handleItemClick=handleItemClick />
         
         <div class="introduce-box" v-if="pageId==1">
             <div class="intro-box1 layout">
@@ -12,16 +12,14 @@
                     <h1 class="size30">碧城智慧科技——智慧城市行业领先者 <br/> 全产业链智慧城市解决方案与运营服务提供商</h1>
                     <scroll>
                         <div class="content" :style="{height:maxHeight}">
-                            
-                                <p>深圳市碧城智慧科技有限公司（简称碧城智慧）是中国首家完成智慧城市、智慧园区、智慧社区、智慧酒店、智慧工地、城市会客厅（展厅）六大主题场景从顶层规划到建设运营的系统平台建设、产业招商运营、系统平台运维、智慧物业服务全产业链智慧化解决方案与建设运营服务提供商。
-                                <p>公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
-                                    大数据平台），公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
-                                    大数据平台）公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
-                                    大数据平台）公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
-                                    大数据平台）利用AI人工智能利用AI人工智能利用AI人工智能 利用AI人工智能、物联网IoT、移动互联网、5G等技术实现城市场景中的运
-                                    营平台化、设备数字化、值守无人化、业务流程化、管理中心化、数据可视化，达到降低建设成本、提升用户体验、管理降本增效等目标。</p>
-                                <p>公司目前与百度、思科、华为、小米、依图、阿里等搭建智慧产业生态圈，并与行业知名机构成立联合实验室</p>
-                            
+                            <p>深圳市碧城智慧科技有限公司（简称碧城智慧）是中国首家完成智慧城市、智慧园区、智慧社区、智慧酒店、智慧工地、城市会客厅（展厅）六大主题场景从顶层规划到建设运营的系统平台建设、产业招商运营、系统平台运维、智慧物业服务全产业链智慧化解决方案与建设运营服务提供商。
+                            <p>公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
+                                大数据平台），公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
+                                大数据平台）公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
+                                大数据平台）公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
+                                大数据平台）利用AI人工智能利用AI人工智能利用AI人工智能 利用AI人工智能、物联网IoT、移动互联网、5G等技术实现城市场景中的运
+                                营平台化、设备数字化、值守无人化、业务流程化、管理中心化、数据可视化，达到降低建设成本、提升用户体验、管理降本增效等目标。</p>
+                            <p>公司目前与百度、思科、华为、小米、依图、阿里等搭建智慧产业生态圈，并与行业知名机构成立联合实验室</p>
                         </div>
                     </scroll>
                 </div>
@@ -75,9 +73,9 @@ export default {
     data() {
         return {
             tabList: [
-                { label: '公司简介', },
-                { label: '组织架构', },
-                { label: '资质荣誉', }
+                { label: '公司简介', id: 1},
+                { label: '组织架构', id: 2},
+                { label: '资质荣誉', id: 3}
             ],
             bannerInfo: {
                 url: 'static/about-banner.png',
@@ -90,6 +88,10 @@ export default {
         }
     },
     methods: {
+        handleItemClick(item) {
+            console.log(item)
+            this.pageId = item.id
+        }, 
         onMouseover(index) {
             this.hoverIndex = index
         },
@@ -127,6 +129,7 @@ export default {
             immediate: true,
             handler(route) {
                 this.pageId = route.query.id
+                this.activeIndex = this.pageId - 1
             }
         }
     },

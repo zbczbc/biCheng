@@ -1,6 +1,8 @@
 <template>
     <div class="case-page">
         <banner :bannerInfo=bannerInfo />
+       <bread-nav  v-model=activeIndex :thirdList=tabList />
+
         <div class="p-tit">{{basicInfo.title}}</div>
         <div class="p-desc">{{basicInfo.desc}}</div>
         <div class="main-box layout">
@@ -38,7 +40,14 @@ export default {
                 { src: 'static/scene-1.jpg', icon: 'static/scene-c1.png', tit: '智慧园区运营平台', desc: '入驻企业、企业员工、住宅业主、访客、酒店住客、运营人员、游客、合作伙伴' },
                 { src: 'static/scene-2.jpg', icon: 'static/scene-c2.png', tit: '智慧园区运营平台', desc: '4平台+2中心+N场景应用+资源开放接入' },
                 { src: 'static/scene-3.jpg', icon: 'static/scene-c3.png', tit: '智慧园区运营平台', desc: '集中监控、统一管控、实时数据分析决策、自动维修派单' }
-            ]
+            ],
+            tabList: [
+                { label: '产业园区', id: '1' , path: '/case' },
+                { label: '智慧社区', id: '1' , path: '/case' },
+                { label: '智慧酒店', id: '1' , path: '/case' },
+                { label: '智慧商业', id: '1' , path: '/case' },
+            ],
+            activeIndex: 0
         }
     },
     created() {
@@ -49,9 +58,8 @@ export default {
 
 <style lang="stylus" scoped>
 .case-page{
-    tc();
-    
     .main-box{
+        tc();
         calcmedia('mt', 50px, 20px);
         .list{
             calcmedia('mb', 80px, 20px); 

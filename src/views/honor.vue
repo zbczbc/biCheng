@@ -54,7 +54,8 @@ export default {
     .list-group{
         m(45px -17px 0);
         .list{
-            w(calc(33.3% - 34px));m(0 17px 30px);f(left);
+            calcmedia('w', calc(33.3% - 34px), calc(100% - 34px));
+            m(0 17px 30px);f(left);
             .img-w{
                 .mask{
                     abs(); bg(rgba(0,0,0,0.5)); opacity: 0; tranall();
@@ -80,7 +81,10 @@ export default {
     .pagination{
         m(40px 0 80px); tc();
         li{
-            w(40px);lhh(40px);border: 1px solid #ececec; border-radius: 100%; pr(); disin();
+            calcmedia('w', 40px, 30px)
+            calcmedia('lhh', 40px, 30px)
+
+            border: 1px solid #ececec; border-radius: 100%; pr(); disin();
             m(0 10px); vertical-align: middle; fb();
             &.prev:after, &.next:after{
                 wt(12);ht(7);iconBg();content: ""; abs(); iconUrl('right-gray.png'); 

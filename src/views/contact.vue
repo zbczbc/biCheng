@@ -6,7 +6,8 @@
 
         <div class="info-box layout">
             <div class="t1">
-                <div>SMART CITY</div>
+                <!-- <div>SMART CITY</div> -->
+                <img-icon type="word" w=210 h=26 mw=100 mh=13 />
                 <p>碧城智慧科技</p>
                 <span>希望社会因我们的存在而变的更加美好</span>
             </div>
@@ -112,7 +113,7 @@ export default {
 .map-tab{
     bg($blue); calcmedia('h', 90px); 
     calcmedia('ty', 90px, 0);
-    pr(); z(10);
+    pr(); z(9);
     ul{
         calcmedia('p', 30px 0 0 10px);
         li{
@@ -127,6 +128,6 @@ export default {
 }
 
 .map{
-    width: 100vw; height: 480px;
+    width: 100%; height: 480px;
 }
 </style>

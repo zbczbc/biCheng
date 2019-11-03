@@ -39,7 +39,6 @@
 <script>
 import { router } from "@/router"
 
-
 export default {
     data() {
         return {
@@ -85,6 +84,8 @@ export default {
                     path = `${item.path}?id=${item.id}`
                 }
                 this.$router.push(path)
+                this.menuIconType = "menu"
+                
                 this.navOpen = false
                 this.logoType = "logo"
             }
@@ -100,7 +101,6 @@ export default {
                 this.logoType = 'logo'
                 this.menuIconType = "menu"
             }
-
         },
         toIndex() {
             this.$router.push('/')
@@ -144,8 +144,6 @@ export default {
                 return item
             })
 
-            console.log(this.navList)
-
         },
         _initData() {
 
@@ -168,6 +166,7 @@ export default {
                 if(route.meta.index >= 0) {
                     this.activeIndex = route.meta.index
                 }
+                
             }
         }
     },

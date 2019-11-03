@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.3.2",
+    "jquery": "^3.4.1",
     "swiper": "^5.1.0",
     "vue": "^2.6.10",
     "vue-baidu-map": "^0.21.22",

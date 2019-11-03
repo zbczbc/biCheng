@@ -1,4 +1,6 @@
 const path = require("path");
+const webpack = require("webpack")
+
 function resolve(dir) {
   return path.join(__dirname, dir);
 }
@@ -40,5 +42,4 @@ module.exports = {
       "BMap_Symbol_SHAPE_POINT": "BMap_Symbol_SHAPE_POINT"
     }
   }
-
 };
