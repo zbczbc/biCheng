@@ -10,7 +10,9 @@ export default {
   props: {
     type: {
       required: true
-    }
+    },
+    mw: {},
+    mh: {}
   },
   data() {
     return {};
@@ -21,6 +23,11 @@ export default {
       if (isUndefined(this.w)) {
         style += `width:100%;`;
       }else{
+        if ( this.$device.isM && this.mw ) {
+          this.w = this.mw
+          this.h = this.mh
+        }
+        
         style += `width:${this.setAttValue(this.w)};`;
       }
       if (this.h) {
@@ -113,6 +120,18 @@ export default {
   }
   &.fff_close{
      iconUrl('fff_close.png'); width: 20px; height: 20px;
+  }
+  &.case-left{
+     iconUrl('case-left.png'); 
+  }
+  &.case-right{
+     iconUrl('case-right.png'); 
+  }
+  &.contact-add{
+     iconUrl('contact-add.png'); 
+  }
+  &.contact-tel{
+     iconUrl('contact-tel.png'); 
   }
 }
 
