@@ -55,6 +55,10 @@ export default {
 		window.onresize = () => {
 			this.onResize()
 		}
+		
+		this.$root.$on('showVideo', () => {
+			this.showDialog('video')
+		})
 
 	},
 	components: {

@@ -18,7 +18,7 @@ export default {
             }else{
                 this.title = "技术支持"
             }
-            this.$refs.dialog.init()
+            this.$refs.dialog.init(type)
         }
     },
     components: {

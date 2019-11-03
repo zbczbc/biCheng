@@ -79,6 +79,9 @@ export default {
   &.mClose {
       iconUrl('mClose.png')
   }
+  &.close {
+      iconUrl('Close.png')
+  }
   &.play {
       iconUrl('play.png')
   }

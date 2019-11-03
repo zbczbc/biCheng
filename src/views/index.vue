@@ -4,7 +4,8 @@
             <div class="swiper-slide" v-for="item,index in list" :key="item.index">
                 <template v-if="item.videoUrl">
                     <div class="video-mask por"></div>
-                    <video :src=item.videoUrl autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
+                    <video :src=item.videoUrl v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
+                    <video :src=item.videoUrl v-else></video>
                 </template>
                 <div v-else class="bg-box"  :style="{backgroundImage: 'url(' + item.src + ')'}"></div>
                 <div class="text-box" v-if="index==0">
@@ -12,7 +13,7 @@
                     <div class="sub-tit">智慧城市系统建设及服务商</div>
                     <div class="sub-desc">把数字技术带入每个城市，让智慧触手可及</div>
                     <div></div>
-                    <img-icon type="play" w=63 h=63 class="ilt" m="30 0 0 0"></img-icon>
+                    <img-icon type="play" w=63 h=63 class="ilt cp" @onClick="$root.$emit('showVideo')" m="30 0 0 0"></img-icon>
 
                     <div class="icons-group">
                         <div class="list" v-for="item in iconesGroup">
@@ -65,6 +66,11 @@ export default {
             ]
         }
     },
+    computed: {
+        isPc() {
+            return this.$device.isPC
+        }
+    },
     created() {
 
         this.$nextTick(() => {
@@ -102,6 +108,7 @@ export default {
     height 100%; width 100%; background-size cover; background-position center
 
 .text-box
+    calcmedia('t', 20%, 16%)
     position absolute; top 20%; text-align center; width 100%; 
     .tit
         font-size: px2vw(62);
@@ -114,7 +121,8 @@ export default {
 .icons-group{
     width: 600px; margin: 20px auto;
     .list{
-        w(25%); f(left); t(center); m(0 0 10px 0); p(0 0 0 20px);
+        calcmedia('p', 0 0 0 20px, 0 0 0 40px)
+        w(25%); f(left); t(center); m(0 0 10px 0);
     }
 }
 
