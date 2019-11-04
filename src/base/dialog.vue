@@ -43,6 +43,7 @@
 
 <script>
 import Scroll from "base/scroll"
+import { getTechnicalSupport } from "@/api/api"
 
 export default {
     props: {
@@ -60,7 +61,13 @@ export default {
         init(type) {
             this.visible = true
             this.showVideo = type=='video'
+        },
+        _getData() {
+            getTechnicalSupport({xxx:22})
         }
+    },
+    created() {
+        this._getData()
     },
     components: {
         Scroll
