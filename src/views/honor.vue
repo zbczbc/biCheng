@@ -8,7 +8,7 @@
                 <div class="list" v-for="item,index in list" :key="index">
                     <div class="img-w pr">
                         <img :src="item.src" class="full"/>
-                        <div class="mask"></div>
+                        <div class="mask" @click="showDialog(index)"></div>
                     </div>
                     <div class="word-w">
                         <div class="tit">{{item.title}}</div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { getHonor } from "@/api/api"
 export default {
     data() {
         return {
@@ -45,6 +46,20 @@ export default {
 
             ]
         }
+    },
+    methods: {
+        getHonor() {
+            getHonor({pageNo: 1, pageSize: 12})
+        },
+        showDialog(index) {
+            this.$showDialog('image', { 
+                images: this.list.map(item => item.src),
+                current: index,
+            })
+        }
+    },
+    created() {
+        this.getHonor()
     }
 }
 </script>

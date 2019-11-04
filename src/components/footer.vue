@@ -17,8 +17,8 @@
         <div class="f-bottom">
             <div class="layout">
                 <div class="links-box fl">
-                    <span @click="$emit('showDialog', 'law')">法律声明</span>
-                    <span @click="$emit('showDialog', 'suppose')">技术支持</span>
+                    <span @click="onShowDialog('low')">法律声明</span>
+                    <span @click="onShowDialog('support')">技术支持</span>
                 </div>
                 <div class="txt-box fr">
                     佛山市顺德区碧桂园物业发展有限公司版权所有 粤 icp 备 05055114 号-1
@@ -38,6 +38,9 @@ export default {
         }
     },
     methods: {
+        onShowDialog(type) {
+            this.$showDialog(type)
+        },
         _initData() {
             this.navList = [
                 { name: '走进碧城', path: '',

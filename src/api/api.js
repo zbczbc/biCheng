@@ -1,43 +1,32 @@
-//GET /portal/technicalSupport
 import axios from "axios"
 
-
-// async function fetchData(method, url, params ) {
-//     await axios({
-//         method,
-//         url,
-//         //cache:false,
-//         params,
-//     }).then(data => {
-//         console.log(data)
-//     })
-// }
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 async function fetchData( opts ) {
-    console.log(opts)
+ 
     return await axios({
         method: opts.method || 'get',
-        url: opts.url,
+        url: '/api'+opts.url,
         //cache:false,
         params: opts.params,
-    }).then(data => {
-        console.log(data)
+    }).then(res => {
+        let data = res.data
+        if(data.code == 0) {
+            return data.data
+        }
     })
 }
 
-// function request(params, detail) {
-//     console.log(params, detail)
-//     return fetchData( {
-//         method: detail.method || 'get',
-//         url: detail.url
-//     } )
-// }
-
-
 export const getTechnicalSupport = params => {
-    console.log(params)
     return fetchData({
        url: `/portal/technicalSupport`,
        params
     });
  };
+
+export const getHonor = params  => {
+    return fetchData({
+        url: `/portal/honor`,
+        params,
+     });
+}
