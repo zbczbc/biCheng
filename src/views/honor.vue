@@ -1,7 +1,7 @@
 <template>
     <div class="honor-page">
         <div class="p-tit">资质荣誉</div>
-        <div class="p-desc">业内领先的智慧园区全场景解决方案服务商</div>
+        <div class="p-desc">公司自研的智慧园区平台荣获2018年APICTA亚太信息通信科技大奖赛奖项。替换下面的专利图片。</div>
 
         <div class="layout">
             <div class="list-group clearfix">
@@ -42,7 +42,7 @@ export default {
                 { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
                 { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
                 { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                
+
             ]
         }
     }
@@ -61,7 +61,7 @@ export default {
                     abs(); bg(rgba(0,0,0,0.5)); opacity: 0; tranall();
                 }
                 &:hover .mask{
-                    opacity: 1; 
+                    opacity: 1;
                     &::after{
                         w(24px);h(24px);content: "";iconUrl('search.png');abs();iconBg();
                     }
@@ -87,15 +87,15 @@ export default {
             border: 1px solid #ececec; border-radius: 100%; pr(); disin();
             m(0 10px); vertical-align: middle; fb();
             &.prev:after, &.next:after{
-                wt(12);ht(7);iconBg();content: ""; abs(); iconUrl('right-gray.png'); 
-            } 
+                wt(12);ht(7);iconBg();content: ""; abs(); iconUrl('right-gray.png');
+            }
             &.prev:after{
                 r(180);
             }
             &:hover{
                 c(#fff);bg($blue);
                 &.prev:after, &.next:after{
-                    iconUrl('fff_right.png'); 
+                    iconUrl('fff_right.png');
                 }
             }
             &:nth-child(4n+1) {

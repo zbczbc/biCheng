@@ -1,7 +1,7 @@
 <template>
     <div class="org-page layout tc">
         <div class="p-tit">组织架构</div>
-        <div class="p-desc">大碧城智慧下属部门，打造中国领先的智慧城市系统建设及服务商</div>
+        <div class="p-desc">公司现有人员150多人，其中100%本科以上学历，博士学历以上4人</div>
 
         <img src="static/org.png" class="mfull"/>
     </div>

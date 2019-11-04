@@ -29,9 +29,9 @@
                         台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是，内容描述后台修
                         改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后
                         台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容</p>
-                    </div>   
+                    </div>
                 </scroll>
-            </div>  
+            </div>
         </div>
         <div class="video-container" v-else>
             <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" />
@@ -52,16 +52,14 @@ export default {
     },
     data() {
         return {
-            visible: false, 
+            visible: false,
             showVideo: false
         }
     },
     methods: {
         init(type) {
             this.visible = true
-            if(type=='video') {
-                this.showVideo = true
-            }
+            this.showVideo = type=='video'
         }
     },
     components: {
@@ -82,13 +80,13 @@ export default {
     pb(); h(100%); w(100%);bg(rgba(0,0,0,0.5));top:0;
 }
 .dialog-container{
-    pb(); h(400px); bg(#fff); abs(); z(12);  
+    pb(); h(400px); bg(#fff); abs(); z(12);
     >.content{
         m(30px);
     }
     .content{
          h(250px); lh(25px); pr();
-        p{  
+        p{
             m(0 0 20px 0);
         }
     }

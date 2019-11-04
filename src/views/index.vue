@@ -48,6 +48,7 @@ export default {
     methods: {
         initSwiper() {
             this.mySwiper = new Swiper(".swiper-container", {
+                loop: true,
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
@@ -100,16 +101,21 @@ export default {
         .video-mask
             width 100%; height 100%; top: 0; left: 0; background: rgba(0,0,0,0.3);
 .swiper-button-next
-    right 30px; color #fff;
+    right 30px; color rgba(255,255,255,.3);
 .swiper-button-prev
-    left 20px; color #fff;
+    left 20px; color rgba(255,255,255,.3);
+.swiper-button-next:hover, .swiper-button-prev:hover
+    color:#fff;
 
 .bg-box
     height 100%; width 100%; background-size cover; background-position center
 
 .text-box
-    calcmedia('t', 20%, 16%)
-    position absolute; top 20%; text-align center; width 100%; 
+    calcmedia('h', 360px, auto);
+    calcmedia('t', 0, 16%);
+
+    position absolute; text-align center; width 100%;
+    abs();
     .tit
         font-size: px2vw(62);
     .sub-tit

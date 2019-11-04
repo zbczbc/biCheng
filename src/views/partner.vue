@@ -3,7 +3,7 @@
         <banner :bannerInfo=bannerInfo />
         <bread-nav />
         <div class="p-tit">合作伙伴</div>
-        <div class="list-group clearfix">
+        <div class="list-group clearfix layout">
             <div class="list" v-for="item,index in list" :key="">
                 <img :src="item.src" class="full" />
             </div>

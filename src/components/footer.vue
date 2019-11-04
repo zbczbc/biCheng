@@ -87,8 +87,8 @@ export default {
 .footer-wrap
     background #333; color #999; overflow hidden
     &.in-index{
-        .f-main { 
-            display: none 
+        .f-main {
+            display: none
         }
         .f-bottom {
             border-top: 0px none;
@@ -101,7 +101,7 @@ export default {
         span
             padding 0 4%; display inline-block;
             &:first-child
-                border-right 1px solid #fff;
+                border-right 1px solid #595959;
             &:hover
                 cursor: pointer; color: $blue;
     .txt-box
@@ -112,7 +112,7 @@ export default {
     .links{
         float: left;
         dl{
-            w(px2vh(180));f(left);p(px2vh(77) 0 0 0); fz(16px); lh(30px);
+            w(px2vh(180));f(left);p(px2vh(77) 0 0 0); fz(14px); lh(30px);
             &.nth-child(2) {
                 w(px2vh(200));
             }
@@ -123,7 +123,7 @@ export default {
     }
     .qr-code{
         w(px2vw(180));h(px2vw(180)); float:right;
-        m(px2vw(70) 0 0 0); 
+        m(px2vw(70) 0 0 0);
         p{
             font-size: 12px;m(10px 0 0 0);
         }
@@ -146,7 +146,7 @@ export default {
             display: none;
         .qr-code
             width: 30%; height 30%; display: inline-block; float: none;
-    
+
 
 
 

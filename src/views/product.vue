@@ -24,7 +24,7 @@
                     <div class="s-tit">产品特点</div>
                     <div class="list pr" v-for="feature,index in featureList">
                         <div class="list-inner">
-                            <img :src=feature.icon />
+                            <img :src=feature.icon class="ani-top" />
                             <p>{{feature.label}}</p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <img :src=techImg class="full"/>
                     </div>
                 </template>
-                
+
             </div>
 
         </div>
@@ -130,7 +130,7 @@ export default {
         tabIndex(index){
             if(index==2) {
                 this.slidesPerView = 5
-        
+
                 if(this.$device.isM) {
                     this.slidesPerView = 1
                 }
@@ -142,7 +142,7 @@ export default {
         }
     },
     created() {
-        
+
         this._initData()
     }
 }
@@ -151,7 +151,7 @@ export default {
 <style lang="stylus" scoped>
 $lw = 420px;
 
-$productHeight = 650px;
+$productHeight = 500px;
 $productWidth = 500px;
 
 
@@ -171,12 +171,12 @@ $productWidth = 500px;
             }
         }
         .thumb-img {
-            height: 100px; display: flex; align-items: center;
+            height: 100px; display: flex; align-items: center; mt(30); tc();
             .item{
                 flex: 1;
             }
             .img-w{
-                width: 100px; height: 100px;
+                width: 100px; height: 100px; disin();
                 &.active{
                     border:1px solid $blue;
                 }
@@ -198,13 +198,13 @@ $productWidth = 500px;
             .list{
                 w(50%); calcmedia('h', 200px, 150px); float:left; p(0 10px 20px 10px); tc();
                 .list-inner{
-                    border: 1px solid $border; height: 100%; calcmedia('pt', 17%, 10%);
+                    border: 1px solid $border; height: 100%; calcmedia('pt', 13%, 10%);
                 }
                 img {
-                    max-width: 50px; max-height: 50px; disin();
+                    max-width: 50px; max-height: 50px; disin(); cp();
                 }
                 p{
-                    text-align: center; calcmedia('sz',16,12);m(10px 0 0 0);
+                    text-align: center; calcmedia('sz',16,12);m(30px 0 0 0);
                 }
             }
         }
@@ -242,16 +242,16 @@ $productWidth = 500px;
     }
 }
 .tab-content{
-    bg($border);
-    .tit{ 
-        calcmedia('m', 30px 0 20px 0, ) ; 
+    bg($border); padding-bottom: 60px;
+    .tit{
+        calcmedia('m', 30px 0 20px 0, ) ;
     }
     .tab-inner{
         calcmedia('pt', 20px, 10px)
     }
     .solve-box{
         .list-con{
-            margin: 0 -10px; overflow: hidden;  
+            margin: 0 -10px; overflow: hidden;
             .list{
                 p(0, 10px); f(left); calcmedia('h', 200px, );p(0 10px); w(20%);
                 .list-in{
@@ -260,7 +260,7 @@ $productWidth = 500px;
                         c($blue); p(30px 0 25px);
                     }
                     P {
-                        lh(25px); 
+                        lh(25px);
                     }
 
                 }
@@ -268,7 +268,7 @@ $productWidth = 500px;
         }
     }
     .tech-box{
-        calcmedia('p', px2vw(235), 10px)   
+        calcmedia('p', px2vw(235), 10px)
     }
 }
 </style>
