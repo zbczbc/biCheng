@@ -2,8 +2,8 @@
 	<div id="app">
 		<m-header></m-header>
 		<router-view></router-view>
-		<m-footer @showDialog=showDialog></m-footer>
-		<index-dialog v-if="dialogVisible" ref="dialog"></index-dialog>
+		<custom-dialog ref="dialog"></custom-dialog>
+		<m-footer></m-footer>
 	</div>
 </template>
 
@@ -11,7 +11,7 @@
 import MHeader from "./components/header"
 import MFooter from "./components/footer"
 
-import IndexDialog from "@/views/home/indexDialog"
+import CustomDialog from "base/dialog"
 
 import Vue from "vue"
 
@@ -39,14 +39,6 @@ export default {
 			}
 
 			Vue.prototype.$device = { isM,  isPC}
-		},
-		showDialog(type) {
-			this.dialogVisible = true
-			this.$nextTick(() => {
-				if(Vue.prototype.$device.isPC) {
-					this.$refs.dialog.init(type)
-				}
-			})
 		}
 	},
 	created() {
@@ -55,14 +47,10 @@ export default {
 		window.onresize = () => {
 			this.onResize()
 		}
-		
-		this.$root.$on('showVideo', () => {
-			this.showDialog('video')
-		})
 
 	},
 	components: {
-		MHeader, MFooter, IndexDialog
+		MHeader, MFooter, CustomDialog
 	}
 }
 </script>

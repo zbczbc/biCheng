@@ -8,10 +8,20 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://120.77.220.34:8080",
+        target: "http://120.77.220.34:8080/admin",
         // target: "http://test.gbei.com",
         // target: "http://tiyan.gbei.com",
-        ws: true,
+        // ws: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      },
+      "/apix": {
+        target: "https://www.v2ex.com/api",
+        // target: "http://test.gbei.com",
+        // target: "http://tiyan.gbei.com",
+        // ws: true,
         changeOrigin: true
       }
     }

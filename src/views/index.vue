@@ -8,6 +8,7 @@
                     <video :src=item.videoUrl v-else></video>
                 </template>
                 <div v-else class="bg-box"  :style="{backgroundImage: 'url(' + item.src + ')'}"></div>
+
                 <div class="text-box" v-if="index==0">
                     <div class="tit">许明天一个精彩</div>
                     <div class="sub-tit">智慧城市系统建设及服务商</div>
@@ -19,6 +20,19 @@
                         <div class="list" v-for="item in iconesGroup">
                             <img-icon :type=item.type class="ilm" :w=item.w :h=item.h m="0 5 0 0"/>
                             <span class="ilm">{{item.label}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layout pob">
+                    <div class="text-box2" v-if="index==1">
+                        <div class="tit">
+                            <p>连接空间·企业·服务</p>
+                            <p>共建智慧产业生态</p>
+                        </div>
+                        <div class="desc">
+                            <p>聚集4大核心、汇聚1000+产服资源、服务2000+优质企业聚集, </p>
+                            <p>4大核心、汇聚1000+产服资源、服务2000+优质企业 </p>
                         </div>
                     </div>
                 </div>
@@ -129,6 +143,25 @@ export default {
     .list{
         calcmedia('p', 0 0 0 20px, 0 0 0 40px)
         w(25%); f(left); t(center); m(0 0 10px 0);
+    }
+}
+
+.layout{
+    h(100%); right:0; 
+}
+.text-box2{
+    calcmedia('w', 520px, 80%);
+    calcmedia('l', 0, 0);
+    calcmedia('r', auto, 0);
+    calcmedia('m', 0, 0 auto);
+    calcmedia('align', left, center);
+    
+    topcenter(); 
+    .tit{
+        size55();lh(75px);
+    }
+    .desc{
+        size18();lh(35px);mt(35px);   
     }
 }
 

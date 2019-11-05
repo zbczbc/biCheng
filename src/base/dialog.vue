@@ -1,6 +1,6 @@
 <template>
     <div class="dialog-wrapper" v-if="visible">
-        <div class="dialog-container layout" v-if="!showVideo">
+        <div class="dialog-container layout container" v-if="type=='video'">
             <div class="title-box pr">
                 {{title}}
                 <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" />
@@ -33,7 +33,22 @@
                 </scroll>
             </div>
         </div>
-        <div class="video-container" v-else>
+        <div class="image-container container" v-else-if="type=='image'">
+            <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" />
+
+            <div class="image-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="item,i in images" :key="i">
+                        <img :src="item"/>
+                    </div>
+                </div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            
+        </div>
+        <div class="video-container container" v-else>
             <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" />
             <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
         </div>
@@ -44,30 +59,85 @@
 <script>
 import Scroll from "base/scroll"
 import { getTechnicalSupport } from "@/api/api"
+import Swiper from "swiper"
+import Vue from "vue"
 
+// type 传值 law suppose video image
 export default {
-    props: {
-        title: {},
-        //提供video 选项， 传入video
-        video: ''
-    },
     data() {
         return {
-            visible: false,
-            showVideo: false
+            visible: true,
+            type: "image",
+            //法律法规 内容
+            content: "",
+            images: [
+                'static/honor-pic.jpg', 'static/honor-pic.jpg', 'static/honor-pic.jpg','static/honor-pic.jpg'
+            ]
         }
     },
     methods: {
         init(type) {
             this.visible = true
-            this.showVideo = type=='video'
+            this.type = 'video'
         },
         _getData() {
-            getTechnicalSupport({xxx:22})
+            getTechnicalSupport()
+        },
+        _initSwiper() {
+            this.mySwiper = null
+            this.mySwiper = new Swiper('.image-swiper', {
+
+            })
+            console.log(this.mySwiper)
+        },
+        showVideo(opts) {
+            
+            this.current = opts.current || 1
+            this.images = opts.images || []
+
+            let image = new Image()
+                image.src = this.images[this.current]
+
+            image.onload = () => {
+                this.$nextTick(() => {
+                    if (image.width > image.height) {
+                        this.imageClass = "active"
+                    } else {
+                        this.imageClass = "thin active"
+                    }
+                })
+            }
         }
     },
     created() {
         this._getData()
+
+
+        Vue.prototype.$showDialog = (type, opts) => {
+            this.type = type
+            if(type == 'law') {
+                this.title = "法律法规"
+
+            }
+            if(type == "support") {
+                this.title = "技术支持"
+            }
+
+            if(type == "video") {
+
+            }
+
+            if(type == "image") {
+                this.showVideo(opts)
+            }
+
+            this.visible = true
+            
+        }
+
+        this.$nextTick(() => {
+            this._initSwiper()
+        })
     },
     components: {
         Scroll
@@ -76,18 +146,34 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
+.image-container{
+    w(600px); h(600px); overflow: hidden;
+    .image-swiper{
+        h(100%);
+        .swiper-slide{
+            flexcenter();
+        }
+    }
+}
+
+
 .title-box{
     lhh(70px); border: 1px solid $border; p(0 40px);
     size20(); c(#333);
 }
 .dialog-wrapper{
-    h(100%); w(100%); position: fixed; top:0; z(10);
+    h(100%); w(100%); position: fixed; top:0; z(200);
 }
 .mask{
     pb(); h(100%); w(100%);bg(rgba(0,0,0,0.5));top:0;
 }
+
+.container{
+    bg(#fff); abs(); z(12); pb();
+}
 .dialog-container{
-    pb(); h(400px); bg(#fff); abs(); z(12);
+    h(400px); 
     >.content{
         m(30px);
     }
@@ -99,9 +185,12 @@ export default {
     }
 }
 .video-container{
-    w(900px); h(500px); abs(); z(11);
+    w(900px); h(500px); 
     video{
         width: 100%;
     }
 }
+
+
+
 </style>

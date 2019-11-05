@@ -17,8 +17,8 @@
         <div class="f-bottom">
             <div class="layout">
                 <div class="links-box fl">
-                    <span @click="$emit('showDialog', 'law')">法律声明</span>
-                    <span @click="$emit('showDialog', 'suppose')">技术支持</span>
+                    <span @click="onShowDialog('low')">法律声明</span>
+                    <span @click="onShowDialog('support')">技术支持</span>
                 </div>
                 <div class="txt-box fr">
                     深圳市碧城智慧科技有限公司
@@ -38,6 +38,9 @@ export default {
         }
     },
     methods: {
+        onShowDialog(type) {
+            this.$showDialog(type)
+        },
         _initData() {
             this.navList = [
                 { name: '走进碧城', path: '',
