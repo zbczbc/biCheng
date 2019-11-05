@@ -132,7 +132,7 @@ export default {
         w(px2vw(180));h(px2vw(180)); float:right;
         m(px2vw(70) 0 0 0);
         p{
-            font-size: 12px;m(10px 0 0 0);
+            font-size: 12px;m(10px 0 0 0); lh(24px);
         }
     }
 }
@@ -148,7 +148,7 @@ export default {
         .txt-box
             line-height 20px; line1(); float: none;
     .f-main
-        tc(); p(0 0 10px 0);
+        tc(); p(0 0 20px 0);
         .links
             display: none;
         .qr-code

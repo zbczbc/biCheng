@@ -32,8 +32,8 @@
         <div class="down-bg ani-hei" :class="bgClass" v-if="!isM"></div>
 
         <div class="m-top z10" v-if="isM">
-            <img-box v-if="whiteLogVisible" @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="13 0 0 10"></img-box>
-            <img-icon class="menu-icon por" :type="menuIconType" @onClick="monToggleNav" w=28 h=28 m="15 10 0 0"></img-icon>
+            <img-box v-if="whiteLogVisible" @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="14 0 0 10"></img-box>
+            <img-icon class="menu-icon por" :type="menuIconType" @onClick="monToggleNav" w=24 h=24 m="20 10 0 0"></img-icon>
         </div>
     </div>
 </template>
@@ -84,9 +84,6 @@ export default {
                 }
             }else {
                 let path = item.path
-
-                
-                
 
                 if(item.path.indexOf('case') > -1) {
                     if(this.$route.path.indexOf('case') > -1) {

@@ -150,7 +150,8 @@ export default {
 .case-wrap{
     calcmedia('pb', 80px, 20px);
     .tabs{
-        calcmedia('m', 40px 0 30px, 10px 0 10px); tc();
+        calcmedia('align', center, left);
+        calcmedia('m', 40px 0 30px, 10px 0 10px); 
         li{
             p(0 20px);lhh(30px);m(10px 10px)
             border:1px solid #ccc; display: inline-block; border-radius: 30px;
@@ -178,9 +179,10 @@ export default {
         }
     }
     .oper-pagin{
-        mt(20); tc();
+        tc();
+        calcmedia('mt', 20px, 10px);
         /deep/ .swiper-pagination-bullet{
-            margin: 0 8px;
+            calcmedia('m', 0 8px, 0 6px);
         }
     }
 }

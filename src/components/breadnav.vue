@@ -1,7 +1,7 @@
 <template>
     <div class="bread-nav pr">
         <div class="layout" >
-            <img-icon type="address" w=14 h=18 class="ilm"></img-icon>
+            <img-icon type="address" w=12 h=18 class="ilm"></img-icon>
             <span class="link" v-for="item,index in breadList" :key="index" :to="'index'">
                 {{item.label}}
                 <img-icon class="right-icon ilm" v-if="index<breadList.length-1" type="right-gray" w=13 h=13 />
@@ -104,7 +104,8 @@ export default {
 
 <style lang="stylus" scoped>
 .bread-nav{
-    height: 70px; line-height: 70px; background: #eee;
+    calcmedia('lhh', 70px, 48px)
+    background: #eee;
     .link{
         p(0 0px 0 5px); vertical-align middle; color: $color-text; 
         

@@ -131,9 +131,9 @@ export default {
     calcmedia('ty', 90px, 0);
     pr(); z(9);
     ul{
-        calcmedia('p', 30px 0 0 10px);
+        calcmedia('p', 30px 0 0 10px, 25px 0 0 0px);
         li{
-            calcmedia('m', 0 0 0 20px);
+            calcmedia('m', 0 0 0 20px, 0 10px 0 0px);
             lhh(40px);
             float: left; border: 1px solid #fff; p(0 30px); border-radius: 40px; c(#fff);
             &.active, &:hover{

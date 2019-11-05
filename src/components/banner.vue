@@ -27,13 +27,14 @@ export default {
     calcmedia('h', 480px, 250px)
     c(#fff); tc(); iconBg();
     .tit{
-        calcmedia('sz', 36px, 16px);
+        calcmedia('sz', 36px, 18px);
         calcmedia('p', 200px 0 px2vw(30) 0 , 70px 0 px2vw(30) 0);
     }
     .desc{
         calcmedia('sz', 18px, 14px);
         calcmedia('w', 360px, 90%);
-        lh(35px); disin(); max-width: 100%;
+        calcmedia('lh', 35px, 24px);
+        disin(); max-width: 100%;
     }
 }
 </style>

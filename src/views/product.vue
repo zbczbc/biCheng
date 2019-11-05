@@ -198,10 +198,13 @@ $productWidth = 500px;
             .list{
                 w(50%); calcmedia('h', 190px, 150px); float:left; p(0 10px 20px 10px); tc();
                 .list-inner{
-                    border: 1px solid $border; height: 100%; calcmedia('pt', 13%, 10%);
+                    border: 1px solid $border; height: 100%; calcmedia('pt', 13%, 16px);
+                    calcmedia('m', 0, 0 -10px);
                 }
                 img {
                     max-width: 50px; max-height: 50px; disin(); cp();
+                    calcmedia('w', 50px, 40px);
+                    calcmedia('h', 50px, 40px);
                 }
                 p{
                     text-align: center; calcmedia('sz',16,12);m(30px 0 0 0);
@@ -217,8 +220,11 @@ $productWidth = 500px;
 
 .tabs-box{
     ul{
+        calcmedia('w', auto,100%)
         lhh(70px); f(left);
         li{
+            calcmedia('w', auto, 33.33%);
+            calcmedia('align', left, center);
             f(left);calcmedia('p', 0 20px, 0 10px);pr();
             &::after{
                 content: ""; h(20px);w(2px);bg($eb);pb();left:0; top:25px;
@@ -238,6 +244,7 @@ $productWidth = 500px;
         }
     }
     .btn{
+        calcmedia('pr', relative, fixed); bottom:0; right: 0;
         calcmedia('w',160px,70px); lhh(40px); c(#fff); tc(); f(right); mt(20px); bg($blue);
     }
 }

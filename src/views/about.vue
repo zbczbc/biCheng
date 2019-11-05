@@ -14,7 +14,7 @@
                         <div class="content" :style="{height:maxHeight}">
                             <p>深圳市碧城智慧科技有限公司（简称碧城智慧）是中国首家完成智慧城市、智慧园区、智慧社区、智慧酒店、智慧工地、城市会客厅（展厅）六大主题场景从顶层规划到建设运营的系统平台建设、产业招商运营、系统平台运维、智慧物业服务全产业链智慧化解决方案与建设运营服务提供商。
                             <p>公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
-                                大数据平台），公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
+                                大数据平台），公司依托自研智慧城市系统平35台（包含物联网平台、互联网业务平台、聚合支付平台、
                                 大数据平台）公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
                                 大数据平台）公司依托自研智慧城市系统平台（包含物联网平台、互联网业务平台、聚合支付平台、
                                 大数据平台）利用AI人工智能利用AI人工智能利用AI人工智能 利用AI人工智能、物联网IoT、移动互联网、5G等技术实现城市场景中的运
@@ -117,7 +117,7 @@ export default {
         maxHeight() {
             let ret = ""
             if(this.$device.isM) {
-                ret = '100px'
+                ret = 'auto'
             }else{
                 ret = `${parseFloat(this.getCurrentPx(200, 'w'))}px`
             }
@@ -173,7 +173,7 @@ export default {
         }
     }
     .intro-box2{
-        calcmedia('p', px2vw(150) 100px, 40px 20px ); tc();
+        calcmedia('p', px2vw(150) 100px, 40px 0); tc();
         .icon-group{
             calcmedia('pt', 40px, ); tc();
             li{
@@ -205,11 +205,11 @@ export default {
         }
         .tit{
             pb(); w(100%); 
-            calcmedia('t', 100px, 20px);
+            calcmedia('t', 100px, 40px);
         }
         .list-group{
             calcmedia('p', 60px 20px 40px, 40px 20px 20px);
-            transform: translateY(-250px);
+            calcmedia('ty', -250px, -365px);
             bg(#fff);
             .list {
                 calcmedia('w',calc(50% - 80px), 100%); 

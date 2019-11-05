@@ -96,13 +96,15 @@ export default {
         }
     }
     .pagination{
-        m(40px 0 80px); tc();
+        calcmedia('m', 40px 0 80px, 20px -10px 60px)
+        tc();
         li{
-            calcmedia('w', 40px, 30px)
-            calcmedia('lhh', 40px, 30px)
+            calcmedia('w', 40px)
+            calcmedia('lhh', 40px)
+            calcmedia('m', 0 10px, 0 5px)
 
             border: 1px solid #ececec; border-radius: 100%; pr(); disin();
-            m(0 10px); vertical-align: middle; fb();
+            vertical-align: middle; fb();
             &.prev:after, &.next:after{
                 wt(12);ht(7);iconBg();content: ""; abs(); iconUrl('right-gray.png');
             }
