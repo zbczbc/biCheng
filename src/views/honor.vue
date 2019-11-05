@@ -6,8 +6,8 @@
         <div class="layout">
             <div class="list-group clearfix">
                 <div class="list" v-for="item,index in list" :key="index">
-                    <div class="img-w pr">
-                        <img :src="item.src" class="full"/>
+                    <div class="img-w pr hid">
+                        <img :src="item.src" class="full scale" />
                         <div class="mask" @click="showDialog(index)"></div>
                     </div>
                     <div class="word-w">
@@ -52,7 +52,7 @@ export default {
             getHonor({pageNo: 1, pageSize: 12})
         },
         showDialog(index) {
-            this.$showDialog('image', { 
+            this.$showDialog('image', {
                 images: this.list.map(item => item.src),
                 current: index,
             })

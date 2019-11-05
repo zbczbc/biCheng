@@ -27,7 +27,7 @@ export default {
           this.w = this.mw
           this.h = this.mh
         }
-        
+
         style += `width:${this.setAttValue(this.w)};`;
       }
       if (this.h) {
@@ -60,7 +60,7 @@ export default {
     &.intro_5{
       iconUrl('intro_5_h.png')
     }
-  }  
+  }
 }
 
 .icon {
@@ -125,19 +125,31 @@ export default {
      iconUrl('fff_close.png'); width: 20px; height: 20px;
   }
   &.case-left{
-     iconUrl('case-left.png'); 
+     iconUrl('case-left.png');
   }
   &.case-right{
-     iconUrl('case-right.png'); 
+     iconUrl('case-right.png');
   }
   &.contact-add{
-     iconUrl('contact-add.png'); 
+     iconUrl('contact-add.png');
   }
   &.contact-tel{
-    iconUrl('contact-tel.png'); 
+    iconUrl('contact-tel.png');
   }
   &.word{
-    iconUrl('word.png'); 
+    iconUrl('word.png');
+  }
+  &.dialog-left{
+    iconUrl('dialog-left.png'); cp();
+    &:hover{
+      iconUrl('dialog-left-h.png');
+    }
+  }
+  &.dialog-right{
+    iconUrl('dialog-right.png'); cp();
+    &:hover{
+      iconUrl('dialog-right-h.png');
+    }
   }
 
 }

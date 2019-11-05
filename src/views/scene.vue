@@ -7,8 +7,8 @@
         <div class="p-desc">{{basicInfo.desc}}</div>
         <div class="main-box layout">
             <div class="list clearfix" v-for="item,index in list" :key="index" :class="{reverse: index%2==0}">
-                <div class="img-w">
-                    <img :src="item.src" class="full"/>
+                <div class="img-w hid">
+                    <img :src="item.src" class="full scale"/>
                 </div>
                 <div class="word-w">
                     <div class="inner">
@@ -51,7 +51,7 @@ export default {
         }
     },
     created() {
-       
+
     }
 }
 </script>
@@ -62,24 +62,17 @@ export default {
         tc();
         calcmedia('mt', 50px, 20px);
         .list{
-            calcmedia('mb', 80px, 20px); 
+            calcmedia('mb', 80px, 20px);
             bg($border); h(100%); pr();
             >div{
-                calcmedia('w', 50%, 100%); 
+                calcmedia('w', 50%, 100%);
             }
             .img-w{
-                calcmedia('float', left, none); 
-                overflow: hidden;
-                img{
-                    tranall();
-                }
-                img:hover{
-                    transcale(1.1);
-                }
+                calcmedia('float', left, none);
             }
             .word-w{
-                calcmedia('h', 100%, 300px); 
-                calcmedia('pr', absolute, relative); 
+                calcmedia('h', 100%, 300px);
+                calcmedia('pr', absolute, relative);
 
                 h(100%); right: 0;
 
@@ -90,19 +83,19 @@ export default {
                     w(60%); m(20px auto); lh(24px);
                 }
                 img{
-                    width: 90px; height: 90px; m(0 0 20px); 
+                    width: 90px; height: 90px; m(0 0 20px);
                 }
             }
             &.reverse{
-                .img-w{ 
-                    calcmedia('float', right, none); 
+                .img-w{
+                    calcmedia('float', right, none);
                 }
-                .word-w{ 
+                .word-w{
                     left: 0 ; right: auto;
                 }
             }
         }
-        
+
 
     }
 }

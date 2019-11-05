@@ -1,40 +1,44 @@
 <template>
-    <div class="case-wrap layout" >
-        <div class="p-tit">{{title}}</div>
-        <div class="p-desc">{{desc}}</div>
+    <div class="case-wrap" >
+        <div class="layout">
+            <div class="p-tit">{{title}}</div>
+            <div class="p-desc">{{desc}}</div>
 
-        <ul class="tabs">
-            <li v-for="tab,index in tabList" :key=index 
-                @click="tabClick(index)" 
-                :class="{active: index==activeIndex}">{{tab.name}}</li>
-        </ul>
-        <div class="tab-content pr" :class="containerClass">
-            <div class="swiper-wrapper">
+            <ul class="tabs">
+                <li v-for="tab,index in tabList" :key=index
+                    @click="tabClick(index)"
+                    :class="{active: index==activeIndex}">{{tab.name}}</li>
+            </ul>
+            <div class="tab-content pr" :class="containerClass">
+                <div class="swiper-wrapper">
 
-                <div v-if="!isM" class="swiper-slide" v-for="slide,index in tabContent" :key="index" >
-                    <div class="list" v-for="item, index in slide.arr" >
+                    <div v-if="!isM" class="swiper-slide" v-for="slide,index in tabContent" :key="index" >
+                        <div class="list" v-for="item, index in slide.arr" >
+                            <div class="img-w hid">
+                                <img :src="item.src" class="mfull scale"/>
+                                <div class="mask" @click="showDialog(index)"></div>
+                            </div>
+                            <p>{{item.label}}</p>
+                        </div>
+                    </div>
+
+                    <div v-if="isM" class="swiper-slide list" v-for="item,index in mtabContent" :key="index">
                         <div class="img-w">
                             <img :src="item.src" class="mfull"/>
                         </div>
-                        <p>{{item.label}}</p>
+                            <p>{{item.label}}</p>
                     </div>
                 </div>
 
-                <div v-if="isM" class="swiper-slide list" v-for="item,index in mtabContent" :key="index">
-                    <div class="img-w">
-                        <img :src="item.src" class="mfull"/>
-                    </div>
-                        <p>{{item.label}}</p>
-                </div>
+                <!-- <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div> -->
+                <img-icon type="case-left" w=60 h=60 mh=30 mw=30 class="pol oper-prev z10" m="-50 0 0 35"/>
+                <img-icon type="case-right" w=60 h=60 mh=30 mw=30 class="por oper-next z10" m="-50 35 0 0" />
+
+                <div class="oper-pagin" :class="paginClass"></div>
             </div>
-
-            <!-- <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div> -->
-            <img-icon type="case-left" w=60 h=60 mh=30 mw=30 class="pol oper-prev z10" m="-50 0 0 20"/>
-            <img-icon type="case-right" w=60 h=60 mh=30 mw=30 class="por oper-next z10" m="-50 20 0 0" />
-
-            <div class="oper-pagin" :class="paginClass"></div>
         </div>
+
     </div>
 </template>
 
@@ -81,6 +85,12 @@ export default {
         }
     },
     methods: {
+        showDialog(index) {
+            this.$showDialog('image', {
+                images: this.mtabContent.map(item => item.src),
+                current: index,
+            })
+        },
         tabClick(index) {
             this.activeIndex = index
         },
@@ -123,13 +133,13 @@ export default {
         console.log()
     }
 }
-  
+
 </script>
 
 <style lang="stylus" scoped>
 
 .case-wrap{
-    calcmedia('m', 0 auto 80px, 0 auto 20px);
+    calcmedia('pb', 80px, 20px);
     .tabs{
         calcmedia('m', 40px 0 30px, 10px 0 10px); tc();
         li{
@@ -155,7 +165,7 @@ export default {
             calcmedia('w', 60px, 30px);
             calcmedia('h', 60px, 30px);
             top: 50%; margin-top: -30px;
-            
+
         }
     }
     .oper-pagin{
@@ -164,6 +174,20 @@ export default {
             margin: 0 8px;
         }
     }
+}
+
+.img-w{
+    pr();
+    .mask{
+        abs(); bg(rgba(0,0,0,0.5)); opacity: 0; tranall();
+    }
+    &:hover .mask{
+        opacity: 1;
+        &::after{
+            w(24px);h(24px);content: "";iconUrl('search.png');abs();iconBg();
+        }
+    }
+
 }
 
 

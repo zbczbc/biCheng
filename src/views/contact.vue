@@ -34,7 +34,7 @@
         </div>
         <div class="map-tab layout">
             <ul>
-                <li v-for="item,index in tabList" :key="index" 
+                <li v-for="item,index in tabList" :key="index"
                     :class="{active: index==activeIndex}"
                     @click="activeIndex=index" >{{item.label}}</li>
             </ul>
@@ -66,7 +66,23 @@ export default {
     created() {
         this.$nextTick(() => {
             let map =new BMap.Map(this.$refs.map)
-            map.centerAndZoom(new BMap.Point(114.404, 22.915), 11);
+            map.centerAndZoom(new BMap.Point(114.02597366,22.54605355), 11);
+
+            var point = new BMap.Point(114.02597366,22.54605355);
+            map.centerAndZoom(point, 15);
+            var opts = {
+            position : point,    // 指定文本标注所在的地理位置
+            offset   : new BMap.Size(30, -30)    //设置文本偏移量
+            }
+            var label = new BMap.Label("深圳市碧城智慧科技有限公司", opts);  // 创建文本标注对象
+                label.setStyle({
+                    color : "red",
+                    fontSize : "12px",
+                    height : "20px",
+                    lineHeight : "20px",
+                    fontFamily:"微软雅黑"
+                });
+	        map.addOverlay(label);
         })
     }
 }
@@ -82,15 +98,15 @@ export default {
         calcmedia('w', 31%, 100%); c(#999);
         div{
             calcmedia('sz', 36px, 20px);
-            calcmedia('mt', 10px); 
+            calcmedia('mt', 10px);
         }
         p{
             calcmedia('sz', 33px, 16px);
             calcmedia('m', 6px 0 12px 0, );
-            c(#333); 
+            c(#333);
         }
         span{
-            size16(); 
+            size16();
         }
     }
     .t2{
@@ -111,14 +127,14 @@ export default {
     }
 }
 .map-tab{
-    bg($blue); calcmedia('h', 90px); 
+    bg($blue); calcmedia('h', 90px);
     calcmedia('ty', 90px, 0);
     pr(); z(9);
     ul{
         calcmedia('p', 30px 0 0 10px);
         li{
             calcmedia('m', 0 0 0 20px);
-            lhh(40px); 
+            lhh(40px);
             float: left; border: 1px solid #fff; p(0 30px); border-radius: 40px; c(#fff);
             &.active, &:hover{
                 bg(#fff); color: $blue;

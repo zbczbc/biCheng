@@ -17,7 +17,7 @@
         <div class="f-bottom">
             <div class="layout">
                 <div class="links-box fl">
-                    <span @click="onShowDialog('low')">法律声明</span>
+                    <span @click="onShowDialog('law')">法律声明</span>
                     <span @click="onShowDialog('support')">技术支持</span>
                 </div>
                 <div class="txt-box fr">
@@ -25,7 +25,6 @@
                 </div>
             </div>
         </div>
-
 
     </div>
 </template>
@@ -52,7 +51,12 @@ export default {
                 },
                 { name: '产品介绍', path: '',
                     children: [
+                        { name: '物联网IoT平台', path: '/product' },
+                        { name: '智慧运营服务平台', path: '/product' },
                         { name: '大数据分析平台', path: '/product' },
+                        { name: '智慧安全', path: '/product' },
+                        { name: '智慧交通', path: '/product' },
+                        { name: '更多产品>', path: '/product' },
                     ]
                 },
                 { name: '场景方案', path: '/product',

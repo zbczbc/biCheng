@@ -85,7 +85,7 @@ export default {
                 }
                 this.$router.push(path)
                 this.menuIconType = "menu"
-                
+
                 this.navOpen = false
                 this.logoType = "logo"
             }
@@ -119,7 +119,16 @@ export default {
                         break;
                     case 2:
                         item.children = [
+                            { name: '物联网IoT平台', path: '/product' },
+                            { name: '智慧运营服务平台', path: '/product' },
                             { name: '大数据分析平台', path: '/product' },
+                            { name: '智慧安全', path: '/product' },
+                            { name: '智慧交通', path: '/product' },
+                            { name: '智慧办公', path: '/product' },
+                            { name: '智慧家庭', path: '/product' },
+                            { name: '智慧生活', path: '/product' },
+                            { name: '智慧环境', path: '/product' },
+                            { name: '智慧楼宇', path: '/product' },
                         ]
                         break;
                     case 3:
@@ -166,7 +175,7 @@ export default {
                 if(route.meta.index >= 0) {
                     this.activeIndex = route.meta.index
                 }
-                
+
             }
         }
     },

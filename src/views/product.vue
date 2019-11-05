@@ -184,7 +184,7 @@ $productWidth = 500px;
         }
     }
     .info-content{
-        width: 55%; float:left; p(110px 0 0 px2vw(80));
+        width: 55%; float:left; p(50px 0 0 px2vw(80));
         .tit{
             calcmedia('sz',24, 16);
         }
@@ -196,7 +196,7 @@ $productWidth = 500px;
                 calcmedia('sz', 18, 14); m(0 0 30px 0); border-top: 1px solid $border; pt(28);
             }
             .list{
-                w(50%); calcmedia('h', 200px, 150px); float:left; p(0 10px 20px 10px); tc();
+                w(50%); calcmedia('h', 190px, 150px); float:left; p(0 10px 20px 10px); tc();
                 .list-inner{
                     border: 1px solid $border; height: 100%; calcmedia('pt', 13%, 10%);
                 }

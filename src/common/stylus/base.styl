@@ -225,9 +225,9 @@ textarea:focus:-ms-input-placeholder {
   color: #fff
 
 .p-tit{
-    mb(30, 'h'); tc();
+    tc(); mb(30, 'h');
     calcmedia('sz', 30, 16);
-    calcmedia('mt', 100px, 50px);
+    calcmedia('pt', 100px, 50px);
     font-weight: bold;
 }
 .p-desc{
@@ -242,3 +242,16 @@ textarea:focus:-ms-input-placeholder {
 
 .cp
   cursor: pointer;
+.hid {
+  overflow: hidden;
+  &:hover .scale{
+    transcale(1.1);
+  }
+
+}
+.scale{
+  tranall();
+  &:hover{
+    transcale(1.1);
+  }
+}

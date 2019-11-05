@@ -14,7 +14,7 @@
                     <div class="sub-tit">智慧城市系统建设及服务商</div>
                     <div class="sub-desc">把数字技术带入每个城市，让智慧触手可及</div>
                     <div></div>
-                    <img-icon type="play" w=63 h=63 class="ilt cp" @onClick="$root.$emit('showVideo')" m="30 0 0 0"></img-icon>
+                    <img-icon type="play" w=63 h=63 class="ilt cp z10" @onClick="$showDialog('video')" m="30 0 0 0"></img-icon>
 
                     <div class="icons-group">
                         <div class="list" v-for="item in iconesGroup">
@@ -24,8 +24,8 @@
                     </div>
                 </div>
 
-                <div class="layout pob">
-                    <div class="text-box2" v-if="index==1">
+                <div class="layout pob" v-if="index==1">
+                    <div class="text-box2">
                         <div class="tit">
                             <p>连接空间·企业·服务</p>
                             <p>共建智慧产业生态</p>
@@ -41,12 +41,13 @@
 
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
+
+        <div class="oper-pagin" ></div>
     </div>
 </template>
 
 <script>
 import Swiper from "swiper"
-
 
 export default {
     data() {
@@ -66,6 +67,9 @@ export default {
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
+                },
+                pagination: {
+                    el: `.oper-pagin`
                 }
             })
         },
@@ -147,7 +151,7 @@ export default {
 }
 
 .layout{
-    h(100%); right:0; 
+    h(100%); right:0;
 }
 .text-box2{
     calcmedia('w', 520px, 80%);
@@ -155,16 +159,23 @@ export default {
     calcmedia('r', auto, 0);
     calcmedia('m', 0, 0 auto);
     calcmedia('align', left, center);
-    
-    topcenter(); 
+
+    topcenter();
     .tit{
         size55();lh(75px);
     }
     .desc{
-        size18();lh(35px);mt(35px);   
+        size18();lh(35px);mt(35px);
     }
 }
 
+
+ .oper-pagin{
+    mt(20); tc(); z(100); pb(); bottom: 5%;
+    /deep/ .swiper-pagination-bullet{
+        margin: 0 8px; width: 30px; height: 3px; bg(#fff); border-radius: 3px;
+    }
+}
 
 
 

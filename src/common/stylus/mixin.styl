@@ -82,8 +82,8 @@ pb() {
 pf() {
     position: fixed;
 }
-bg(value) 
-    background-color: value; 
+bg(value)
+    background-color: value;
 c(value) { color: value }
 
 tc() { text-align: center; }
@@ -131,16 +131,16 @@ wt(number, type = false)
 
 // 媒体查询 方法
 calcmedia(type, pc, mobile=false)
-    @media (max-width: 768px) 
-        if(mobile == false) 
+    @media (max-width: 768px)
+        if(mobile == false)
             mobile = pc
         setMedia(type, mobile)
-  
-    @media (min-width: 769px) 
+
+    @media (min-width: 769px)
         setMedia(type, pc)
 
 setMedia(type, value)
-    
+
         if(type == "sz")
             font-size: value * 1px
         if(type == "pt")
@@ -161,6 +161,8 @@ setMedia(type, value)
             line-height: value; height: value
         if(type == "p")
             padding: value
+        if(type == "pb")
+            padding-bottom: value
         if(type == "w")
             width: value
         if(type == "pr")
@@ -181,47 +183,47 @@ setMedia(type, value)
             text-align: value
         if(type == "dis")
             display: value
-        
 
 
-borderAni() 
+
+borderAni()
     transition: all 0.3s ease; transform: translateX(-50%); left:50%; width: 0;
 
-bgray() 
+bgray()
     border: 1px solid $border;
 
-bbgray() 
+bbgray()
     border-bottom: 1px solid $border;
 
 
-tranall(number=false) 
+tranall(number=false)
     if(number==false)
         number = 1
 
     transition: all number*1s ease; cursor: pointer;
 
-abs() 
+abs()
     position absolute; top 0; left 0; bottom 0; right 0; margin auto;
 
-transcale(number=false) 
+transcale(number=false)
     if(number==false)
         number = 1
 
     transform: scale(number)
 
-size20() 
+size20()
     calcmedia('sz', 20px, 14px)
 
-size14() 
+size14()
     calcmedia('sz', 14px, 12px)
 
-size55() 
+size55()
     calcmedia('sz', 55px, 18px)
 
-size18() 
+size18()
     calcmedia('sz', 18px, 14px)
 
-fb() 
+fb()
     font-weight: bold;
 
 z(number)

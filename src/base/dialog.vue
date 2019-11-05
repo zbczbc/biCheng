@@ -1,6 +1,28 @@
 <template>
     <div class="dialog-wrapper" v-if="visible">
-        <div class="dialog-container layout container" v-if="type=='video'">
+
+        <div class="image-container container" v-if="type=='image'">
+            <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" />
+
+            <div class="image-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" v-for="item,i in images" :key="i">
+                        <img :src="item"/>
+                    </div>
+                </div>
+
+                <img-icon type="dialog-left" w=50 h=70 class="dialog-next pob" m="-25 0 0 30"></img-icon>
+                <img-icon type="dialog-right" w=50 h=70 class="dialog-prev por" m="-25 30 0 0"></img-icon>
+            </div>
+
+        </div>
+
+        <div class="video-container container" v-else-if="type=='video'">
+            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" />
+            <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
+        </div>
+
+        <div class="dialog-container layout container" v-else>
             <div class="title-box pr">
                 {{title}}
                 <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" />
@@ -33,26 +55,10 @@
                 </scroll>
             </div>
         </div>
-        <div class="image-container container" v-else-if="type=='image'">
-            <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" />
 
-            <div class="image-swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for="item,i in images" :key="i">
-                        <img :src="item"/>
-                    </div>
-                </div>
-
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-            
-        </div>
-        <div class="video-container container" v-else>
-            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" />
-            <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
-        </div>
         <div class="mask" @click="visible=false"></div>
+
+
     </div>
 </template>
 
@@ -66,8 +72,8 @@ import Vue from "vue"
 export default {
     data() {
         return {
-            visible: true,
-            type: "image",
+            visible: false,
+            type: "law",
             //法律法规 内容
             content: "",
             images: [
@@ -86,12 +92,15 @@ export default {
         _initSwiper() {
             this.mySwiper = null
             this.mySwiper = new Swiper('.image-swiper', {
-
+                loop: true,
+                navigation: {
+                    nextEl: '.dialog-prev',
+                    prevEl: '.dialog-next',
+                }
             })
-            console.log(this.mySwiper)
         },
-        showVideo(opts) {
-            
+        showImage(opts) {
+
             this.current = opts.current || 1
             this.images = opts.images || []
 
@@ -107,6 +116,10 @@ export default {
                     }
                 })
             }
+
+            this.$nextTick(() => {
+                this._initSwiper()
+            })
         }
     },
     created() {
@@ -115,6 +128,8 @@ export default {
 
         Vue.prototype.$showDialog = (type, opts) => {
             this.type = type
+            this.visible = true
+
             if(type == 'law') {
                 this.title = "法律法规"
 
@@ -128,16 +143,14 @@ export default {
             }
 
             if(type == "image") {
-                this.showVideo(opts)
+                this.showImage(opts)
             }
 
-            this.visible = true
-            
+
+
         }
 
-        this.$nextTick(() => {
-            this._initSwiper()
-        })
+
     },
     components: {
         Scroll
@@ -153,7 +166,13 @@ export default {
         h(100%);
         .swiper-slide{
             flexcenter();
+            img{
+                max-width: 90%; max-height: 90%;
+            }
         }
+    }
+    .dialog-next,.dialog-prev{
+        top: 50%; z(10);
     }
 }
 
@@ -173,7 +192,7 @@ export default {
     bg(#fff); abs(); z(12); pb();
 }
 .dialog-container{
-    h(400px); 
+    h(400px);
     >.content{
         m(30px);
     }
@@ -185,7 +204,7 @@ export default {
     }
 }
 .video-container{
-    w(900px); h(500px); 
+    w(900px); h(500px);
     video{
         width: 100%;
     }
