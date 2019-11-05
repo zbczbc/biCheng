@@ -3,7 +3,7 @@ import axios from "axios"
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 async function fetchData( opts ) {
- 
+
     return await axios({
         method: opts.method || 'get',
         url: '/api'+opts.url,

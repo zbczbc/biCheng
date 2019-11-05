@@ -30,6 +30,7 @@
 
 <script>
 import { getHonor } from "@/api/api"
+
 export default {
     data() {
         return {
@@ -43,13 +44,14 @@ export default {
                 { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
                 { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
                 { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-
             ]
         }
     },
     methods: {
         getHonor() {
-            getHonor({pageNo: 1, pageSize: 12})
+            getHonor({pageNo: 1, pageSize: 12}).then(data => {
+
+            })
         },
         showDialog(index) {
             this.$showDialog('image', {
