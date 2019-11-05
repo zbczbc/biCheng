@@ -1,5 +1,5 @@
 <template>
-    <div class="case-wrap" >
+    <div class="case-wrap" :class="paginClass">
         <div class="layout">
             <div class="p-tit">{{title}}</div>
             <div class="p-desc">{{desc}}</div>
@@ -44,10 +44,12 @@
 
 <script>
 import Swiper from "swiper"
+import $ from 'jquery'
 
 export default {
     props: {
         id: {},
+        ids: {},
         title: {},
         desc: {}
     },
@@ -130,6 +132,14 @@ export default {
     },
     created() {
         console.log()
+    },
+    mounted() {
+        let top = $(`.${this.paginClass}`).offset().top
+
+        this.$root.$emit('changeToCase', () => {
+
+        })
+
     }
 }
 

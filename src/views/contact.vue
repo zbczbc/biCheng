@@ -123,7 +123,7 @@ export default {
         calcmedia('w', 25%, 100%);
     }
     .t4{
-        calcmedia('w', 15%, 100%); lh(35px);
+        calcmedia('w', 15%, 100%); lh(35px); tc();
     }
 }
 .map-tab{

@@ -23,15 +23,20 @@ export default {
       if (isUndefined(this.w)) {
         style += `width:100%;`;
       }else{
+        let w = this.w
         if ( this.$device.isM && this.mw ) {
-          this.w = this.mw
-          this.h = this.mh
+          w = this.mw
         }
 
-        style += `width:${this.setAttValue(this.w)};`;
+        style += `width:${this.setAttValue(w)};`;
       }
       if (this.h) {
-        style += `height:${this.setAttValue(this.h)};`;
+         let w = this.h
+        if ( this.$device.isM && this.mw ) {
+          w = this.mh
+        }
+
+        style += `height:${this.setAttValue(w)};`;
       } else if (isUndefined(this.h)) {
         style += `height:100%;`;
       }

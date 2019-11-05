@@ -10,7 +10,7 @@
                         v-for="(item,index) in navList"
                         :key="item.name"
                         :class="{ active: index==activeIndex, open: item.children&&hoverIndex==index }"
-                        @click.stop="onClickItem(item, index)"
+                        @click.stop="onClickItem(item, index, 1)"
                         @mouseleave="onMouseOut"
                         @mouseenter="onMouseOver(item, index)">
                         <span>{{item.name}}</span>
@@ -19,7 +19,9 @@
                             <ul class="ul-02"
                                 :class="{'ul-03':item.children&&item.children.length>4}"
                                 v-show="item.children&&hoverIndex==index">
-                                <li v-for="item02 in item.children" @click="onClickItem(item02, index)" >{{item02.name}}</li>
+                                <li v-for="item02, indexSec in item.children"  @click="onClickItem(item02, indexSec, 2)">
+                                    {{item02.name}}
+                                </li>
                             </ul>
                         </transition>
                     </li>
@@ -38,6 +40,7 @@
 
 <script>
 import { router } from "@/router"
+import $ from 'jquery'
 
 export default {
     data() {
@@ -68,7 +71,8 @@ export default {
             this.isShowChild = false
             this.hoverIndex = 0
         },
-        onClickItem(item, index) {
+        onClickItem(item, index, level) {
+
             if(item.children) {
                 if(this.isM) {
 
@@ -80,12 +84,27 @@ export default {
                 }
             }else {
                 let path = item.path
-                if(item.id) {
-                    path = `${item.path}?id=${item.id}`
-                }
-                this.$router.push(path)
-                this.menuIconType = "menu"
 
+                
+                
+
+                if(item.path.indexOf('case') > -1) {
+                    if(this.$route.path.indexOf('case') > -1) {
+                        let _top = $(`.pagin-${index}`).offset().top
+                        $('html,body').animate({scrollTop: _top-30})
+                    }else{
+                        this.$router.push('/case')
+                    }
+                    
+                }else{
+                    if(item.id) {
+                        path = `${item.path}?id=${item.id}`
+                    }
+
+                    this.$router.push(path)
+                }
+
+                this.menuIconType = "menu"
                 this.navOpen = false
                 this.logoType = "logo"
             }
@@ -141,10 +160,10 @@ export default {
                         break;
                     case 5:
                         item.children = [
-                            { name: '产业园区', id: '1' , path: '/case' },
-                            { name: '智慧社区', id: '1' , path: '/case' },
-                            { name: '智慧酒店', id: '1' , path: '/case' },
-                            { name: '智慧商业', id: '1' , path: '/case' },
+                            { name: '智慧园区' , path: '/case' },
+                            { name: '智慧社区' , path: '/case' },
+                            { name: '智慧酒店' , path: '/case' },
+                            { name: '智慧商业' , path: '/case' },
                         ]
                         break;
                     default:

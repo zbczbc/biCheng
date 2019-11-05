@@ -58,10 +58,15 @@ export default {
         onItemClick(item, index) {
             this.activeIndex = index
 
-            let route = `${this.$route.path}?id=${item.id}`
-            this.$router.push(route)
-            $('.menu-list').slideUp()
-            //this.$emit('handleItemClick', item)
+            if(item.id) {
+                let route = `${this.$route.path}?id=${item.id}`
+                this.$router.push(route)
+                $('.menu-list').slideUp()
+            }else{
+                let _top = $(`.pagin-${index}`).offset().top
+                $('html,body').animate({scrollTop: _top-30})
+            }
+            
         },
         onToggle() {
             this.isShowMore = !this.isShowMore
