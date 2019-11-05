@@ -105,7 +105,6 @@ export default {
                     el: `.${this.paginClass}`
                 }
             })
-            console.log(this.mySwiper, this.paginClass)
         }
     },
     computed: {
