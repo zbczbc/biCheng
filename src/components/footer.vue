@@ -21,7 +21,7 @@
                     <span @click="$emit('showDialog', 'suppose')">技术支持</span>
                 </div>
                 <div class="txt-box fr">
-                    佛山市顺德区碧桂园物业发展有限公司版权所有 粤 icp 备 05055114 号-1
+                    深圳市碧城智慧科技有限公司
                 </div>
             </div>
         </div>
