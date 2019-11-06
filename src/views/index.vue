@@ -69,7 +69,8 @@ export default {
                     prevEl: '.swiper-button-prev',
                 },
                 pagination: {
-                    el: `.oper-pagin`
+                    el: `.oper-pagin`,
+                    clickable: true
                 }
             })
         },

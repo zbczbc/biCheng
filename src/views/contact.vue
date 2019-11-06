@@ -7,7 +7,7 @@
         <div class="info-box layout">
             <div class="t1">
                 <!-- <div>SMART CITY</div> -->
-                <img-icon type="word" w=210 h=26 mw=100 mh=13 />
+                <img-icon type="word" w=210 h=26 mw=100 mh=13 class="ilm"/>
                 <p>碧城智慧科技</p>
                 <span>希望社会因我们的存在而变的更加美好</span>
             </div>

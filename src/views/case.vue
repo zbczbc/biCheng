@@ -2,10 +2,10 @@
     <div class="case-page">
         <banner :bannerInfo=bannerInfo />
         <bread-nav  v-model=activeIndex :thirdList=tabList />
-        
-        <case-list  v-for="item,index in list" 
-                    :title=item.title 
-                    :desc=item.desc 
+
+        <case-list  v-for="item,index in list"
+                    :title=item.title
+                    :desc=item.desc
                     :id=index :class="{bggray: index%2==1}"></case-list>
     </div>
 </template>
@@ -13,6 +13,7 @@
 
 <script>
 import CaseList from "../components/caseList"
+import { getCaseList } from "@/api/api"
 
 export default {
     data() {
@@ -36,6 +37,16 @@ export default {
                 url: 'static/case-banner.png'
             }
         }
+    },
+    methods: {
+        getCaseList() {
+            getCaseList().then(data => {
+                console.log(data)
+            })
+        }
+    },
+    created() {
+        this.getCaseList()
     },
     components: {
         CaseList

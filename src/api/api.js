@@ -17,6 +17,7 @@ async function fetchData( opts ) {
     })
 }
 
+//技术支持
 export const getTechnicalSupport = params => {
     return fetchData({
        url: `/portal/technicalSupport`,
@@ -24,9 +25,18 @@ export const getTechnicalSupport = params => {
     });
  };
 
+//荣耀资质
 export const getHonor = params  => {
     return fetchData({
         url: `/portal/honor`,
+        params,
+     });
+}
+
+//项目案例
+export const getCaseList = params  => {
+    return fetchData({
+        url: `/portal/allCaseClassifyDetails`,
         params,
      });
 }
