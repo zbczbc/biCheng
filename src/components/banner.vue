@@ -17,7 +17,7 @@ export default {
                 }
             }
         },
-        
+
     }
 }
 </script>
@@ -33,7 +33,7 @@ export default {
     .desc{
         calcmedia('sz', 18px, 14px);
         calcmedia('w', 360px, 90%);
-        calcmedia('lh', 35px, 24px);
+        calcmedia('lh', 32px, 24px);
         disin(); max-width: 100%;
     }
 }

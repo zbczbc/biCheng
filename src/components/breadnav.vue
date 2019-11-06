@@ -27,7 +27,7 @@
                     <li class="list"
                         v-for="item,index in thirdList"
                         @click="onItemClick(item, index)"
-                        :class="{active: index==activeIndex}" >{{item.label}}</li>           
+                        :class="{active: index==activeIndex}" >{{item.label}}</li>
                 </ul>
             </div>
         </div>
@@ -66,7 +66,7 @@ export default {
                 let _top = $(`.pagin-${index}`).offset().top
                 $('html,body').animate({scrollTop: _top-30})
             }
-            
+
         },
         onToggle() {
             this.isShowMore = !this.isShowMore
@@ -107,8 +107,8 @@ export default {
     calcmedia('lhh', 70px, 48px)
     background: #eee;
     .link{
-        p(0 0px 0 5px); vertical-align middle; color: $color-text; 
-        
+        p(0 0px 0 5px); vertical-align middle; color: $color-text;
+
         .right-icon{
             m(0 5px 0 8px);
         }
@@ -116,8 +116,8 @@ export default {
 
     .oper-list{
         li {
-            padding: 0 20px;
-            &.active{
+            padding: 0 20px; fz(16px);
+            &.active,&:hover{
                 bg($blue); color:#fff;
             }
         }

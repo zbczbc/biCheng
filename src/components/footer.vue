@@ -61,7 +61,7 @@ export default {
                 },
                 { name: '场景方案', path: '/product',
                     children: [
-                        { name: '产业园区',  },
+                        { name: '智慧园区',  },
                         { name: '智慧社区',  },
                         { name: '智慧酒店',  },
                         { name: '智慧商业',  },
@@ -69,7 +69,7 @@ export default {
                 },
                 { name: '项目案例', path: '' ,
                     children: [
-                        { name: '产业园区',  },
+                        { name: '智慧园区',  },
                         { name: '智慧社区',  },
                         { name: '智慧酒店',  },
                         { name: '智慧商业',  },
