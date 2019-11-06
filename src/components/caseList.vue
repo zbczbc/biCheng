@@ -5,11 +5,11 @@
             <div class="p-desc">{{desc}}</div>
 
             <ul class="tabs">
-                <li v-for="tab,index in tabList" :key=index
+                <li v-for="tab,index in caseList" :key=index
                     @click="tabClick(index)"
-                    :class="{active: index==activeIndex}">{{tab.name}}</li>
+                    :class="{active: index==activeIndex}">{{tab.caseName}}</li>
             </ul>
-            <div class="tab-content pr" :class="containerClass">
+            <div class="tab-content pr" :class="containerClass" v-if="caseList&&caseList.length>0">
                 <div class="swiper-wrapper">
 
                     <div v-if="!isM" class="swiper-slide" v-for="slide,index in tabContent" :key="index" >
@@ -22,11 +22,13 @@
                         </div>
                     </div>
 
-                    <div v-if="isM" class="swiper-slide list" v-for="item,index in mtabContent" :key="index">
+                    <!-- <div>caseList: {{caseList[activeIndex]}}</div> -->
+
+                    <div v-if="isM" class="swiper-slide list" v-for="item,index in caseList[activeIndex].caseImgList" :key="index">
                         <div class="img-w">
-                            <img :src="item.src" class="mfull"/>
+                            <img :src="`/api/portal/getFileStream/${item.imgName}`" class="mfull"/>
                         </div>
-                            <p>{{item.label}}</p>
+                            <p>{{item.imgTitle}}</p>
                     </div>
                 </div>
 
@@ -51,38 +53,47 @@ export default {
         id: {},
         ids: {},
         title: {},
-        desc: {}
+        desc: {},
+        caseList: {
+            dafault: () => []
+        },
+        tabContent: {
+            dafault: () => []
+        },
+        mtabContent: {
+            dafault: () => []
+        }
     },
     data() {
         return {
             idName: "xxx",
-            tabList: [
-                { name: '惠州潼湖科技小镇', id: "" },
-                { name: '惠州潼湖科学城', id: "" },
-                { name: '广州CBD项目', id: "" },
-            ],
-            tabContent: [
-                { arr: [
-                    { src: 'static/case.jpg', label: '酒店外观' },
-                    { src: 'static/case.jpg', label: '科技小镇效果图' },
-                ] },
-                { arr: [
-                     { src: 'static/case.jpg', label: '酒店外观' },
-                    { src: 'static/case.jpg', label: '科技小镇效果图' },
-                ] },
-                { arr: [
-                     { src: 'static/case.jpg', label: '酒店外观' },
-                    { src: 'static/case.jpg', label: '科技小镇效果图' },
-                ] }
-            ],
-            mtabContent: [
-                { src: 'static/case.jpg', label: '酒店外观' },
-                { src: 'static/case.jpg', label: '科技小镇效果图' },
-                { src: 'static/case.jpg', label: '酒店外观' },
-                { src: 'static/case.jpg', label: '科技小镇效果图' },
-                { src: 'static/case.jpg', label: '酒店外观' },
-                { src: 'static/case.jpg', label: '科技小镇效果图' },
-            ],
+            // tabList: [
+            //     { name: '惠州潼湖科技小镇', id: "" },
+            //     { name: '惠州潼湖科学城', id: "" },
+            //     { name: '广州CBD项目', id: "" },
+            // ],
+            // tabContent: [
+            //     { arr: [
+            //         { src: 'static/case.jpg', label: '酒店外观' },
+            //         { src: 'static/case.jpg', label: '科技小镇效果图' },
+            //     ] },
+            //     { arr: [
+            //          { src: 'static/case.jpg', label: '酒店外观' },
+            //         { src: 'static/case.jpg', label: '科技小镇效果图' },
+            //     ] },
+            //     { arr: [
+            //          { src: 'static/case.jpg', label: '酒店外观' },
+            //         { src: 'static/case.jpg', label: '科技小镇效果图' },
+            //     ] }
+            // ],
+            // mtabContent: [
+            //     { src: 'static/case.jpg', label: '酒店外观' },
+            //     { src: 'static/case.jpg', label: '科技小镇效果图' },
+            //     { src: 'static/case.jpg', label: '酒店外观' },
+            //     { src: 'static/case.jpg', label: '科技小镇效果图' },
+            //     { src: 'static/case.jpg', label: '酒店外观' },
+            //     { src: 'static/case.jpg', label: '科技小镇效果图' },
+            // ],
             activeIndex: 0
         }
     },
@@ -107,6 +118,8 @@ export default {
                     el: `.${this.paginClass}`
                 }
             })
+
+            console.log(this.mySwiper, this.containerClass, this.$refs[this.containerClass])
         }
     },
     computed: {
@@ -125,7 +138,9 @@ export default {
             immediate: true,
             handler(value) {
                 this.$nextTick(() => {
-                    this.init()
+                    setTimeout(() => {
+                        this.init()
+                    },1000)
                 })
             }
         }

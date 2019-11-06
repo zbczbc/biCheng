@@ -4,8 +4,9 @@
         <bread-nav  v-model=activeIndex :thirdList=tabList />
 
         <case-list  v-for="item,index in list"
-                    :title=item.title
-                    :desc=item.desc
+                    :title=item.classifyName
+                    :desc=item.classifyTitle
+                    :caseList=item.caseList
                     :id=index :class="{bggray: index%2==1}"></case-list>
     </div>
 </template>
@@ -41,7 +42,20 @@ export default {
     methods: {
         getCaseList() {
             getCaseList().then(data => {
-                console.log(data)
+                let { imgTitle:title, content: desc } = data.bannerPicture
+                
+                Object.assign(this.bannerInfo, { title, desc })
+
+                this.tabList = []
+                this.list = []
+
+                data.classifyList.map(classify => {
+                        
+                    this.tabList.push({
+                        label: classify.classifyName
+                    })
+                    this.list.push(classify)
+                })
             })
         }
     },
