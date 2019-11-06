@@ -1,7 +1,7 @@
 <template>
     <div class="header-wrap"  :class="{'nav-open': navOpen}">
         <div class="pr z10 layout">
-            <div class="log fl" v-if="!whiteLogVisible">
+            <div class="log fl" v-if="!isM">
                 <img-box class="pc-logo" :type="logoType" m="26 0 0 0" @onClick="toIndex"></img-box>
             </div>
             <div class="nav fr ani-hei">
@@ -32,7 +32,7 @@
         <div class="down-bg ani-hei" :class="bgClass" v-if="!isM"></div>
 
         <div class="m-top z10" v-if="isM">
-            <img-box v-if="whiteLogVisible" @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="14 0 0 10"></img-box>
+            <img-box  @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="14 0 0 10"></img-box>
             <img-icon class="menu-icon por" :type="menuIconType" @onClick="monToggleNav" w=24 h=24 m="20 10 0 0"></img-icon>
         </div>
     </div>
@@ -92,7 +92,7 @@ export default {
                     }else{
                         this.$router.push('/case')
                     }
-                    
+
                 }else{
                     if(item.id) {
                         path = `${item.path}?id=${item.id}`
@@ -119,7 +119,12 @@ export default {
             }
         },
         toIndex() {
-            this.$router.push('/')
+            if(this.$route.path != "/") {
+                this.$router.push("/")
+            }
+            this.menuIconType = "menu"
+            this.navOpen = false
+            this.logoType = "logo"
         },
         _setNavList() {
             let arr = router.routes

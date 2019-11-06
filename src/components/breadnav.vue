@@ -19,7 +19,7 @@
         <div class="menu open" v-if="isM&&thirdList.length>0">
             <div class="menu-head" @click="onToggle">
                 <span>{{title}}</span>
-                <img-icon type="right-gray" w=25 h=25 m="25 20 0 0" class="por r90 tra" :class="{r270: isShowMore}"/>
+                <img-icon type="right-gray" w=25 h=25 m="13 20 0 0" class="por r90 tra" :class="{r270: isShowMore}"/>
             </div>
 
             <div class="menu-list">
