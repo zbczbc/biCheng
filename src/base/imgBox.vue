@@ -1,18 +1,17 @@
 
 <template>
   <div :style="setContainerStyle()" class="image-box" @click="onClick">
-    <img v-if="url&&!isLoadFail" class="image" :src="url" @error="onError">
-    <template v-else>
-      <img  class="image" :src="imgURL" alt="">
-    </template>
+    <img v-if="!isLoadFail" class="image" :src="imgURL" @error="onError">
   </div>
 </template>
 <script type='text/ecmascript-6'>
 import { isUndefined,isString } from "common/js/util";
 
-const TYPE_MAP = {
-	logo: 'logo.png',
-}
+/**
+ * 两种形式：
+ * 1. 传入type 取static里面的图片
+ * 2. 传入url  取服务器的图片
+ * */
 
 export default {
 	props: {
@@ -36,8 +35,14 @@ export default {
 	},
 	computed: {
 		imgURL() {
-			let str = TYPE_MAP[this.type] || this.type+'.png'
-			return 'static/'+str
+			let str
+			if(this.type) {
+				str = 'static/'+this.type+'.png'
+			}else{
+				str = `/api/portal/getFileStream/${this.url}`
+			}
+			
+			return str
 		}
 	},
 	methods: {
@@ -68,6 +73,7 @@ export default {
 <style scoped >
 .image {
   display: block;
-  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
 }
 </style>

@@ -12,30 +12,18 @@
             <div class="tab-content pr" :class="containerClass" v-if="caseList&&caseList.length>0">
                 <div class="swiper-wrapper">
 
-                    <div v-if="!isM" class="swiper-slide" v-for="slide,index in tabContent" :key="index" >
-                        <div class="list" v-for="item, index in slide.arr" >
-                            <div class="img-w hid">
-                                <img :src="item.src" class="mfull scale"/>
-                                <div class="mask" @click="showDialog(index)"></div>
-                            </div>
-                            <p>{{item.label}}</p>
-                        </div>
-                    </div>
-
-                    <!-- <div>caseList: {{caseList[activeIndex]}}</div> -->
-
-                    <div v-if="isM" class="swiper-slide list" v-for="item,index in caseList[activeIndex].caseImgList" :key="index">
-                        <div class="img-w">
-                            <img :src="`/api/portal/getFileStream/${item.imgName}`" class="mfull"/>
+                    <div class="swiper-slide list" v-for="item,imgIndex in caseImgList" :key="imgIndex">
+                        <div class="img-w hid">
+                            <!-- <img :src="`/api/portal/getFileStream/${item.imgName}`" class="mfull"/> -->
+                            <img-box :url="item.imgName" />
+                            <div class="mask" @click="showDialog(imgIndex)"></div>
                         </div>
                             <p>{{item.imgTitle}}</p>
                     </div>
                 </div>
-
-                <!-- <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div> -->
-                <img-icon type="case-left" w=60 h=60 mh=30 mw=30 class="pol oper-prev z10" m="-50 0 0 35"/>
-                <img-icon type="case-right" w=60 h=60 mh=30 mw=30 class="por oper-next z10" m="-50 35 0 0" />
+               
+                <img-icon type="case-left" w=60 h=60 mh=30 mw=30 class="pol oper-prev z10 cp" m="-50 0 0 35"/>
+                <img-icon type="case-right" w=60 h=60 mh=30 mw=30 class="por oper-next z10 cp" m="-50 35 0 0" />
 
                 <div class="oper-pagin" :class="paginClass"></div>
             </div>
@@ -98,11 +86,13 @@ export default {
         }
     },
     methods: {
-        showDialog(index) {
-            this.$showDialog('image', {
-                images: this.mtabContent.map(item => item.src),
-                current: index,
-            })
+        showDialog(imgIndex) {
+            if(this.$device.isPC) {
+                this.$showDialog('image', {
+                    images: this.caseImgList.map(item => item.imgName),
+                    current: imgIndex,
+                })
+            }
         },
         tabClick(index) {
             this.activeIndex = index
@@ -110,6 +100,7 @@ export default {
         init() {
             this.mySwiper = new Swiper(`.${this.containerClass}`, {
                 //loop: true,
+                slidesPerView: this.$device.isM ? 1: 2,
                 navigation: {
                     nextEl: '.oper-next',
                     prevEl: '.oper-prev',
@@ -119,7 +110,7 @@ export default {
                 }
             })
 
-            console.log(this.mySwiper, this.containerClass, this.$refs[this.containerClass])
+            //console.log(this.mySwiper, this.containerClass, this.$refs[this.containerClass])
         }
     },
     computed: {
@@ -131,6 +122,9 @@ export default {
         },
         isM() {
             return this.$device.isM
+        },
+        caseImgList() {
+            return this.caseList[this.activeIndex].caseImgList
         }
     },
     watch: {
@@ -140,7 +134,7 @@ export default {
                 this.$nextTick(() => {
                     setTimeout(() => {
                         this.init()
-                    },1000)
+                    },1000  )
                 })
             }
         }
@@ -176,12 +170,21 @@ export default {
         }
     }
     .tab-content{
-        calcmedia('m', 0 -15px, 0);
-        overflow: hidden;
+        //calcmedia('m', 0 -15px, 0);
+        overflow: hidden; overflow: hidden;
+        .swiper-wrapper{
+            //width: 100%; 
+        }
         .list{
-            calcmedia('w', calc(50% - 30px), 100%);
-            calcmedia('m', 0 15px, 0);
+            //calcmedia('w', calc(50% - 30px), 100%);
+            calcmedia('p', 0 15px, 0);
             float:left;
+            .img-w{
+                height:400px; overflow: hidden;
+            }
+            img{
+                min-width:100%; min-height:400px; 
+            }
             p{
                 size18(); mt(20);
             }

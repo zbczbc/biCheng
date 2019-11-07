@@ -7,12 +7,12 @@
             <div class="image-swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item,i in images" :key="i">
-                        <img :src="item"/>
+                        <img :src=item.src :class="item.className" />
                     </div>
                 </div>
 
-                <img-icon type="dialog-left" w=50 h=70 class="dialog-next pob" m="-25 0 0 30"></img-icon>
-                <img-icon type="dialog-right" w=50 h=70 class="dialog-prev por" m="-25 30 0 0"></img-icon>
+                <img-icon type="dialog-left" w=50 h=70 class="dialog-next pob cp" m="-25 0 0 30"></img-icon>
+                <img-icon type="dialog-right" w=50 h=70 class="dialog-prev por cp" m="-25 30 0 0"></img-icon>
             </div>
 
         </div>
@@ -78,7 +78,8 @@ export default {
             content: "",
             images: [
                 'static/honor-pic.jpg', 'static/honor-pic.jpg', 'static/honor-pic.jpg','static/honor-pic.jpg'
-            ]
+            ],
+            imageClass: ""
         }
     },
     methods: {
@@ -91,31 +92,45 @@ export default {
         },
         _initSwiper() {
             this.mySwiper = null
+            
             this.mySwiper = new Swiper('.image-swiper', {
                 loop: true,
+                initialSlide: this.current,
                 navigation: {
                     nextEl: '.dialog-prev',
                     prevEl: '.dialog-next',
                 }
             })
         },
-        showImage(opts) {
+        getImg(url) {
+            return `/api/portal/getFileStream/${url}`
+        },
+        async showImage(opts) {
 
-            this.current = opts.current || 1
-            this.images = opts.images || []
+            this.current = opts.current || 0
+            this.images = []
 
-            let image = new Image()
-                image.src = this.images[this.current]
+            opts.images.map(item => {
+                let image = new Image()
+                    image.src = this.getImg(item)
+               
+                    image.onload = () => {
+                    this.$nextTick(() => {
+                        let className = ''
+                        if (image.width > image.height) {
+                            className = "main-w"
+                        } else {
+                            className = "main-h"
+                        }
 
-            image.onload = () => {
-                this.$nextTick(() => {
-                    if (image.width > image.height) {
-                        this.imageClass = "active"
-                    } else {
-                        this.imageClass = "thin active"
-                    }
-                })
-            }
+                        this.images.push({
+                            src: image.src,
+                            className: className
+                        })
+                    })
+                }
+            })
+            
 
             this.$nextTick(() => {
                 this._initSwiper()
@@ -166,14 +181,19 @@ export default {
         h(100%);
         .swiper-slide{
             flexcenter();
-            img{
-                max-width: 90%; max-height: 90%;
-            }
+            p(30px 30px);
         }
     }
     .dialog-next,.dialog-prev{
         top: 50%; z(10);
     }
+}
+
+.main-w{
+    width: 100%;
+}
+.main-h{
+    height: 100%;
 }
 
 
