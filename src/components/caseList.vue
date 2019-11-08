@@ -21,7 +21,7 @@
                             <p>{{item.imgTitle}}</p>
                     </div>
                 </div>
-               
+
                 <img-icon type="case-left" w=60 h=60 mh=30 mw=30 class="pol oper-prev z10 cp" m="-50 0 0 35"/>
                 <img-icon type="case-right" w=60 h=60 mh=30 mw=30 class="por oper-next z10 cp" m="-50 35 0 0" />
 
@@ -89,8 +89,9 @@ export default {
         showDialog(imgIndex) {
             if(this.$device.isPC) {
                 this.$showDialog('image', {
-                    images: this.caseImgList.map(item => item.imgName),
+                    images: this.caseImgList,
                     current: imgIndex,
+
                 })
             }
         },
@@ -160,7 +161,7 @@ export default {
     calcmedia('pb', 80px, 20px);
     .tabs{
         calcmedia('align', center, left);
-        calcmedia('m', 40px 0 30px, 10px 0 10px); 
+        calcmedia('m', 40px 0 30px, 10px 0 10px);
         li{
             p(0 20px);lhh(30px);m(10px 10px)
             border:1px solid #ccc; display: inline-block; border-radius: 30px;
@@ -173,7 +174,7 @@ export default {
         //calcmedia('m', 0 -15px, 0);
         overflow: hidden; overflow: hidden;
         .swiper-wrapper{
-            //width: 100%; 
+            //width: 100%;
         }
         .list{
             //calcmedia('w', calc(50% - 30px), 100%);
@@ -183,7 +184,7 @@ export default {
                 height:400px; overflow: hidden;
             }
             img{
-                min-width:100%; min-height:400px; 
+                min-width:100%; min-height:400px;
             }
             p{
                 size18(); mt(20);

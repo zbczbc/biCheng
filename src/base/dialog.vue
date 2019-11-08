@@ -8,6 +8,7 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item,i in images" :key="i">
                         <img :src=item.src :class="item.className" />
+                        <div class="text">{{item.title}}</div>
                     </div>
                 </div>
 
@@ -67,6 +68,7 @@ import Scroll from "base/scroll"
 import { getTechnicalSupport } from "@/api/api"
 import Swiper from "swiper"
 import Vue from "vue"
+import Taskes from "@/common/js/Taskes"
 
 // type 传值 law suppose video image
 export default {
@@ -92,7 +94,7 @@ export default {
         },
         _initSwiper() {
             this.mySwiper = null
-            
+
             this.mySwiper = new Swiper('.image-swiper', {
                 loop: true,
                 initialSlide: this.current,
@@ -105,16 +107,26 @@ export default {
         getImg(url) {
             return `/api/portal/getFileStream/${url}`
         },
-        async showImage(opts) {
+        showImage(opts) {
 
             this.current = opts.current || 0
             this.images = []
 
+            this.taskes = new Taskes()
+
+             this.taskes.end(() => {
+                console.log(this.images)
+                this.$nextTick(() => {
+                    this._initSwiper()
+                })
+            })
+
             opts.images.map(item => {
+                this.taskes.add()
                 let image = new Image()
-                    image.src = this.getImg(item)
-               
-                    image.onload = () => {
+                image.src = this.getImg(item.imgName)
+
+                image.onload = () => {
                     this.$nextTick(() => {
                         let className = ''
                         if (image.width > image.height) {
@@ -122,18 +134,17 @@ export default {
                         } else {
                             className = "main-h"
                         }
+                        console.log(className)
+                        this.taskes.check()
 
                         this.images.push({
                             src: image.src,
-                            className: className
+                            title: item.imgTitle,
+                            className
                         })
                     })
                 }
-            })
-            
 
-            this.$nextTick(() => {
-                this._initSwiper()
             })
         }
     },
@@ -176,12 +187,15 @@ export default {
 <style lang="stylus" scoped>
 
 .image-container{
-    w(600px); h(600px); overflow: hidden;
+    w(600px); h(630px); overflow: hidden;
     .image-swiper{
         h(100%);
         .swiper-slide{
             flexcenter();
-            p(30px 30px);
+            p(30px 30px 60px);
+            .text{
+                pb(); w(100%); bottom: 30px;tc(); lhh(30px); fz(14px);
+            }
         }
     }
     .dialog-next,.dialog-prev{
