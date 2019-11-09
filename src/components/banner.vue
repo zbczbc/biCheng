@@ -1,14 +1,14 @@
 <template>
-    <div class="banner" :style="{backgroundImage: 'url(' + bannerInfo.url + ')'}">
-        <div class="tit">{{bannerInfo.title}}</div>
-        <div class="desc">{{bannerInfo.desc}}</div>
+    <div class="banner" :style="bgStyle">
+        <div class="tit">{{bannerPicture.imgTitle}}</div>
+        <div class="desc">{{bannerPicture.content}}</div>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-        bannerInfo: {
+        bannerPicture: {
             default: () => {
                 return {
                     title: "",
@@ -17,7 +17,12 @@ export default {
                 }
             }
         },
-
+    },
+    computed: {
+        bgStyle() {
+            let src = this.$api.getImg(this.bannerPicture.imgName)
+            return `backgroundImage: url(${src}) `
+        }
     }
 }
 </script>

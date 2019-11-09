@@ -9,6 +9,8 @@ export default {
     h: {},
     lh:{},
     m: {},
+    mw: {},
+    mh: {},
     mr: {},
     ml: {},
     mb: {},

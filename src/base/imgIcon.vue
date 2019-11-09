@@ -11,8 +11,6 @@ export default {
     type: {
       required: true
     },
-    mw: {},
-    mh: {}
   },
   data() {
     return {};

@@ -35,27 +35,41 @@ export default {
 	},
 	computed: {
 		imgURL() {
-			let str
-			if(this.type) {
-				str = 'static/'+this.type+'.png'
-			}else{
-				str = `/api/portal/getFileStream/${this.url}`
+			// let str
+			// if(this.type) {
+			// 	str = 'static/'+this.type+'.png'
+			// }else{
+			// 	str = `/api/portal/getFileStream/${this.url}`
+			// }
+			if(this.url) {
+				console.log(this.$api.getImg(this.url), this.url)
+				return this.$api.getImg(this.url)
 			}
-			
-			return str
 		}
 	},
 	methods: {
 		setContainerStyle() {
 			let style = this.getBaseStyle();
 			//REPconsole.log(style)
-			if (isUndefined(this.h)) {
-				style += `height:100%;`;
-			}else {
-				style += this.getHeightStyle('w')
-			}
-			if (isUndefined(this.w)) {
+			 if (isUndefined(this.w)) {
 				style += `width:100%;`;
+			}else{
+				let w = this.w
+				if ( this.$device.isM && this.mw ) {
+				w = this.mw
+				}
+
+				style += `width:${this.setAttValue(w)};`;
+			}
+			if (this.h) {
+				let w = this.h
+				if ( this.$device.isM && this.mw ) {
+					w = this.mh
+				}
+
+				style += `height:${this.setAttValue(w)};`;
+			} else if (isUndefined(this.h)) {
+				style += `height:100%;`;
 			}
 
 			if ("vertical-align" in this.$attrs) {
@@ -73,7 +87,8 @@ export default {
 <style scoped >
 .image {
   display: block;
-  min-width: 100%;
-  min-height: 100%;
+  width: 100%;
+  /* min-width: 100%;
+  min-height: 100%; */
 }
 </style>

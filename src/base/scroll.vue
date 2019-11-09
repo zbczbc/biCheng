@@ -53,13 +53,12 @@ export default {
 .scroll-wrapper {
     /deep/ .happy-scroll-container {
         .happy-scroll-content{
-            
             display:block;
             padding:0 40px 20px 0;     //设置为20抵消插件里计算多的20（也是padding的20）
         }
     }
     /deep/ .happy-scroll-strip--vertical{
-        right:1px; bg($border); 
+        right:1px; 
     }
 }
 

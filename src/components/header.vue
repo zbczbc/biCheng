@@ -17,9 +17,9 @@
 
                         <transition name="height">
                             <ul class="ul-02"
-                                :class="{'ul-03':item.children&&item.children.length>4}"
+                                :class="{'ul-03':index==2}"
                                 v-show="item.children&&hoverIndex==index">
-                                <li v-for="item02, indexSec in item.children"  @click="onClickItem(item02, indexSec, 2)">
+                                <li v-for="item02, indexSec in item.children"  @click="onClickItem(item02, indexSec, 2, index)">
                                     {{item02.name}}
                                 </li>
                             </ul>
@@ -29,10 +29,10 @@
             </div>
         </div>
 
-        <div class="down-bg ani-hei" :class="bgClass" v-if="!isM"></div>
+        <div class="down-bg ani-hei" :style="bgHeight" v-if="!isM"></div>
 
         <div class="m-top z10" v-if="isM">
-            <img-box  @onClick="toIndex" class="pc-logo" :type="logoType" w=100 m="14 0 0 10"></img-box>
+            <img-box  @onClick="toIndex" class="pc-logo" :type="logoType" w=100 h=30  m="14 0 0 10"></img-box>
             <img-icon class="menu-icon por" :type="menuIconType" @onClick="monToggleNav" w=24 h=24 m="20 10 0 0"></img-icon>
         </div>
     </div>
@@ -41,6 +41,12 @@
 <script>
 import { router } from "@/router"
 import $ from 'jquery'
+
+const PATH_INDEX = {
+    2: '/product',
+    3: '/scene',
+    5: '/case',
+}
 
 export default {
     data() {
@@ -71,7 +77,7 @@ export default {
             this.isShowChild = false
             this.hoverIndex = 0
         },
-        onClickItem(item, index, level) {
+        onClickItem(item, index, level, Findex) {
 
             if(item.children) {
                 if(this.isM) {
@@ -83,9 +89,9 @@ export default {
                     }
                 }
             }else {
-                let path = item.path
+                let path = item.path || PATH_INDEX[Findex]
 
-                if(item.path.indexOf('case') > -1) {
+                if(path.indexOf('case') > -1) {
                     if(this.$route.path.indexOf('case') > -1) {
                         let _top = $(`.pagin-${index}`).offset().top
                         $('html,body').animate({scrollTop: _top-30})
@@ -95,7 +101,7 @@ export default {
 
                 }else{
                     if(item.id) {
-                        path = `${item.path}?id=${item.id}`
+                        path = `${path}?id=${item.id}`
                     }
 
                     this.$router.push(path)
@@ -129,50 +135,46 @@ export default {
         _setNavList() {
             let arr = router.routes
 
-            this.navList = arr.map(item => {
-                switch (item.meta.index) {
-                    case 1:
-                        item.children = [
-                            { name: '公司简介', id: '1' , path: '/about'},
-                            { name: '组织架构', id: '2' , path: '/about'},
-                            { name: '资质荣誉', id: '3' , path: '/about'},
-                        ]
-                        break;
-                    case 2:
-                        item.children = [
-                            { name: '物联网IoT平台', path: '/product' },
-                            { name: '智慧运营服务平台', path: '/product' },
-                            { name: '大数据分析平台', path: '/product' },
-                            { name: '智慧安全', path: '/product' },
-                            { name: '智慧交通', path: '/product' },
-                            { name: '智慧办公', path: '/product' },
-                            { name: '智慧家庭', path: '/product' },
-                            { name: '智慧生活', path: '/product' },
-                            { name: '智慧环境', path: '/product' },
-                            { name: '智慧楼宇', path: '/product' },
-                        ]
-                        break;
-                    case 3:
-                        item.children = [
-                            { name: '产业园区', id: '1' , path: '/scene' },
-                            { name: '智慧社区', id: '1' , path: '/scene' },
-                            { name: '智慧酒店', id: '1' , path: '/scene' },
-                            { name: '智慧商业', id: '1' , path: '/scene' },
-                        ]
-                        break;
-                    case 5:
-                        item.children = [
-                            { name: '智慧园区' , path: '/case' },
-                            { name: '智慧社区' , path: '/case' },
-                            { name: '智慧酒店' , path: '/case' },
-                            { name: '智慧商业' , path: '/case' },
-                        ]
-                        break;
-                    default:
-                        break;
-                }
-                return item
+            this.$api.menuList().then(data => {
+                let { caseClassifyList, productList, schemeList } = data
+
+                this.navList = arr.map(item => {
+                    switch (item.meta.index) {
+                        case 1:
+                            item.children = [
+                                { name: '公司简介', id: '1' , path: '/about'},
+                                { name: '组织架构', id: '2' , path: '/about'},
+                                { name: '资质荣誉', id: '3' , path: '/about'},
+                            ]
+                            break;
+                        case 2:
+                            item.children = productList
+                            // [
+                            //     { name: '物联网IoT平台', path: '/product' },
+                            //     { name: '智慧运营服务平台', path: '/product' },
+                            //     { name: '大数据分析平台', path: '/product' },
+                            //     { name: '智慧安全', path: '/product' },
+                            //     { name: '智慧交通', path: '/product' },
+                            //     { name: '智慧办公', path: '/product' },
+                            //     { name: '智慧家庭', path: '/product' },
+                            //     { name: '智慧生活', path: '/product' },
+                            //     { name: '智慧环境', path: '/product' },
+                            //     { name: '智慧楼宇', path: '/product' },
+                            // ]
+                            break;
+                        case 3:
+                            item.children = schemeList
+                            break;
+                        case 5:
+                            item.children = caseClassifyList
+                        default:
+                            break;
+                    }
+                    return item
+                })
             })
+
+            
 
         },
         _initData() {
@@ -180,12 +182,22 @@ export default {
         }
     },
     computed: {
-        bgClass() {
-            let childNav = this.navList[this.hoverIndex].children
-            if( childNav ) {
-                return childNav.length > 4 ? 'moreRow' : 'oneRow'
-            }else{
-                return ""
+        bgHeight() {
+            // let childNav = this.navList.length && this.navList[this.hoverIndex].children
+            // if( childNav ) {
+            //     return childNav.length > 4 ? 'moreRow' : 'oneRow'
+            // }else{
+            //     return ""
+            // }
+
+            
+            let childNav = this.navList.length && this.navList[this.hoverIndex].children
+            if(childNav) {
+                let height = 70
+                if(this.hoverIndex == 2) {
+                    height = Math.ceil(childNav.length/2) * 40 + 50
+                }
+                return `height: ${height}px`
             }
         }
     },
