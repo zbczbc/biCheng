@@ -55,33 +55,6 @@ export default {
     data() {
         return {
             idName: "xxx",
-            // tabList: [
-            //     { name: '惠州潼湖科技小镇', id: "" },
-            //     { name: '惠州潼湖科学城', id: "" },
-            //     { name: '广州CBD项目', id: "" },
-            // ],
-            // tabContent: [
-            //     { arr: [
-            //         { src: 'static/case.jpg', label: '酒店外观' },
-            //         { src: 'static/case.jpg', label: '科技小镇效果图' },
-            //     ] },
-            //     { arr: [
-            //          { src: 'static/case.jpg', label: '酒店外观' },
-            //         { src: 'static/case.jpg', label: '科技小镇效果图' },
-            //     ] },
-            //     { arr: [
-            //          { src: 'static/case.jpg', label: '酒店外观' },
-            //         { src: 'static/case.jpg', label: '科技小镇效果图' },
-            //     ] }
-            // ],
-            // mtabContent: [
-            //     { src: 'static/case.jpg', label: '酒店外观' },
-            //     { src: 'static/case.jpg', label: '科技小镇效果图' },
-            //     { src: 'static/case.jpg', label: '酒店外观' },
-            //     { src: 'static/case.jpg', label: '科技小镇效果图' },
-            //     { src: 'static/case.jpg', label: '酒店外观' },
-            //     { src: 'static/case.jpg', label: '科技小镇效果图' },
-            // ],
             activeIndex: 0
         }
     },
@@ -163,7 +136,7 @@ export default {
         calcmedia('align', center, left);
         calcmedia('m', 40px 0 30px, 10px 0 10px);
         li{
-            p(0 20px);lhh(30px);m(10px 10px)
+            p(0 20px);lhh(30px);m(10px 10px); cursor:pointer;
             border:1px solid #ccc; display: inline-block; border-radius: 30px;
             &.active,&:hover{
                 color: $blue; border-color: $blue;

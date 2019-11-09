@@ -7,18 +7,19 @@
             <div class="list-group clearfix">
                 <div class="list" v-for="item,index in list" :key="index">
                     <div class="img-w pr hid">
-                        <img-box :url="item" class="full scale" />
+                        <img-box :url="item.imgName" class="full scale" />
                         <div class="mask" @click="showDialog(index)"></div>
                     </div>
                     <div class="word-w">
-                        <div class="tit">{{item.title}}</div>
-                        <p>{{item.date}}</p>
+                        <div class="tit">{{item.imgTitle}}</div>
                     </div>
                 </div>
             </div>
             <ul class="pagination">
                 <li class="prev"></li>
-                <li v-for="page,index in totalArr" :key="index">{{index==2?'...':index+1}}</li>
+                <li v-for="page,index in totalArr" 
+                    :key="index" 
+                    :active="pageNo==index">{{index>2?'...':index+1}}</li>
                 <li class="next"></li>
             </ul>
         </div>
@@ -32,8 +33,8 @@ export default {
         return {
             title: "",
             list: [],
-            pageNo: 2,
-            pageSize: 1,
+            pageNo: 1,
+            pageSize: 10,
             totalPage: 1,
             totalArr: [""]
         }
@@ -42,16 +43,16 @@ export default {
         _getPageData() {
             this.$api.honor({pageNo: this.pageNo, pageSize: this.pageSize}).then(data => {
                 let { pictureList, title } = data
+                
                 this.title = title
                 this.list = pictureList.list
                 this.totalPage = data.totalPage
-                this.totalArr.length = data.totalPage > 4 ? 4 : data.totalPage
-                console.log(this.totalArr)
+                this.totalArr.length = pictureList.totalPage > 4 ? 4 : pictureList.totalPage
             })
         },
         showDialog(index) {
             this.$showDialog('image', {
-                images: this.list.map(item => item.src),
+                images: this.list,
                 current: index,
             })
         }

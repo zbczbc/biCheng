@@ -1,6 +1,6 @@
 <template>
     <div class="contact-page">
-        <banner :bannerInfo=bannerInfo />
+        <banner :bannerPicture=pageData.bannerPicture />
         <bread-nav />
         <div class="p-tit">联系我们</div>
 
@@ -48,16 +48,13 @@
 export default {
     data() {
         return {
-            bannerInfo: {
-                title: '联系我们',
-                desc: '赋能企业成长 助力产业发展 ',
-                url: 'static/contact-banner.png'
-            },
+            bannerPicture: {},
             activeIndex: 0,
             tabList: [
                 { label: '总部', },
                 { label: '惠州', }
-            ]
+            ],
+            pageData: {}
         }
     },
     methods: {
@@ -86,7 +83,7 @@ export default {
         })
 
         this.$api.getContactUs().then(data => {
-            console.log(data)
+            this.pageData = data
         })
     }
 }

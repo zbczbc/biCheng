@@ -1,6 +1,6 @@
 <template>
     <div class="case-page">
-        <banner :bannerInfo=bannerInfo />
+        <banner :bannerPicture=bannerPicture />
         <bread-nav  v-model=activeIndex :thirdList=tabList />
 
         <case-list  v-for="item,index in list"
@@ -14,7 +14,6 @@
 
 <script>
 import CaseList from "../components/caseList"
-import { getCaseList } from "@/api/api"
 
 export default {
     data() {
@@ -32,25 +31,20 @@ export default {
                 { title: '智慧酒店', desc: '助力园区智慧升级，构建产业创新生态' },
                 { title: '智慧商业', desc: '助力园区智慧升级，构建产业创新生态' },
             ],
-            bannerInfo: {
-                title: '项目案例',
-                desc: "20年园区运营经验，40+大型园区服务经验，解决国家3大新型智慧产业方向，推进产业一体化智慧运营",
-                url: 'static/case-banner.png'
-            }
+            bannerPicture: {}
         }
     },
     methods: {
         getCaseList() {
-            getCaseList().then(data => {
-                let { imgTitle:title, content: desc } = data.bannerPicture
-                
-                Object.assign(this.bannerInfo, { title, desc })
+            console.log(this.$api)
+            this.$api.getCaseList().then(data => {
+                console.log(data)
+                this.bannerPicture = data && data.bannerPicture
 
                 this.tabList = []
                 this.list = []
 
                 data.classifyList.map(classify => {
-                        
                     this.tabList.push({
                         label: classify.classifyName
                     })

@@ -11,15 +11,22 @@ export default {
         bannerPicture: {
             default: () => {
                 return {
-                    title: "",
-                    desc: "",
-                    url: ""
+                    imgTitle: "",
+                    content: "",
+                    imgName: ""
                 }
             }
         },
     },
     computed: {
         bgStyle() {
+            // let imgName = this.bannerPicture.imgName, str
+            
+            // if(/static/.test(imgName)){
+            //     str = imgName
+            // }else{
+            //     str = this.$api.getImg(imgName)
+            // }
             let src = this.$api.getImg(this.bannerPicture.imgName)
             return `backgroundImage: url(${src}) `
         }

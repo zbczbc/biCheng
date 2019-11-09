@@ -1,7 +1,7 @@
 <template>
     <div class="case-page">
-        <banner :bannerInfo=bannerInfo />
-       <bread-nav  v-model=activeIndex :thirdList=tabList />
+        <banner :bannerPicture=pageData.bannerPicture />
+        <bread-nav  v-model=activeIndex :thirdList=tabList />
 
         <div class="p-tit">{{basicInfo.title}}</div>
         <div class="p-desc">{{basicInfo.desc}}</div>
@@ -27,14 +27,14 @@ export default {
     data() {
         return {
             bannerInfo: {
-                url: 'static/about-banner.png',
-                desc: '智慧资管·智慧物联·智慧服务”全场景一体化解决方案',
-                title: "场景方案"
+                url: '',
+                desc: '',
+                title: ""
             },
             basicInfo: {
                 url: "",
-                title: '智慧园区场景方案',
-                desc: '依托自研的智慧园区系统总平台，搭建物联网、互联网运营、支付、大数据、可视化五个子平台，可以实现园区80多个物联网设备系统及30多个业务系统的统一管理，提高管理效能，抓取管理大数据。'
+                title: '',
+                desc: ''
             },
             list: [
                 { src: 'static/scene-1.jpg', icon: 'static/scene-c1.png', tit: '智慧园区运营平台', desc: '入驻企业、企业员工、住宅业主、访客、酒店住客、运营人员、游客、合作伙伴' },
@@ -47,13 +47,15 @@ export default {
                 { label: '智慧酒店', id: '1' , path: '/case' },
                 { label: '智慧商业', id: '1' , path: '/case' },
             ],
-            activeIndex: 0
+            activeIndex: 0,
+            pageData: {}
         }
     },
     
     created() {
         this.$api.schemeDetails(48).then(data => {
             console.log(data)
+            this.pageData = data
         })
     }
 }

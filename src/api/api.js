@@ -9,13 +9,15 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 function fetchData( path , opts ) {
     return async (params) => {
         let ret = {},
-            url = '/api/portal/'+path
+            url = '/api/portal/'+path,
+            n_path = path
 
-        if(/{id}/.test(url)) {
-            url = url.replace('{id}', '')
-            url = url+params
+        if(/{id}/.test(path)) {
+            url = url.replace('/{id}', '')
+            n_path = path.replace('/{id}', '')
+            url = url+'/'+params
         }
-        
+
         await axios({
             method: opts && opts.method || 'get',
             url,
@@ -24,10 +26,11 @@ function fetchData( path , opts ) {
         }).then(res => {
             let data = res.data
             if(data.code == 0) {
-                let morkData = mork[path],
+                let morkData = mork[n_path],
                     sqlData = data.data,
                     realData = sqlData.organizational || sqlData
                 
+                //console.log(realData, morkData, path)
                 for(let key in morkData) {
                     let realValue = realData[key] || morkData[key]
 
@@ -49,7 +52,6 @@ function fetchData( path , opts ) {
 }
 
 //技术支持 
-export const getTechnicalSupport = fetchData('technicalSupport')
 
 //公司简介
 export const getCompanyProfile = fetchData('companyProfile')
@@ -101,7 +103,6 @@ Vue.prototype.$api = {
     getContactUs,
     getCaseList, 
     getCompanyProfile, 
-    getTechnicalSupport,
     getImg
 }
 

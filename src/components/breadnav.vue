@@ -116,7 +116,7 @@ export default {
 
     .oper-list{
         li {
-            padding: 0 20px; fz(16px);
+            padding: 0 20px; fz(16px); cursor: pointer;
             &.active,&:hover{
                 bg($blue); color:#fff;
             }

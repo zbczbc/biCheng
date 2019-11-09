@@ -1,11 +1,11 @@
 <template>
     <div class="partner-page">
-        <banner :bannerInfo=bannerInfo />
+        <banner :bannerPicture=pageData.bannerPicture />
         <bread-nav />
         <div class="p-tit">合作伙伴</div>
         <div class="list-group clearfix layout">
-            <div class="list" v-for="item,index in list" :key="">
-                <img :src="item.src" class="full" />
+            <div class="list" v-for="item,index in pageData.logoList" :key="">
+                <img-box :url="item" class="full" />
             </div>
         </div>
     </div>
@@ -30,11 +30,15 @@ export default {
                 { src: 'static/cooperation-logo.jpg', },
                 { src: 'static/cooperation-logo.jpg', },
                 { src: 'static/cooperation-logo.jpg', },
-            ]
+            ],
+            pageData: {}
         }
     },
-    methods: {
-
+    created() {
+        this.$api.cooperativePartner().then(data => {
+            console.log(data)
+            this.pageData = data    
+        })
     }
 }
 </script>

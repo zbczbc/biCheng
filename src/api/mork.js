@@ -70,7 +70,64 @@ const honor = {
 
 //产品页面
 const productDetails = {
+    content: '小贩机器人结合最新市场趋势及需求研发的针对零售行业的一款全自主移动零售服务机器人,具有专利百余项。能够在复杂环境中主动寻找目标客户进行商品推广及销售,使小贩成为全新的流量平台。',
+    title: '无人驾驶汽车',
+    introduce: [
+        'static/xq.png',
+    ],
+    preview: [
+        'static/product-01.png', 'static/product-02.png',
+        'static/product-03.png', 'static/product-04.png'
+    ],
+    solutionResults: [],
+    technicalData: [
+        { icon: "static/product-icon1.png", label: '全新、高效的运行方式' },
+        { icon: "static/product-icon2.png", label: '5大场景需求' },
+        { icon: "static/product-icon3.png", label: '主动到你身边,给你想要' },
+        { icon: "static/product-icon4.png", label: '够能装、够好用' }
+    ],
+    trait: []
+}
 
+const schemeDetails = {
+    bannerPicture: {
+        imgName: 'static/about-banner.png',
+        imgTitle: '场景方案',
+        content: '智慧资管·智慧物联·智慧服务”全场景一体化解决方案'
+
+    },
+    content: "依托自研的智慧园区系统总平台，搭建物联网、互联网运营、支付、大数据、可视化五个子平台，可以实现园区80多个物联网设备系统及30多个业务系统的统一管理，提高管理效能，抓取管理大数据。",
+    imgNameList: [
+
+    ],
+    title: "智慧园区场景方案"
+}
+
+const cooperativePartner = {
+    bannerPicture: {
+        imgTitle: '合作伙伴',
+        content: '诚信合作 互惠共赢 稳步发展 ',
+        imgName: 'static/contact-banner.png'
+    },
+    logoList: {}
+}
+
+const allCaseClassifyDetails = {
+    bannerPicture: {
+        imgTitle: '项目案例',
+        content: '20年园区运营经验，40+大型园区服务经验，解决国家3大新型智慧产业方向，推进产业一体化智慧运营 ',
+        imgName: 'static/case-banner.png'
+    },
+    classifyList: []
+}
+
+const contactUs = {
+    bannerPicture: {
+        imgTitle: '联系我们',
+        content: '赋能企业成长 助力产业发展',
+        imgName: 'static/contact-banner.png'
+    },
+    classifyList: []
 }
 
 
@@ -79,5 +136,38 @@ export default {
     organizational,
     menuList,
     honor,
-    productDetails
+    productDetails,
+    schemeDetails,
+    cooperativePartner,
+    allCaseClassifyDetails,
+    contactUs
 }
+
+
+// tabList: [
+//     { name: '惠州潼湖科技小镇', id: "" },
+//     { name: '惠州潼湖科学城', id: "" },
+//     { name: '广州CBD项目', id: "" },
+// ],
+// tabContent: [
+//     { arr: [
+//         { src: 'static/case.jpg', label: '酒店外观' },
+//         { src: 'static/case.jpg', label: '科技小镇效果图' },
+//     ] },
+//     { arr: [
+//          { src: 'static/case.jpg', label: '酒店外观' },
+//         { src: 'static/case.jpg', label: '科技小镇效果图' },
+//     ] },
+//     { arr: [
+//          { src: 'static/case.jpg', label: '酒店外观' },
+//         { src: 'static/case.jpg', label: '科技小镇效果图' },
+//     ] }
+// ],
+// mtabContent: [
+//     { src: 'static/case.jpg', label: '酒店外观' },
+//     { src: 'static/case.jpg', label: '科技小镇效果图' },
+//     { src: 'static/case.jpg', label: '酒店外观' },
+//     { src: 'static/case.jpg', label: '科技小镇效果图' },
+//     { src: 'static/case.jpg', label: '酒店外观' },
+//     { src: 'static/case.jpg', label: '科技小镇效果图' },
+// ],

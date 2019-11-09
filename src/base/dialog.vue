@@ -65,7 +65,6 @@
 
 <script>
 import Scroll from "base/scroll"
-import { getTechnicalSupport } from "@/api/api"
 import Swiper from "swiper"
 import Vue from "vue"
 import Taskes from "@/common/js/Taskes"
@@ -88,9 +87,6 @@ export default {
         init(type) {
             this.visible = true
             this.type = 'video'
-        },
-        _getData() {
-            getTechnicalSupport()
         },
         _initSwiper() {
             this.mySwiper = null
@@ -149,8 +145,6 @@ export default {
         }
     },
     created() {
-        this._getData()
-
 
         Vue.prototype.$showDialog = (type, opts) => {
             this.type = type

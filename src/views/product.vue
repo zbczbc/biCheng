@@ -1,16 +1,17 @@
 <template>
     <div class="product-page">
         <bread-nav></bread-nav>
-        <div class="detail layout pr clearfix">
+
+        <div class="detail layout pr clearfix" v-if="productDetails.title">
             <div class="image-content">
                 <div class="image-inner">
                      <div class="scale-img">
-                        <img :src=picList[activeIndex].src />
+                        <img-box :url=picList[activeIndex] />
                     </div>
                     <div class="thumb-img clearfix">
                         <div class="item pr" v-for="picture,index in picList"  @click="onClickList(picture, index)">
                             <div class="img-w" :class="{active: index==activeIndex}">
-                                <img-box :url="picture.src" w=100% h=100% ></img-box>
+                                <img-box :url="picture" w=100% h=100% ></img-box>
                             </div>
                         </div>
                 </div>
@@ -18,8 +19,8 @@
 
             </div>
             <div class="info-content">
-                <div class="tit">无人驾驶汽车</div>
-                <div class="desc">小贩机器人结合最新市场趋势及需求研发的针对零售行业的一款全自主移动零售服务机器人,具有专利百余项。能够在复杂环境中主动寻找目标客户进行商品推广及销售,使小贩成为全新的流量平台。</div>
+                <div class="tit">{{productDetails.title}}</div>
+                <div class="desc">{{productDetails.content}}</div>
                 <div class="feature-con clearfix">
                     <div class="s-tit">产品特点</div>
                     <div class="list pr" v-for="feature,index in featureList">
@@ -42,7 +43,9 @@
         </div>
         <div class="tab-content">
             <div class="tab-inner layout">
-                <img src="static/xq.jpg" class="full" v-show="tabIndex==0"/>
+                <template v-if="tabIndex==0" >
+                    <img-box v-for="item,index in productDetails.introduce" :url="item" class="full" />
+                </template>
 
                 <div class="solve-box" v-show="tabIndex==2">
                     <div class="size24 tit">解决成果</div>
@@ -78,22 +81,11 @@ import Swiper from "swiper"
 export default {
     data() {
         return {
-            picList: [
-                { src: 'static/product-01.png' },
-                { src: 'static/product-02.png' },
-                { src: 'static/product-03.png' },
-                { src: 'static/product-04.png' }
-            ],
             activeIndex: 0,
-            featureList: [
-                { icon: "static/product-icon1.png", label: '全新、高效的运行方式' },
-                { icon: "static/product-icon2.png", label: '5大场景需求' },
-                { icon: "static/product-icon3.png", label: '主动到你身边,给你想要' },
-                { icon: "static/product-icon4.png", label: '够能装、够好用' }
-            ],
             tabIndex: 0,
             solveList: [],
-            techImg: "static/product-2.jpg"
+            techImg: "static/product-2.jpg",
+            productDetails: {}
         }
     },
     methods: {
@@ -105,7 +97,7 @@ export default {
             this.mySwiper = new Swiper('.product-swiper', {
                 slidesPerView: this.slidesPerView
             })
-            console.log(this.mySwiper, this.slidesPerView)
+            //console.log(this.mySwiper, this.slidesPerView)
         },
         _initData() {
             this.tabsList = [
@@ -125,9 +117,15 @@ export default {
                 { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
             ]
 
-            this.$api.productDetails(60).then(data => {
-
-            })
+            
+        }
+    },
+    computed: {
+        picList() {
+            return this.productDetails.preview
+        },
+        featureList() {
+            return this.productDetails.technicalData
         }
     },
     watch: {
@@ -138,12 +136,21 @@ export default {
                 if(this.$device.isM) {
                     this.slidesPerView = 1
                 }
-                console.log(222)
+                
                 this.$nextTick(() => {
                     this.initSwiper()
                 })
             }
-        }
+        },
+        $route: {
+            immediate: true,
+            handler(route) {
+                this.$api.productDetails(route.query.id).then(data => {
+                    this.productDetails = data
+                })
+            }
+        },
+       
     },
     created() {
 
@@ -177,7 +184,7 @@ $productWidth = 500px;
         .thumb-img {
             height: 100px; display: flex; align-items: center; mt(30); tc();
             .item{
-                flex: 1;
+                flex: 0 0 25%;
             }
             .img-w{
                 width: 100px; height: 100px; disin();

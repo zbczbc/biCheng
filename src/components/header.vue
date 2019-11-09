@@ -138,7 +138,7 @@ export default {
             this.$api.menuList().then(data => {
                 let { caseClassifyList, productList, schemeList } = data
 
-                console.log(data)
+                //console.log(data)
                 this.navList = arr.map(item => {
                     switch (item.meta.index) {
                         case 1:
