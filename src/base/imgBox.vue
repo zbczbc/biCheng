@@ -1,7 +1,7 @@
 
 <template>
   <div :style="setContainerStyle()" class="image-box" @click="onClick">
-    <img v-if="!isLoadFail" class="image" :src="imgURL" @error="onError">
+    <img v-if="!isLoadFail" class="image" :src="imgURL" @error="onError" >
   </div>
 </template>
 <script type='text/ecmascript-6'>
@@ -30,21 +30,18 @@ export default {
 	},
 	data() {
 		return {
-			isLoadFail: false
+			isLoadFail: false,
 		};
 	},
 	computed: {
 		imgURL() {
-			// let str
-			// if(this.type) {
-			// 	str = 'static/'+this.type+'.png'
-			// }else{
-			// 	str = `/api/portal/getFileStream/${this.url}`
-			// }
-			if(this.url) {
-				console.log(this.$api.getImg(this.url), this.url)
-				return this.$api.getImg(this.url)
+			let str
+			if(this.type) {
+				str = 'static/'+this.type+'.png'
+			}else if(this.url){
+				str = this.$api.getImg(this.url)
 			}
+			return str
 		}
 	},
 	methods: {
@@ -56,7 +53,7 @@ export default {
 			}else{
 				let w = this.w
 				if ( this.$device.isM && this.mw ) {
-				w = this.mw
+					w = this.mw
 				}
 
 				style += `width:${this.setAttValue(w)};`;

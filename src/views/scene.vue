@@ -50,8 +50,11 @@ export default {
             activeIndex: 0
         }
     },
+    
     created() {
-
+        this.$api.schemeDetails(48).then(data => {
+            console.log(data)
+        })
     }
 }
 </script>

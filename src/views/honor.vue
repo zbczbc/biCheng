@@ -7,7 +7,7 @@
             <div class="list-group clearfix">
                 <div class="list" v-for="item,index in list" :key="index">
                     <div class="img-w pr hid">
-                        <img :src="item.src" class="full scale" />
+                        <img-box :url="item" class="full scale" />
                         <div class="mask" @click="showDialog(index)"></div>
                     </div>
                     <div class="word-w">
@@ -18,10 +18,7 @@
             </div>
             <ul class="pagination">
                 <li class="prev"></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>...</li>
+                <li v-for="page,index in totalArr" :key="index">{{index==2?'...':index+1}}</li>
                 <li class="next"></li>
             </ul>
         </div>
@@ -29,28 +26,27 @@
 </template>
 
 <script>
-import { getHonor } from "@/api/api"
 
 export default {
     data() {
         return {
-            list: [
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-                { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
-            ]
+            title: "",
+            list: [],
+            pageNo: 2,
+            pageSize: 1,
+            totalPage: 1,
+            totalArr: [""]
         }
     },
     methods: {
-        getHonor() {
-            getHonor({pageNo: 1, pageSize: 12}).then(data => {
-
+        _getPageData() {
+            this.$api.honor({pageNo: this.pageNo, pageSize: this.pageSize}).then(data => {
+                let { pictureList, title } = data
+                this.title = title
+                this.list = pictureList.list
+                this.totalPage = data.totalPage
+                this.totalArr.length = data.totalPage > 4 ? 4 : data.totalPage
+                console.log(this.totalArr)
             })
         },
         showDialog(index) {
@@ -61,7 +57,7 @@ export default {
         }
     },
     created() {
-        this.getHonor()
+        this._getPageData()
     }
 }
 </script>

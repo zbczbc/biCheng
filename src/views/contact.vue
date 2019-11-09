@@ -84,6 +84,10 @@ export default {
                 });
 	        map.addOverlay(label);
         })
+
+        this.$api.getContactUs().then(data => {
+            console.log(data)
+        })
     }
 }
 </script>

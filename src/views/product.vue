@@ -124,6 +124,10 @@ export default {
                 { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
                 { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
             ]
+
+            this.$api.productDetails(60).then(data => {
+
+            })
         }
     },
     watch: {

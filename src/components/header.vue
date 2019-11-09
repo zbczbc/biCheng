@@ -32,7 +32,7 @@
         <div class="down-bg ani-hei" :style="bgHeight" v-if="!isM"></div>
 
         <div class="m-top z10" v-if="isM">
-            <img-box  @onClick="toIndex" class="pc-logo" :type="logoType" w=100 h=30  m="14 0 0 10"></img-box>
+            <img-box  @onClick="toIndex" class="pc-logo" :url="logoType" w=100 h=30  m="14 0 0 10"></img-box>
             <img-icon class="menu-icon por" :type="menuIconType" @onClick="monToggleNav" w=24 h=24 m="20 10 0 0"></img-icon>
         </div>
     </div>
@@ -138,6 +138,7 @@ export default {
             this.$api.menuList().then(data => {
                 let { caseClassifyList, productList, schemeList } = data
 
+                console.log(data)
                 this.navList = arr.map(item => {
                     switch (item.meta.index) {
                         case 1:
@@ -149,18 +150,7 @@ export default {
                             break;
                         case 2:
                             item.children = productList
-                            // [
-                            //     { name: '物联网IoT平台', path: '/product' },
-                            //     { name: '智慧运营服务平台', path: '/product' },
-                            //     { name: '大数据分析平台', path: '/product' },
-                            //     { name: '智慧安全', path: '/product' },
-                            //     { name: '智慧交通', path: '/product' },
-                            //     { name: '智慧办公', path: '/product' },
-                            //     { name: '智慧家庭', path: '/product' },
-                            //     { name: '智慧生活', path: '/product' },
-                            //     { name: '智慧环境', path: '/product' },
-                            //     { name: '智慧楼宇', path: '/product' },
-                            // ]
+                            
                             break;
                         case 3:
                             item.children = schemeList

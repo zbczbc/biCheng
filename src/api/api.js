@@ -2,26 +2,45 @@ import axios from "axios"
 
 import Vue from "vue"
 import mork from "./mork"
+import { isArray } from "common/js/util"
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-function fetchData( url , opts ) {
+function fetchData( path , opts ) {
     return async (params) => {
-        let ret = {}
+        let ret = {},
+            url = '/api/portal/'+path
+
+        if(/{id}/.test(url)) {
+            url = url.replace('{id}', '')
+            url = url+params
+        }
+        
         await axios({
             method: opts && opts.method || 'get',
-            url: '/api/portal/'+url,
+            url,
             //cache:false,
             params: params,
         }).then(res => {
             let data = res.data
             if(data.code == 0) {
-                let morkData = mork[url],
-                    sqlData = data.data
+                let morkData = mork[path],
+                    sqlData = data.data,
+                    realData = sqlData.organizational || sqlData
+                
                 for(let key in morkData) {
-                    ret[key] = sqlData[key]
+                    let realValue = realData[key] || morkData[key]
+
+                    if(isArray(realValue)) {
+                        if(realValue.length == 0 ){
+                            realValue = morkData[key]
+                        }
+                    }
+                    ret[key] = realValue
                 }
             }
+        }).catch(err => {
+            ret = mork[url]
         })
         
         return ret
@@ -54,7 +73,7 @@ export const legalStatement = fetchData('legalStatement')
 export const menuList = fetchData('menuList')
 export const organizational = fetchData('organizational')
 
-export const productDetails = fetchData('organizational/{id}')
+export const productDetails = fetchData('productDetails/{id}')
 
 export const schemeDetails = fetchData('schemeDetails/{id}')
 

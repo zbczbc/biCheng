@@ -11,7 +11,73 @@ const companyProfile = {
     },
 }
 
+//企业架构
+const organizational = {
+    PictureName: 'static/org.png',
+    title: '公司现有人员150多人，其中100%本科以上学历，博士学历以上4人'
+}
+
+const menuList = {
+    caseClassifyList: [
+        { name: '智慧园区' , path: '/case' },
+        { name: '智慧社区' , path: '/case' },
+        { name: '智慧酒店' , path: '/case' },
+        { name: '智慧商业' , path: '/case' },
+    ],
+    productList: [
+        [
+            { name: '物联网IoT平台', path: '/product' },
+            { name: '智慧运营服务平台', path: '/product' },
+            { name: '大数据分析平台', path: '/product' },
+            { name: '智慧安全', path: '/product' },
+            { name: '智慧交通', path: '/product' },
+            { name: '智慧办公', path: '/product' },
+            { name: '智慧家庭', path: '/product' },
+            { name: '智慧生活', path: '/product' },
+            { name: '智慧环境', path: '/product' },
+            { name: '智慧楼宇', path: '/product' },
+        ]
+    ],
+    schemeList: [
+        { name: '产业园区', id: '1' , path: '/scene' },
+        { name: '智慧社区', id: '1' , path: '/scene' },
+        { name: '智慧酒店', id: '1' , path: '/scene' },
+        { name: '智慧商业', id: '1' , path: '/scene' },
+    ]
+}
+
+//资质荣誉
+const honor = {
+    pictureList: {
+        currPage: 1,
+        list: [
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+            { src: 'static/honor-pic.jpg' , title: '智慧停车场管理系统' , date: '2009-01' },
+        ],
+        pageSize: 12,
+        totalCount: 3,
+        totalPage:1
+    },
+    title: '公司自研的智慧园区平台荣获2018年APICTA亚太信息通信科技大奖赛奖项。替换下面的专利图片。'
+}
+
+//产品页面
+const productDetails = {
+
+}
+
 
 export default {
-    companyProfile
+    companyProfile,
+    organizational,
+    menuList,
+    honor,
+    productDetails
 }

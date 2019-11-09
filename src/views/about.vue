@@ -91,8 +91,6 @@ export default {
             this.$api.getCompanyProfile().then(data => {
                 let { bannerPicture, enterpriseInfo } = data
 
-                console.log(bannerPicture)
-
                 this.bannerPicture = bannerPicture
                 this.enterpriseInfo = enterpriseInfo
 
