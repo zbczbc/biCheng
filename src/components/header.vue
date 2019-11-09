@@ -32,14 +32,13 @@
         <div class="down-bg ani-hei" :style="bgHeight" v-if="!isM"></div>
 
         <div class="m-top z10" v-if="isM">
-            <img-box  @onClick="toIndex" class="pc-logo" :url="logoType" w=100 h=30  m="14 0 0 10"></img-box>
+            <img-box  @onClick="toIndex" class="pc-logo" :type="logoType" w=100 h=30  m="14 0 0 10"></img-box>
             <img-icon class="menu-icon por" :type="menuIconType" @onClick="monToggleNav" w=24 h=24 m="20 10 0 0"></img-icon>
         </div>
     </div>
 </template>
 
 <script>
-import { router } from "@/router"
 import $ from 'jquery'
 
 const PATH_INDEX = {
@@ -49,6 +48,11 @@ const PATH_INDEX = {
 }
 
 export default {
+    props: {
+        navList: {
+            default: () => []
+        }
+    },
     data() {
         return {
             activeIndex: 0,
@@ -57,7 +61,6 @@ export default {
             navOpen: false,
             logoType: 'logo',
             isM: false,
-            navList: [],
             menuIconType: 'menu',
             whiteLogVisible: false
         }
@@ -132,41 +135,7 @@ export default {
             this.navOpen = false
             this.logoType = "logo"
         },
-        _setNavList() {
-            let arr = router.routes
-
-            this.$api.menuList().then(data => {
-                let { caseClassifyList, productList, schemeList } = data
-
-                //console.log(data)
-                this.navList = arr.map(item => {
-                    switch (item.meta.index) {
-                        case 1:
-                            item.children = [
-                                { name: '公司简介', id: '1' , path: '/about'},
-                                { name: '组织架构', id: '2' , path: '/about'},
-                                { name: '资质荣誉', id: '3' , path: '/about'},
-                            ]
-                            break;
-                        case 2:
-                            item.children = productList
-                            
-                            break;
-                        case 3:
-                            item.children = schemeList
-                            break;
-                        case 5:
-                            item.children = caseClassifyList
-                        default:
-                            break;
-                    }
-                    return item
-                })
-            })
-
-            
-
-        },
+       
         _initData() {
 
         }
@@ -203,9 +172,7 @@ export default {
         }
     },
     created() {
-
         this._initData()
-        this._setNavList()
         this.isM = this.$device.isM
     }
 }

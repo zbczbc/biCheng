@@ -76,7 +76,7 @@ export default {
 		},
 		onError() {
 			this.isLoadFail = true;
-			console.log('这张图片加载失败了')
+			console.log('这张图片加载失败了', this.imgURL)
 		}
 	}
 };

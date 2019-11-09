@@ -75,7 +75,7 @@ export default {
                     abs(); bg(rgba(0,0,0,0.5)); opacity: 0; tranall();
                 }
                 &:hover .mask{
-                    opacity: 1;
+                    calcmedia('opacity', 1, 0)
                     &::after{
                         w(24px);h(24px);content: "";iconUrl('search.png');abs();iconBg();
                     }
@@ -84,7 +84,7 @@ export default {
             .word-w{
                 p(20px); c($c45); tc(); fz(12px); border: 1px solid $eb; border-top: 0px;
                 .tit{
-                    size20();
+                    size20(); line1();
                 }
                 p{
                     c(#999); size14(); mt(15);

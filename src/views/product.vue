@@ -153,7 +153,6 @@ export default {
        
     },
     created() {
-
         this._initData()
     }
 }
@@ -203,6 +202,7 @@ $productWidth = 500px;
             line(3); lh(24px); calcmedia('sz', 14, 12); m(20px 0 30px 0); p(0 0 20px 0);  line(3); h(72px)
         }
         .feature-con {
+            calcmedia('m', 0, 0 -5px);
             .s-tit {
                 calcmedia('sz', 18, 14); m(0 0 30px 0); border-top: 1px solid $border; pt(28);
             }
@@ -210,7 +210,6 @@ $productWidth = 500px;
                 w(50%); calcmedia('h', 190px, 150px); float:left; p(0 10px 20px 10px); tc();
                 .list-inner{
                     border: 1px solid $border; height: 100%; calcmedia('pt', 13%, 16px);
-                    calcmedia('m', 0, 0 -10px);
                 }
                 img {
                     max-width: 50px; max-height: 50px; disin(); cp();

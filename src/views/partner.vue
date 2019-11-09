@@ -45,6 +45,7 @@ export default {
 
 <style lang="stylus" scoped>
 .partner-page{
+    p(0 0 60px 0);
     .list-group{
         calcmedia('mt', 60px);
         .list{

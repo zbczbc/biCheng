@@ -147,6 +147,10 @@ export default {
     created() {
 
         Vue.prototype.$showDialog = (type, opts) => {
+
+            if(this.$device.isM) {
+                return 
+            }
             this.type = type
             this.visible = true
 
@@ -181,7 +185,9 @@ export default {
 <style lang="stylus" scoped>
 
 .image-container{
-    w(600px); h(630px); overflow: hidden;
+    overflow: hidden;
+    calcmedia('w', 600px, 100%);
+    calcmedia('w', 630px, 200px);
     .image-swiper{
         h(100%);
         .swiper-slide{

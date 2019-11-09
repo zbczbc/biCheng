@@ -185,7 +185,7 @@ export default {
         abs(); bg(rgba(0,0,0,0.5)); opacity: 0; tranall();
     }
     &:hover .mask{
-        opacity: 1;
+        calcmedia('opacity', 1, 0)
         &::after{
             w(24px);h(24px);content: "";iconUrl('search.png');abs();iconBg();
         }

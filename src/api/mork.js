@@ -73,7 +73,7 @@ const productDetails = {
     content: '小贩机器人结合最新市场趋势及需求研发的针对零售行业的一款全自主移动零售服务机器人,具有专利百余项。能够在复杂环境中主动寻找目标客户进行商品推广及销售,使小贩成为全新的流量平台。',
     title: '无人驾驶汽车',
     introduce: [
-        'static/xq.png',
+        'static/xq.jpg',
     ],
     preview: [
         'static/product-01.png', 'static/product-02.png',

@@ -3,9 +3,10 @@
         <div class="layout" >
             <div class="f-main clearfix">
                 <div class="links">
-                    <dl v-for="link in navList">
+                    <dl v-for="link in footerNavList">
                         <dt >{{link.name}}</dt>
-                        <dd v-for="item in link.children">{{item.name}}</dd>
+                        <dd v-for="item,index in link.children" v-if="index<5">{{item.name}}</dd>
+                        <dd v-if="link.children.length>5">更多产品></dd>
                     </dl>
                 </div>
                 <div class="qr-code pr">
@@ -30,10 +31,17 @@
 </template>
 
 <script>
+import { router } from "@/router"
+
 export default {
+    props: {
+        footerNavList: {
+            default: () => []
+        }
+    },
     data() {
         return {
-
+            footerNav: []
         }
     },
     methods: {
@@ -82,9 +90,6 @@ export default {
         isIndex() {
             return this.$route.meta.index==0
         }
-    },
-    created() {
-        this._initData()
     }
 }
 </script>

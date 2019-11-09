@@ -1,9 +1,9 @@
 <template>
 	<div id="app">
-		<m-header></m-header>
-		<router-view></router-view>
+		<m-header :navList=navList></m-header>
+		<router-view v-if="refreshing"></router-view>
 		<custom-dialog ref="dialog"></custom-dialog>
-		<m-footer></m-footer>
+		<m-footer :footerNavList=footerNavList></m-footer>
 	</div>
 </template>
 
@@ -14,13 +14,18 @@ import MFooter from "./components/footer"
 import CustomDialog from "base/dialog"
 
 import Vue from "vue"
+import { router } from "@/router"
+
 
 
 export default {
-	name: '',
+	name: 'app',
 	data() {
 		return {
-			dialogVisible: false
+			dialogVisible: false,
+			refreshing: true, 
+			navList: [],
+			footerNavList: []
 		}
 	},
 	methods: {
@@ -39,10 +44,64 @@ export default {
 			}
 
 			Vue.prototype.$device = { isM,  isPC}
+		},
+		_setNavList() {
+            let arr = router.routes
+
+            this.$api.menuList().then(data => {
+                let { caseClassifyList, productList, schemeList } = data
+
+                //console.log(data)
+                this.navList = arr.map(item => {
+                    switch (item.meta.index) {
+                        case 1:
+                            item.children = [
+                                { name: '公司简介', id: '1' , path: '/about'},
+                                { name: '组织架构', id: '2' , path: '/about'},
+                                { name: '资质荣誉', id: '3' , path: '/about'},
+                            ]
+                            break;
+                        case 2:
+							item.children = productList
+							
+                            
+                            break;
+                        case 3:
+                            item.children = schemeList
+                            break;
+                        case 5:
+                            item.children = caseClassifyList
+                        default:
+                            break;
+					}
+					
+					if(item.children) {
+						this.footerNavList.push(item)
+					}
+
+					
+					return item
+				})
+				
+				this.footerNavList[2]
+
+            })
+        },
+	},
+	watch: {
+		$route(route) {
+			location.reload()
+
+			// this.refreshing = false
+			// setTimeout(() => {
+			// 	this.refreshing = true
+				
+			// }, 100)
 		}
 	},
 	created() {
 		this.onResize()
+		this._setNavList()
 
 		window.onresize = () => {
 			this.onResize()
