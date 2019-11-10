@@ -1,20 +1,25 @@
 <template>
     <div class="index-banner swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item,index in list" :key="item.index">
-                <template v-if="item.videoUrl">
+            <div class="swiper-slide" v-for="item,index in pageData.bannerList" :key="item.index">
+                <template v-if="pageData.videoName&&index==0">
                     <div class="video-mask por"></div>
-                    <video :src=item.videoUrl v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
-                    <video :src=item.videoUrl v-else></video>
+                    <video :src=$api.getImg(pageData.videoName) v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
+                    <video :src=$api.getImg(pageData.videoName) v-else></video>
                 </template>
-                <div v-else class="bg-box"  :style="{backgroundImage: 'url(' + item.src + ')'}"></div>
+                <template v-if="index>0||$device.isM">
+                     <div class="bg-box"  :style="{backgroundImage: 'url(' + $api.getImg(item.imgName) + ')'}"></div>
+                </template>
+               
 
                 <div class="text-box" v-if="index==0">
-                    <div class="tit">许明天一个精彩</div>
-                    <div class="sub-tit">智慧城市系统建设及服务商</div>
-                    <div class="sub-desc">把数字技术带入每个城市，让智慧触手可及</div>
-                    <div></div>
-                    <img-icon type="play" w=63 h=63 class="ilt cp z10" @onClick="$showDialog('video')" m="30 0 0 0"></img-icon>
+                    <div class="tit">
+                        <c-b :content=item.imgTitle></c-b>
+                    </div>
+                    <div class="sub-desc">
+                        <c-b :content=item.content></c-b>
+                    </div>
+                    <img-icon type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
 
                     <div class="icons-group">
                         <div class="list" v-for="item in iconesGroup">
@@ -24,15 +29,13 @@
                     </div>
                 </div>
 
-                <div class="layout pob" v-if="index==1">
+                <div class="layout pob" v-if="index>0">
                     <div class="text-box2">
                         <div class="tit">
-                            <p>连接空间·企业·服务</p>
-                            <p>共建智慧产业生态</p>
+                            <c-b :content=item.imgTitle></c-b>
                         </div>
                         <div class="desc">
-                            <p>聚集4大核心、汇聚1000+产服资源、服务2000+优质企业聚集, </p>
-                            <p>4大核心、汇聚1000+产服资源、服务2000+优质企业 </p>
+                            <c-b :content=item.content></c-b>
                         </div>
                     </div>
                 </div>
@@ -57,7 +60,8 @@ export default {
                 { src: 'static/programme-banner.png', index: 2, },
                 { src: 'static/programme-banner.png', index: 3 },
             ],
-            bannerHeight: null
+            bannerHeight: null,
+            pageData: {}
         }
     },
     methods: {
@@ -93,15 +97,20 @@ export default {
     },
     created() {
 
-        this.$nextTick(() => {
-            this.initSwiper()
-        })
-
         this.$root.$on('onChangeWindow', () => {
             this.setStyle()
         })
 
         this._initData()
+
+        this.$api.homeData().then(data => {
+            this.pageData = data
+            this.$root.$emit('sendCopyright', data.copyright)
+
+            this.$nextTick(() => {
+                this.initSwiper()
+            })
+        })
     }
 }
 </script>
@@ -137,6 +146,7 @@ export default {
     abs();
     .tit
         font-size: px2vw(62);
+        calcmedia('lh', px2vw(90), auto);
     .sub-tit
         font-size: px2vw(54); margin 20px 0 25px;
     .sub-desc

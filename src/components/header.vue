@@ -21,7 +21,7 @@
                                 v-show="item.children&&hoverIndex==index">
                                 <li v-for="item02, indexSec in item.children"  
                                     :class="{active: isActived(item02, indexSec)}"
-                                    @click="onClickItem(item02, indexSec, 2, index)">
+                                    @click.stop="onClickItem(item02, indexSec, 2, index)">
                                     {{item02.name}}
                                 </li>
                             </ul>
@@ -105,29 +105,37 @@ export default {
                         this.hoverIndex = index
                     }
                 }
+
+                this.toOneItem(item.children[0], index)
             }else {
-                let path = item.path || PATH_INDEX[Findex]
+                this.toOneItem(item, Findex)
+            }   
+        },
+        toOneItem(item, Findex) {
+            
+            let path = item.path || PATH_INDEX[Findex]
+            // console.log(path, item.id)
+            // return 
 
-                if(path.indexOf('case') > -1) {
-                    if(this.$route.path.indexOf('case') > -1) {
-                        let _top = $(`.pagin-${index}`).offset().top
-                        $('html,body').animate({scrollTop: _top-30})
-                    }else{
-                        this.$router.push('/case')
-                    }
-
+            if(path && path.indexOf('case') > -1) {
+                if(this.$route.path.indexOf('case') > -1) {
+                    let _top = $(`.pagin-${index}`).offset().top
+                    $('html,body').animate({scrollTop: _top-30})
                 }else{
-                    if(item.id) {
-                        path = `${path}?id=${item.id}`
-                    }
-
-                    this.$router.push(path)
+                    this.$router.push('/case')
                 }
 
-                this.menuIconType = "menu"
-                this.navOpen = false
-                this.logoType = "logo"
+            }else{
+                if(item.id) {
+                    path = `${path}?id=${item.id}`
+                }
+
+                this.$router.push(path)
             }
+
+            this.menuIconType = "menu"
+            this.navOpen = false
+            this.logoType = "logo"
         },
         monToggleNav() {
             this.navOpen = !this.navOpen

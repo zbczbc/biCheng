@@ -14,7 +14,6 @@
 
                     <div class="swiper-slide list" v-for="item,imgIndex in caseImgList" :key="imgIndex">
                         <div class="img-w hid">
-                            <!-- <img :src="`/api/portal/getFileStream/${item.imgName}`" class="mfull"/> -->
                             <img-box :url="item.imgName" />
                             <div class="mask" @click="showDialog(imgIndex)"></div>
                         </div>

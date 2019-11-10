@@ -21,9 +21,7 @@
                     <span @click="onShowDialog('law')">法律声明</span>
                     <span @click="onShowDialog('support')">技术支持</span>
                 </div>
-                <div class="txt-box fr">
-                    深圳市碧城智慧科技有限公司
-                </div>
+                <div class="txt-box fr">{{right}}</div>
             </div>
         </div>
 
@@ -41,7 +39,8 @@ export default {
     },
     data() {
         return {
-            footerNav: []
+            footerNav: [],
+            right: ""
         }
     },
     methods: {
@@ -85,6 +84,11 @@ export default {
                 },
             ]
         }
+    },
+    created() {
+         this.$root.$on('sendCopyright', data => {
+            this.right = data || '深圳市碧城智慧科技有限公司'
+        })
     },
     computed: {
         isIndex() {

@@ -109,6 +109,7 @@ export default {
 		window.onresize = () => {
 			this.onResize()
 		}
+		
 
 	},
 	components: {

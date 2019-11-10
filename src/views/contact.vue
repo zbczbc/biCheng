@@ -11,24 +11,28 @@
                 <p>碧城智慧科技</p>
                 <span>希望社会因我们的存在而变的更加美好</span>
             </div>
-            <div class="t2">
-                <div>
-                    <img-icon type="contact-add" class="ilm" w=48 h=48 m="0 18 0 0"/>
-                    <span>总部地址</span>
+
+            <template v-if="addressInfo">
+                <div class="t2">
+                    <div>
+                        <img-icon type="contact-add" class="ilm" w=48 h=48 m="0 18 0 0"/>
+                        <span>{{addressInfo.addressTitle}}</span>
+                    </div>
+                    <p>公司邮箱：{{addressInfo.email}}</p>
+                    <p>总部公司：{{addressInfo.detailedAddress}}</p>
                 </div>
-                <p>公司邮箱：bczh@bgysmartcity.com</p>
-                <p>总部公司：广东省深圳市南山区桑达大厦13楼</p>
-            </div>
-            <div class="t2 t3">
-                <div>
-                    <img-icon type="contact-tel" class="ilm" w=48 h=48 m="0 18 0 0" />
-                    <span>联系方式</span>
+                <div class="t2 t3">
+                    <div>
+                        <img-icon type="contact-tel" class="ilm" w=48 h=48 m="0 18 0 0" />
+                        <span>联系方式</span>
+                    </div>
+                    <p>联系人：{{addressInfo.contacts}}</p>
+                    <p>联系电话：{{addressInfo.phone}}</p>
                 </div>
-                <p>联系人：邓经理</p>
-                <p>联系电话：0532-66773517</p>
-            </div>
-            <div class="t4 tc">
-                <img-box type="qr" class="ilt" w=150 h=150></img-box>
+            </template>
+            
+            <div class="t4 tc" v-if="pageData.qcCode">
+                <img-box :url="pageData.qcCode" class="ilt" w=150 h=150></img-box>
                 <p>扫一扫关注碧城智慧</p>
             </div>
         </div>
@@ -60,6 +64,13 @@ export default {
     methods: {
 
     },
+    computed: {
+        addressInfo() {
+            if(this.pageData && this.pageData.addressInfoList) {
+                return this.pageData.addressInfoList[this.activeIndex].contactInfo
+            }
+        }
+    },
     created() {
         this.$nextTick(() => {
             let map =new BMap.Map(this.$refs.map)
@@ -68,8 +79,8 @@ export default {
             var point = new BMap.Point(114.02597366,22.54605355);
             map.centerAndZoom(point, 15);
             var opts = {
-            position : point,    // 指定文本标注所在的地理位置
-            offset   : new BMap.Size(30, -30)    //设置文本偏移量
+                position : point,    // 指定文本标注所在的地理位置
+                offset   : new BMap.Size(30, -30)    //设置文本偏移量
             }
             var label = new BMap.Label("深圳市碧城智慧科技有限公司", opts);  // 创建文本标注对象
                 label.setStyle({

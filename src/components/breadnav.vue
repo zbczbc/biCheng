@@ -2,7 +2,7 @@
     <div class="bread-nav pr">
         <div class="layout" >
             <img-icon type="address" w=12 h=18 class="ilm"></img-icon>
-            <span class="link" v-for="item,index in breadList" :key="index" :to="'index'">
+            <span class="link cp" v-for="item,index in breadList" :key="index" :to="'index'" @click="onBreadClick(item)">
                 {{item.label}}
                 <img-icon class="right-icon ilm" v-if="index<breadList.length-1" type="right-gray" w=13 h=13 />
             </span>
@@ -55,6 +55,11 @@ export default {
         }
     },
     methods: {
+        onBreadClick(item) {
+            if(item.label=="首页") {
+                this.$router.push('/')
+            }
+        },
         onItemClick(item, index) {
             this.activeIndex = index
             let curPath = this.$route.path
@@ -67,7 +72,6 @@ export default {
                 this.$router.push(route)
                 $('.menu-list').slideUp()
             }
-
         },
         onToggle() {
             this.isShowMore = !this.isShowMore
@@ -77,11 +81,14 @@ export default {
     watch: {
         $route: {
             immediate: true,
-            handler(route) {
+            handler(route) { 
                 this.breadList = [
                     { path: '/', label: '首页' },
-                    { path: '/', label: route.name },
                 ]
+
+                if(route.name != "产品介绍") {
+                    this.breadList.push({ path: '/', label: route.name })
+                }
             }
         },
         value: {
@@ -142,6 +149,11 @@ export default {
 
         .right-icon{
             m(0 5px 0 8px);
+        }
+
+       
+        &.active,&:hover{
+            color:$blue;
         }
     }
 

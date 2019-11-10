@@ -9,7 +9,7 @@
                     <img-box class="full" :url="enterpriseInfo.imgName"/>
                 </div>
                 <div class="word-w">
-                    <h1 class="size30">{{enterpriseInfo.imgTitle}}</h1>
+                    <h1 class="size30"><c-b :content=enterpriseInfo.imgTitle></c-b></h1>
                     <scroll v-if="enterpriseInfo.content">
                         <div class="content" :style="{height:maxHeight}">
                             <c-b :content=enterpriseInfo.content></c-b>
@@ -117,7 +117,7 @@ export default {
             if(this.$device.isM) {
                 ret = 'auto'
             }else{
-                ret = `${parseFloat(this.getCurrentPx(200, 'w'))}px`
+                ret = `${parseFloat(this.getCurrentPx(180, 'w'))}px`
             }
             return ret
         }
@@ -157,14 +157,14 @@ export default {
             calcmedia('pl', px2vw(710), 0); 
             //pl(710, 'w')
             h1{
-                calcmedia('lh', px2vw(48), 24px);
-                calcmedia('h', px2vw(100), auto);
+                calcmedia('lh', 45px, 24px);
+                calcmedia('h', 90px, auto);
                 calcmedia('mt', 0, 20px);
 
                 font-weight: bold; 
             }
             .content{
-                fz(14px); lh(24px); 
+                fz(14px); lh(24px); m(20px 0 0 0);
                 p {
                     m(10px 0 0 0);
                 }

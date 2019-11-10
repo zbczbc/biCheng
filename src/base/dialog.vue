@@ -29,29 +29,9 @@
                 <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" />
             </div>
             <div class="content">
-                <scroll>
+                <scroll v-if="content">
                     <div class="content">
-                        <p>这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述
-                        后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内
-                        容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内，容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是，内容描述后台修
-                        改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容</p>
-                        <p>这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述
-                        后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内
-                        容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内，容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是，内容描述后台修
-                        改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容</p>
-                        <p>这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述
-                        后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内
-                        容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内，容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是，内容描述后台修
-                        改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后
-                        台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容这里是内容描述后台修改内容</p>
+                        <c-b :content="content"></c-b>
                     </div>
                 </scroll>
             </div>
@@ -100,9 +80,6 @@ export default {
                 }
             })
         },
-        getImg(url) {
-            return `/api/portal/getFileStream/${url}`
-        },
         showImage(opts) {
 
             this.current = opts.current || 0
@@ -120,7 +97,7 @@ export default {
             opts.images.map(item => {
                 this.taskes.add()
                 let image = new Image()
-                image.src = this.getImg(item.imgName)
+                image.src = this.$api.getImg(item.imgName)
 
                 image.onload = () => {
                     this.$nextTick(() => {
@@ -156,10 +133,15 @@ export default {
 
             if(type == 'law') {
                 this.title = "法律法规"
-
+                this.$api.legalStatement().then(data => {
+                    this.content = data && data.content
+                })
             }
             if(type == "support") {
                 this.title = "技术支持"
+                this.$api.technicalSupport().then(data => {
+                    this.content = data && data.content
+                })
             }
 
             if(type == "video") {
@@ -187,7 +169,7 @@ export default {
 .image-container{
     overflow: hidden;
     calcmedia('w', 600px, 100%);
-    calcmedia('w', 630px, 200px);
+    calcmedia('h', 630px, 200px);
     .image-swiper{
         h(100%);
         .swiper-slide{

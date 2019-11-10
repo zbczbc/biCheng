@@ -25,8 +25,8 @@
                     <div class="s-tit">产品特点</div>
                     <div class="list pr" v-for="feature,index in featureList">
                         <div class="list-inner">
-                            <img :src=feature.icon class="ani-top" />
-                            <p>{{feature.label}}</p>
+                            <img :src=$api.getImg(feature.imgName) class="ani-top" />
+                            <p>{{feature.imgTitle}}</p>
                         </div>
                     </div>
                 </div>
@@ -51,10 +51,10 @@
                     <div class="size24 tit">解决成果</div>
                     <div class="list-con product-swiper">
                         <div class="swiper-wrapper">
-                            <div class="list swiper-slide" v-for="item,index in solveList" :key=index>
+                            <div class="list swiper-slide" v-for="item,index in productDetails.solutionResults" :key=index>
                                 <div class="list-in">
                                     <div class="stit size24">0{{index+1}}</div>
-                                    <p class="size16">{{item.label}}</p>
+                                    <p class="size16">{{item}}</p>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                 <template v-if="tabIndex==1">
                     <div class="size24 tit">技术参数</div>
                     <div class="tech-box bgfff">
-                        <img :src=techImg class="full"/>
+                        <img v-for="item,index in productDetails.technicalData" :src="$api.getImg(item)" class="full"/>
                     </div>
                 </template>
 
@@ -105,18 +105,6 @@ export default {
                 { label: '技术参数', },
                 { label: '解决成果', },
             ]
-            this.solveList = [
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-                { label: '产品这里是解决问题的标题这里是解决问题的标题介绍', },
-            ]
-
             
         }
     },
@@ -125,7 +113,7 @@ export default {
             return this.productDetails.preview
         },
         featureList() {
-            return this.productDetails.technicalData
+            return this.productDetails.trait
         }
     },
     watch: {
@@ -285,7 +273,7 @@ $productWidth = 500px;
         }
     }
     .tech-box{
-        calcmedia('p', px2vw(235), 10px)
+        calcmedia('p', px2vw(100), 10px)
     }
 }
 </style>

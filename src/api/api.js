@@ -6,11 +6,16 @@ import { isArray } from "common/js/util"
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+
+let isDev = process.env.NODE_ENV == 'development'
+
+let baseUrl = isDev ? '/api' : "/admin"
+
+
 function fetchData( path , opts ) {
     return async (params) => {
-        let ret = {},
-            url = '/api/portal/'+path,
-            n_path = path
+
+        let ret = {}, n_path = path,  url=`${baseUrl}/portal/${path}`;
 
         if(/{id}/.test(path)) {
             url = url.replace('/{id}', '')
@@ -80,13 +85,13 @@ export const productDetails = fetchData('productDetails/{id}')
 
 export const schemeDetails = fetchData('schemeDetails/{id}')
 
-export const technicalSupport = fetchData('technicalSupport/{id}')
+export const technicalSupport = fetchData('technicalSupport')
 
 
 const getImg = (imgName) => {
     let src = imgName
     if(!/static/.test(imgName)) {
-        src = `/api/portal/getFileStream/${imgName}`
+        src = `${baseUrl}/portal/getFileStream/${imgName}`
     }
     return src
 }

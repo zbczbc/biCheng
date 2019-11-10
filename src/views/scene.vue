@@ -3,7 +3,7 @@
         <banner :bannerPicture="pageData.bannerPicture" />
         <bread-nav />
 
-        <div class="p-tit">{{pageData.title}}</div>
+        <div class="p-tit mt20">{{pageData.title}}</div>
         <div class="p-desc">{{pageData.content}}</div>
         <div class="main-box layout">
             <div class="list clearfix" v-for="item,index in pageData.itemList" :key="index" :class="{reverse: index%2==0}">

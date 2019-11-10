@@ -79,14 +79,23 @@ const productDetails = {
         'static/product-01.png', 'static/product-02.png',
         'static/product-03.png', 'static/product-04.png'
     ],
-    solutionResults: [],
-    technicalData: [
-        { icon: "static/product-icon1.png", label: '全新、高效的运行方式' },
-        { icon: "static/product-icon2.png", label: '5大场景需求' },
-        { icon: "static/product-icon3.png", label: '主动到你身边,给你想要' },
-        { icon: "static/product-icon4.png", label: '够能装、够好用' }
+    solutionResults: [
+       '产品这里是解决问题的标题这里是解决问题的标题介绍',
+       '产品这里是解决问题的标题这里是解决问题的标题介绍',
+       '产品这里是解决问题的标题这里是解决问题的标题介绍',
+       '产品这里是解决问题的标题这里是解决问题的标题介绍',
+       '产品这里是解决问题的标题这里是解决问题的标题介绍',
+       '产品这里是解决问题的标题这里是解决问题的标题介绍',
     ],
-    trait: []
+    technicalData: [
+        'static/product-2.jpg'
+    ],
+    trait: [
+        { imgName: "static/product-icon1.png", imgTitle: '全新、高效的运行方式' },
+        { imgName: "static/product-icon2.png", imgTitle: '5大场景需求' },
+        { imgName: "static/product-icon3.png", imgTitle: '主动到你身边,给你想要' },
+        { imgName: "static/product-icon4.png", imgTitle: '够能装、够好用' }
+    ]
 }
 
 const schemeDetails = {
@@ -129,9 +138,30 @@ const contactUs = {
         content: '赋能企业成长 助力产业发展',
         imgName: 'static/contact-banner.png'
     },
-    classifyList: []
+    addressInfoList: [
+        { addressTitle: '总部地址', contactInfo: {
+            addressTitle: '总部地址',
+            contacts: '邓经理',
+            detailedAddress: '广东省深圳市南山区桑达大厦13楼',
+            email: "bczh@bgysmartcity.com",
+            phone: "0532-66773517" }  }
+    ],
+    qcCode: 'static/qr.png'
 }
 
+const homeData = {
+    bannerList: [],
+    copyright: '深圳市碧城智慧科技有限公司',
+    videoName: 'static/video.mp4'
+}
+
+const legalStatement = {
+    content: ""
+}
+
+const technicalSupport = {
+    content: ""
+}
 
 export default {
     companyProfile,
@@ -142,7 +172,10 @@ export default {
     schemeDetails,
     cooperativePartner,
     allCaseClassifyDetails,
-    contactUs
+    contactUs,
+    homeData,
+    legalStatement,
+    technicalSupport
 }
 
 
