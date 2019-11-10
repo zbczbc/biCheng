@@ -19,7 +19,9 @@
                             <ul class="ul-02"
                                 :class="{'ul-03':index==2}"
                                 v-show="item.children&&hoverIndex==index">
-                                <li v-for="item02, indexSec in item.children"  @click="onClickItem(item02, indexSec, 2, index)">
+                                <li v-for="item02, indexSec in item.children"  
+                                    :class="{active: isActived(item02, indexSec)}"
+                                    @click="onClickItem(item02, indexSec, 2, index)">
                                     {{item02.name}}
                                 </li>
                             </ul>
@@ -62,10 +64,18 @@ export default {
             logoType: 'logo',
             isM: false,
             menuIconType: 'menu',
-            whiteLogVisible: false
+            whiteLogVisible: false,
+            secIndex:0
         }
     },
     methods: {
+        isActived(item, index) {
+            if(this.$route.query.id) {
+                return item.id==this.$route.query.id
+            }else{
+                return this.secIndex==index
+            }
+        },
         onMouseOver(item, index) {
             if(this.isM)  return
             this.hoverIndex = index
@@ -81,6 +91,10 @@ export default {
             this.hoverIndex = 0
         },
         onClickItem(item, index, level, Findex) {
+
+            if(level == 2) {
+                this.secIndex = index
+            }
 
             if(item.children) {
                 if(this.isM) {

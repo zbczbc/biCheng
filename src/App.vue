@@ -46,7 +46,12 @@ export default {
 			Vue.prototype.$device = { isM,  isPC}
 		},
 		_setNavList() {
-            let arr = router.routes
+			let arr = router.routes,
+				aboutList = [
+					{ name: '公司简介', id: '1' , path: '/about'},
+					{ name: '组织架构', id: '2' , path: '/about'},
+					{ name: '资质荣誉', id: '3' , path: '/about'},
+				]
 
             this.$api.menuList().then(data => {
                 let { caseClassifyList, productList, schemeList } = data
@@ -55,15 +60,10 @@ export default {
                 this.navList = arr.map(item => {
                     switch (item.meta.index) {
                         case 1:
-                            item.children = [
-                                { name: '公司简介', id: '1' , path: '/about'},
-                                { name: '组织架构', id: '2' , path: '/about'},
-                                { name: '资质荣誉', id: '3' , path: '/about'},
-                            ]
+                            item.children = aboutList
                             break;
                         case 2:
 							item.children = productList
-							
                             
                             break;
                         case 3:
@@ -84,6 +84,9 @@ export default {
 				})
 				
 				this.footerNavList[2]
+
+				// 给breadnav用
+				this.$root.$emit('getNavSuccess', {1:aboutList, 3: schemeList,5: caseClassifyList, productList})
 
             })
         },

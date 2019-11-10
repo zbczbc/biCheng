@@ -7,16 +7,16 @@
                 <img-icon class="right-icon ilm" v-if="index<breadList.length-1" type="right-gray" w=13 h=13 />
             </span>
 
-            <ul class="oper-list fr" v-if="thirdList.length>0&&!isM">
+            <ul class="oper-list fr" v-show="thirdList&&thirdList.length>0&&!isM">
                 <li class="fl"
                     v-for="item,index in thirdList"
                     @click="onItemClick(item, index)"
-                    :class="{active: index==activeIndex}" >{{item.label}}</li>
+                    :class="{active: index==activeIndex}" >{{item.name}}</li>
             </ul>
         </div>
 
 
-        <div class="menu open" v-if="isM&&thirdList.length>0">
+        <div class="menu open" v-if="isM&&thirdList&&thirdList.length>0">
             <div class="menu-head" @click="onToggle">
                 <span>{{title}}</span>
                 <img-icon type="right-gray" w=25 h=25 m="13 20 0 0" class="por r90 tra" :class="{r270: isShowMore}"/>
@@ -41,9 +41,6 @@ export default {
     props: {
         value: {
             default: 0
-        },
-        thirdList: {
-            default: () => []
         }
     },
     data() {
@@ -51,20 +48,24 @@ export default {
             breadList: [],
             activeIndex: 0,
             operVisible: false,
-            isShowMore: false
+            isShowMore: false,
+            thirdList: [],
+            currentItem: {},
+            title: ""
         }
     },
     methods: {
         onItemClick(item, index) {
             this.activeIndex = index
+            let curPath = this.$route.path
 
-            if(item.id) {
-                let route = `${this.$route.path}?id=${item.id}`
-                this.$router.push(route)
-                $('.menu-list').slideUp()
-            }else{
+            if(/case/.test(curPath)) {
                 let _top = $(`.pagin-${index}`).offset().top
                 $('html,body').animate({scrollTop: _top-30})
+            }else{
+                let route = `${curPath}?id=${item.id}`
+                this.$router.push(route)
+                $('.menu-list').slideUp()
             }
 
         },
@@ -81,14 +82,11 @@ export default {
                     { path: '/', label: '首页' },
                     { path: '/', label: route.name },
                 ]
-
-                console.log(this.$router)
             }
         },
         value: {
             immediate: true,
             handler(index) {
-                //console.log(index)
                 this.activeIndex = index
             }
         }
@@ -96,10 +94,41 @@ export default {
     computed: {
         isM() {
             return this.$device.isM
-        },
-        title() {
-            return this.thirdList[this.activeIndex].label
         }
+    },
+    created() {
+        this.$root.$on('getNavSuccess', routes => {
+            let index = this.$route.meta.index
+            
+            let childs = routes[index]
+
+            if(routes[index]) {
+                this.thirdList = routes[index]
+            }
+
+            if(index == 2) {
+                childs = routes.productList
+            }
+
+            if(childs) {
+                let currentChild;
+
+                childs.map((item,index) => {
+                    if(item.id == this.$route.query.id) {
+                        this.activeIndex = index
+                        currentChild = item
+                    }
+                })
+
+                if(currentChild) {
+                    this.title = childs[this.activeIndex].name
+                    this.breadList.push({
+                        label: currentChild.name
+                    })
+                }
+            }
+            
+        })
     }
 }
 </script>

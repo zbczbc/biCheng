@@ -1,20 +1,20 @@
 <template>
-    <div class="case-page" v-if="pageData.bannerPicture">
-        <banner :bannerPicture=pageData.bannerPicture />
-        <bread-nav  v-model=activeIndex />
+    <div class="case-page">
+        <banner :bannerPicture="pageData.bannerPicture" />
+        <bread-nav />
 
-        <div class="p-tit">{{basicInfo.title}}</div>
-        <div class="p-desc">{{basicInfo.desc}}</div>
+        <div class="p-tit">{{pageData.title}}</div>
+        <div class="p-desc">{{pageData.content}}</div>
         <div class="main-box layout">
-            <div class="list clearfix" v-for="item,index in list" :key="index" :class="{reverse: index%2==0}">
+            <div class="list clearfix" v-for="item,index in pageData.itemList" :key="index" :class="{reverse: index%2==0}">
                 <div class="img-w hid">
-                    <img :src="item.src" class="full scale"/>
+                    <img :src="$api.getImg(item.introduceImg)" class="full scale icon"/>
                 </div>
                 <div class="word-w">
                     <div class="inner">
-                        <img :src="item.icon"/>
-                        <div class="stit size18">{{item.tit}}</div>
-                        <div class="sdesc">{{item.desc}}</div>
+                        <img :src="$api.getImg(item.iconImg)" />
+                        <div class="stit size18">{{item.title}}</div>
+                        <div class="sdesc">{{item.content}}</div>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ export default {
     },
     
     created() {
-        this.$api.schemeDetails(48).then(data => {
+        this.$api.schemeDetails(this.$route.query.id).then(data => {
             this.pageData = data
         })
     }
@@ -46,6 +46,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 .case-page{
     .main-box{
         tc();
@@ -71,7 +72,7 @@ export default {
                 .sdesc{
                     w(60%); m(20px auto); lh(24px);
                 }
-                img{
+                .icon{
                     width: 90px; height: 90px; m(0 0 20px);
                 }
             }

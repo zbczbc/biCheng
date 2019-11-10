@@ -42,6 +42,7 @@ function fetchData( path , opts ) {
                     ret[key] = realValue
                 }
             }
+            //ret = mork[n_path]
         }).catch(err => {
             ret = mork[url]
         })
