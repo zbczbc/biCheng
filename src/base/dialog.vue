@@ -23,13 +23,13 @@
             <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
         </div>
 
-        <div class="dialog-container layout container" v-else>
+        <div class="text-container layout container" v-else>
             <div class="title-box pr">
                 {{title}}
                 <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" />
             </div>
             <div class="content">
-                <scroll v-if="content">
+                <scroll v-if="content" :mustShow=true>
                     <div class="content">
                         <c-b :content="content"></c-b>
                     </div>
@@ -125,9 +125,9 @@ export default {
 
         Vue.prototype.$showDialog = (type, opts) => {
 
-            if(this.$device.isM) {
-                return 
-            }
+            // if(this.$device.isM) {
+            //     return 
+            // }
             this.type = type
             this.visible = true
 
@@ -194,7 +194,7 @@ export default {
 
 
 .title-box{
-    lhh(70px); border: 1px solid $border; p(0 40px);
+    lhh(70px); border-bottom: 1px solid $border; p(0 40px);
     size20(); c(#333);
 }
 .dialog-wrapper{
@@ -207,10 +207,11 @@ export default {
 .container{
     bg(#fff); abs(); z(12); pb();
 }
-.dialog-container{
+.text-container{
     h(400px);
+    calcmedia('w', auto, 90% !important);
     >.content{
-        m(30px);
+        calcmedia('m', 30px, 15px);
     }
     .content{
          h(250px); lh(25px); pr();
@@ -220,7 +221,9 @@ export default {
     }
 }
 .video-container{
-    w(900px); h(500px);
+
+    calcmedia('w',900px, 80%);
+    calcmedia('h',500px, 150px);
     video{
         width: 100%;
     }

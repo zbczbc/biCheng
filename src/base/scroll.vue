@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <happy-scroll class="scroll-wrapper"  v-if="visible&&$device.isPC"
+    <div v-if="visible">
+        <happy-scroll class="scroll-wrapper"  v-if="$device.isPC||mustShow"
                 :size=size
                 :color=color
                 :resize=resize>
@@ -28,7 +28,8 @@ export default {
         resize: {
             type: Boolean,
             default: true
-        }
+        },
+        mustShow: {}
     },
     data() {
         return {

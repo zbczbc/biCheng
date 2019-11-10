@@ -2,7 +2,7 @@
     <div class="index-banner swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="item,index in pageData.bannerList" :key="item.index">
-                <template v-if="pageData.videoName&&index==0">
+                <template v-if="pageData.videoName&&index==0&&$device.isPC">
                     <div class="video-mask por"></div>
                     <video :src=$api.getImg(pageData.videoName) v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
                     <video :src=$api.getImg(pageData.videoName) v-else></video>
@@ -146,7 +146,7 @@ export default {
     abs();
     .tit
         font-size: px2vw(62);
-        calcmedia('lh', px2vw(90), auto);
+        calcmedia('lh', px2vw(90), 45px); margin 20px 0 25px;
     .sub-tit
         font-size: px2vw(54); margin 20px 0 25px;
     .sub-desc
