@@ -81,6 +81,8 @@ export default {
                     { path: '/', label: '首页' },
                     { path: '/', label: route.name },
                 ]
+
+                console.log(this.$router)
             }
         },
         value: {

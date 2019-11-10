@@ -98,7 +98,9 @@ const schemeDetails = {
     },
     content: "依托自研的智慧园区系统总平台，搭建物联网、互联网运营、支付、大数据、可视化五个子平台，可以实现园区80多个物联网设备系统及30多个业务系统的统一管理，提高管理效能，抓取管理大数据。",
     imgNameList: [
-
+        { src: 'static/scene-1.jpg', icon: 'static/scene-c1.png', tit: '智慧园区运营平台', desc: '入驻企业、企业员工、住宅业主、访客、酒店住客、运营人员、游客、合作伙伴' },
+        { src: 'static/scene-2.jpg', icon: 'static/scene-c2.png', tit: '智慧园区运营平台', desc: '4平台+2中心+N场景应用+资源开放接入' },
+        { src: 'static/scene-3.jpg', icon: 'static/scene-c3.png', tit: '智慧园区运营平台', desc: '集中监控、统一管控、实时数据分析决策、自动维修派单' }
     ],
     title: "智慧园区场景方案"
 }

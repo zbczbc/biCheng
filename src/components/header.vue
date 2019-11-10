@@ -172,7 +172,7 @@ export default {
         }
     },
     created() {
-        this._initData()
+         this._initData()
         this.isM = this.$device.isM
     }
 }
