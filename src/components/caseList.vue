@@ -70,7 +70,9 @@ export default {
         tabClick(index) {
             this.activeIndex = index
             //this.init()
-            this.mySwiper && this.mySwiper.init()
+            setTimeout(() => {
+                this.mySwiper && this.mySwiper.init()
+            }, 50)
         },
         init() {
             this.mySwiper = new Swiper(`.${this.containerClass}`, {
