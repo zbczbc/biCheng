@@ -10,7 +10,7 @@
                     </dl>
                 </div>
                 <div class="qr-code pr">
-                    <img-box type="qr" class="ilt"></img-box>
+                    <img-box :url="qrCode" class="ilt"></img-box>
                     <p>扫一扫关注碧城智慧公众号</p>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                     <span @click="onShowDialog('law')">法律声明</span>
                     <span @click="onShowDialog('support')">技术支持</span>
                 </div>
-                <div class="txt-box fr">{{right}}</div>
+                <div class="txt-box fr">{{copyright}}</div>
             </div>
         </div>
 
@@ -40,7 +40,8 @@ export default {
     data() {
         return {
             footerNav: [],
-            right: ""
+            copyright: "",
+            qrCode: ""
         }
     },
     methods: {
@@ -86,8 +87,9 @@ export default {
         }
     },
     created() {
-         this.$root.$on('sendCopyright', data => {
-            this.right = data || '深圳市碧城智慧科技有限公司'
+        this.$root.$on('getFooterSuccess', data => {
+            this.copyright = data.copyright || '深圳市碧城智慧科技有限公司'
+            this.qrCode = data.qcCode
         })
     },
     computed: {

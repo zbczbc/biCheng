@@ -30,9 +30,9 @@
                     <p>联系电话：{{addressInfo.phone}}</p>
                 </div>
             </template>
-            
+
             <div class="t4 tc" v-if="pageData.qcCode">
-                <img-box :url="pageData.qcCode" class="ilt" w=150 h=150></img-box>
+                <img-box :url="qrCode" class="ilt" w=150 h=150></img-box>
                 <p>扫一扫关注碧城智慧</p>
             </div>
         </div>
@@ -58,7 +58,8 @@ export default {
                 { label: '总部', },
                 { label: '惠州', }
             ],
-            pageData: {}
+            pageData: {},
+            qrCode: ""
         }
     },
     methods: {
@@ -95,6 +96,10 @@ export default {
 
         this.$api.getContactUs().then(data => {
             this.pageData = data
+        })
+
+        this.$root.$on('getFooterSuccess', data => {
+            this.qrCode = data.qcCode
         })
     }
 }

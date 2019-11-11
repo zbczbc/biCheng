@@ -43,7 +43,9 @@ const menuList = {
         { name: '智慧社区', id: '1' , path: '/scene' },
         { name: '智慧酒店', id: '1' , path: '/scene' },
         { name: '智慧商业', id: '1' , path: '/scene' },
-    ]
+    ],
+    copyright: "",
+    qcCode: "",
 }
 
 //资质荣誉

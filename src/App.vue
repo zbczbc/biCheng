@@ -23,7 +23,7 @@ export default {
 	data() {
 		return {
 			dialogVisible: false,
-			refreshing: true, 
+			refreshing: true,
 			navList: [],
 			footerNavList: []
 		}
@@ -54,7 +54,7 @@ export default {
 				]
 
             this.$api.menuList().then(data => {
-                let { caseClassifyList, productList, schemeList } = data
+                let { caseClassifyList, productList, schemeList, qcCode, copyright } = data
 
                 //console.log(data)
                 this.navList = arr.map(item => {
@@ -64,7 +64,7 @@ export default {
                             break;
                         case 2:
 							item.children = productList
-                            
+
                             break;
                         case 3:
                             item.children = schemeList
@@ -74,19 +74,21 @@ export default {
                         default:
                             break;
 					}
-					
+
 					if(item.children) {
 						this.footerNavList.push(item)
 					}
 
-					
+
 					return item
 				})
-				
+
 				this.footerNavList[2]
 
 				// 给breadnav用
 				this.$root.$emit('getNavSuccess', {1:aboutList, 3: schemeList,5: caseClassifyList, productList})
+
+				this.$root.$emit('getFooterSuccess', { qcCode, copyright })
 
             })
         },
@@ -98,7 +100,7 @@ export default {
 			// this.refreshing = false
 			// setTimeout(() => {
 			// 	this.refreshing = true
-				
+
 			// }, 100)
 		}
 	},
@@ -109,7 +111,7 @@ export default {
 		window.onresize = () => {
 			this.onResize()
 		}
-		
+
 
 	},
 	components: {

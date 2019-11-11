@@ -46,7 +46,7 @@ export default {
     data() {
         return {
             breadList: [],
-            activeIndex: 0,
+            activeIndex: null,
             operVisible: false,
             isShowMore: false,
             thirdList: [],
@@ -81,7 +81,7 @@ export default {
     watch: {
         $route: {
             immediate: true,
-            handler(route) { 
+            handler(route) {
                 this.breadList = [
                     { path: '/', label: '首页' },
                 ]
@@ -106,7 +106,7 @@ export default {
     created() {
         this.$root.$on('getNavSuccess', routes => {
             let index = this.$route.meta.index
-            
+
             let childs = routes[index]
 
             if(routes[index]) {
@@ -134,7 +134,7 @@ export default {
                     })
                 }
             }
-            
+
         })
     }
 }
@@ -151,7 +151,7 @@ export default {
             m(0 5px 0 8px);
         }
 
-       
+
         &.active,&:hover{
             color:$blue;
         }
