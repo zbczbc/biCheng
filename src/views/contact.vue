@@ -40,7 +40,7 @@
             <ul>
                 <li v-for="item,index in tabList" :key="index"
                     :class="{active: index==activeIndex}"
-                    @click="activeIndex=index" >{{item.label}}</li>
+                    @click="onChangeAddress(item, index)" >{{item.label}}</li>
             </ul>
         </div>
         <div class="map" ref="map"></div>
@@ -63,7 +63,11 @@ export default {
         }
     },
     methods: {
+        onChangeAddress(item, index) {
+            this.activeIndex = index
 
+
+        }
     },
     computed: {
         addressInfo() {
@@ -74,25 +78,47 @@ export default {
     },
     created() {
         this.$nextTick(() => {
-            let map =new BMap.Map(this.$refs.map)
-            map.centerAndZoom(new BMap.Point(114.02597366,22.54605355), 11);
+            let map = new BMap.Map(this.$refs.map)
 
-            var point = new BMap.Point(114.02597366,22.54605355);
-            map.centerAndZoom(point, 15);
-            var opts = {
-                position : point,    // 指定文本标注所在的地理位置
-                offset   : new BMap.Size(30, -30)    //设置文本偏移量
-            }
-            var label = new BMap.Label("深圳市碧城智慧科技有限公司", opts);  // 创建文本标注对象
-                label.setStyle({
-                    color : "red",
-                    fontSize : "12px",
-                    height : "20px",
-                    lineHeight : "20px",
-                    fontFamily:"微软雅黑"
-                });
-	        map.addOverlay(label);
+            //var myIcon = new BMap.Icon('static/address.png', new BMap.Size(32,32));
+
+
+            let options = {
+                   onSearchComplete:(results)=>{
+                        if (this.locationMap.getStatus() == 0){
+                            var point = results.getPoi(0).point;
+
+                            map.centerAndZoom(point, 15);
+                            var opts = {
+                                position : point,    // 指定文本标注所在的地理位置
+                                offset   : new BMap.Size(-100, -70)    //设置文本偏移量
+                            }
+                            var label = new BMap.Label("深圳市碧城智慧科技有限公司", opts);  // 创建文本标注对象
+                                label.setStyle({
+                                    color : "#333",
+                                    fontSize : "14px",
+                                    height : "40px",
+                                    lineHeight : "40px",
+                                    fontFamily:"微软雅黑",
+                                    backgroundColor :"#ffffff",
+                                    border: "0px",
+                                    padding: "0 10px"
+                                });
+                            map.addOverlay(label);
+
+                            var mk = new BMap.Marker(point);
+                            map.addOverlay(mk);
+                            //mk.setAnimation(BMAP_ANIMATION_BOUNCE);
+                        }
+                  }
+            };
+
+            this.locationMap = new BMap.LocalSearch(map, options);
+
+            this.locationMap.search('广东省深圳市南山区桑达大厦13楼');
         })
+
+
 
         this.$api.getContactUs().then(data => {
             this.pageData = data
