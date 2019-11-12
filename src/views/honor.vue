@@ -16,7 +16,8 @@
                 </div>
             </div>
             <ul class="pagination" :class="{reverse: isReverse}">
-                <li class="prev"></li>
+                <li class="prev" v-if="this.pageNo>1" @click="onArrow('prev')"></li>
+
                 <li v-for="page,index in totalArr"
                     :key="index"
                     @click="onPageChange(page)"
@@ -24,7 +25,7 @@
                     >
                     {{page}}
                 </li>
-                <li class="next"></li>
+                <li class="next" v-if="this.pageNo<this.totalPage" @click="onArrow('next')"></li>
             </ul>
         </div>
     </div>
@@ -45,18 +46,36 @@ export default {
         }
     },
     methods: {
+        onArrow(type) {
+            if(type=='prev') {
+                this.pageNo--
+            }else{
+                this.pageNo++
+            }
+            if(this.pageNo>3) {
+                this.isReverse = true
+            }else{
+                this.isReverse = false
+            }
+            this._setPageArr()
+            this._getPageData()
+        },
         onPageChange(page) {
             if(page == "...") {
                 this.isReverse = !this.isReverse
 
-                if(this.isReverse) {
-                    this.totalArr = [1,'...',this.totalPage-2,this.totalPage-1,this.totalPage]
-                }else{
-                    this.totalArr = [1,2,3,"...",this.totalPage]
-                }
+                this._setPageArr()
             }else{
                 this.pageNo = page
                 this._getPageData()
+            }
+
+        },
+        _setPageArr() {
+            if(this.isReverse) {
+                this.totalArr = [1,'...',this.totalPage-2,this.totalPage-1,this.totalPage]
+            }else{
+                this.totalArr = [1,2,3,"...",this.totalPage]
             }
         },
         _getPageData() {
@@ -67,12 +86,14 @@ export default {
                 this.list = pictureList.list
                 this.totalPage = pictureList.totalPage
 
-                if(this.totalPage > 4) {
-                    this.isReverse = false
-                    this.totalArr = [1,2,3,"...",this.totalPage]
-                }else{
-                    for(let i=1; i<this.totalPage; i++) {
-                        this.totalArr.push(i);
+                if(this.totalArr.length == 0) {
+                    if(this.totalPage > 4) {
+                        this.isReverse = false
+                        this.totalArr = [1,2,3,"...",this.totalPage]
+                    }else{
+                        for(let i=1; i<=this.totalPage; i++) {
+                            this.totalArr.push(i);
+                        }
                     }
                 }
             })
@@ -141,19 +162,19 @@ export default {
                     iconUrl('fff_right.png');
                 }
             }
-            &:nth-child(4n+1) {
-                lh(30px);
-            }
+            // &:nth-child(4n+1) {
+            //     lh(30px);
+            // }
 
         }
-        &.reverse li{
-            &:nth-child(5) {
-                lh(40px);
-            }
-            &:nth-child(3) {
-                lh(30px);
-            }
-        }
+        // &.reverse li{
+        //     &:nth-child(5) {
+        //         lh(40px);
+        //     }
+        //     &:nth-child(3) {
+        //         lh(30px);
+        //     }
+        // }
     }
 }
 </style>
