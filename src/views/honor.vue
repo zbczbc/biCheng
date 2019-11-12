@@ -16,7 +16,7 @@
                 </div>
             </div>
             <ul class="pagination" :class="{reverse: isReverse}">
-                <li class="prev" v-if="this.pageNo>1" @click="onArrow('prev')"></li>
+                <li class="prev" @click="onArrow('prev')"></li>
 
                 <li v-for="page,index in totalArr"
                     :key="index"
@@ -25,7 +25,7 @@
                     >
                     {{page}}
                 </li>
-                <li class="next" v-if="this.pageNo<this.totalPage" @click="onArrow('next')"></li>
+                <li class="next" @click="onArrow('next')"></li>
             </ul>
         </div>
     </div>
@@ -47,9 +47,16 @@ export default {
     },
     methods: {
         onArrow(type) {
+
             if(type=='prev') {
+                if(this.pageNo<=1) {
+                    return
+                }
                 this.pageNo--
             }else{
+                if(this.pageNo>=this.totalPage) {
+                    return
+                }
                 this.pageNo++
             }
             if(this.pageNo>3) {
