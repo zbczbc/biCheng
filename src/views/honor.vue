@@ -15,11 +15,15 @@
                     </div>
                 </div>
             </div>
-            <ul class="pagination">
+            <ul class="pagination" :class="{reverse: isReverse}">
                 <li class="prev"></li>
-                <li v-for="page,index in totalArr" 
-                    :key="index" 
-                    :active="pageNo==index">{{index>2?'...':index+1}}</li>
+                <li v-for="page,index in totalArr"
+                    :key="index"
+                    @click="onPageChange(page)"
+                    :class="{active: pageNo==page}"
+                    >
+                    {{page}}
+                </li>
                 <li class="next"></li>
             </ul>
         </div>
@@ -34,20 +38,43 @@ export default {
             title: "",
             list: [],
             pageNo: 1,
-            pageSize: 10,
+            pageSize: 12,
             totalPage: 1,
-            totalArr: [""]
+            totalArr: [],
+            isReverse: false
         }
     },
     methods: {
+        onPageChange(page) {
+            if(page == "...") {
+                this.isReverse = !this.isReverse
+
+                if(this.isReverse) {
+                    this.totalArr = [1,'...',this.totalPage-2,this.totalPage-1,this.totalPage]
+                }else{
+                    this.totalArr = [1,2,3,"...",this.totalPage]
+                }
+            }else{
+                this.pageNo = page
+                this._getPageData()
+            }
+        },
         _getPageData() {
             this.$api.honor({pageNo: this.pageNo, pageSize: this.pageSize}).then(data => {
                 let { pictureList, title } = data
-                
+
                 this.title = title
                 this.list = pictureList.list
-                this.totalPage = data.totalPage
-                this.totalArr.length = pictureList.totalPage > 4 ? 4 : pictureList.totalPage
+                this.totalPage = pictureList.totalPage
+
+                if(this.totalPage > 4) {
+                    this.isReverse = false
+                    this.totalArr = [1,2,3,"...",this.totalPage]
+                }else{
+                    for(let i=1; i<this.totalPage; i++) {
+                        this.totalArr.push(i);
+                    }
+                }
             })
         },
         showDialog(index) {
@@ -108,13 +135,22 @@ export default {
             &.prev:after{
                 r(180);
             }
-            &:hover{
+            &:hover, &.active{
                 c(#fff);bg($blue);
                 &.prev:after, &.next:after{
                     iconUrl('fff_right.png');
                 }
             }
             &:nth-child(4n+1) {
+                lh(30px);
+            }
+
+        }
+        &.reverse li{
+            &:nth-child(5) {
+                lh(40px);
+            }
+            &:nth-child(3) {
                 lh(30px);
             }
         }
