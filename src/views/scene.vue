@@ -3,7 +3,7 @@
         <banner :bannerPicture="pageData.bannerPicture" />
         <bread-nav />
 
-        <div class="p-tit mt20">{{pageData.title}}</div>
+        <div class="p-tit">{{pageData.title}}</div>
         <div class="p-desc">{{pageData.content}}</div>
         <div class="main-box layout">
             <div class="list clearfix" v-for="item,index in pageData.itemList" :key="index" :class="{reverse: index%2==0}">
@@ -13,7 +13,7 @@
                 <div class="word-w">
                     <div class="inner">
                         <img :src="$api.getImg(item.iconImg)" />
-                        <div class="stit size18">{{item.title}}</div>
+                        <div class="stit size18 mt20">{{item.title}}</div>
                         <div class="sdesc">{{item.content}}</div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@ export default {
             pageData: {}
         }
     },
-    
+
     created() {
         this.$api.schemeDetails(this.$route.query.id).then(data => {
             this.pageData = data

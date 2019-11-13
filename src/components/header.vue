@@ -19,7 +19,7 @@
                             <ul class="ul-02"
                                 :class="{'ul-03':index==2}"
                                 v-show="item.children&&hoverIndex==index">
-                                <li v-for="item02, indexSec in item.children"  
+                                <li v-for="item02, indexSec in item.children"
                                     :class="{active: isActived(item02, indexSec)}"
                                     @click.stop="onClickItem(item02, indexSec, 2, index)">
                                     {{item02.name}}
@@ -104,18 +104,19 @@ export default {
                     }else{
                         this.hoverIndex = index
                     }
+                }else{
+                    this.toOneItem(item.children[0], index)
                 }
 
-                this.toOneItem(item.children[0], index)
             }else {
                 this.toOneItem(item, Findex)
-            }   
+            }
         },
         toOneItem(item, Findex) {
-            
+
             let path = item.path || PATH_INDEX[Findex]
             // console.log(path, item.id)
-            // return 
+            // return
 
             if(path && path.indexOf('case') > -1) {
                 if(this.$route.path.indexOf('case') > -1) {
@@ -157,7 +158,7 @@ export default {
             this.navOpen = false
             this.logoType = "logo"
         },
-       
+
         _initData() {
 
         }
@@ -171,7 +172,7 @@ export default {
             //     return ""
             // }
 
-            
+
             let childNav = this.navList.length && this.navList[this.hoverIndex].children
             if(childNav) {
                 let height = 70

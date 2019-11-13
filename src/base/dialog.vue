@@ -71,8 +71,9 @@ export default {
         _initSwiper() {
             this.mySwiper = null
 
+            //console.log(this.current, this.images)
             this.mySwiper = new Swiper('.image-swiper', {
-                loop: true,
+                loop: false,
                 initialSlide: this.current,
                 navigation: {
                     nextEl: '.dialog-prev',
@@ -86,12 +87,12 @@ export default {
             this.images = []
 
             this.taskes = new Taskes()
+            this.taskes.end(() => {
+                this.visible = true
 
-             this.taskes.end(() => {
-                console.log(this.images)
-                this.$nextTick(() => {
+                setTimeout(() => {
                     this._initSwiper()
-                })
+                }, 100)
             })
 
             opts.images.map(item => {
@@ -126,21 +127,24 @@ export default {
         Vue.prototype.$showDialog = (type, opts) => {
 
             // if(this.$device.isM) {
-            //     return 
+            //     return
             // }
             this.type = type
-            this.visible = true
+
 
             if(type == 'law') {
+
                 this.title = "法律法规"
                 this.$api.legalStatement().then(data => {
                     this.content = data && data.content
+                    this.visible = true
                 })
             }
             if(type == "support") {
                 this.title = "技术支持"
                 this.$api.technicalSupport().then(data => {
                     this.content = data && data.content
+                    this.visible = true
                 })
             }
 
@@ -214,7 +218,7 @@ export default {
         calcmedia('m', 30px, 15px);
     }
     .content{
-         h(250px); lh(25px); pr();
+         h(230px); lh(25px); pr();
         p{
             m(0 0 20px 0);
         }

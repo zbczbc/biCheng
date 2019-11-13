@@ -65,8 +65,7 @@ export default {
     methods: {
         onChangeAddress(item, index) {
             this.activeIndex = index
-
-
+            this.locationMap.search(this.addressInfo.detailedAddress);
         }
     },
     computed: {
@@ -114,14 +113,14 @@ export default {
             };
 
             this.locationMap = new BMap.LocalSearch(map, options);
-
-            this.locationMap.search('广东省深圳市南山区桑达大厦13楼');
         })
 
 
 
         this.$api.getContactUs().then(data => {
             this.pageData = data
+
+            this.locationMap.search(this.addressInfo.detailedAddress);
         })
 
         this.$root.$on('getFooterSuccess', data => {

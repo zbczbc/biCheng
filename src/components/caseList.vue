@@ -10,7 +10,7 @@
                     :class="{active: index==activeIndex}">{{tab.caseName}}</li>
             </ul>
             <div class="tab-content pr" :class="containerClass" v-if="caseList&&caseList.length>0">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper" >
 
                     <div class="swiper-slide list" v-for="item,imgIndex in caseImgList" :key="imgIndex">
                         <div class="img-w hid">
@@ -54,7 +54,8 @@ export default {
     data() {
         return {
             idName: "xxx",
-            activeIndex: 0
+            activeIndex: 0,
+            isShowSwiper: false
         }
     },
     methods: {
@@ -71,13 +72,15 @@ export default {
             this.activeIndex = index
             //this.init()
             setTimeout(() => {
+                this.isShowSwiper = true
                 this.mySwiper && this.mySwiper.init()
-            }, 50)
+            }, 100)
         },
         init() {
+            let perView = this.$device.isM ? 1: 2
             this.mySwiper = new Swiper(`.${this.containerClass}`, {
                 //loop: true,
-                slidesPerView: this.$device.isM ? 1: 2,
+                slidesPerView: perView,
                 navigation: {
                     nextEl: '.oper-next',
                     prevEl: '.oper-prev',
@@ -86,6 +89,8 @@ export default {
                     el: `.${this.paginClass}`
                 }
             })
+
+            console.log(perView)
 
             //console.log(this.mySwiper, this.containerClass, this.$refs[this.containerClass])
         }
@@ -109,9 +114,10 @@ export default {
             immediate: true,
             handler(value) {
                 this.$nextTick(() => {
+                    this.isShowSwiper = true
                     setTimeout(() => {
                         this.init()
-                    },1000  )
+                    }, 100)
                 })
             }
         }
@@ -151,6 +157,10 @@ export default {
         overflow: hidden; overflow: hidden;
         .swiper-wrapper{
             //width: 100%;
+            //opacity: 0;
+            &.show{
+                opacity: 1;
+            }
         }
         .list{
             //calcmedia('w', calc(50% - 30px), 100%);

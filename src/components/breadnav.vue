@@ -27,7 +27,7 @@
                     <li class="list"
                         v-for="item,index in thirdList"
                         @click="onItemClick(item, index)"
-                        :class="{active: index==activeIndex}" >{{item.label}}</li>
+                        :class="{active: index==activeIndex}" >{{item.name}}</li>
                 </ul>
             </div>
         </div>
