@@ -10,7 +10,7 @@
                     :class="{active: index==activeIndex}">{{tab.caseName}}</li>
             </ul>
             <div class="tab-content pr" :class="containerClass" v-if="caseList&&caseList.length>0">
-                <div class="swiper-wrapper" >
+                <div class="swiper-wrapper" :class="{show: isShowSwiper}">
 
                     <div class="swiper-slide list" v-for="item,imgIndex in caseImgList" :key="imgIndex">
                         <div class="img-w hid">
@@ -34,6 +34,7 @@
 <script>
 import Swiper from "swiper"
 import $ from 'jquery'
+import Taskes from "@/common/js/Taskes"
 
 export default {
     props: {
@@ -71,10 +72,42 @@ export default {
         tabClick(index) {
             this.activeIndex = index
             //this.init()
+            this.isShowSwiper = false
+
             setTimeout(() => {
-                this.isShowSwiper = true
-                this.mySwiper && this.mySwiper.init()
-            }, 100)
+                    this.mySwiper = null
+                    this.isShowSwiper = true
+                    // this.mySwiper && this.mySwiper.init()
+                    this.init()
+            }, 1000)
+
+            // this.loadAllImg().then(data => {
+
+            // })
+        },
+
+        loadAllImg() {
+            return new Promise((resolve, reject) => {
+                this.taskes = new Taskes()
+                this.taskes.end(() => {
+                    resolve()
+                })
+
+                this.caseImgList.map(item => {
+                    this.taskes.add()
+                    let image = new Image()
+                    image.src = this.$api.getImg(item.imgName)
+
+                    image.onload = () => {
+                        this.taskes.check()
+                    }
+
+                    image.onerror = () => {
+                        this.taskes.check()
+                        console.log('有图片加载失败了')
+                    }
+                })
+            })
         },
         init() {
             let perView = this.$device.isM ? 1: 2
@@ -89,8 +122,10 @@ export default {
                     el: `.${this.paginClass}`
                 }
             })
+            // this.loadAllImg().then(() => {
 
-            console.log(perView)
+
+            // })
 
             //console.log(this.mySwiper, this.containerClass, this.$refs[this.containerClass])
         }
@@ -106,7 +141,12 @@ export default {
             return this.$device.isM
         },
         caseImgList() {
-            return this.caseList[this.activeIndex].caseImgList
+            let temp = this.caseList && this.caseList[this.activeIndex]
+            if(temp) {
+                return temp.caseImgList
+            }else{
+                return []
+            }
         }
     },
     watch: {
@@ -114,10 +154,10 @@ export default {
             immediate: true,
             handler(value) {
                 this.$nextTick(() => {
-                    this.isShowSwiper = true
                     setTimeout(() => {
+                        this.isShowSwiper = true
                         this.init()
-                    }, 100)
+                    }, 1000)
                 })
             }
         }
@@ -157,7 +197,7 @@ export default {
         overflow: hidden; overflow: hidden;
         .swiper-wrapper{
             //width: 100%;
-            //opacity: 0;
+            opacity: 0.01;
             &.show{
                 opacity: 1;
             }
