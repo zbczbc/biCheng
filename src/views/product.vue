@@ -124,10 +124,11 @@ export default {
                 if(this.$device.isM) {
                     this.slidesPerView = 1
                 }
-                
-                this.$nextTick(() => {
-                    this.initSwiper()
-                })
+                if(!this.mySwiper) {
+                    this.$nextTick(() => {
+                        this.initSwiper()
+                    })
+                }
             }
         },
         $route: {
@@ -242,7 +243,7 @@ $productWidth = 500px;
         }
     }
     .btn{
-        calcmedia('pr', relative, fixed); bottom:0; right: 0;
+        calcmedia('pr', relative, fixed); bottom:0; right: 0; z-index: 100;
         calcmedia('w',160px,70px); lhh(40px); c(#fff); tc(); f(right); mt(20px); bg($blue);
     }
 }
