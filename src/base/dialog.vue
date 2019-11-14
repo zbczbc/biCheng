@@ -131,6 +131,8 @@ export default {
             // }
             this.type = type
 
+            console.log(type)
+
 
             if(type == 'law') {
 
@@ -149,7 +151,7 @@ export default {
             }
 
             if(type == "video") {
-
+                this.visible = true
             }
 
             if(type == "image") {

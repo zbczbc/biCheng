@@ -14,7 +14,7 @@
 
                     <div class="swiper-slide list" v-for="item,imgIndex in caseImgList" :key="imgIndex">
                         <div class="img-w hid">
-                            <img-box :url="item.imgName" />
+                            <img :src="$api.getImg(item.imgName)" />
                             <div class="mask" @click="showDialog(imgIndex)"></div>
                         </div>
                             <p>{{item.imgTitle}}</p>
@@ -77,8 +77,8 @@ export default {
             setTimeout(() => {
                     this.mySwiper = null
                     this.isShowSwiper = true
-                    // this.mySwiper && this.mySwiper.init()
-                    this.init()
+                    this.mySwiper && this.mySwiper.init()
+                    //this.init()
             }, 1000)
 
             // this.loadAllImg().then(data => {
@@ -119,7 +119,8 @@ export default {
                     prevEl: '.oper-prev',
                 },
                 pagination: {
-                    el: `.${this.paginClass}`
+                    el: `.${this.paginClass}`,
+                    clickable: true
                 }
             })
             // this.loadAllImg().then(() => {
@@ -207,10 +208,13 @@ export default {
             calcmedia('p', 0 15px, 0);
             float:left;
             .img-w{
-                height:400px; overflow: hidden;
+                calcmedia('h', 400px, 200px);
+                overflow: hidden;
             }
             img{
-                min-width:100%; min-height:400px;
+                calcmedia('mh', 400px, 200px);
+
+                min-width: 100%;
             }
             p{
                 size18(); mt(20);

@@ -47,7 +47,7 @@
                     <img-box v-for="item,index in productDetails.introduce" :url="item" class="full" />
                 </template>
 
-                <div class="solve-box" v-show="tabIndex==2">
+                <div class="solve-box" v-if="tabIndex==2">
                     <div class="size24 tit">解决成果</div>
                     <div class="list-con product-swiper">
                         <div class="swiper-wrapper">
@@ -93,11 +93,11 @@ export default {
             this.activeIndex = index
         },
         initSwiper() {
-            this.mySwiper&&this.mySwiper.destory()
+            //this.mySwiper&&this.mySwiper.destory()
             this.mySwiper = new Swiper('.product-swiper', {
                 slidesPerView: this.slidesPerView
             })
-            //console.log(this.mySwiper, this.slidesPerView)
+            console.log(this.mySwiper, this.slidesPerView)
         },
         _initData() {
             this.tabsList = [
@@ -124,11 +124,12 @@ export default {
                 if(this.$device.isM) {
                     this.slidesPerView = 1
                 }
-                if(!this.mySwiper) {
-                    this.$nextTick(() => {
-                        this.initSwiper()
-                    })
-                }
+                console.log(!this.mySwiper, index)
+                
+                this.$nextTick(() => {
+                    this.initSwiper()
+                })
+                if(!this.mySwiper) {}
             }
         },
         $route: {
@@ -256,6 +257,10 @@ $productWidth = 500px;
         calcmedia('pt', 20px, 10px)
     }
     .solve-box{
+        // position: absolute; z-index: -1
+        // &.active{
+        //     position: relative; z-index: 0
+        // }
         .list-con{
             margin: 0 -10px; overflow: hidden;
             .list{
