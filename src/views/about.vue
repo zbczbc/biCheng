@@ -13,8 +13,6 @@
                     <scroll v-if="isShowContent">
                         <div class="content" :style="{height:maxHeight}">
                             <c-b :content=enterpriseInfo.content></c-b>
-                            <c-b :content=enterpriseInfo.content></c-b>
-                            <c-b :content=enterpriseInfo.content></c-b>
                         </div>
                     </scroll>
                 </div>
