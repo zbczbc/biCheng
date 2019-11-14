@@ -61,16 +61,20 @@ export default {
                 calcmedia('float', left, none);
             }
             .word-w{
-                calcmedia('h', 100%, 300px);
+                calcmedia('h', 100%, 350px);
                 calcmedia('pr', absolute, relative);
 
                 h(100%); right: 0;
 
                 .inner{
-                    abs(); h(200px);
+                        position: absolute;
+                        transform: translateY(-50%);
+                        top: 50%;
+                        width: 100%;
                 }
                 .sdesc{
-                    w(60%); m(20px auto); lh(24px);
+                    calcmedia('w', 60%, 90%);
+                     m(20px auto); lh(24px);
                 }
                 .icon{
                     width: 90px; height: 90px; m(0 0 20px);

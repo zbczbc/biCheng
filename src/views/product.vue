@@ -155,6 +155,7 @@ $productHeight = 500px;
 $productWidth = 500px;
 
 
+
 .product-page{
     .detail{
         border-bottom: 1px solid $border;

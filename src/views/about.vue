@@ -6,12 +6,14 @@
         <div class="introduce-box" v-if="pageId==1">
             <div class="intro-box1 layout">
                 <div class="img-w">
-                    <img-box class="full" :url="enterpriseInfo.imgName"/>
+                    <img class="full" :src="$api.getImg(enterpriseInfo.imgName)" ref="img"/>
                 </div>
                 <div class="word-w">
                     <h1 class="size30"><c-b :content=enterpriseInfo.imgTitle></c-b></h1>
-                    <scroll v-if="enterpriseInfo.content">
+                    <scroll v-if="isShowContent">
                         <div class="content" :style="{height:maxHeight}">
+                            <c-b :content=enterpriseInfo.content></c-b>
+                            <c-b :content=enterpriseInfo.content></c-b>
                             <c-b :content=enterpriseInfo.content></c-b>
                         </div>
                     </scroll>
@@ -72,9 +74,11 @@ export default {
             ],
             bannerPicture: {},
             enterpriseInfo: {},
+            maxHeight: 200,
             activeIndex: 1,
             hoverIndex: -1,
-            pageId: 1
+            pageId: 1,
+            isShowContent: false
         }
     },
     methods: {
@@ -88,11 +92,30 @@ export default {
             this.hoverIndex = -1
         },
         _getPageData() {
+            this.isShowContent = false
             this.$api.getCompanyProfile().then(data => {
                 let { bannerPicture, enterpriseInfo } = data
 
                 this.bannerPicture = bannerPicture
                 this.enterpriseInfo = enterpriseInfo
+
+                let image = new Image()
+                image.src = this.$api.getImg(enterpriseInfo.imgName)
+
+                image.onload = () => {
+                    this.$nextTick(() => {
+                        this.isShowContent = true
+
+                        console.log(this.$refs.img, this.$refs.img.width)
+                        let hei = this.$refs.img.height - 155
+
+                        if(this.$device.isM) {
+                            this.maxHeight = "auto"
+                        }else{
+                            this.maxHeight = hei + 'px'
+                        }
+                    })
+                }
 
             })
         },
@@ -111,17 +134,6 @@ export default {
             ]
         }
     },
-    computed: {
-        maxHeight() {
-            let ret = ""
-            if(this.$device.isM) {
-                ret = 'auto'
-            }else{
-                ret = `${parseFloat(this.getCurrentPx(180, 'w'))}px`
-            }
-            return ret
-        }
-    },
     watch: {
         $route: {
             immediate: true,
@@ -134,6 +146,9 @@ export default {
     created() {
         this._initData()
         this._getPageData()
+
+       
+
     },
     components: {
         Scroll, Org, Honor
@@ -143,6 +158,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 .introduce-box{
     .intro-box1{
         //mt(140, 'h')
@@ -159,12 +175,12 @@ export default {
             h1{
                 calcmedia('lh', 45px, 24px);
                 calcmedia('h', 90px, auto);
-                calcmedia('mt', 0, 20px);
+                calcmedia('m', 0 0 25px 0, 20px 0 0 0);
 
                 font-weight: bold; 
             }
             .content{
-                fz(14px); lh(24px); m(20px 0 0 0);
+                fz(14px); lh(24px);
                 p {
                     m(10px 0 0 0);
                 }
@@ -224,5 +240,12 @@ export default {
         }
         
     }
+}
+</style>
+
+
+<style>
+.introduce-box .word-w p{
+    margin-bottom: 10px;
 }
 </style>
