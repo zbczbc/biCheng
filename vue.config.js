@@ -8,7 +8,7 @@ module.exports = {
   devServer: {
     proxy: {
       "/api": {
-        target: "http://120.77.220.34",
+        target: "http://www.bgysmartcity.com/",
         // target: "http://test.gbei.com",
         // target: "http://tiyan.gbei.com",
         // ws: true,

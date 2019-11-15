@@ -65,25 +65,17 @@ export default {
                 this.$showDialog('image', {
                     images: this.caseImgList,
                     current: imgIndex,
-
                 })
             }
         },
         tabClick(index) {
             this.activeIndex = index
-            //this.init()
+
             this.isShowSwiper = false
-
             setTimeout(() => {
-                    this.mySwiper = null
-                    this.isShowSwiper = true
-                    this.mySwiper && this.mySwiper.init()
-                    //this.init()
-            }, 1000)
-
-            // this.loadAllImg().then(data => {
-
-            // })
+                this.mySwiper.slideTo(0, 0)
+                this.isShowSwiper = true
+            }, 300)
         },
 
         loadAllImg() {
@@ -112,7 +104,6 @@ export default {
         init() {
             let perView = this.$device.isM ? 1: 2
             this.mySwiper = new Swiper(`.${this.containerClass}`, {
-                //loop: true,
                 slidesPerView: perView,
                 navigation: {
                     nextEl: '.oper-next',
@@ -121,14 +112,9 @@ export default {
                 pagination: {
                     el: `.${this.paginClass}`,
                     clickable: true
-                }
+                },
+                observer:true
             })
-            // this.loadAllImg().then(() => {
-
-
-            // })
-
-            //console.log(this.mySwiper, this.containerClass, this.$refs[this.containerClass])
         }
     },
     computed: {
@@ -236,6 +222,9 @@ export default {
     }
 }
 
+.swiper-button-disabled{
+    opacity: 0.3;
+}
 .img-w{
     pr();
     .mask{
