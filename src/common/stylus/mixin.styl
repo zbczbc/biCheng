@@ -130,7 +130,8 @@ wt(number, type = false)
 
 
 // 媒体查询 方法
-calcmedia(type, pc, mobile=false)
+calcmedia(type, pc, mobile=false, mini=false)
+    
     @media (max-width: 768px)
         if(mobile == false)
             mobile = pc
@@ -138,6 +139,13 @@ calcmedia(type, pc, mobile=false)
 
     @media (min-width: 769px)
         setMedia(type, pc)
+    
+    @media (min-width: 320px) && (max-width: 350px)
+        if(mini == false)
+            mini = mobile
+        if(mobile == false)
+            mini = pc
+        setMedia(type, mini)
 
 setMedia(type, value)
 

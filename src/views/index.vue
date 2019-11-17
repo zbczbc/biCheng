@@ -2,14 +2,14 @@
     <div class="index-banner swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="item,index in pageData.bannerList" :key="item.index">
-                <template v-if="pageData.videoName&&index==0&&$device.isPC">
+                <template v-if="pageData.videoName&&$device.isPC&&index==0">
                     <div class="video-mask por"></div>
                     <video :src=$api.getImg(pageData.videoName) v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
                     <video :src=$api.getImg(pageData.videoName) v-else></video>
                 </template>
-                <template v-if="index>0||$device.isM">
-                     <div class="bg-box"  :style="{backgroundImage: 'url(' + $api.getImg(item.imgName) + ')'}"></div>
-                </template>
+                
+                <div class="bg-box"  :style="{backgroundImage: 'url(' + $api.getImg(item.imgName) + ')'}"></div>
+                <template v-if="index>0||$device.isM"></template>
                
 
                 <div class="text-box" v-if="index==0">
@@ -19,7 +19,9 @@
                     <div class="sub-desc">
                         <c-b :content=item.content></c-b>
                     </div>
-                    <img-icon type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
+
+                    <img-icon v-if="$device.isPc" type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
+                    <img-icon v-else type="play" w=40 h=40 class="cp z10" @onClick="$showDialog('video')" m="8% auto"></img-icon>
 
                     <div class="icons-group">
                         <div class="list" v-for="item in iconesGroup">
@@ -104,7 +106,13 @@ export default {
         this._initData()
 
         this.$api.homeData().then(data => {
-            this.pageData = data
+            
+            let { bannerList } = data
+            if(this.$device.isPc) {
+                bannerList.unshift([{}])
+            }
+
+            this.pageData = { ...data, bannerList }
             this.$root.$emit('sendCopyright', data.copyright)
 
             this.$nextTick(() => {
@@ -140,12 +148,13 @@ export default {
 
 .text-box
     calcmedia('h', 360px, auto);
-    calcmedia('t', 0, 16%);
-
+    
+    transform: translateY(-50%);top: 50%; pb();
     position absolute; text-align center; width 100%;
-    abs();
+    
     .tit
         font-size: px2vw(62);
+        calcmedia('sz', px2vw(62), 30px, 26px)
         calcmedia('lh', px2vw(90), 45px); margin 20px 0 25px;
     .sub-tit
         font-size: px2vw(54); margin 20px 0 25px;
@@ -156,7 +165,7 @@ export default {
 .icons-group{
     width: 600px; margin: 20px auto;
     .list{
-        calcmedia('p', 0 0 0 20px, 0 0 0 40px)
+        calcmedia('p', 0 0 0 20px, 0 0 0 8%)
         w(25%); f(left); t(center); m(0 0 10px 0);
     }
 }
@@ -173,10 +182,14 @@ export default {
 
     topcenter();
     .tit{
-        size55();lh(75px);
+        calcmedia('sz', px2vw(62), 30px, 26px);
+        calcmedia('lh', 75px, 45px, 40px);
+        
     }
     .desc{
-        size18();lh(35px);mt(35px);
+        calcmedia('mt', 35px, 20px);
+        calcmedia('lh', 35px, 24px);
+        size18();
     }
 }
 

@@ -2,8 +2,9 @@
     <div class="dialog-wrapper" v-if="visible">
 
         <div class="image-container container" v-if="type=='image'">
-            <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" />
+            <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" mw="26 0" />
 
+             
             <div class="image-swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item,i in images" :key="i">
@@ -19,14 +20,14 @@
         </div>
 
         <div class="video-container container" v-else-if="type=='video'">
-            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" />
+            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" mw="26 0" />
             <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
         </div>
 
         <div class="text-container layout container" v-else>
             <div class="title-box pr">
                 {{title}}
-                <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" />
+                <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" mw="26 0" />
             </div>
             <div class="content">
                 <scroll v-if="content" :mustShow=true>
@@ -201,6 +202,7 @@ export default {
 
 .title-box{
     lhh(70px); border-bottom: 1px solid $border; p(0 40px);
+    calcmedia('p', 0 40px, 0 16px)
     size20(); c(#333);
 }
 .dialog-wrapper{

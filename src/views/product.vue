@@ -37,7 +37,7 @@
             <ul class="tabs-inner">
                 <li v-for="item,index in tabsList"
                     @click="tabIndex=index"
-                    :class="{active: index==tabIndex}">{{item.label}}</li>
+                    :class="{active: index==tabIndex}"><span>{{item.label}}</span></li>
             </ul>
             <div class="btn">联系碧城</div>
         </div>
@@ -228,19 +228,24 @@ $productWidth = 500px;
             calcmedia('align', left, center);
             f(left);calcmedia('p', 0 20px, 0 10px);pr();
             &::after{
-                content: ""; h(20px);w(2px);bg($eb);pb();left:0; top:25px;
+                content: ""; h(20px);w(2px);bg($eb);pb();left:-2px; top:25px;
             }
 
-            &::before{
-                h(2px); w(0); bg($blue); pb(); bottom: 0; content: "";
+            span{
+                pr(); display: inline-block;
+                &::before{
+                    h(2px); w(0); bg($blue); pb(); bottom: 0; content: "";
+                }
             }
-            &.active::before, &:hover::before{
-                width: calc(100% - 30px);
+
+            &.active, &:hover{
+                span::before{
+                    width: 100%;
+                }
             }
             &:first-child{
-                pl(0);
+                ml(0);
                 &::after{ display: none;  }
-                &.active::before, &:hover::before{ width: calc(100% - 10px)}
             }
         }
     }

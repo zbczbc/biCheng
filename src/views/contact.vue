@@ -38,9 +38,9 @@
         </div>
         <div class="map-tab layout">
             <ul>
-                <li v-for="item,index in tabList" :key="index"
+                <li v-for="item,index in pageData.addressInfoList" :key="index"
                     :class="{active: index==activeIndex}"
-                    @click="onChangeAddress(item, index)" >{{item.label}}</li>
+                    @click="onChangeAddress(item, index)" >{{item.addressTitle}}</li>
             </ul>
         </div>
         <div class="map" ref="map"></div>
