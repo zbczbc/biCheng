@@ -153,8 +153,10 @@ export default {
                 image.onload = () => {
                     this.$nextTick(() => {
                         
-                        let hei = this.$refs.bottomImg[0].height*2+45 + 70+86
-                        this.bottomHeight =  hei + 'px'
+                        if(this.$refs.bottomImg) {
+                            let hei = this.$refs.bottomImg[0].height*2+45 + 70+86
+                            this.bottomHeight =  hei + 'px'
+                        }
                     })
                 }
         }
