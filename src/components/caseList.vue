@@ -21,8 +21,8 @@
                     </div>
                 </div>
 
-                <img-icon type="case-left" w=60 h=60 mh=30 mw=30 class="pol oper-prev z10 cp" m="-50 0 0 35"/>
-                <img-icon type="case-right" w=60 h=60 mh=30 mw=30 class="por oper-next z10 cp" m="-50 35 0 0" />
+                <img-icon type="case-left" w=60 h=60 mh=30 mw=30 class="pol oper-prev z10 cp" m="-50 0 0 35" mm="-30 0 0 20"/>
+                <img-icon type="case-right" w=60 h=60 mh=30 mw=30 class="por oper-next z10 cp" m="-50 35 0 0" mm="-30 20 0 0"/>
 
                 <div class="oper-pagin" :class="paginClass"></div>
             </div>
@@ -209,7 +209,7 @@ export default {
         .z10{
             calcmedia('w', 60px, 30px);
             calcmedia('h', 60px, 30px);
-            top: 50%; margin-top: -30px;
+            top: 50%; 
 
         }
     }
@@ -218,6 +218,8 @@ export default {
         calcmedia('mt', 20px, 10px);
         /deep/ .swiper-pagination-bullet{
             calcmedia('m', 0 8px, 0 6px);
+            calcmedia('w', 8px, 4px);
+            calcmedia('h', 8px, 4px);
         }
     }
 }

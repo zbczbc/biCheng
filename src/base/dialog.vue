@@ -176,7 +176,7 @@ export default {
 .image-container{
     overflow: hidden;
     calcmedia('w', 600px, 100%);
-    calcmedia('h', 630px, 200px);
+    calcmedia('h', 630px, 320px);
     .image-swiper{
         h(100%);
         .swiper-slide{
@@ -184,6 +184,9 @@ export default {
             p(30px 30px 60px);
             .text{
                 pb(); w(100%); bottom: 30px;tc(); lhh(30px); fz(14px);
+            }
+            img{
+                calcmedia('mh', auto, 200px)
             }
         }
     }

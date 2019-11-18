@@ -221,7 +221,7 @@ export default {
             calcmedia('t', 100px, 40px);
         }
         .list-group{
-            calcmedia('p', 60px 20px 40px, 40px 20px 20px);
+            calcmedia('p', 60px 20px 40px, 28px 20px 8px);
             calcmedia('ty', -250px, -365px);
             bg(#fff);
             .list {
