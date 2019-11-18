@@ -77,7 +77,7 @@ export default {
             hoverIndex: -1,
             pageId: 1,
             isShowContent: false,
-            bottomHeight: '450px'
+            bottomHeight: '630px'
         }
     },
     methods: {

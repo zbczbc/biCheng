@@ -13,8 +13,8 @@
                     </div>
                 </div>
 
-                <img-icon type="dialog-left" w=50 h=70 class="dialog-next pob cp" m="-25 0 0 30"></img-icon>
-                <img-icon type="dialog-right" w=50 h=70 class="dialog-prev por cp" m="-25 30 0 0"></img-icon>
+                <img-icon type="dialog-left" w=50 h=70 mw=30 class="dialog-next pob cp" m="-25 0 0 30"></img-icon>
+                <img-icon type="dialog-right" w=50 h=70 mw=30 class="dialog-prev por cp" m="-25 30 0 0"></img-icon>
             </div>
 
         </div>
@@ -185,9 +185,9 @@ export default {
             .text{
                 pb(); w(100%); bottom: 30px;tc(); lhh(30px); fz(14px);
             }
-            img{
-                calcmedia('mh', auto, 200px)
-            }
+            // img{
+            //     calcmedia('mh', auto, 200px)
+            // }
         }
     }
     .dialog-next,.dialog-prev{

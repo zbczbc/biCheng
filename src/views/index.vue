@@ -20,7 +20,7 @@
                         <c-b :content=item.content></c-b>
                     </div>
 
-                    <img-icon v-if="$device.isPc" type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
+                    <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
                     <img-icon v-else type="play" w=40 h=40 class="cp z10" @onClick="$showDialog('video')" m="8% auto"></img-icon>
 
                     <div class="icons-group">

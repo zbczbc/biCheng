@@ -30,7 +30,7 @@ export default {
       }
       if (this.h) {
          let w = this.h
-        if ( this.$device.isM && this.mw ) {
+        if ( this.$device.isM && this.mh ) {
           w = this.mh
         }
 
