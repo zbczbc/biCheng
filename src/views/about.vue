@@ -32,13 +32,13 @@
                 </div>
             </div>
 
-            <div class="intro-box3 bggray">
+            <div class="intro-box3 bggray" :style="{height: bottomHeight}">
                 <div class="bg"></div>
                 <div class="tit size30 fb white">愿景与价值观</div>
-                <div class="layout">
+                <div class="layout" >
                     <div class="list-group clearfix">
                         <div class="list" v-for="item,index in priceList" :key="index">
-                            <img class="fl" :src="item.src"/>
+                            <img class="fl" :src="item.src" ref="bottomImg"/>
                             <div class="word">
                                 <p class="size18 mb20">{{item.title}}</p>
                                 <p class="size14">{{item.desc}}</p>
@@ -76,7 +76,8 @@ export default {
             activeIndex: 1,
             hoverIndex: -1,
             pageId: 1,
-            isShowContent: false
+            isShowContent: false,
+            bottomHeight: '450px'
         }
     },
     methods: {
@@ -144,9 +145,20 @@ export default {
     created() {
         this._initData()
         this._getPageData()
+        if(this.$device.isM) {
 
-       
+            let image = new Image()
+                image.src = `static/about-pic2.png`
 
+                image.onload = () => {
+                    this.$nextTick(() => {
+                        
+                        let hei = this.$refs.bottomImg[0].height*2+45 + 70+86
+                        this.bottomHeight =  hei + 'px'
+                    })
+                }
+        }
+        
     },
     components: {
         Scroll, Org, Honor

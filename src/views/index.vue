@@ -108,7 +108,7 @@ export default {
         this.$api.homeData().then(data => {
             
             let { bannerList } = data
-            if(this.$device.isPc) {
+            if(this.isPc) {
                 bannerList.unshift([{}])
             }
 

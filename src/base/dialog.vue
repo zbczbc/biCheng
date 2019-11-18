@@ -2,7 +2,7 @@
     <div class="dialog-wrapper" v-if="visible">
 
         <div class="image-container container" v-if="type=='image'">
-            <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" mw="26 0" />
+            <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" mm="26 0" />
 
              
             <div class="image-swiper">
@@ -20,14 +20,14 @@
         </div>
 
         <div class="video-container container" v-else-if="type=='video'">
-            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" mw="26 0" />
+            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" mm="26 0" />
             <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
         </div>
 
         <div class="text-container layout container" v-else>
             <div class="title-box pr">
                 {{title}}
-                <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" mw="26 0" />
+                <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" mm="26 0" />
             </div>
             <div class="content">
                 <scroll v-if="content" :mustShow=true>
@@ -222,7 +222,7 @@ export default {
     h(400px);
     calcmedia('w', auto, 90% !important);
     >.content{
-        calcmedia('m', 30px, 15px);
+        calcmedia('m', 30px, 15px 0);
     }
     .content{
          h(230px); lh(25px); pr();
@@ -231,6 +231,8 @@ export default {
         }
     }
 }
+
+
 .video-container{
 
     calcmedia('w',900px, 80%);
