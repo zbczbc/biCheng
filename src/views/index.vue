@@ -7,10 +7,10 @@
                     <video :src=$api.getImg(pageData.videoName) v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
                     <video :src=$api.getImg(pageData.videoName) v-else></video>
                 </template>
-                
+
                 <div class="bg-box"  :style="{backgroundImage: 'url(' + $api.getImg(item.imgName) + ')'}"></div>
                 <template v-if="index>0||$device.isM"></template>
-               
+
 
                 <div class="text-box" v-if="index==0">
                     <div class="tit">
@@ -106,13 +106,10 @@ export default {
         this._initData()
 
         this.$api.homeData().then(data => {
-            
-            let { bannerList } = data
-            if(this.isPc) {
-                bannerList.unshift([{}])
-            }
 
-            this.pageData = { ...data, bannerList }
+            let { bannerList } = data
+
+this.pageData = { ...data, bannerList }
             this.$root.$emit('sendCopyright', data.copyright)
 
             this.$nextTick(() => {
@@ -148,10 +145,10 @@ export default {
 
 .text-box
     calcmedia('h', 360px, auto);
-    
+
     transform: translateY(-50%);top: 50%; pb();
     position absolute; text-align center; width 100%;
-    
+
     .tit
         font-size: px2vw(62);
         calcmedia('sz', px2vw(62), 30px, 26px)
@@ -184,7 +181,7 @@ export default {
     .tit{
         calcmedia('sz', px2vw(62), 30px, 26px);
         calcmedia('lh', 75px, 45px, 40px);
-        
+
     }
     .desc{
         calcmedia('mt', 35px, 20px);

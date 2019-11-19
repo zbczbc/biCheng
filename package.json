@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "babel-polyfill": "^6.26.0",
     "core-js": "^3.3.2",
+    "es6-promise": "^4.2.8",
     "jquery": "^3.4.1",
     "swiper": "^5.1.0",
     "vue": "^2.6.10",
@@ -51,6 +53,7 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions"
+    "last 4 versions",
+    "not ie <= 8"
   ]
 }

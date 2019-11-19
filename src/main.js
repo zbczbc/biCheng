@@ -8,6 +8,9 @@ import baseComponent from "base/index"
 import api from "@/api/api"
 import 'swiper/css/swiper.css'
 
+import 'babel-polyfill'
+
+
 Vue.config.productionTip = false
 Vue.mixin(base)
 Vue.use(baseComponent)
@@ -16,5 +19,3 @@ new Vue({
   render: h => h(App),
   router
 }).$mount('#app')
-
-
