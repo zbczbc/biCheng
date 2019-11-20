@@ -20,7 +20,7 @@
         </div>
 
         <div class="video-container container" v-else-if="type=='video'">
-            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" mm="26 0" />
+            <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" />
             <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
         </div>
 

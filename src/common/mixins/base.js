@@ -93,7 +93,7 @@ export default {
       if(this.mm&&this.$device.isM) {
         margin = this.mm.split(" ");
       }
-      console.log(this.mm, this.$device.isM, margin)
+      //console.log(this.mm, this.$device.isM, margin)
       switch (margin.length) {
           case 1:
             style += `margin-top: ${this.setMarginValue(margin[0], 'h')};`;

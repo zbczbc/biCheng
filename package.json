@@ -50,10 +50,5 @@
     "plugins": {
       "autoprefixer": {}
     }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 4 versions",
-    "not ie <= 8"
-  ]
+  }
 }

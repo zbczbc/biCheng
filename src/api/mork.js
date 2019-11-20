@@ -82,12 +82,7 @@ const productDetails = {
         'static/product-03.png', 'static/product-04.png'
     ],
     solutionResults: [
-       '产品这里是解决问题的标题这里是解决问题的标题介绍',
-       '产品这里是解决问题的标题这里是解决问题的标题介绍',
-       '产品这里是解决问题的标题这里是解决问题的标题介绍',
-       '产品这里是解决问题的标题这里是解决问题的标题介绍',
-       '产品这里是解决问题的标题这里是解决问题的标题介绍',
-       '产品这里是解决问题的标题这里是解决问题的标题介绍',
+       
     ],
     technicalData: [
         'static/product-2.jpg'

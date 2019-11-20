@@ -52,6 +52,7 @@ export default {
 					{ name: '组织架构', id: '2' , path: '/about'},
 					{ name: '资质荣誉', id: '3' , path: '/about'},
 				]
+			
 
             this.$api.menuList().then(data => {
                 let { caseClassifyList, productList, schemeList, qcCode, copyright } = data

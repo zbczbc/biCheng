@@ -39,7 +39,7 @@
                     @click="tabIndex=index"
                     :class="{active: index==tabIndex}"><span>{{item.label}}</span></li>
             </ul>
-            <div class="btn">联系碧城</div>
+            <div class="btn" @click="$router.push('/contact')">联系碧城</div>
         </div>
         <div class="tab-content">
             <div class="tab-inner layout">
@@ -47,7 +47,7 @@
                     <img-box v-for="item,index in productDetails.introduce" :url="item" class="full" />
                 </template>
 
-                <div class="solve-box" v-if="tabIndex==2">
+                <div class="solve-box" v-if="tabIndex==2&&productDetails.solutionResults.length>0">
                     <div class="size24 tit">解决成果</div>
                     <div class="list-con product-swiper">
                         <div class="swiper-wrapper">
@@ -85,7 +85,8 @@ export default {
             tabIndex: 0,
             solveList: [],
             techImg: "static/product-2.jpg",
-            productDetails: {}
+            productDetails: {},
+            tabsList: []
         }
     },
     methods: {
@@ -137,6 +138,18 @@ export default {
             handler(route) {
                 this.$api.productDetails(route.query.id).then(data => {
                     this.productDetails = data
+                    if(data.solutionResults.length > 0) {
+                        this.tabsList = [
+                            { label: '产品介绍', },
+                            { label: '技术参数', },
+                            { label: '解决成果', },
+                        ]
+                    } else {
+                        this.tabsList = [
+                            { label: '产品介绍', },
+                            { label: '技术参数', },
+                        ]
+                    }
                 })
             }
         },

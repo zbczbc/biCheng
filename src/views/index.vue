@@ -44,8 +44,8 @@
             </div>
         </div>
 
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next" v-if="isInitSwiper"></div>
+        <div class="swiper-button-prev" v-if="isInitSwiper"></div>
 
         <div class="oper-pagin" ></div>
     </div>
@@ -63,7 +63,8 @@ export default {
                 { src: 'static/programme-banner.png', index: 3 },
             ],
             bannerHeight: null,
-            pageData: {}
+            pageData: {},
+            isInitSwiper: false
         }
     },
     methods: {
@@ -109,12 +110,17 @@ export default {
 
             let { bannerList } = data
 
-this.pageData = { ...data, bannerList }
+            this.pageData = { ...data, bannerList }
             this.$root.$emit('sendCopyright', data.copyright)
 
-            this.$nextTick(() => {
-                this.initSwiper()
-            })
+            this.isInitSwiper = bannerList.length > 1
+
+            if(bannerList.length > 1) {
+                
+                this.$nextTick(() => {
+                    this.initSwiper()
+                })
+            }
         })
     }
 }
