@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import Swiper from "swiper"
+import Swiper from 'swiper/dist/js/swiper.min.js'
 
 export default {
     data() {
@@ -116,7 +116,7 @@ export default {
             this.isInitSwiper = bannerList.length > 1
 
             if(bannerList.length > 1) {
-                
+
                 this.$nextTick(() => {
                     this.initSwiper()
                 })

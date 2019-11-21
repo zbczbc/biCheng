@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import Swiper from "swiper"
+import Swiper from 'swiper/dist/js/swiper.min.js'
 
 export default {
     data() {
@@ -106,7 +106,7 @@ export default {
                 { label: '技术参数', },
                 { label: '解决成果', },
             ]
-            
+
         }
     },
     computed: {
@@ -126,7 +126,7 @@ export default {
                     this.slidesPerView = 1
                 }
                 console.log(!this.mySwiper, index)
-                
+
                 this.$nextTick(() => {
                     this.initSwiper()
                 })
@@ -153,7 +153,7 @@ export default {
                 })
             }
         },
-       
+
     },
     created() {
         this._initData()

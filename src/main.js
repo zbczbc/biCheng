@@ -6,7 +6,7 @@ import router from "./router"
 import base from 'common/mixins/base'
 import baseComponent from "base/index"
 import api from "@/api/api"
-import 'swiper/css/swiper.css'
+import 'swiper/dist/css/swiper.min.css'
 
 import 'babel-polyfill'
 

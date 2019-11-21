@@ -152,7 +152,9 @@ export default {
         }
     }
     .t2{
-        calcmedia('w', 29%, 100%);
+        calcmedia('w', 27%, 100%);
+        calcmedia('mr', 1%, 0);
+
         div {
             size18(); m(0 0 20px 0)
         }

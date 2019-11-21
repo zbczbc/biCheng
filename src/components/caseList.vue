@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Swiper from "swiper"
+import Swiper from 'swiper/dist/js/swiper.min.js'
 import $ from 'jquery'
 import Taskes from "@/common/js/Taskes"
 
@@ -209,7 +209,7 @@ export default {
         .z10{
             calcmedia('w', 60px, 30px);
             calcmedia('h', 60px, 30px);
-            top: 50%; 
+            top: 50%;
 
         }
     }
