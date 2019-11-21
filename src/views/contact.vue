@@ -19,7 +19,7 @@
                         <span>{{addressInfo.addressTitle}}</span>
                     </div>
                     <p>公司邮箱：{{addressInfo.email}}</p>
-                    <p>总部公司：{{addressInfo.detailedAddress}}</p>
+                    <p>详细地址：{{addressInfo.detailedAddress}}</p>
                 </div>
                 <div class="t2 t3">
                     <div>
