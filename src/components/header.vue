@@ -65,7 +65,7 @@ export default {
             isM: false,
             menuIconType: 'menu',
             whiteLogVisible: false,
-            secIndex:0
+            secIndex: null
         }
     },
     methods: {
@@ -120,7 +120,7 @@ export default {
 
             if(path && path.indexOf('case') > -1) {
                 if(this.$route.path.indexOf('case') > -1) {
-                    let _top = $(`.pagin-${index}`).offset().top
+                    let _top = $(`.pagin-${Findex}`).offset().top
                     $('html,body').animate({scrollTop: _top-30})
                 }else{
                     this.$router.push('/case')
@@ -180,7 +180,7 @@ export default {
                     height = Math.ceil(childNav.length/2) * 40 + 50
                     item.more = true
                 }
-                
+
                 return `height: ${height}px`
             }
         }
