@@ -20,7 +20,7 @@
                                 :class="{'ul-03':index==2||item.more}"
                                 v-show="item.children&&hoverIndex==index">
                                 <li v-for="item02, indexSec in item.children"
-                                    :class="{active: isActived(item02, indexSec)}"
+                                    :class="{active: isActived(item02, index, indexSec)}"
                                     @click.stop="onClickItem(item02, indexSec, 2, index)">
                                     {{item02.name}}
                                 </li>
@@ -65,16 +65,21 @@ export default {
             isM: false,
             menuIconType: 'menu',
             whiteLogVisible: false,
-            secIndex: null
+            secIndex: 0
         }
     },
     methods: {
-        isActived(item, index) {
-            if(this.$route.query.id) {
-                return item.id==this.$route.query.id
-            }else{
-                return this.secIndex==index
+        isActived(item,index, secondIndex) {
+            let flag = false
+            if(index == this.activeIndex) {
+                if(this.$route.query.id) {
+                    flag = item.id==this.$route.query.id
+                }else{
+                    flag = this.secIndex==secondIndex
+                }
             }
+
+            return flag
         },
         onMouseOver(item, index) {
             if(this.isM)  return
@@ -105,22 +110,22 @@ export default {
                         this.hoverIndex = index
                     }
                 }else{
-                    this.toOneItem(item.children[0], index)
+                    this.toOneItem(item.children[0], index, 0)
                 }
 
             }else {
-                this.toOneItem(item, Findex)
+                this.toOneItem(item, Findex, index)
             }
         },
-        toOneItem(item, Findex) {
+        toOneItem(item, Findex, SecondIndex) {
 
             let path = item.path || PATH_INDEX[Findex]
-            // console.log(path, item.id)
+            //console.log(path, item.id, SecondIndex)
             // return
 
             if(path && path.indexOf('case') > -1) {
                 if(this.$route.path.indexOf('case') > -1) {
-                    let _top = $(`.pagin-${Findex}`).offset().top
+                    let _top = $(`.pagin-${SecondIndex}`).offset().top
                     $('html,body').animate({scrollTop: _top-30})
                 }else{
                     this.$router.push('/case')
