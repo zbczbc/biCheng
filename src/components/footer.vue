@@ -3,9 +3,9 @@
         <div class="layout" >
             <div class="f-main clearfix">
                 <div class="links">
-                    <dl v-for="link in footerNavList">
+                    <dl v-for="link,linkIndex in footerNavList">
                         <dt >{{link.name}}</dt>
-                        <dd v-for="item,index in link.children" v-if="index<5">{{item.name}}</dd>
+                        <dd v-for="item, itemIndex in link.children" v-if="itemIndex<5" @click="toPath(item, linkIndex, itemIndex)">{{item.name}}</dd>
                         <dd v-if="link.children.length>5">更多产品></dd>
                     </dl>
                 </div>
@@ -30,6 +30,7 @@
 
 <script>
 import { router } from "@/router"
+import $ from 'jquery'
 
 export default {
     props: {
@@ -47,6 +48,28 @@ export default {
     methods: {
         onShowDialog(type) {
             this.$showDialog(type)
+        },
+        toPath(item, index, itemIndex) {
+            let path = item.path,
+                pathMap = {
+                    1: '/product',
+                    2: '/scene',
+                    3: '/case'
+                }
+
+            if(index == 3 && this.$route.path == '/case') {
+                let _top = $(`.pagin-${itemIndex}`).offset().top
+                $('html,body').animate({scrollTop: _top-30})
+                return
+            }
+
+            if(!path){
+                path = pathMap[index]
+            }
+            path = `${path}?id=${item.id}`
+
+            this.$router.push(path)
+
         },
         _initData() {
             this.navList = [
@@ -135,7 +158,10 @@ export default {
                 w(px2vh(200));
             }
             dt{
-                font-size: 16px; c(#fff); m(0 0 10px 0)
+                font-size: 16px; c(#fff); m(0 0 10px 0); cursor: pointer;
+            }
+            dd{
+                cursor: pointer;
             }
         }
     }

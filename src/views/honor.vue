@@ -1,13 +1,13 @@
 <template>
     <div class="honor-page">
         <div class="p-tit">资质荣誉</div>
-        <div class="p-desc">公司自研的智慧园区平台荣获2018年APICTA亚太信息通信科技大奖赛奖项。替换下面的专利图片。</div>
+        <div class="p-desc">{{title}}</div>
 
         <div class="layout">
             <div class="list-group clearfix">
                 <div class="list" v-for="item,index in list" :key="index">
                     <div class="img-w pr hid">
-                        <img-box :url="item.imgName" class="full scale" />
+                        <img :src="$api.getImg(item.imgName)" class="scale" />
                         <div class="mask" @click="showDialog(index)"></div>
                     </div>
                     <div class="word-w">
@@ -126,8 +126,12 @@ export default {
             calcmedia('w', calc(33.3% - 34px), calc(100% - 34px));
             m(0 17px 30px);f(left);
             .img-w{
+                height: 450px; border:1px solid #ddd; text-align:center; padding: 20px;
                 .mask{
                     abs(); bg(rgba(0,0,0,0.5)); opacity: 0; tranall();
+                }
+                img{
+                    height: 100%; width: auto;
                 }
                 &:hover .mask{
                     calcmedia('opacity', 1, 0)

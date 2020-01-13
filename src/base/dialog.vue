@@ -109,7 +109,7 @@ export default {
                         } else {
                             className = "main-h"
                         }
-                        console.log(className)
+
                         this.taskes.check()
 
                         this.images.push({

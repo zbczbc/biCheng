@@ -52,7 +52,7 @@ export default {
 					{ name: '组织架构', id: '2' , path: '/about'},
 					{ name: '资质荣誉', id: '3' , path: '/about'},
 				]
-			
+
 
             this.$api.menuList().then(data => {
                 let { caseClassifyList, productList, schemeList, qcCode, copyright } = data
@@ -80,11 +80,10 @@ export default {
 						this.footerNavList.push(item)
 					}
 
-
 					return item
 				})
 
-				this.footerNavList[2]
+				console.log(this.footerNavList)
 
 				// 给breadnav用
 				this.$root.$emit('getNavSuccess', {1:aboutList, 3: schemeList,5: caseClassifyList, productList})
