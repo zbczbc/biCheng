@@ -153,7 +153,7 @@ export default {
     .links{
         float: left;
         dl{
-            w(px2vh(180));f(left);p(px2vh(77) 0 0 0); fz(14px); lh(30px);
+            w(200px);f(left);p(px2vh(77) 0 0 0); fz(14px); lh(30px);
             &.nth-child(2) {
                 w(px2vh(200));
             }

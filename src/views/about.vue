@@ -2,7 +2,7 @@
     <div class="introduce-page">
         <banner :bannerPicture=bannerPicture  />
         <bread-nav  v-model=activeIndex :thirdList=tabList  @handleItemClick=handleItemClick />
-        
+
         <div class="introduce-box" v-if="pageId==1">
             <div class="intro-box1 layout">
                 <div class="img-w">
@@ -10,11 +10,14 @@
                 </div>
                 <div class="word-w">
                     <h1 class="size30"><c-b :content=enterpriseInfo.imgTitle></c-b></h1>
-                    <scroll v-if="isShowContent">
+                    <div class="content" >
+                        <c-b :content=enterpriseInfo.content></c-b>
+                    </div>
+                    <!-- <scroll v-if="isShowContent">
                         <div class="content" :style="{height:maxHeight}">
                             <c-b :content=enterpriseInfo.content></c-b>
                         </div>
-                    </scroll>
+                    </scroll> -->
                 </div>
             </div>
 
@@ -46,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -54,7 +57,7 @@
 
         <honor v-if="pageId==3"></honor>
     </div>
-    
+
 </template>
 
 <script>
@@ -83,7 +86,7 @@ export default {
     methods: {
         handleItemClick(item) {
             this.pageId = item.id
-        }, 
+        },
         onMouseover(index) {
             this.hoverIndex = index
         },
@@ -152,7 +155,7 @@ export default {
 
                 image.onload = () => {
                     this.$nextTick(() => {
-                        
+
                         if(this.$refs.bottomImg) {
                             let hei = this.$refs.bottomImg[0].height*2+45 + 70+86
                             this.bottomHeight =  hei + 'px'
@@ -160,12 +163,12 @@ export default {
                     })
                 }
         }
-        
+
     },
     components: {
         Scroll, Org, Honor
     }
-    
+
 }
 </script>
 
@@ -176,20 +179,20 @@ export default {
         //mt(140, 'h')
         calcmedia('m', px2vw(140) auto px2vw(140), 20px auto 20px); pr();
         .img-w{
-            calcmedia('w', px2vw(600), 100%); 
+            calcmedia('w', px2vw(600), 100%);
             calcmedia('pr', absolute, relative);
             calcmedia('h', px2vw(360), auto);
             left: 0;
         }
         .word-w{
-            calcmedia('pl', px2vw(710), 0); 
+            calcmedia('pl', px2vw(710), 0);
             //pl(710, 'w')
             h1{
                 calcmedia('lh', 45px, 24px);
                 calcmedia('h', 90px, auto);
                 calcmedia('m', 0 0 25px 0, 20px 0 0 0);
 
-                font-weight: bold; 
+                font-weight: bold;
             }
             .content{
                 fz(14px); lh(24px);
@@ -226,12 +229,12 @@ export default {
         calcmedia('p', 0 0 170px, 0 0 20px);
         calcmedia('h', 630px, 450px);
         overflow: hidden; pr();
-        tc(); 
+        tc();
         .bg{
             iconUrl('tbg.jpg'); iconBg(); calcmedia('h', 450px, );
         }
         .tit{
-            pb(); w(100%); 
+            pb(); w(100%);
             calcmedia('t', 100px, 40px);
         }
         .list-group{
@@ -239,18 +242,18 @@ export default {
             calcmedia('ty', -250px, -365px);
             bg(#fff);
             .list {
-                calcmedia('w',calc(50% - 80px), 100%); 
-                calcmedia('m',0 40px 20px, 0 0 20px); 
+                calcmedia('w',calc(50% - 80px), 100%);
+                calcmedia('m',0 40px 20px, 0 0 20px);
                 f(left); bg($border);
                 img{
                     calcmedia('w', 45%);
                 }
                 .word{
-                    calcmedia('pt', 90px, 20px); 
+                    calcmedia('pt', 90px, 20px);
                 }
             }
         }
-        
+
     }
 }
 </style>
