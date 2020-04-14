@@ -1,10 +1,10 @@
 <template>
     <div class="introduce-page">
-        <banner :bannerPicture=bannerPicture  />
-        <bread-nav  v-model=activeIndex :thirdList=tabList  @handleItemClick=handleItemClick />
+        <banner class="flash-move" :bannerPicture=bannerPicture  />
+        <bread-nav v-model=activeIndex :thirdList=tabList  @handleItemClick=handleItemClick />
 
         <div class="introduce-box" v-if="pageId==1">
-            <div class="intro-box1 layout">
+            <div class="intro-box1 layout  flash-move">
                 <div class="img-w">
                     <img class="full" :src="$api.getImg(enterpriseInfo.imgName)" ref="img"/>
                 </div>
@@ -13,6 +13,7 @@
                     <div class="content" >
                         <c-b :content=enterpriseInfo.content></c-b>
                     </div>
+
                     <!-- <scroll v-if="isShowContent">
                         <div class="content" :style="{height:maxHeight}">
                             <c-b :content=enterpriseInfo.content></c-b>
@@ -21,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="intro-box2 bggray">
+            <div class="intro-box2 bggray  flash-move">
                 <div class="layout">
                      <div class="tit size30 fb">业务范围</div>
                     <ul class="icon-group clearfix">
@@ -35,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="intro-box3 bggray" :style="{height: bottomHeight}">
+            <div class="intro-box3 bggray  flash-move" :style="{height: bottomHeight}">
                 <div class="bg"></div>
                 <div class="tit size30 fb white">愿景与价值观</div>
                 <div class="layout" >
@@ -53,9 +54,9 @@
             </div>
         </div>
 
-        <org v-if="pageId==2"></org>
+        <org class="flash-move" v-if="pageId==2"></org>
 
-        <honor v-if="pageId==3"></honor>
+        <honor class="flash-move" v-if="pageId==3"></honor>
     </div>
 
 </template>

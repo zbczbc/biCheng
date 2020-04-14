@@ -1,5 +1,5 @@
 <template>
-    <div class="banner" :style="bgStyle">
+    <div class="banner"  :style="bgStyle">
         <div class="tit">{{bannerPicture.imgTitle}}</div>
         <div class="desc">{{bannerPicture.content}}</div>
     </div>
@@ -21,7 +21,7 @@ export default {
     computed: {
         bgStyle() {
             // let imgName = this.bannerPicture.imgName, str
-            
+
             // if(/static/.test(imgName)){
             //     str = imgName
             // }else{
@@ -30,6 +30,9 @@ export default {
             let src = this.$api.getImg(this.bannerPicture.imgName)
             return `backgroundImage: url(${src}) `
         }
+    },
+    created() {
+
     }
 }
 </script>

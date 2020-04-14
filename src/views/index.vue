@@ -1,7 +1,10 @@
 <template>
-    <div class="index-banner swiper-container">
+    <div class="index-banner swiper-container" id="canvas-particle">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item,index in pageData.bannerList" :key="item.index">
+            <div class="swiper-slide" id="canvas-wrap">
+                <canvas id="can1"></canvas>
+            </div>
+            <div class="swiper-slide"  v-for="(item,index) in pageData.bannerList" :key="item.index">
                 <template v-if="pageData.videoName&&$device.isPC&&index==0">
                     <div class="video-mask por"></div>
                     <video :src=$api.getImg(pageData.videoName) v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
@@ -122,6 +125,23 @@ export default {
                 })
             }
         })
+
+        setTimeout(() => {
+                   // 画布
+            var config = {
+                    vx: 4,//点x轴速度,正为右，负为左
+                    vy:  4,//点y轴速度
+                    height: 2,//点高宽，其实为正方形，所以不宜太大
+                    width: 2,
+                    count: 100,//点个数
+                    color: "170, 170, 170",//点颜色
+                    stroke: "127,127,127",//线条颜色
+                    dist: 6000,//点吸附距离
+                    e_dist: 20000,//鼠标吸附加速距离
+                    max_conn: 10//点到点最大连接数
+                }
+            CanvasParticle(config);     //调用
+        }, 3000);
     }
 }
 </script>

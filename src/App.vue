@@ -104,6 +104,24 @@ export default {
 			// }, 100)
 		}
 	},
+	mounted() {
+		function animate() {
+			$('.flash-move').each(function () {
+				var win = $(window);
+				var winScrollTop = win.scrollTop();
+				var othis = $(this);
+				var oTop = parseInt(othis.offset().top);
+
+				console.log(oTop, parseInt(win.height() + winScrollTop))
+				if (oTop <= parseInt(win.height() + winScrollTop)) {
+					othis.addClass('animated fadeInUp ');
+				}
+			});
+		}
+
+		$(window).on('scroll', animate);
+        animate();
+	},
 	created() {
 		this.onResize()
 		this._setNavList()
