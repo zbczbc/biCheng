@@ -59,6 +59,8 @@
         <honor class="flash-move" v-else-if="pageId==3"></honor>
 
         <join-us v-else-if="pageId==4" />
+
+        <news v-else-if="pageId==5" />
     </div>
 
 </template>
@@ -68,6 +70,8 @@ import Scroll from 'base/scroll'
 import Org from "./org"
 import Honor from "./honor"
 import JoinUs from "./joinus"
+import News from "./news/news"
+import NewsDetail from "./news/news-detail"
 
 export default {
     data() {
@@ -166,7 +170,7 @@ export default {
 
     },
     components: {
-        Scroll, Org, Honor, JoinUs
+        Scroll, Org, Honor, JoinUs, News, NewsDetail
     }
 
 }
