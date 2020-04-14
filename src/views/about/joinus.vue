@@ -84,7 +84,7 @@ $m_gap=10px;
     .list-title{
         calcmedia('p', 0 $l_gap, 0 $m_gap);
         display: block; size18(); display: flex; justify-content:space-between;
-        color:#fff; width: 100%;
+         width: 100%;
     }
     .main-wrap{
         calcmedia('p', 0 $l_gap, 0 $m_gap);
@@ -111,8 +111,11 @@ $m_gap=10px;
 }
 /deep/ .el-collapse{
     .el-collapse-item__header{
-        calcmedia('h', 70px, 40px); background: $blue;
-        calcmedia('lh', 70px, 40px);
+        calcmedia('h', 70px, 40px);
+        calcmedia('lh', 70px, 40px); color:$c45;
+        &.is-active{
+            color:#fff; background: $blue;
+        }
     }
     .el-collapse-item__arrow{
         display: none;
