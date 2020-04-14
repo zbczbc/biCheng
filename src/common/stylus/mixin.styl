@@ -17,6 +17,12 @@ iconUrl(url) {
     background-image: url('../assets/icones/' + url);
 }
 
+iconUrl_c(url) {
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-image: url('../../assets/icones/' + url);
+}
+
 iconBg() {
     background-size: cover;
     background-repeat: no-repeat;
@@ -131,7 +137,7 @@ wt(number, type = false)
 
 // 媒体查询 方法
 calcmedia(type, pc, mobile=false, mini=false)
-    
+
     @media (max-width: 768px)
         if(mobile == false)
             mobile = pc
@@ -139,7 +145,7 @@ calcmedia(type, pc, mobile=false, mini=false)
 
     @media (min-width: 769px)
         setMedia(type, pc)
-    
+
     @media (min-width: 320px) && (max-width: 350px)
         if(mini == false)
             mini = mobile
@@ -237,8 +243,18 @@ size55()
 size18()
     calcmedia('sz', 18px, 14px)
 
+size16()
+    calcmedia('sz', 16px, 14px)
+
 fb()
     font-weight: bold;
 
 z(number)
     z-index: number
+
+.bluebtn{
+    calcmedia('h', 50px, 35px);
+    calcmedia('lh', 50px, 35px);
+    calcmedia('w', 150px, 100px);
+    color: #fff; background: $blue; text-align: center; size16(); cursor: pointer;
+}

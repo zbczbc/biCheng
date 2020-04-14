@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Index from './views/index'
-import About from './views/about'
+import About from './views/about/about'
 import Product from './views/product'
 import Scene from './views/scene'
 import Partner from './views/partner'
 import Case from './views/case'
-import contact from './views/contact'
-import $ from 'jquery'
+import Contact from './views/contact'
+// import Joinus from './views/joinus'
+// import News from './views/news'
+
 
 Vue.use(Router)
 
@@ -66,7 +68,7 @@ export const router = {
         {
             path: '/contact',
             name: '联系我们',
-            component: contact,
+            component: Contact,
             meta: {
                 index: 6
             }

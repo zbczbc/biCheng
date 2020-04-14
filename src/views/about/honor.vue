@@ -136,7 +136,7 @@ export default {
                 &:hover .mask{
                     calcmedia('opacity', 1, 0)
                     &::after{
-                        w(24px);h(24px);content: "";iconUrl('search.png');abs();iconBg();
+                        w(24px);h(24px);content: "";iconUrl_c('search.png');abs();iconBg();
                     }
                 }
             }
@@ -162,7 +162,7 @@ export default {
             border: 1px solid #ececec; border-radius: 100%; pr(); disin();
             vertical-align: middle; fb();
             &.prev:after, &.next:after{
-                wt(12);ht(7);iconBg();content: ""; abs(); iconUrl('right-gray.png');
+                wt(12);ht(7);iconBg();content: ""; abs(); iconUrl_c('right-gray.png');
             }
             &.prev:after{
                 r(180);
@@ -170,7 +170,7 @@ export default {
             &:hover, &.active{
                 c(#fff);bg($blue);
                 &.prev:after, &.next:after{
-                    iconUrl('fff_right.png');
+                    iconUrl_c('fff_right.png');
                 }
             }
             // &:nth-child(4n+1) {

@@ -51,6 +51,9 @@ export default {
 					{ name: '公司简介', id: '1' , path: '/about'},
 					{ name: '组织架构', id: '2' , path: '/about'},
 					{ name: '资质荣誉', id: '3' , path: '/about'},
+					{ name: '加入我们', id: '4', path: '/about'},
+					{ name: '新闻中心', id: '5', path: '/about'},
+					{ name: '友情链接', id: '6', path: '/about'},
 				]
 
 
@@ -86,7 +89,11 @@ export default {
 				console.log(this.footerNavList)
 
 				// 给breadnav用
-				this.$root.$emit('getNavSuccess', {1:aboutList, 3: schemeList,5: caseClassifyList, productList})
+				this.$root.$emit('getNavSuccess', {
+					1: aboutList,
+					3: schemeList,
+					5: caseClassifyList,
+					productList})
 
 				this.$root.$emit('getFooterSuccess', { qcCode, copyright })
 

@@ -1,7 +1,7 @@
 <template>
     <div class="introduce-page">
-        <banner class="flash-move" :bannerPicture=bannerPicture  />
-        <bread-nav v-model=activeIndex :thirdList=tabList  @handleItemClick=handleItemClick />
+        <banner :bannerPicture=bannerPicture  />
+        <bread-nav v-model=activeIndex  @handleItemClick=handleItemClick />
 
         <div class="introduce-box" v-if="pageId==1">
             <div class="intro-box1 layout  flash-move">
@@ -56,24 +56,22 @@
 
         <org class="flash-move" v-if="pageId==2"></org>
 
-        <honor class="flash-move" v-if="pageId==3"></honor>
+        <honor class="flash-move" v-else-if="pageId==3"></honor>
+
+        <join-us v-else-if="pageId==4" />
     </div>
 
 </template>
 
 <script>
 import Scroll from 'base/scroll'
-import Org from "./about/org"
+import Org from "./org"
 import Honor from "./honor"
+import JoinUs from "./joinus"
 
 export default {
     data() {
         return {
-            tabList: [
-                { label: '公司简介', id: 1},
-                { label: '组织架构', id: 2},
-                { label: '资质荣誉', id: 3}
-            ],
             bannerPicture: {},
             enterpriseInfo: {},
             maxHeight: 200,
@@ -109,13 +107,14 @@ export default {
                     this.$nextTick(() => {
                         this.isShowContent = true
 
-                        console.log(this.$refs.img, this.$refs.img.width)
-                        let hei = this.$refs.img.height - 155
+                        if(this.$refs.img) {
+                            let hei = this.$refs.img.height - 155
 
-                        if(this.$device.isM) {
-                            this.maxHeight = "auto"
-                        }else{
-                            this.maxHeight = hei + 'px'
+                            if(this.$device.isM) {
+                                this.maxHeight = "auto"
+                            }else{
+                                this.maxHeight = hei + 'px'
+                            }
                         }
                     })
                 }
@@ -167,7 +166,7 @@ export default {
 
     },
     components: {
-        Scroll, Org, Honor
+        Scroll, Org, Honor, JoinUs
     }
 
 }
@@ -232,7 +231,7 @@ export default {
         overflow: hidden; pr();
         tc();
         .bg{
-            iconUrl('tbg.jpg'); iconBg(); calcmedia('h', 450px, );
+            iconUrl_c('tbg.jpg'); iconBg(); calcmedia('h', 450px, );
         }
         .tit{
             pb(); w(100%);
