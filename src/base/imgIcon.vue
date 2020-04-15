@@ -155,6 +155,10 @@ export default {
     }
   }
 
+  &.news-arrow{
+    iconUrl('news-arrow.png');
+  }
+
 }
 
 
