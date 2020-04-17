@@ -2,52 +2,61 @@
     <div class="contact-page">
         <banner :bannerPicture=pageData.bannerPicture />
         <bread-nav />
-        <div class="p-tit">联系我们</div>
+        <tabs v-model="titleIndex" :tabList=titleTabList />
 
-        <div class="info-box layout">
-            <div class="t1">
-                <!-- <div>SMART CITY</div> -->
-                <img-icon type="word" w=210 h=26 mw=100 mh=13 class="ilm"/>
-                <p>碧城智慧科技</p>
-                <span>希望社会因我们的存在而变的更加美好</span>
-            </div>
-
-            <template v-if="addressInfo">
-                <div class="t2">
-                    <div>
-                        <img-icon type="contact-add" class="ilm" w=48 h=48 m="0 18 0 0"/>
-                        <span>{{addressInfo.addressTitle}}</span>
-                    </div>
-                    <p>公司邮箱：{{addressInfo.email}}</p>
-                    <p>详细地址：{{addressInfo.detailedAddress}}</p>
+        <template v-if="titleIndex==1">
+            <div class="info-box layout">
+                <div class="t1">
+                    <!-- <div>SMART CITY</div> -->
+                    <img-icon type="word" w=210 h=26 mw=100 mh=13 class="ilm"/>
+                    <p>碧城智慧科技</p>
+                    <span>希望社会因我们的存在而变的更加美好</span>
                 </div>
-                <div class="t2 t3">
-                    <div>
-                        <img-icon type="contact-tel" class="ilm" w=48 h=48 m="0 18 0 0" />
-                        <span>联系方式</span>
-                    </div>
-                    <p>联系人：{{addressInfo.contacts}}</p>
-                    <p>联系电话：{{addressInfo.phone}}</p>
-                </div>
-            </template>
 
-            <div class="t4 tc" v-if="pageData.qcCode">
-                <img-box :url="qrCode" class="ilt" w=150 h=150></img-box>
-                <p>扫一扫关注碧城智慧</p>
+                <template v-if="addressInfo">
+                    <div class="t2">
+                        <div>
+                            <img-icon type="contact-add" class="ilm" w=48 h=48 m="0 18 0 0"/>
+                            <span>{{addressInfo.addressTitle}}</span>
+                        </div>
+                        <p>公司邮箱：{{addressInfo.email}}</p>
+                        <p>详细地址：{{addressInfo.detailedAddress}}</p>
+                    </div>
+                    <div class="t2 t3">
+                        <div>
+                            <img-icon type="contact-tel" class="ilm" w=48 h=48 m="0 18 0 0" />
+                            <span>联系方式</span>
+                        </div>
+                        <p>联系人：{{addressInfo.contacts}}</p>
+                        <p>联系电话：{{addressInfo.phone}}</p>
+                    </div>
+                </template>
+
+                <div class="t4 tc" v-if="pageData.qcCode">
+                    <img-box :url="qrCode" class="ilt" w=150 h=150></img-box>
+                    <p>扫一扫关注碧城智慧</p>
+                </div>
             </div>
-        </div>
-        <div class="map-tab layout">
-            <ul>
-                <li v-for="item,index in pageData.addressInfoList" :key="index"
-                    :class="{active: index==activeIndex}"
-                    @click="onChangeAddress(item, index)" >{{item.addressTitle}}</li>
-            </ul>
-        </div>
-        <div class="map" ref="map"></div>
+            <div class="map-tab layout">
+                <ul>
+                    <li v-for="item,index in pageData.addressInfoList" :key="index"
+                        :class="{active: index==activeIndex}"
+                        @click="onChangeAddress(item, index)" >{{item.addressTitle}}</li>
+                </ul>
+            </div>
+            <div class="map" ref="map"></div>
+        </template>
+        <template v-else-if="titleIndex==0">
+            <inline-msg />
+
+        </template>
+
     </div>
 </template>
 
 <script>
+import Tabs from "base/Tabs"
+import InlineMsg from "./contact/inlineMsg"
 
 export default {
     data() {
@@ -58,6 +67,7 @@ export default {
                 { label: '总部', },
                 { label: '惠州', }
             ],
+            titleIndex: 0,
             pageData: {},
             qrCode: ""
         }
@@ -115,7 +125,10 @@ export default {
             this.locationMap = new BMap.LocalSearch(map, options);
         })
 
-
+        this.titleTabList = [
+            { label: '联系我们' },
+            { label: '在线留言' },
+        ]
 
         this.$api.getContactUs().then(data => {
             this.pageData = data
@@ -126,6 +139,9 @@ export default {
         this.$root.$on('getFooterSuccess', data => {
             this.qrCode = data.qcCode
         })
+    },
+    components: {
+        Tabs, InlineMsg
     }
 }
 </script>
