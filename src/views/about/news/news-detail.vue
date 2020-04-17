@@ -43,26 +43,33 @@
 <style lang="stylus" scoped>
 
 .new-detail-wrapper{
-    calcmedia('p', 50px 5% 30px, $s_50 5% $s_30);
+    calcmedia('p', 50px 5% 30px, 0 5% $s_30);
     calcmedia('mt', 70px, $s_70);
     calcmedia('bd', 1px solid $eb, 0px);
     .title{
         size24(); color: $c45; text-align: center; line-height: 25px;
     }
     .p-desc{
-        color: #999; margin-top: 30px; padding-bottom:50px; width: 100%;
+        calcmedia('mt', 30px, $s_30);
+        calcmedia('pb', 50px, $s_50);
+
+        color: #999; width: 100%;
         border-bottom: 1px solid $eb;
         >div{
             display: inline-block; vertical-align: middle; margin: 0 20px;
         }
+        .bdsharebuttonbox{
+            calcmedia('mt', 0px, 10px);
+        }
 
     }
     .p-con{
-        padding: 50px 0;
+        calcmedia('p', 50px 0, $s_50 0 0);
         line-height: 30px;
         color: #333;
         img{
-            width: 75%; display: block; margin: 40px auto;
+            calcmedia('w', 75%, 100%);
+            calcmedia('m', 40px auto, $s_40 auto);
         }
     }
     .oper-box{
@@ -83,6 +90,7 @@
 }
 
 .bdsharebuttonbox{
+    calcmedia('mt', 0px, 10px);
     line-height: 36px;
     >a{
         width: 36px; height: 36px; iconBg(); margin: 0 5px;
