@@ -158,8 +158,12 @@ export default {
   &.news-arrow{
     iconUrl('news-arrow.png');
   }
-
+  &.news-clock{
+    iconUrl('news-clock.png');
+  }
+  &.news-return{
+    iconUrl('news-return.png');
+  }
 }
-
 
 </style>

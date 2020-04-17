@@ -1,7 +1,7 @@
 <template>
     <div class="introduce-page">
-        <banner :bannerPicture=bannerPicture  />
-        <bread-nav v-model=activeIndex  @handleItemClick=handleItemClick />
+        <!-- <banner :bannerPicture=bannerPicture  /> -->
+        <!-- <bread-nav v-model=activeIndex  @handleItemClick=handleItemClick /> -->
 
         <div class="introduce-box" v-if="pageId==1">
             <div class="intro-box1 layout  flash-move">

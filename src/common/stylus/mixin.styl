@@ -8,6 +8,13 @@ $border = #eff1f4;
 $eb = #ebebeb;
 $c45 = #454545;
 
+$s_70 = 40px;
+$s_60 = 30px;
+$s_50 = 30px;
+$s_40 = 20px;
+$s_30 = 15px;
+$s_20 = 10px;
+
 tra()
  transition: all 0.3s ease;
 
@@ -209,6 +216,8 @@ setMedia(type, value)
             min-width: value
         if(type == "mh")
             min-height: value
+        if(type == "bd")
+            border: value
 
 
 
@@ -239,6 +248,9 @@ transcale(number=false)
 
 size20()
     calcmedia('sz', 20px, 14px)
+
+size24()
+    calcmedia('sz', 24px, 16px)
 
 size14()
     calcmedia('sz', 14px, 12px)

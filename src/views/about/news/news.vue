@@ -1,39 +1,44 @@
 <template>
     <div class="news-wapper">
-        <tabs v-model="tabIndex" :tabList=tabList />
+        <news-detail v-if="isDetail" />
 
-        <div class="layout">
-            <div class="list-group">
-                <div class="list">
-                    <div class="list-inner">
-                        <div class="img-w  pr hid">
-                            <img src="static/about-pic.jpg" class="scale" />
-                            <div class="mask"></div>
-                        </div>
-                        <div class="word-box">
-                            <div class="sub-tit">惠州潼湖科技小镇携手碧城智慧</div>
-                            <div class="p-txt">
-                                碧城智慧助力惠州潼湖科技小镇实现数字化运营。连接空间·企业·服务，构建产业创新生态。
+        <template v-else>
+            <tabs v-model="tabIndex" :tabList=tabList />
+
+            <div class="layout">
+                <div class="list-group">
+                    <div class="list" @click="toDetail">
+                        <div class="list-inner">
+                            <div class="img-w  pr hid">
+                                <img src="static/about-pic.jpg" class="scale" />
+                                <div class="mask"></div>
                             </div>
-                        </div>
-                        <div class="detail-box">
-                            <div class="detail-btn fl">
-                                查看详情
-                                <img-icon type="news-arrow" w=10 h=9 class="ilb" m="0 0 0 10" />
+                            <div class="word-box">
+                                <div class="sub-tit">惠州潼湖科技小镇携手碧城智慧</div>
+                                <div class="p-txt">
+                                    碧城智慧助力惠州潼湖科技小镇实现数字化运营。连接空间·企业·服务，构建产业创新生态。
+                                </div>
                             </div>
-                            <div class="time fr">2015-01-05</div>
-                            <div class="clear"></div>
+                            <div class="detail-box">
+                                <div class="detail-btn fl">
+                                    查看详情
+                                    <img-icon type="news-arrow" w=10 h=9 class="ilb" m="0 0 0 10" />
+                                </div>
+                                <div class="time fr">2015-01-05</div>
+                                <div class="clear"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
+        </template>
     </div>
 </template>
 
 <script>
 import Tabs from "base/Tabs"
+import NewsDetail from "./news-detail"
 
 export default {
     data() {
@@ -42,6 +47,9 @@ export default {
         }
     },
     methods: {
+        toDetail() {
+            this.$router.push(`/about?id=5&d=1`)
+        },
         _initCreatedData() {
             this.tabList = [
                 { label: '公司新闻' },
@@ -49,11 +57,25 @@ export default {
             ]
         }
     },
+    watch: {
+        $route: {
+            immediate: true,
+            deep: true,
+            handler(val) {
+                let isDetail
+            }
+        }
+    },
+    computed: {
+        isDetail() {
+            return !!this.$route.query.d
+        }
+    },
     created() {
         this._initCreatedData()
     },
     components: {
-        Tabs
+        Tabs, NewsDetail
     }
 }
 </script>
