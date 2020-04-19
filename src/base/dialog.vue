@@ -40,7 +40,6 @@
 
         <div class="mask" @click="visible=false"></div>
 
-
     </div>
 </template>
 
@@ -158,12 +157,7 @@ export default {
             if(type == "image") {
                 this.showImage(opts)
             }
-
-
-
         }
-
-
     },
     components: {
         Scroll

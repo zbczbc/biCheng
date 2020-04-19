@@ -32,6 +32,18 @@
                     <template slot="append">验证码</template>
                 </el-input>
             </template>
+            <el-upload v-else-if="item.type=='upload'"
+                class="upload-box"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :limit="1"
+
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                :on-exceed="handleExceed"
+                :file-list="fileList">
+                <el-button size="small" type="primary">点击上传</el-button>
+            </el-upload>
             <el-input   :type="item.type||'text'"
                         v-model.trim="model[item.name]"
                         clearable
@@ -43,6 +55,7 @@
                             v-else />
             
         </el-form-item>
+        
         <div class="p10">
             <div class="bluebtn fr">提交</div>
         </div>
@@ -94,7 +107,7 @@ export default {
 <style lang="stylus" scoped>
 $label_w=100px;
 
-/deep/ .el-input{
+/deep/ .el-input, .upload-box{
     padding-left: $label_w;  height: 50px; border: 1px solid $eb;
     // &.is-focus{
     //     border-color: $blue;
@@ -148,6 +161,14 @@ $label_w=100px;
         border-color: $eb;
     }
 }
+.upload-box{
+    width: 100%; text-align: left;   line-height: 50px;
+    .el-upload-list{
+        display: inline-block;    
+    }
+}
+
+
 
 
 .draw-border::after,.draw-border::before{content:'';position:absolute;z-index: 1;}
@@ -163,9 +184,9 @@ $label_w=100px;
 
 
 .bluebtn{
-    calcmedia('w', 0, 100%);
-    calcmedia('lhh', 0, 40px);
-    calcmedia('m', 0, 0 0 20px 0);
+    calcmedia('w', false, 100%);
+    calcmedia('lhh', false, 40px);
+    calcmedia('m', false, 0 0 20px 0);
 
 }
 

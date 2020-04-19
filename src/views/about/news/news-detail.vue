@@ -68,7 +68,7 @@
         line-height: 30px;
         color: #333;
         img{
-            calcmedia('w', 75%, 100%);
+            calcmedia('w', 75%, 100%); display: block;
             calcmedia('m', 40px auto, $s_40 auto);
         }
     }

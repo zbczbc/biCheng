@@ -38,17 +38,19 @@
                                 <div>1、制定华为商城日常和大促运营策略，形成店铺销售及促销计划；</div>
                             </div>
                         </div>
-                        <div class="bluebtn mt20">立即申请</div>
+                        <div class="bluebtn mt20" @click="showDialog">立即申请</div>
                     </div>
                 </el-collapse-item>
             </el-collapse>
         </div>
 
+        <joinus-dialog ref="joinusDialog" />
     </div>
 </template>
 
 <script>
 import { Collapse  } from 'element-ui';
+import JoinusDialog from "./joinus/joinus-dialog"
 
 export default {
     data() {
@@ -58,6 +60,12 @@ export default {
         }
     },
     methods: {
+        handleChange() {
+            
+        },
+        showDialog() {
+            this.$refs.joinusDialog.init()
+        },
         _initCreatedData() {
             let keyMap = {
                 location: '工作地点',
@@ -69,7 +77,7 @@ export default {
         }
     },
     components: {
-        Collapse
+        Collapse, JoinusDialog
     }
 }
 </script>

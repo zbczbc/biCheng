@@ -79,7 +79,8 @@ export const router = {
 let routers = new Router(router)
 
 routers.beforeEach((to, from, next) => {
-    $('html,body').animate({scrollTop: 0})
+    
+    //$('html,body').animate({scrollTop: 0})
     next()
 })
 export default routers
