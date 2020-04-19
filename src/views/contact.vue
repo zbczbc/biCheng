@@ -206,4 +206,8 @@ export default {
 .map{
     width: 100%; height: 480px;
 }
+
+/deep/ .tabs{
+    calcmedia('align', center, center);
+}
 </style>
