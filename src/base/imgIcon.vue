@@ -174,6 +174,12 @@ export default {
   &.home-hotel{
     iconUrl('home-hotel.png');
   }
+  &.about-link{
+    iconUrl('about-link.png');
+  }
+  &.about-link-hover{
+    iconUrl('about-link-hover.png');
+  }
 }
 
 </style>

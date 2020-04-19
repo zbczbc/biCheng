@@ -61,6 +61,9 @@
         <join-us v-else-if="pageId==4" />
 
         <news v-else-if="pageId==5" />
+
+        <links v-else-if="pageId==6" />
+
     </div>
 
 </template>
@@ -71,7 +74,8 @@ import Org from "./org"
 import Honor from "./honor"
 import JoinUs from "./joinus"
 import News from "./news/news"
-import NewsDetail from "./news/news-detail"
+import Links from "./links"
+
 
 export default {
     data() {
@@ -170,7 +174,7 @@ export default {
 
     },
     components: {
-        Scroll, Org, Honor, JoinUs, News, NewsDetail
+        Scroll, Org, Honor, JoinUs, News, Links
     }
 
 }
