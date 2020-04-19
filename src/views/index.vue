@@ -1,8 +1,12 @@
 <template>
     <div class="index-banner swiper-container" id="canvas-particle">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" id="canvas-wrap">
+            <div class="swiper-slide first-slide" id="canvas-wrap" >
                 <canvas id="can1"></canvas>
+                <img src="static/earth-bot.png" class="pob" />
+                <img src="static/earth.png" class="abs earth" />
+
+                <first-banner :item="pageData.bannerList&&pageData.bannerList[0]" />
             </div>
             <div class="swiper-slide"  v-for="(item,index) in pageData.bannerList" :key="item.index">
                 <template v-if="pageData.videoName&&$device.isPC&&index==0">
@@ -12,27 +16,9 @@
                 </template>
 
                 <div class="bg-box"  :style="{backgroundImage: 'url(' + $api.getImg(item.imgName) + ')'}"></div>
-                <template v-if="index>0||$device.isM"></template>
 
-
-                <div class="text-box" v-if="index==0">
-                    <div class="tit">
-                        <c-b :content=item.imgTitle></c-b>
-                    </div>
-                    <div class="sub-desc">
-                        <c-b :content=item.content></c-b>
-                    </div>
-
-                    <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
-                    <img-icon v-else type="play" w=40 h=40 class="cp z10" @onClick="$showDialog('video')" m="8% auto"></img-icon>
-
-                    <div class="icons-group">
-                        <div class="list" v-for="item in iconesGroup">
-                            <img-icon :type=item.type class="ilm" :w=item.w :h=item.h m="0 5 0 0"/>
-                            <span class="ilm">{{item.label}}</span>
-                        </div>
-                    </div>
-                </div>
+                <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
+                <img-icon v-else type="play" w=40 h=40 class="cp z10" @onClick="$showDialog('video')" m="8% auto"></img-icon>
 
                 <div class="layout pob" v-if="index>0">
                     <div class="text-box2">
@@ -56,6 +42,7 @@
 
 <script>
 import Swiper from 'swiper/dist/js/swiper.min.js'
+import FirstBanner from "./home/firstBanner"
 
 export default {
     data() {
@@ -87,14 +74,7 @@ export default {
         setStyle() {
 
         },
-        _initData() {
-            this.iconesGroup = [
-                { type: 'video-icon1', w: 25, h: 26, label: '规划设计'   },
-                { type: 'video-icon2', w: 30, h: 30, label: '智慧城市建设' },
-                { type: 'video-icon3', w: 30, h: 30, label: '产业运营服务' },
-                { type: 'video-icon4', w: 31, h: 28, label: '智慧城市运维' },
-            ]
-        }
+        
     },
     computed: {
         isPc() {
@@ -107,8 +87,6 @@ export default {
             this.setStyle()
         })
 
-        this._initData()
-
         this.$api.homeData().then(data => {
 
             let { bannerList } = data
@@ -116,32 +94,37 @@ export default {
             this.pageData = { ...data, bannerList }
             this.$root.$emit('sendCopyright', data.copyright)
 
-            this.isInitSwiper = bannerList.length > 1
+            //this.isInitSwiper = bannerList.length > 1
 
-            if(bannerList.length > 1) {
+            // if(bannerList.length > 1) {
 
-                this.$nextTick(() => {
-                    this.initSwiper()
-                })
-            }
+                
+            // }
+
+            this.$nextTick(() => {
+                this.initSwiper()
+            })
         })
 
         setTimeout(() => {
-                   // 画布
-            var config = {
-                    vx: 4,//点x轴速度,正为右，负为左
-                    vy:  4,//点y轴速度
-                    height: 2,//点高宽，其实为正方形，所以不宜太大
-                    width: 2,
-                    count: 100,//点个数
-                    color: "170, 170, 170",//点颜色
-                    stroke: "127,127,127",//线条颜色
-                    dist: 6000,//点吸附距离
-                    e_dist: 20000,//鼠标吸附加速距离
-                    max_conn: 10//点到点最大连接数
-                }
-            CanvasParticle(config);     //调用
-        }, 3000);
+                    // 画布
+                var config = {
+                        vx: 4,//点x轴速度,正为右，负为左
+                        vy:  4,//点y轴速度
+                        height: 2,//点高宽，其实为正方形，所以不宜太大
+                        width: 2,
+                        count: 50,//点个数
+                        color: "170, 170, 170",//点颜色
+                        stroke: "127,127,127",//线条颜色
+                        dist: 6000,//点吸附距离
+                        e_dist: 20000,//鼠标吸附加速距离
+                        max_conn: 5//点到点最大连接数
+                    }
+                CanvasParticle(config);     //调用
+            }, 3000);
+    },
+    components: {
+        FirstBanner
     }
 }
 </script>
@@ -160,38 +143,15 @@ export default {
         .video-mask
             width 100%; height 100%; top: 0; left: 0; background: rgba(0,0,0,0.3);
 .swiper-button-next
-    right 30px; color rgba(255,255,255,.3);
+    right 30px; color rgba(255,255,255,.3); z(12);
 .swiper-button-prev
-    left 20px; color rgba(255,255,255,.3);
+    left 20px; color rgba(255,255,255,.3); z(12);
 .swiper-button-next:hover, .swiper-button-prev:hover
     color:#fff;
 
 .bg-box
     height 100%; width 100%; background-size cover; background-position center
 
-.text-box
-    calcmedia('h', 360px, auto);
-
-    transform: translateY(-50%);top: 50%; pb();
-    position absolute; text-align center; width 100%;
-
-    .tit
-        font-size: px2vw(62);
-        calcmedia('sz', px2vw(62), 30px, 26px)
-        calcmedia('lh', px2vw(90), 45px); margin 20px 0 25px;
-    .sub-tit
-        font-size: px2vw(54); margin 20px 0 25px;
-    .sub-desc
-        font-size: px2vw(24); padding 0 10px; iconUrl("tbg.jpg"); display: inline-block; border-radius: 44px;
-        height: 44px; line-height: 44px;
-
-.icons-group{
-    width: 600px; margin: 20px auto;
-    .list{
-        calcmedia('p', 0 0 0 20px, 0 0 0 8%)
-        w(25%); f(left); t(center); m(0 0 10px 0);
-    }
-}
 
 .layout{
     h(100%); right:0;
@@ -224,7 +184,24 @@ export default {
     }
 }
 
+.first-slide{
+    background: url('/static/earth-bg.jpg'); width: 100%; height: 100%; position: relative; z-index:10;
+}
 
-
+.earth {
+  z-index: 2; width: 70vh;
+  animation: rotate 200s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
 
 </style>

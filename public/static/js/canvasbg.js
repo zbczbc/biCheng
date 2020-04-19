@@ -39,8 +39,8 @@ var CanvasParticle = (function(){
 			return null;
 		}
 
-		body.style.padding = "0";
-		body.style.margin = "0";
+		// body.style.padding = "0";
+		// body.style.margin = "0";
 		// body.replaceChild(canvas.element, canvasDiv);
 		/*body.appendChild(canvas.element);*/
 		canvasWrap.appendChild(canvas.element);

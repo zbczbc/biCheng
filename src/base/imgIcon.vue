@@ -164,6 +164,16 @@ export default {
   &.news-return{
     iconUrl('news-return.png');
   }
+
+  &.home-zone{
+    iconUrl('home-zone.png');
+  }
+  &.home-shequ{
+    iconUrl('home-shequ.png');
+  }
+  &.home-hotel{
+    iconUrl('home-hotel.png');
+  }
 }
 
 </style>
