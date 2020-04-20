@@ -1,5 +1,5 @@
 <template>
-    <div class="video-box" v-if="false">
+    <div class="video-box">
         <div class="play-con" ref="playcon">
             <video :src="dataList[activeIndex].src" controls></video>
         </div>

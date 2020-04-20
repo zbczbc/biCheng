@@ -82,8 +82,8 @@ import VideoList from './product/video-list'
 export default {
     data() {
         return {
-            activeIndex: 1,
-            tabIndex: 1,
+            activeIndex: 0,
+            tabIndex: 0,
             solveList: [],
             techImg: "static/product-2.jpg",
             productDetails: {},
