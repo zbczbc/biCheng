@@ -1,63 +1,5 @@
-import axios from "axios"
-
+import { fetchData, baseUrl } from "./fetch"
 import Vue from "vue"
-import mork from "./mork"
-import { isArray } from "common/js/util"
-
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-
-
-let isDev = process.env.NODE_ENV == 'development'
-
-let baseUrl = isDev ? '/api' : "/admin"
-
-
-function fetchData( path , opts ) {
-    return async (params) => {
-
-        let ret = {}, n_path = path,  url=`${baseUrl}/portal/${path}`;
-
-        if(/{id}/.test(path)) {
-            url = url.replace('/{id}', '')
-            n_path = path.replace('/{id}', '')
-            url = url+'/'+params
-        }
-
-        await axios({
-            method: opts && opts.method || 'get',
-            url,
-            //cache:false,
-            params: params,
-        }).then(res => {
-            let data = res.data
-            if(data.code == 0) {
-                let morkData = mork[n_path],
-                    sqlData = data.data,
-                    realData = sqlData.organizational || sqlData
-                
-                //console.log(realData, morkData, path)
-                for(let key in morkData) {
-                    let realValue = realData[key] || morkData[key]
-
-                    if(isArray(realValue)) {
-                        if(realValue.length == 0 ){
-                            realValue = morkData[key]
-                        }
-                    }
-                    ret[key] = realValue
-                }
-            }
-            //ret = mork[n_path]
-        }).catch(err => {
-            ret = mork[url]
-        })
-        
-        return ret
-    }
-    // return 
-}
-
-//技术支持 
 
 //公司简介
 export const getCompanyProfile = fetchData('companyProfile')
@@ -87,6 +29,10 @@ export const schemeDetails = fetchData('schemeDetails/{id}')
 
 export const technicalSupport = fetchData('technicalSupport')
 
+//招聘
+export const getJoinInfoList = fetchData('jobInfoList') 
+export const joinApply = fetchData('jobApply', { type: 'method' }) 
+
 
 const getImg = (imgName) => {
     let src = imgName
@@ -109,7 +55,9 @@ Vue.prototype.$api = {
     getContactUs,
     getCaseList, 
     getCompanyProfile, 
-    getImg
+    getImg,
+    getJoinInfoList,
+    joinApply
 }
 
  

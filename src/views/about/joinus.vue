@@ -6,11 +6,11 @@
 
         <div class="layout">
             <el-collapse class="list-group" v-model="activeNames" @change="handleChange">
-                <el-collapse-item name="1" class="flash-move">
+                <el-collapse-item name="1" class="flash-move" v-for="(item, i) in listData" :key="i">
                     <template slot="title">
                         <div class="list-title">
                             <!-- 25*25 -->
-                            <div>行政管理</div>
+                            <div>{{item.jobTitle}}</div>
                             <div>查看详情</div>
                         </div>
                     </template>
@@ -74,7 +74,16 @@ export default {
             this.listData = [
                {  }
             ]
+        },
+        _getList() {
+            this.$api.getJoinInfoList({pageNo: 1, pageSize: 100}).then(data => {
+                console.log(data)
+                this.listData = data.jobInfoList.list
+            })
         }
+    },
+    created() {
+        this._getList()
     },
     components: {
         Collapse, JoinusDialog
