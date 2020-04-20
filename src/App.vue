@@ -119,7 +119,7 @@ export default {
 				var othis = $(this);
 				var oTop = parseInt(othis.offset().top);
 
-				console.log(oTop, parseInt(win.height() + winScrollTop))
+				//console.log(oTop, parseInt(win.height() + winScrollTop))
 				if (oTop <= parseInt(win.height() + winScrollTop)) {
 					othis.addClass('animated fadeInUp ');
 				}

@@ -62,9 +62,9 @@
                 </div>
 
                 <template v-if="tabIndex==1">
-                    <div class="size24 tit">技术参数</div>
+                    <div class="size24 tit">视频展示</div>
                     <div class="tech-box bgfff">
-                        <img v-for="item,index in productDetails.technicalData" :src="$api.getImg(item)" class="full"/>
+                        <video-list />
                     </div>
                 </template>
 
@@ -77,12 +77,13 @@
 
 <script>
 import Swiper from 'swiper/dist/js/swiper.min.js'
+import VideoList from './product/video-list'
 
 export default {
     data() {
         return {
-            activeIndex: 0,
-            tabIndex: 0,
+            activeIndex: 1,
+            tabIndex: 1,
             solveList: [],
             techImg: "static/product-2.jpg",
             productDetails: {},
@@ -157,6 +158,9 @@ export default {
     },
     created() {
         this._initData()
+    },
+    components: {
+        VideoList
     }
 }
 </script>
