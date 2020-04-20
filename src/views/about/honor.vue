@@ -5,7 +5,7 @@
 
         <div class="layout">
             <div class="list-group clearfix">
-                <div class="list" v-for="item,index in list" :key="index">
+                <div class="list flash-move" v-for="item,index in list" :key="index">
                     <div class="img-w pr hid">
                         <img :src="$api.getImg(item.imgName)" class="scale" />
                         <div class="mask" @click="showDialog(index)"></div>

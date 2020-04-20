@@ -3,7 +3,7 @@
         <div class="swiper-wrapper">
             <div class="swiper-slide first-slide" id="canvas-wrap" >
                 <canvas id="can1"></canvas>
-                <img src="static/earth-bot.png" class="pob" />
+                <img src="static/earth-bot.png" class="pob full" />
                 <img src="static/earth.png" class="abs earth" />
 
                 <first-banner :item="pageData.bannerList&&pageData.bannerList[0]" />
@@ -74,7 +74,7 @@ export default {
         setStyle() {
 
         },
-        
+
     },
     computed: {
         isPc() {
@@ -98,7 +98,7 @@ export default {
 
             // if(bannerList.length > 1) {
 
-                
+
             // }
 
             this.$nextTick(() => {

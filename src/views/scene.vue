@@ -3,10 +3,10 @@
         <banner :bannerPicture="pageData.bannerPicture" />
         <bread-nav />
 
-        <div class="p-tit">{{pageData.title}}</div>
-        <div class="p-desc">{{pageData.content}}</div>
+        <div class="p-tit flash-move">{{pageData.title}}</div>
+        <div class="p-desc flash-move">{{pageData.content}}</div>
         <div class="main-box layout">
-            <div class="list clearfix" v-for="item,index in pageData.itemList" :key="index" :class="{reverse: index%2==0}">
+            <div class="list flash-move clearfix" v-for="item,index in pageData.itemList" :key="index" :class="{reverse: index%2==0}">
                 <div class="img-w hid">
                     <img :src="$api.getImg(item.introduceImg)" class="full scale icon"/>
                 </div>

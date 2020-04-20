@@ -3,10 +3,11 @@
         <banner :bannerPicture=bannerPicture />
         <bread-nav  v-model=activeIndex :thirdList=tabList />
 
-        <case-list  v-for="item,index in list"
+        <case-list  v-for="(item,index) in list"
                     :title=item.classifyName
                     :desc=item.classifyTitle
                     :caseList=item.caseList
+                     class="flash-move"
                     :id=index :class="{bggray: index%2==1}"></case-list>
     </div>
 </template>

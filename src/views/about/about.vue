@@ -56,7 +56,7 @@
 
         <org class="flash-move" v-if="pageId==2"></org>
 
-        <honor class="flash-move" v-else-if="pageId==3"></honor>
+        <honor v-else-if="pageId==3"></honor>
 
         <join-us v-else-if="pageId==4" />
 

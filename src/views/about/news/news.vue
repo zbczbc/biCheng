@@ -7,7 +7,7 @@
 
             <div class="layout">
                 <div class="list-group">
-                    <div class="list" @click="toDetail">
+                    <div class="list flash-move" @click="toDetail">
                         <div class="list-inner">
                             <div class="img-w  pr hid">
                                 <img src="static/about-pic.jpg" class="scale" />

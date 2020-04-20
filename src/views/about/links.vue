@@ -1,8 +1,8 @@
 <template>
 <div class="link-wrapper layout">
-    <div class="p-tit">友情链接</div>
+    <div class="p-tit flash-move">友情链接</div>
     <div class="links-list">
-        <div class="list tra">
+        <div class="list tra flash-move">
             <div class="list-inner">
                 <div class="top tra">
                     <div class="top-inner pr">
@@ -14,7 +14,7 @@
                             <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
                         </div>
                     </div>
-                    
+
                     <div class="clear"></div>
                 </div>
                 <div class="more tra">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="list tra">
+        <div class="list tra flash-move">
             <div class="list-inner">
                 <div class="top tra">
                     <div class="top-inner pr">
@@ -35,7 +35,7 @@
                             <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
                         </div>
                     </div>
-                    
+
                     <div class="clear"></div>
                 </div>
                 <div class="more tra">
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class="list tra">
+        <div class="list tra flash-move">
             <div class="list-inner">
                 <div class="top tra">
                     <div class="top-inner pr">
@@ -56,7 +56,7 @@
                             <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
                         </div>
                     </div>
-                    
+
                     <div class="clear"></div>
                 </div>
                 <div class="more tra">
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-        <div class="list tra">
+        <div class="list tra flash-move">
             <div class="list-inner">
                 <div class="top tra">
                     <div class="top-inner pr">
@@ -77,7 +77,7 @@
                             <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
                         </div>
                     </div>
-                    
+
                     <div class="clear"></div>
                 </div>
                 <div class="more tra">
@@ -86,9 +86,10 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
-    
+
 </template>
 
 <style lang="stylus" scoped>
@@ -113,8 +114,8 @@
                     }
                 }
             }
-            .top{ 
-                padding:30px; 
+            .top{
+                padding:30px;
                 border-top-left-radius: 4px; border-top-right-radius: 4px;
                 border: 1px solid $eb; border-bottom: 0px none;background: #eff1f4;
                 .img-w{
@@ -127,7 +128,7 @@
                 .word-w{
                    padding:10px 0 0 calc(40% + 20px);
                     .tit{
-                        color:#333; font-size: 14px; font-weight: bold; 
+                        color:#333; font-size: 14px; font-weight: bold;
                     }
                     .tit-p{
                         font-size: 12px; margin-top: 10px; line-height: 24px;
@@ -139,7 +140,7 @@
                 border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; text-align: center;
                 background: #fff;
             }
-            
+
         }
     }
 }

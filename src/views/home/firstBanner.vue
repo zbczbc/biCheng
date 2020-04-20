@@ -1,7 +1,5 @@
 <template>
-    <div class="first-banner"   >
-        <!-- <canvas id="can1" ></canvas> -->
-        
+    <div class="first-banner tra">
         <div class="text-box" v-if="item">
             <div class="tit">
                 <c-b :content=item.imgTitle></c-b>
@@ -64,7 +62,6 @@ export default {
 // .first-banner{
 //     z-index: 10; height: 100%; width: 100%; position: relative;
 // }
-
 
 .text-box
     calcmedia('h', 360px, auto);

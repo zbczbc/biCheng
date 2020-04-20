@@ -2,7 +2,7 @@
     <div class="product-page">
         <bread-nav></bread-nav>
 
-        <div class="detail layout pr clearfix" v-if="productDetails.title">
+        <div class="detail layout pr clearfix flash-move" v-if="productDetails.title">
             <div class="image-content">
                 <div class="image-inner">
                      <div class="scale-img">
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-        <div class="tabs-box layout">
+        <div class="tabs-box layout flash-move">
             <ul class="tabs-inner">
                 <li v-for="item,index in tabsList"
                     @click="tabIndex=index"
@@ -41,7 +41,7 @@
             </ul>
             <div class="btn" @click="$router.push('/contact')">联系碧城</div>
         </div>
-        <div class="tab-content">
+        <div class="tab-content flash-move">
             <div class="tab-inner layout">
                 <template v-if="tabIndex==0" >
                     <img-box v-for="item,index in productDetails.introduce" :url="item" class="full" />
