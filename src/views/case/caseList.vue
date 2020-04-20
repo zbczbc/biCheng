@@ -9,6 +9,9 @@
                     @click="tabClick(index)"
                     :class="{active: index==activeIndex}">{{tab.caseName}}</li>
             </ul>
+
+            <introduce/>
+
             <div class="tab-content pr" :class="containerClass" v-if="caseList&&caseList.length>0">
                 <div class="swiper-wrapper" :class="{show: isShowSwiper}">
 
@@ -35,6 +38,7 @@
 import Swiper from 'swiper/dist/js/swiper.min.js'
 import $ from 'jquery'
 import Taskes from "@/common/js/Taskes"
+import Introduce from "./introduce"
 
 export default {
     props: {
@@ -159,6 +163,9 @@ export default {
 
         })
 
+    },
+    components: {
+        Introduce
     }
 }
 
@@ -235,7 +242,7 @@ export default {
     &:hover .mask{
         calcmedia('opacity', 1, 0)
         &::after{
-            w(24px);h(24px);content: "";iconUrl('search.png');abs();iconBg();
+            w(24px);h(24px);content: "";iconUrl_c('search.png');abs();iconBg();
         }
     }
 

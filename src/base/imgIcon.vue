@@ -180,6 +180,12 @@ export default {
   &.about-link-hover{
     iconUrl('about-link-hover.png');
   }
+  &.case-address{
+    iconUrl('case-address.png');
+  }
+  &.case-area{
+    iconUrl('case-area.png');
+  }
 }
 
 </style>

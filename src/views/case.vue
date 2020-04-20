@@ -14,7 +14,7 @@
 
 
 <script>
-import CaseList from "../components/caseList"
+import CaseList from "./case/caseList"
 
 export default {
     data() {
