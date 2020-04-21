@@ -9,12 +9,11 @@
         <el-form-item   :label="item.label"
                         v-for="(item, index) in formItems.filter(item => !item.isHidden)"
                         :key=index
-                        required
                         :style="getStyle(item)"
                         :prop="item.name" >
-            <el-select v-if="item.type=='select'"  v-model="model[item.name]" clearable filterable  
+            <el-select v-if="item.type=='select'"  v-model="model[item.name]"  filterable
                         class="draw-border"
-                        :class="{'draw-border-active': focusIndex[index]}"  
+                        :class="{'draw-border-active': focusIndex[index]}"
                         @focus="onFocus(index)"
                         @blur="onBlur(index)"
                          >
@@ -24,48 +23,45 @@
                 </template>
             </el-select>
             <template v-else-if="item.type=='validate'">
-                <el-input placeholder="请输入内容" v-model="model[item.name]"  
+                <el-input placeholder="请输入内容" v-model="model[item.name]"
                         class="draw-border"
-                        :class="{'draw-border-active': focusIndex[index]}"  
+                        :class="{'draw-border-active': focusIndex[index]}"
                         @focus="onFocus(index)"
                         @blur="onBlur(index)">
-                    <template slot="append">验证码</template>
+                    <template slot="append">
+                        <img :src="codeImg" class="cp" @click="setCodeImg" />
+                    </template>
                 </el-input>
             </template>
-            <el-upload v-else-if="item.type=='upload'"
-                class="upload-box"
-                action="https://jsonplaceholder.typicode.com/posts/"
-                :limit="1"
-
-                :on-preview="handlePreview"
-                :on-remove="handleRemove"
-                :before-remove="beforeRemove"
-                :on-exceed="handleExceed"
-                :file-list="fileList">
-                <el-button size="small" type="primary">点击上传</el-button>
-            </el-upload>
+            <template v-else-if="item.type=='upload'">
+                <slot name="upload"></slot>
+            </template>
             <el-input   :type="item.type||'text'"
                         v-model.trim="model[item.name]"
-                        clearable
                         class="draw-border"
-                        :class="{'draw-border-active': focusIndex[index]}" 
+                        :class="{'draw-border-active': focusIndex[index]}"
                         @focus="onFocus(index)"
                         @blur="onBlur(index)"
-
                             v-else />
-            
+
         </el-form-item>
-        
+
         <div class="p10">
-            <div class="bluebtn fr">提交</div>
+            <div class="bluebtn fr" @click="onSubmit">提交</div>
         </div>
     </el-form>
 </template>
 
 <script>
+import CUpload from "./cUpload"
+import { random_string } from "common/js/util"
+
 export default {
     props: {
-        rules: {},
+        rules: {
+            type: Object,
+            default: () => { }
+        },
         formItems: {
             default: () => []
         },
@@ -75,19 +71,30 @@ export default {
     },
     data() {
         return {
-            focusIndex: new Array(15)
+            focusIndex: new Array(15),
+            fileList: [],
+            codeImg: ""
         }
     },
     methods: {
+        onSubmit() {
+            this.$refs.elForm.validate(flag => {
+                if( flag ) {
+                    this.$emit('handleSubmit')
+                }
+            })
+        },
         onFocus(index) {
             this.focusIndex[index] = true
 
             this.$set(this.focusIndex, index, true)
 
-            console.log(this.focusIndex)
+            //console.log(this.focusIndex)
         },
         onBlur(index) {
             this.focusIndex[index] = false
+            this.$set(this.focusIndex, index, false)
+            console.log(this.focusIndex[index])
         },
         getStyle(item) {
             let style = ""
@@ -99,7 +106,34 @@ export default {
             }
 
             return style
+        },
+        validateField (str) {
+            this.$refs.elForm.validateField(str)
+        },
+        setCodeImg() {
+            let len = 6, str = ""
+            for(let i=0; i<6; i++) {
+                str+=random_string()
+            }
+            this.codeImg = `api/portal/captcha.jpg?code=${str}`
+
+             console.log(this.rules)
+            this.rules.captcha = {
+                required: true,
+                trigger: 'blur',
+                validator: (rule, value, callback) => {
+                    console.log(value)
+                }
+            }
+
         }
+    },
+    created() {
+        this.setCodeImg()
+        console.log(random_string())
+    },
+    components: {
+        CUpload
     }
 }
 </script>
@@ -116,11 +150,15 @@ $label_w=100px;
     //     }
     // }
     .el-input__inner{
-        padding: 0;  line-height: 50px;
+        padding: 0; line-height: 50px; height: 48px;
     }
     .el-input-group__append{
-        calcmedia('w', 160px)
-        background: transparent; border: 0; border-left: 1px solid $eb;  
+        calcmedia('w', 160px);
+        padding: 0;
+        background: transparent; border: 0; border-left: 1px solid $eb;
+        img{
+            width:100%; display: block; height: 100%;
+        }
     }
 }
 
@@ -148,7 +186,7 @@ $label_w=100px;
     .el-input .el-select__caret{
         calcmedia('sz', 24px)
     }
-}   
+}
 
 /deep/ .el-textarea{
     &.is-focus{
@@ -161,12 +199,7 @@ $label_w=100px;
         border-color: $eb;
     }
 }
-.upload-box{
-    width: 100%; text-align: left;   line-height: 50px;
-    .el-upload-list{
-        display: inline-block;    
-    }
-}
+
 
 
 

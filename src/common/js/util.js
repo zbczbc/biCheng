@@ -8,12 +8,17 @@ function padding(s, len) {
     }
     return s;
 }
-function random_string() {
-    return uuid.v4();
+export const  random_string = function () {
+    //return uuid.v4();
+
+    let str1 = "abc0de9fgh1ijkl2mn8op3qr4st5uvwx6yz7",
+        array = str1.split("");
+
+    var n = Math.round(Math.random() * (array.length - 1));
+
+    return array[n]
 }
-export const calculate_object_name = ({ key, fileExt }) => {
-    return key + "/" + random_string() + "." + fileExt;
-};
+
 export const getQueryStringByName = function(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);

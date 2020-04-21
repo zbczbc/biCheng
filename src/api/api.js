@@ -1,4 +1,4 @@
-import { fetchData, baseUrl } from "./fetch"
+import { fetchData, baseUrl, http } from "./fetch"
 import Vue from "vue"
 
 //公司简介
@@ -10,14 +10,14 @@ export const getCaseList = fetchData('allCaseClassifyDetails')
 //联系我们
 export const getContactUs = fetchData('contactUs')
 
-//合作伙伴 
+//合作伙伴
 export const cooperativePartner = fetchData('cooperativePartner')
 
 //合作伙伴  GET /portal/
 export const homeData = fetchData('homeData')
 
 export const honor = fetchData('honor')
- 
+
 export const legalStatement = fetchData('legalStatement')
 
 export const menuList = fetchData('menuList')
@@ -30,9 +30,13 @@ export const schemeDetails = fetchData('schemeDetails/{id}')
 export const technicalSupport = fetchData('technicalSupport')
 
 //招聘
-export const getJoinInfoList = fetchData('jobInfoList') 
-export const joinApply = fetchData('jobApply', { type: 'method' }) 
-
+export const getJoinInfoList = fetchData('jobInfoList')
+// export const jobApply = fetchData('jobApply', { method: 'POST' })
+export const jobApply = (params) => {
+    return http.post('/api/portal/jobApply',
+                    params,
+                     { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+}
 
 const getImg = (imgName) => {
     let src = imgName
@@ -43,24 +47,19 @@ const getImg = (imgName) => {
 }
 
 Vue.prototype.$api = {
-    technicalSupport, 
-    schemeDetails,  
-    productDetails,  
+    technicalSupport,
+    schemeDetails,
+    productDetails,
     organizational,
-    menuList, 
-    legalStatement, 
-    honor, 
-    homeData, 
-    cooperativePartner, 
+    menuList,
+    legalStatement,
+    honor,
+    homeData,
+    cooperativePartner,
     getContactUs,
-    getCaseList, 
-    getCompanyProfile, 
+    getCaseList,
+    getCompanyProfile,
     getImg,
     getJoinInfoList,
-    joinApply
+    jobApply
 }
-
- 
-
-
-

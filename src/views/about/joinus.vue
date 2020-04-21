@@ -17,28 +17,30 @@
                     <div class="main-wrap">
                         <div class="infoes-box">
                             <div class="row clearfix">
-                                <div>工作地点： 广州</div>
-                                <div>工作地点： 广州</div>
-                                <div>工作地点： 广州</div>
-                                <div>工作地点： 广州</div>
+                                <div>工作地点： {{item.workPlace}}</div>
+                                <div>薪资待遇： {{item.salary}}</div>
+                                <div>工作经验： {{item.experience}}</div>
+                                <div>发布日期： {{item.releaseDate}}</div>
                             </div>
                             <div class="row clearfix">
-                                <div>工作地点： 广州</div>
-                                <div>工作地点： 广州</div>
-                                <div>工作地点： 广州</div>
-                                <div>工作地点： 广州</div>
+                                <div>年龄： {{item.ageRqrmnt}}</div>
+                                <div>招聘人数： {{item.headcount}}</div>
+                                <div>学历： {{item.degreeRqrmnt}}</div>
+                                <div>职位有效期： {{item.endDate}}</div>
                             </div>
                         </div>
                         <div class="accuse-box">
                             <div class="sub-tit">岗位职责：</div>
                             <div class="items">
-                                <div>1、制定华为商城日常和大促运营策略，形成店铺销售及促销计划；</div>
-                                <div>1、制定华为商城日常和大促运营策略，形成店铺销售及促销计划；</div>
-                                <div>1、制定华为商城日常和大促运营策略，形成店铺销售及促销计划；</div>
-                                <div>1、制定华为商城日常和大促运营策略，形成店铺销售及促销计划；</div>
+                                <content-br :content=item.jobRqrmnt />
+                            </div>
+
+                            <div class="sub-tit mt10">岗位描述：</div>
+                            <div class="items">
+                                <content-br :content=item.jobDescrip />
                             </div>
                         </div>
-                        <div class="bluebtn mt20" @click="showDialog">立即申请</div>
+                        <div class="bluebtn mt20" @click="onApply(item)">立即申请</div>
                     </div>
                 </el-collapse-item>
             </el-collapse>
@@ -51,6 +53,7 @@
 <script>
 import { Collapse  } from 'element-ui';
 import JoinusDialog from "./joinus/joinus-dialog"
+import ContentBr from "base/content-br"
 
 export default {
     data() {
@@ -63,8 +66,8 @@ export default {
         handleChange() {
 
         },
-        showDialog() {
-            this.$refs.joinusDialog.init()
+        onApply(item) {
+            this.$refs.joinusDialog.init(item)
         },
         _initCreatedData() {
             let keyMap = {
@@ -86,7 +89,7 @@ export default {
         this._getList()
     },
     components: {
-        Collapse, JoinusDialog
+        Collapse, JoinusDialog, ContentBr
     }
 }
 </script>

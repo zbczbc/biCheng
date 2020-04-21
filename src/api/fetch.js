@@ -5,7 +5,6 @@ import { isArray } from "common/js/util"
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-
 let isDev = process.env.NODE_ENV == 'development'
 
 export let baseUrl = isDev ? '/api' : "/admin"
@@ -31,14 +30,23 @@ export function fetchData( path , opts ) {
             let data = res.data
             if(data.code == 0) {
                 ret = data.data
-                
+
             }
             //ret = mork[n_path]
         }).catch(err => {
             ret = mork[url]
         })
-        
+
         return ret
     }
-    // return 
+    // return
 }
+
+
+export const http = axios.create({
+    timeout: 1000 * 30,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+})

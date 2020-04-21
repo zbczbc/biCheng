@@ -1,44 +1,96 @@
 <template>
     <el-dialog title="在线申请"  :visible.sync="visible">
-        <my-form class="msg-form" :formItems=formItems :model="formModel"></my-form>
+        <my-form class="msg-form" :rules=rules ref="myForm" :formItems=formItems :model="formModel" @handleSubmit="handleSubmit">
+            <template slot-scope="scope" slot="upload">
+                <el-upload class="upload-box"
+                            action="/api/portal/jobApply"
+                            :data="formModel"
+                            ref="upload"
+                            :limit="1"
+                            name="resumeFile"
+                            :on-change="onChangeFile"
+                            :on-exceed="onExceed"
+                            :auto-upload="false"
+                            :file-list="fileList">
+                    <el-button size="small" type="primary">点击上传</el-button>
+                </el-upload>
+                <!-- <el-input type="file" @change=changeFile v-model="formModel.resumePath" /> -->
+            </template>
+        </my-form>
     </el-dialog>
 </template>
 
 <script>
-import MyForm from "base/myForm"
+import MAdd from "common/js/m-add"
 
 export default {
     data() {
         return {
             visible: false,
-            formModel: {}
+            formModel: {
+                "applyJobId": 0,
+                "major": "",
+                "nativePlace": "",
+                "resumeName": "string",
+                "school": "string",
+                "userAge": 0,
+                "userEmail": "string",
+                "userName": "string",
+                "userTel": "string"
+            },
+            fileList: []
         }
     },
+    mixins: [MAdd],
     methods: {
-        init() {
+        onExceed(file, fileList) {
+            this.fileList = [ { name: file[0].name, fiLeData: file[0] }]
+        },
+        onChangeFile(file, fileList) {
+            this.fileList = [ {name: file.name, fiLeData: file.raw } ]
+        },
+        init(item) {
             this.visible = true
+            this.formModel.applyJobId = item.id
+        },
+        handleSubmit() {
+            let temp = new FormData()
+            for(let key in this.formModel) {
+                temp.append(key, this.formModel[key])
+            }
+            this.$api.jobApply(temp).then(() => {
+                this.$message.success('操作成功')
+            })
         },
         _initData() {
             this.formItems = [
-                { label: '姓名：', key: 'name', require: true, width: "50%" },
-                { label: '籍贯：', key: 'name2', require: true, width: "50%" },
-                { label: '年龄：', key: 'name3', require: true, width: "50%" },
-                { label: '电话：', key: 'name4', require: true, width: "50%" },
-                { label: '学校：', key: 'name4', require: true, width: "50%" },
-                { label: '专业：', key: 'name4', require: true, width: "50%" },
-                { label: '应聘职业：', key: 'name4', require: true, width: "50%" },
-                { label: '邮箱：', key: 'name4', require: true, width: "50%" },
-                { label: '上传：', key: 'name4', require: true, width: "100%", type: 'upload' },
-                { label: '验证码：', key: 'name4', require: true, type: 'validate'},
-
+                { label: '姓名：', name: 'userName', required: true, width: "50%" },
+                { label: '籍贯：', name: 'nativePlace', required: true, width: "50%" },
+                { label: '年龄：', name: 'userAge', width: "50%" },
+                { label: '电话：', name: 'userTel', required: true, width: "50%" },
+                { label: '学校：', name: 'school', required: true, width: "50%" },
+                { label: '专业：', name: 'major', required: true, width: "50%" },
+                { label: '应聘职业：', name: 'resumeName', required: true, width: "50%" },
+                { label: '邮箱：', name: 'userEmail', required: true, width: "50%" },
+                { label: '简历：', name: 'resumeFile', required: true,  width: "100%", type: 'upload', upload: {} },
+                { label: '验证码：', name: 'name4', required: true, type: 'validate'},
             ]
+            this.rules = this.getRules()
+            console.log(this.rules)
+        }
+    },
+    watch: {
+        fileList: {
+            deep: true,
+            handler(val) {
+                this.$set(this.formModel, 'resumeFile', val[0].fiLeData)
+                this.formModel.resumeFile = val[0].fiLeData
+                this.$refs.myForm.validateField('resumeFile')
+            }
         }
     },
     created() {
         this._initData()
-    },
-    components: {
-        MyForm
     }
 }
 </script>
@@ -52,5 +104,12 @@ export default {
 }
 /deep/ .my-form .el-form-item .el-form-item__label{
     width: 85px;
+}
+.upload-box{
+    width: 100%; text-align: left;   line-height: 50px;
+    padding-left: 100px;  height: 50px; border: 1px solid $eb;
+    /deep/ .el-upload-list{
+        display: inline-block; vertical-align: top;
+    }
 }
 </style>
