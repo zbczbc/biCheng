@@ -28,15 +28,15 @@ export default {
         return {
             visible: false,
             formModel: {
-                "applyJobId": 0,
+                "applyJobId": "",
                 "major": "",
                 "nativePlace": "",
-                "resumeName": "string",
-                "school": "string",
-                "userAge": 0,
-                "userEmail": "string",
-                "userName": "string",
-                "userTel": "string"
+                "resumeName": "",
+                "school": "",
+                "userAge": "",
+                "userEmail": "",
+                "userName": "",
+                "userTel": ""
             },
             fileList: []
         }
@@ -54,13 +54,12 @@ export default {
             this.formModel.applyJobId = item.id
         },
         handleSubmit() {
-            let temp = new FormData()
-            for(let key in this.formModel) {
-                temp.append(key, this.formModel[key])
-            }
-            this.$api.jobApply(temp).then(() => {
+            
+            this.$api.jobApply(this.formModel).then(() => {
                 this.$message.success('操作成功')
+                this.visible = false
             })
+            
         },
         _initData() {
             this.formItems = [
@@ -73,7 +72,7 @@ export default {
                 { label: '应聘职业：', name: 'resumeName', required: true, width: "50%" },
                 { label: '邮箱：', name: 'userEmail', required: true, width: "50%" },
                 { label: '简历：', name: 'resumeFile', required: true,  width: "100%", type: 'upload', upload: {} },
-                { label: '验证码：', name: 'name4', required: true, type: 'validate'},
+                { label: '验证码：', name: 'captcha', required: true, type: 'validate'},
             ]
             this.rules = this.getRules()
             console.log(this.rules)

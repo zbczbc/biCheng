@@ -29,14 +29,29 @@ export const schemeDetails = fetchData('schemeDetails/{id}')
 
 export const technicalSupport = fetchData('technicalSupport')
 
+export const saveOnlineMsg = fetchData('saveOnlineMsg', { method: 'POST' })
+
 //招聘
 export const getJoinInfoList = fetchData('jobInfoList')
 // export const jobApply = fetchData('jobApply', { method: 'POST' })
 export const jobApply = (params) => {
-    return http.post('/api/portal/jobApply',
+    let temp = new FormData()
+    for(let key in params) {
+        temp.append(key, params[key])
+    }
+
+
+    return http.post(`${baseUrl}/portal/jobApply`,
                     params,
                      { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
 }
+// export const saveOnlineMsg = (params) => {
+//     return http.post(`${baseUrl}/portal/saveOnlineMsg`,
+//                     params,
+//                      { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+// }
+
+
 
 const getImg = (imgName) => {
     let src = imgName
@@ -61,5 +76,6 @@ Vue.prototype.$api = {
     getCompanyProfile,
     getImg,
     getJoinInfoList,
-    jobApply
+    jobApply,
+    saveOnlineMsg
 }

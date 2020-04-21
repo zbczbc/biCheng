@@ -42,6 +42,18 @@ export function fetchData( path , opts ) {
     // return
 }
 
+export function submitData( path, params ) {
+    let formData = new FormData()
+    for(let key in params) {
+        temp.append(key, params[key])
+    }
+
+
+    return http.post(`${baseUrl}/portal/${path}`,
+                        temp,
+                     { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+}
+
 
 export const http = axios.create({
     timeout: 1000 * 30,

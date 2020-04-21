@@ -186,6 +186,9 @@ export default {
   &.case-area{
     iconUrl('case-area.png');
   }
+  &.job{
+    iconUrl('job.png');
+  }
 }
 
 </style>

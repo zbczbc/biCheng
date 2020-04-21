@@ -3,7 +3,7 @@
             status-icon
             ref="elForm"
             @submit.native.prevent
-            :rules="rules"
+            :rules="formRules"
             class="my-form clearfix"
             >
         <el-form-item   :label="item.label"
@@ -73,7 +73,8 @@ export default {
         return {
             focusIndex: new Array(15),
             fileList: [],
-            codeImg: ""
+            codeImg: "",
+            formRules: {}
         }
     },
     methods: {
@@ -111,25 +112,49 @@ export default {
             this.$refs.elForm.validateField(str)
         },
         setCodeImg() {
-            let len = 6, str = ""
-            for(let i=0; i<6; i++) {
+            let str = ""
+            for(let i=0; i<5; i++) {
                 str+=random_string()
             }
             this.codeImg = `api/portal/captcha.jpg?code=${str}`
 
-             console.log(this.rules)
-            this.rules.captcha = {
+            
+            let captcha = {
                 required: true,
                 trigger: 'blur',
                 validator: (rule, value, callback) => {
-                    console.log(value)
+                    let msg = ""
+                    if(value && value!=str) {
+                        msg = "验证码错误"
+                    }else if(!value){
+                        msg = "请输入验证码"
+                    }
+
+                    if(msg) {
+                        callback(new Error(msg))
+                    }else{
+                        callback()
+                    }
                 }
             }
-
+            this.$set(this.formRules.captcha, 'validator', captcha.validator)
         }
     },
-    created() {
+    watch: {
+        rules: {
+            deep: true,
+            immediate: true,
+            handler(val) {
+                this.formRules = { ...this.rules }
+            }
+        }
+    },
+    mounted() {
+        console.log(this.formItems)
         this.setCodeImg()
+    },
+    created() {
+        
         console.log(random_string())
     },
     components: {
