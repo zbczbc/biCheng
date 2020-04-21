@@ -6,17 +6,17 @@
             <tabs v-model="tabIndex" :tabList=tabList />
 
             <div class="layout">
-                <div class="list-group">
-                    <div class="list flash-move" @click="toDetail">
+                <div class="list-group clearfix">
+                    <div class="list flash-move" @click="toDetail" v-for="(item, i) in dataList" :key="i">
                         <div class="list-inner">
                             <div class="img-w  pr hid">
                                 <img src="static/about-pic.jpg" class="scale" />
                                 <div class="mask"></div>
                             </div>
                             <div class="word-box">
-                                <div class="sub-tit">惠州潼湖科技小镇携手碧城智慧</div>
+                                <div class="sub-tit">{{item.newsTitle}}</div>
                                 <div class="p-txt">
-                                    碧城智慧助力惠州潼湖科技小镇实现数字化运营。连接空间·企业·服务，构建产业创新生态。
+                                    {{item.newsSynopsis}}
                                 </div>
                             </div>
                             <div class="detail-box">
@@ -31,6 +31,8 @@
                     </div>
 
                 </div>
+
+                <pagination :pageNum="pageNo" :pageSize="pageSize" :total="total" @handleCurrentChange="handleCurrentChange" />
             </div>
         </template>
     </div>
@@ -39,22 +41,57 @@
 <script>
 import Tabs from "base/Tabs"
 import NewsDetail from "./news-detail"
+import Pagination from "base/pagination"
 
 export default {
     data() {
         return {
-            tabIndex: 0
+            tabIndex: 0,
+            tabList: [],
+            dataList: [],
+            pageSize: 12,
+            pageNo: 1,
+            total: 0
         }
     },
     methods: {
+        getDataList() {
+            let params = {
+                pageNo: this.pageNo,
+                pageSize: this.pageSize,
+                typeId: this.typeId
+            }
+            this.$api.getNewsList(params).then(data => {
+                let { list, totalCount } = data.newsInfoList
+                this.dataList = list
+                this.total = totalCount
+            })
+        },
+        _getData() {
+            this.$api.getNewsTypeList().then(data => {
+                this.tabList = data.newsTypeList.map(item => {
+                    return { 
+                        label: item.name, 
+                        id: item.id 
+                    }
+                })
+
+                this.typeId = this.tabList[this.tabIndex].id
+
+                console.log(this.tabList)
+
+                this.getDataList()
+            })
+        },
+        handleCurrentChange (val) {
+			this.page = val
+			this.getDataList()
+		},
         toDetail() {
             this.$router.push(`/about?id=5&d=1`)
         },
         _initCreatedData() {
-            this.tabList = [
-                { label: '公司新闻' },
-                { label: '媒体新闻' },
-            ]
+            this.tabList = []
         }
     },
     watch: {
@@ -73,9 +110,10 @@ export default {
     },
     created() {
         this._initCreatedData()
+        this._getData()
     },
     components: {
-        Tabs, NewsDetail
+        Tabs, NewsDetail, Pagination
     }
 }
 </script>
@@ -95,7 +133,7 @@ $gap_m=10px;
                 calcmedia('p', $gap_l, $gap_m);
                 border: 1px solid $eb; border-top: 0px none;
                 .sub-tit{
-                    size20(); color: $blue;
+                    size20(); color: $blue; line(1);
                 }
                 .p-txt{
                     calcmedia('h', 52px, 78px);

@@ -92,6 +92,24 @@
 
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            dataList: []
+        }
+    },
+    methods: {
+        getList() {
+            this.$api.getLinksList()
+        }
+    },
+    created() {
+        this.getList()
+    }
+}
+</script>
+
 <style lang="stylus" scoped>
 .link-wrapper{
     .links-list{

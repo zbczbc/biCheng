@@ -42,16 +42,19 @@ export function fetchData( path , opts ) {
     // return
 }
 
-export function submitData( path, params ) {
-    let formData = new FormData()
-    for(let key in params) {
-        temp.append(key, params[key])
+export function submitData( path ) {
+
+    return (params) => {
+        let formData = new FormData()
+        for(let key in params) {
+            formData.append(key, params[key])
+        }
+
+        return http.post(`${baseUrl}/portal/${path}`,
+                    formData,
+                        { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
     }
-
-
-    return http.post(`${baseUrl}/portal/${path}`,
-                        temp,
-                     { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+    
 }
 
 

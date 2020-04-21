@@ -1,4 +1,4 @@
-import { fetchData, baseUrl, http } from "./fetch"
+import { fetchData, baseUrl, submitData } from "./fetch"
 import Vue from "vue"
 
 //公司简介
@@ -32,25 +32,19 @@ export const technicalSupport = fetchData('technicalSupport')
 export const saveOnlineMsg = fetchData('saveOnlineMsg', { method: 'POST' })
 
 //招聘
-export const getJoinInfoList = fetchData('jobInfoList')
-// export const jobApply = fetchData('jobApply', { method: 'POST' })
-export const jobApply = (params) => {
-    let temp = new FormData()
-    for(let key in params) {
-        temp.append(key, params[key])
-    }
+export const getJoinInfoList = submitData('jobInfoList')
+export const jobApply = fetchData('jobApply', { method: 'POST' })
 
+//新闻 /portal/addBrowseCount/{newsId}
+export const getNewsTypeList = fetchData('getNewsTypeList')
+export const getNewsList = fetchData('getNewsList')
+export const addBrowseCount = fetchData('addBrowseCount/{id}')
 
-    return http.post(`${baseUrl}/portal/jobApply`,
-                    params,
-                     { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
-}
-// export const saveOnlineMsg = (params) => {
-//     return http.post(`${baseUrl}/portal/saveOnlineMsg`,
-//                     params,
-//                      { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
-// }
+//友情链接 
+export const getLinksList = fetchData(getLinksList)
 
+//留言类别
+//export const technicalSupport = fetchData('technicalSupport')
 
 
 const getImg = (imgName) => {
@@ -62,7 +56,7 @@ const getImg = (imgName) => {
 }
 
 Vue.prototype.$api = {
-    technicalSupport,
+    technicalSupport, getNewsTypeList,  getNewsList,  addBrowseCount,  getLinksList, 
     schemeDetails,
     productDetails,
     organizational,
