@@ -7,7 +7,7 @@
 
             <div class="layout">
                 <div class="list-group clearfix">
-                    <div class="list flash-move" @click="toDetail" v-for="(item, i) in dataList" :key="i">
+                    <div class="list flash-move" v-for="(item, i) in dataList"  @click="toDetail(item)" :key="i">
                         <div class="list-inner">
                             <div class="img-w  pr hid">
                                 <img src="static/about-pic.jpg" class="scale" />
@@ -87,8 +87,8 @@ export default {
 			this.page = val
 			this.getDataList()
 		},
-        toDetail() {
-            this.$router.push(`/about?id=5&d=1`)
+        toDetail(item) {
+            this.$router.push(`/about?id=5&d=${item.id}`)
         },
         _initCreatedData() {
             this.tabList = []

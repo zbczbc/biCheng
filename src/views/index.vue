@@ -13,7 +13,7 @@
                 <template v-if="item.fileType=='视频'">
                     <template v-if="$device.isPC">
                         <div class="video-mask por"></div>
-                        <video src="static/video.mp4" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo"  controls ></video>
+                        <video :src="$api.getImg(item.fileName)" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo"  controls ></video>
                         <!-- <video :src=$api.getImg(item.fileName) v-else></video> -->
                     </template>
 

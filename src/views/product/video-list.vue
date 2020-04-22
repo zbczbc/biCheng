@@ -1,7 +1,7 @@
 <template>
     <div class="video-box">
         <div class="play-con" ref="playcon">
-            <video :src="videoSrc" controls></video>
+            <video :src="videoSrc" autoplay="autoplay" loop="loop" preload="true" controls></video>
         </div>
         <scroll :mustShow=true color="#666">
             <div class="cover-con">
@@ -71,8 +71,7 @@ export default {
     computed: {
         videoSrc() {
             let src = this.$api.getImg(this.dataList[this.activeIndex].videoName)
-
-            src = 'http://120.77.220.34/admin/portal/getFileStream/FzCeM4AZ1587524751090_video.mp4'
+           
             return src
         }
     },
@@ -91,7 +90,7 @@ export default {
         calcmedia('h', 500px, 300px);
         background: #000;
         video{
-            max-width: 100%; max-height:100%;
+            width: 100%; max-height:100%;
         }
     }
     .cover-con{

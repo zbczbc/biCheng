@@ -105,7 +105,7 @@ export default {
 	},
 	watch: {
 		$route(route) {
-			//location.reload()
+			location.reload()
 
 			// this.refreshing = false
 			// setTimeout(() => {

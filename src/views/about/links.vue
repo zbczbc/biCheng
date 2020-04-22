@@ -1,80 +1,17 @@
 <template>
 <div class="link-wrapper layout">
     <div class="p-tit flash-move">友情链接</div>
-    <div class="links-list">
-        <div class="list tra flash-move">
+    <div class="links-list clearfix">
+        <div class="list tra flash-move" v-for="(item,i) in dataList" :key="i" @click="toLink(item)">
             <div class="list-inner">
                 <div class="top tra">
                     <div class="top-inner pr">
                         <div class="img-w pr">
-                            <img class="abs" src="static/cooperation-logo.jpg" />
+                            <img class="abs" :src="$api.getImg(item.iconImg)" />
                         </div>
                         <div class="word-w">
-                            <div class="tit">碧桂园</div>
-                            <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-                </div>
-                <div class="more tra">
-                    了解更多
-                    <img-icon type="about-link" w=14 h=14 class="ilm" />
-                </div>
-            </div>
-        </div>
-        <div class="list tra flash-move">
-            <div class="list-inner">
-                <div class="top tra">
-                    <div class="top-inner pr">
-                        <div class="img-w pr">
-                            <img class="abs" src="static/cooperation-logo.jpg" />
-                        </div>
-                        <div class="word-w">
-                            <div class="tit">碧桂园</div>
-                            <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-                </div>
-                <div class="more tra">
-                    了解更多
-                    <img-icon type="about-link" w=14 h=14 class="ilm" />
-                </div>
-            </div>
-        </div>
-        <div class="list tra flash-move">
-            <div class="list-inner">
-                <div class="top tra">
-                    <div class="top-inner pr">
-                        <div class="img-w pr">
-                            <img class="abs" src="static/cooperation-logo.jpg" />
-                        </div>
-                        <div class="word-w">
-                            <div class="tit">碧桂园</div>
-                            <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
-                        </div>
-                    </div>
-
-                    <div class="clear"></div>
-                </div>
-                <div class="more tra">
-                    了解更多
-                    <img-icon type="about-link" w=14 h=14 class="ilm" />
-                </div>
-            </div>
-        </div>
-        <div class="list tra flash-move">
-            <div class="list-inner">
-                <div class="top tra">
-                    <div class="top-inner pr">
-                        <div class="img-w pr">
-                            <img class="abs" src="static/cooperation-logo.jpg" />
-                        </div>
-                        <div class="word-w">
-                            <div class="tit">碧桂园</div>
-                            <div class="tit-p">中国新型城镇化的身体力行者是为全世界创造美好生活产品的高科技综合性企业</div>
+                            <div class="tit">{{item.name}}</div>
+                            <div class="tit-p">{{item.synopsis}}</div>
                         </div>
                     </div>
 
@@ -100,9 +37,12 @@ export default {
         }
     },
     methods: {
+        toLink(item) {
+            window.open(item.website)
+        },
         getList() {
             this.$api.getLinksList().then(data => {
-
+                this.dataList = data.linksList
             })
         }
     },
@@ -115,9 +55,9 @@ export default {
 <style lang="stylus" scoped>
 .link-wrapper{
     .links-list{
-        calcmedia('m', 0 -15px 20px, 0);
+        calcmedia('m', 0 -15px 60px, 0 0 20px);
         .list{
-            margin-bottom: 20px;
+            margin-bottom: 20px; cursor: pointer;
             calcmedia('w', 33.33%, 100%);
             float: left;  padding: 0 15px;
             .list-inner{
@@ -151,7 +91,7 @@ export default {
                         color:#333; font-size: 14px; font-weight: bold;
                     }
                     .tit-p{
-                        font-size: 12px; margin-top: 10px; line-height: 24px;
+                        font-size: 12px; margin-top: 10px; line-height: 24px; height: 48px; line(2);
                     }
                 }
             }
