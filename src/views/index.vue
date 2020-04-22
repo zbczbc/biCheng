@@ -78,8 +78,25 @@ export default {
 
         },
         getFirstBannerData() {
-            this.$api.getIndexBanner().then(data => {
+            return this.$api.getIndexBanner().then(data => {
                 this.firstBannerData = data
+            })
+        },
+        async getData() {
+            await this.getFirstBannerData()
+
+            this.$api.homeData().then(data => {
+
+                let { bannerList } = data
+
+                this.pageData = { ...data, bannerList }
+                this.$root.$emit('sendCopyright', data.copyright)
+
+                this.isInitSwiper = bannerList.length > 1
+
+                this.$nextTick(() => {
+                    this.initSwiper()
+                })
             })
         }
     },
@@ -94,21 +111,8 @@ export default {
             this.setStyle()
         })
 
-        this.getFirstBannerData()
+        this.getData()
 
-        this.$api.homeData().then(data => {
-
-            let { bannerList } = data
-
-            this.pageData = { ...data, bannerList }
-            this.$root.$emit('sendCopyright', data.copyright)
-
-            this.isInitSwiper = bannerList.length > 1
-
-            this.$nextTick(() => {
-                this.initSwiper()
-            })
-        })
     },
     components: {
         FirstBanner
@@ -124,7 +128,7 @@ export default {
 .swiper-wrapper
     height 100%;
     .swiper-slide
-        height 100%
+        height 100%; overflow hidden;
         video
             width 100%;
         .video-mask
@@ -176,7 +180,7 @@ export default {
 }
 
 .earth {
-  z-index: 2; width: 70vh;
+  z-index: 2; calcmedia('w', 70vh, 50vh);
   animation: rotate 200s linear infinite;
 }
 @keyframes rotate {

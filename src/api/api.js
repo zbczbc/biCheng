@@ -47,6 +47,7 @@ export const getLinksList = fetchData('getLinksList')
 export const getMsgTypeList = fetchData('getMsgTypeList')
 export const getIndexBanner = fetchData('indexBanner')
 
+export const getNewsDetail = fetchData('getNewsDetail/{id}')
 
 const getImg = (imgName) => {
     let src = imgName
@@ -58,7 +59,7 @@ const getImg = (imgName) => {
 
 Vue.prototype.$api = {
     technicalSupport, getNewsTypeList,  getNewsList,  addBrowseCount,  getLinksList,
-    schemeDetails, getMsgTypeList, getIndexBanner,
+    schemeDetails, getMsgTypeList, getIndexBanner, getNewsDetail,
     productDetails,
     organizational,
     menuList,

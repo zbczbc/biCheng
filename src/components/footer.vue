@@ -1,5 +1,5 @@
 <template>
-    <div class="footer-wrap" :class="{'in-index': isIndex}">
+    <div class="footer-wrap flash-move" :class="{'in-index': isIndex}">
         <div class="layout" >
             <div class="f-main clearfix">
                 <div class="links">

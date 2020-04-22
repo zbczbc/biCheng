@@ -25,7 +25,11 @@
                     <div class="s-tit">产品特点</div>
                     <div class="list pr" v-for="feature,index in featureList">
                         <div class="list-inner">
-                            <img :src=$api.getImg(feature.imgName) class="ani-top" />
+                            <div class="img-box">
+                                <img class="img" :src=$api.getImg(feature.img1Name) />
+                                <img class="img-hover" :src=$api.getImg(feature.img2Name) />
+                            </div>
+
                             <p>{{feature.imgTitle}}</p>
                         </div>
                     </div>
@@ -71,7 +75,6 @@
             </div>
 
         </div>
-
     </div>
 </template>
 
@@ -171,7 +174,25 @@ $lw = 420px;
 $productHeight = 500px;
 $productWidth = 500px;
 
-
+.feature-con{
+    .img-box{
+        position: relative; overflow: hidden; display: inline-block; cursor: pointer;
+        .img{
+            -webkit-transition:0.8s; transition:0.8s;
+        }
+        .img-hover{
+            position: absolute; left:0; top: 80%; transition:0.3s ease-out 0.1s; z-index: 2; opacity: 0;
+        }
+        &:hover{
+            .img-hover{
+                transform:translateY(-80%); opacity: 1;;
+            }
+            .img{
+                transform:translateY(-50%); opacity: 0; transition:0.4s;
+            }
+        }
+    }
+}
 
 .product-page{
     .detail{
