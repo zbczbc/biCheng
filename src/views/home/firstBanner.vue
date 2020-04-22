@@ -2,16 +2,16 @@
     <div class="first-banner tra">
         <div class="text-box" v-if="item">
             <div class="tit">
-                <c-b :content=item.imgTitle></c-b>
+                <c-b :content=item.title></c-b>
             </div>
             <div class="sub-desc">
-                <c-b :content=item.content></c-b>
+                <c-b :content=item.describe></c-b>
             </div>
 
             <div class="icons-group">
-                <div class="list" v-for="item in iconesGroup">
-                    <img-icon :type=item.type class="ilm" :w=item.w :h=item.h m="0 5 0 0"/>
-                    <span class="ilm">{{item.label}}</span>
+                <div class="list" v-for="(icon,index) in iconesGroup" :key="index" @click="onIconClick(icon)">
+                    <img-icon :type=icon.type class="ilm" :w=icon.w :h=icon.h m="0 5 0 0"/>
+                    <span class="ilm">{{icon.label}}</span>
                 </div>
             </div>
         </div>
@@ -23,13 +23,24 @@ export default {
     props: {
         item: {}
     },
+    data() {
+        return {
+            iconesGroup: []
+        }
+    },
     methods: {
         _initData() {
             this.iconesGroup = [
-                { type: 'home-zone', w: 29, h: 29, label: '智慧园区'   },
+                { type: 'home-zone', w: 29, h: 29, label: '智慧园区',},
                 { type: 'home-shequ', w: 31, h: 31, label: '智慧社区' },
                 { type: 'home-hotel', w: 28, h: 27, label: '智慧酒店' },
             ]
+        },
+        onIconClick(icon) {
+            let route = `/scene?id=${this.schemeMap[icon.label]}`
+            if(route) {
+                this.$router.push(route)
+            }
         },
         setCanvas() {
             setTimeout(() => {
@@ -53,15 +64,18 @@ export default {
     created() {
         this._initData()
         this.setCanvas()
+
+        this.$root.$on('getSchemeSuccess', schemeList => {
+            this.schemeMap = {}
+            schemeList.map(item => this.schemeMap[item.name] = item.id)
+        })
     }
 }
 </script>
 
 <style lang="stylus" scoped>
 
-// .first-banner{
-//     z-index: 10; height: 100%; width: 100%; position: relative;
-// }
+
 
 .text-box
     calcmedia('h', 360px, auto);
@@ -89,5 +103,8 @@ export default {
     }
 }
 
+.first-banner{
+    z-index: 10; height: 100%; width: 100vw; position: absolute; top: 0;
+}
 
 </style>

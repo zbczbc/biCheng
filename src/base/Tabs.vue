@@ -2,7 +2,7 @@
     <ul class="tabs">
         <li v-for="(tab,index) in tabList" :key=index
             @click="tabClick(index)"
-            :class="{active: index==activeIndex}">{{tab.label}}
+            :class="{active: index==activeIndex}">{{tab.label||tab[labelKey]}}
         </li>
     </ul>
 </template>
@@ -13,7 +13,8 @@ export default {
         tabList: {
             default: () => []
         },
-        value: {}
+        value: {},
+        labelKey: {}
     },
     data() {
         return {

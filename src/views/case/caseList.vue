@@ -5,17 +5,17 @@
             <div class="p-desc">{{desc}}</div>
 
             <ul class="tabs">
-                <li v-for="tab,index in caseList" :key=index
+                <li v-for="(tab,index) in caseList" :key=index
                     @click="tabClick(index)"
-                    :class="{active: index==activeIndex}">{{tab.caseName}}</li>
+                    :class="{active: index==activeIndex}">{{tab.caseInfo.name}}</li>
             </ul>
 
-            <introduce/>
+            <introduce v-if="caseList&&caseList.length>0" :dataInfo=caseList[activeIndex].caseInfo />
 
             <div class="tab-content pr" :class="containerClass" v-if="caseList&&caseList.length>0">
                 <div class="swiper-wrapper" :class="{show: isShowSwiper}">
 
-                    <div class="swiper-slide list" v-for="item,imgIndex in caseImgList" :key="imgIndex">
+                    <div class="swiper-slide list" v-for="(item,imgIndex) in caseImgList" :key="imgIndex">
                         <div class="img-w hid">
                             <img :src="$api.getImg(item.imgName)" />
                             <div class="mask" @click="showDialog(imgIndex)"></div>
@@ -135,6 +135,14 @@ export default {
             let temp = this.caseList && this.caseList[this.activeIndex]
             if(temp) {
                 return temp.caseImgList
+            }else{
+                return []
+            }
+        },
+        caseInfo() {
+            let temp = this.caseList && this.caseList[this.activeIndex]
+            if(temp) {
+                return temp.caseInfo
             }else{
                 return []
             }

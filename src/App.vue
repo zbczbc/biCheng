@@ -95,6 +95,9 @@ export default {
 					5: caseClassifyList,
 					productList})
 
+				//给首页的首banner用
+				this.$root.$emit('getSchemeSuccess', schemeList)
+
 				this.$root.$emit('getFooterSuccess', { qcCode, copyright })
 
             })

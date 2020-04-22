@@ -4,7 +4,6 @@
         <div class="image-container container" v-if="type=='image'">
             <img-icon type="mClose" w=24 h=24 class="por cp z10" @onClick="visible=false" m="26 30 0 0" mm="26 0" />
 
-
             <div class="image-swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" v-for="item,i in images" :key="i">

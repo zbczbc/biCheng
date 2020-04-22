@@ -3,17 +3,17 @@
         <div class="t-l">
             <div class="info">
                 <div class="tit">项目简介：</div>
-                <p>项目简介项目简介项目简介项目简介项目简介</p>
+                <p>{{dataInfo.describe}}</p>
             </div>
             <div class="address">
                 <img-icon type="case-address" class="ilm" w=36 h=36 m="0 5 0 0" />
-                <p class="ilm">项目地址： xxxx</p>
+                <p class="ilm">项目地址： {{dataInfo.address}}</p>
             </div>
         </div>
         <div class="t-r pr">
             <div class="inner">
                 <img-icon type="case-area" class="ilm" w=36 h=36 />
-                <div class="ilm">项目面积： <br/><span>49万</span>㎡</div>
+                <div class="ilm">项目面积： <br/><span>{{dataInfo.area}}</span>㎡</div>
             </div>
         </div>
     </div>
@@ -22,7 +22,9 @@
 <script>
 export default {
     props: {
-        item: {}
+        dataInfo: {
+            default: () => {}
+        }
     }
 }
 </script>

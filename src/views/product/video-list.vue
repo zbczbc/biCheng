@@ -1,7 +1,7 @@
 <template>
     <div class="video-box">
         <div class="play-con" ref="playcon">
-            <video :src="dataList[activeIndex].src" controls></video>
+            <video :src="videoSrc" controls></video>
         </div>
         <scroll :mustShow=true color="#666">
             <div class="cover-con">
@@ -14,13 +14,13 @@
                             :style="{width: unitW+'px'}">
                         <div class="inner">
                             <div class="img-w pr">
-                                <img :src="item.cover"  />
+                                <img-box :url="item.videoImgName"  />
                                 <template v-if="i!=activeIndex">
                                     <div class="mask"></div>
                                     <img-icon  type="play" w=40 h=40 class="abs" />
                                 </template>
                             </div>
-                            <div class="text tra">{{item.title}}</div>
+                            <div class="text tra">{{item.videoTitle}}</div>
                         </div>
                     </div>
                 </div>
@@ -33,20 +33,22 @@
 import Scroll from "base/scroll"
 
 export default {
-    props: {},
+    props: {
+        dataList: {}
+    },
     data() {
         return {
             activeIndex: 0,
-            dataList: [
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-                { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
-            ],
+            // dataList: [
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            //     { src: '/static/video.mp4', title: 'xxxx', cover: '/static/scene-3.jpg' },
+            // ],
             sumW: 1000,
             unitW: 0
         }
@@ -64,6 +66,14 @@ export default {
             }
             this.unitW = _w
             this.sumW = this.dataList.length * this.unitW
+        }
+    },
+    computed: {
+        videoSrc() {
+            let src = this.$api.getImg(this.dataList[this.activeIndex].videoName)
+
+            src = 'http://120.77.220.34/admin/portal/getFileStream/FzCeM4AZ1587524751090_video.mp4'
+            return src
         }
     },
     mounted() {
@@ -90,8 +100,8 @@ export default {
             calcmedia('p', 0 10px, 0 5px);
             float: left;
             .inner{}
-            img{
-                width: 100%; display:block;
+            .img-w{
+                height: 150px;
             }
             .text{
                 calcmedia('lhh', 40px, 30px); background:#ccc;

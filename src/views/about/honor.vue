@@ -15,23 +15,16 @@
                     </div>
                 </div>
             </div>
-            <ul class="pagination" :class="{reverse: isReverse}">
-                <li class="prev" @click="onArrow('prev')"></li>
-
-                <li v-for="page,index in totalArr"
-                    :key="index"
-                    @click="onPageChange(page)"
-                    :class="{active: pageNo==page}"
-                    >
-                    {{page}}
-                </li>
-                <li class="next" @click="onArrow('next')"></li>
-            </ul>
+             <pagination    :pageNum="pageNo"
+                            :pageSize="pageSize"
+                            :total="total"
+                            @handleCurrentChange="handleCurrentChange" />
         </div>
     </div>
 </template>
 
 <script>
+import Pagination from "base/pagination"
 
 export default {
     data() {
@@ -40,69 +33,22 @@ export default {
             list: [],
             pageNo: 1,
             pageSize: 12,
-            totalPage: 1,
-            totalArr: [],
+            total: 1,
             isReverse: false
         }
     },
     methods: {
-        onArrow(type) {
-
-            if(type=='prev') {
-                if(this.pageNo<=1) {
-                    return
-                }
-                this.pageNo--
-            }else{
-                if(this.pageNo>=this.totalPage) {
-                    return
-                }
-                this.pageNo++
-            }
-            if(this.pageNo>3) {
-                this.isReverse = true
-            }else{
-                this.isReverse = false
-            }
-            this._setPageArr()
-            this._getPageData()
-        },
-        onPageChange(page) {
-            if(page == "...") {
-                this.isReverse = !this.isReverse
-
-                this._setPageArr()
-            }else{
-                this.pageNo = page
-                this._getPageData()
-            }
-
-        },
-        _setPageArr() {
-            if(this.isReverse) {
-                this.totalArr = [1,'...',this.totalPage-2,this.totalPage-1,this.totalPage]
-            }else{
-                this.totalArr = [1,2,3,"...",this.totalPage]
-            }
-        },
-        _getPageData() {
+        handleCurrentChange (val) {
+			this.page = val
+			this.getDataList()
+		},
+        getDataList() {
             this.$api.honor({pageNo: this.pageNo, pageSize: this.pageSize}).then(data => {
                 let { pictureList, title } = data
 
                 this.title = title
                 this.list = pictureList.list
-                this.totalPage = pictureList.totalPage
-
-                if(this.totalArr.length == 0) {
-                    if(this.totalPage > 4) {
-                        this.isReverse = false
-                        this.totalArr = [1,2,3,"...",this.totalPage]
-                    }else{
-                        for(let i=1; i<=this.totalPage; i++) {
-                            this.totalArr.push(i);
-                        }
-                    }
-                }
+                this.totalPage = pictureList.totalCount
             })
         },
         showDialog(index) {
@@ -113,7 +59,10 @@ export default {
         }
     },
     created() {
-        this._getPageData()
+        this.getDataList()
+    },
+    components: {
+        Pagination
     }
 }
 </script>
@@ -173,19 +122,8 @@ export default {
                     iconUrl_c('fff_right.png');
                 }
             }
-            // &:nth-child(4n+1) {
-            //     lh(30px);
-            // }
-
         }
-        // &.reverse li{
-        //     &:nth-child(5) {
-        //         lh(40px);
-        //     }
-        //     &:nth-child(3) {
-        //         lh(30px);
-        //     }
-        // }
+
     }
 }
 </style>

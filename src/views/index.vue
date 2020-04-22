@@ -1,32 +1,35 @@
 <template>
     <div class="index-banner swiper-container" id="canvas-particle">
         <div class="swiper-wrapper">
-            <div class="swiper-slide first-slide" id="canvas-wrap" >
+            <div class="swiper-slide first-slide" id="canvas-wrap" v-if="firstBannerData.isShow=='Y'">
                 <canvas id="can1"></canvas>
                 <img src="static/earth-bot.png" class="pob full" />
                 <img src="static/earth.png" class="abs earth" />
 
-                <first-banner :item="pageData.bannerList&&pageData.bannerList[0]" />
+                <first-banner :item="firstBannerData" />
             </div>
-            <div class="swiper-slide"  v-for="(item,index) in pageData.bannerList" :key="item.index">
-                <template v-if="pageData.videoName&&$device.isPC&&index==0">
-                    <div class="video-mask por"></div>
-                    <video :src=$api.getImg(pageData.videoName) v-if="isPc" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" muted=""></video>
-                    <video :src=$api.getImg(pageData.videoName) v-else></video>
+            <div class="swiper-slide"  v-for="(item, index) in pageData.bannerList" :key="item.index">
+
+                <template v-if="item.fileType=='视频'">
+                    <template v-if="$device.isPC">
+                        <div class="video-mask por"></div>
+                        <video src="static/video.mp4" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo"  controls ></video>
+                        <!-- <video :src=$api.getImg(item.fileName) v-else></video> -->
+                    </template>
+
+                    <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10 abs" @onClick="$showDialog('video')"></img-icon>
+                    <img-icon v-else type="play" w=40 h=40 class="cp z10 abs abs" @onClick="$showDialog('video')"></img-icon>
                 </template>
 
-                <div class="bg-box"  :style="{backgroundImage: 'url(' + $api.getImg(item.imgName) + ')'}"></div>
+                <div v-else class="bg-box" :style="{backgroundImage: 'url(' + $api.getImg(item.fileName) + ')'}"></div>
 
-                <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10" @onClick="$showDialog('video')" m="40 auto"></img-icon>
-                <img-icon v-else type="play" w=40 h=40 class="cp z10" @onClick="$showDialog('video')" m="8% auto"></img-icon>
-
-                <div class="layout pob" v-if="index>0">
+                <div class="layout pob" >
                     <div class="text-box2">
                         <div class="tit">
-                            <c-b :content=item.imgTitle></c-b>
+                            <c-b :content=item.bannerTitle></c-b>
                         </div>
                         <div class="desc">
-                            <c-b :content=item.content></c-b>
+                            <c-b :content=item.bannerDescribe></c-b>
                         </div>
                     </div>
                 </div>
@@ -35,7 +38,6 @@
 
         <div class="swiper-button-next" v-if="isInitSwiper"></div>
         <div class="swiper-button-prev" v-if="isInitSwiper"></div>
-
         <div class="oper-pagin" ></div>
     </div>
 </template>
@@ -54,7 +56,8 @@ export default {
             ],
             bannerHeight: null,
             pageData: {},
-            isInitSwiper: false
+            isInitSwiper: false,
+            firstBannerData: true
         }
     },
     methods: {
@@ -74,7 +77,11 @@ export default {
         setStyle() {
 
         },
-
+        getFirstBannerData() {
+            this.$api.getIndexBanner().then(data => {
+                this.firstBannerData = data
+            })
+        }
     },
     computed: {
         isPc() {
@@ -87,6 +94,8 @@ export default {
             this.setStyle()
         })
 
+        this.getFirstBannerData()
+
         this.$api.homeData().then(data => {
 
             let { bannerList } = data
@@ -94,34 +103,12 @@ export default {
             this.pageData = { ...data, bannerList }
             this.$root.$emit('sendCopyright', data.copyright)
 
-            //this.isInitSwiper = bannerList.length > 1
-
-            // if(bannerList.length > 1) {
-
-
-            // }
+            this.isInitSwiper = bannerList.length > 1
 
             this.$nextTick(() => {
                 this.initSwiper()
             })
         })
-
-        setTimeout(() => {
-                    // 画布
-                var config = {
-                        vx: 4,//点x轴速度,正为右，负为左
-                        vy:  4,//点y轴速度
-                        height: 2,//点高宽，其实为正方形，所以不宜太大
-                        width: 2,
-                        count: 50,//点个数
-                        color: "170, 170, 170",//点颜色
-                        stroke: "127,127,127",//线条颜色
-                        dist: 6000,//点吸附距离
-                        e_dist: 20000,//鼠标吸附加速距离
-                        max_conn: 5//点到点最大连接数
-                    }
-                CanvasParticle(config);     //调用
-            }, 3000);
     },
     components: {
         FirstBanner

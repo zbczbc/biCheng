@@ -64,7 +64,7 @@
                 <template v-if="tabIndex==1">
                     <div class="size24 tit">视频展示</div>
                     <div class="tech-box bgfff">
-                        <video-list />
+                        <video-list :dataList=productDetails.video />
                     </div>
                 </template>
 
@@ -104,7 +104,7 @@ export default {
         _initData() {
             this.tabsList = [
                 { label: '产品介绍', },
-                { label: '技术参数', },
+                { label: '视频展示', },
                 { label: '解决成果', },
             ]
 

@@ -3,8 +3,10 @@
         <banner :bannerPicture=pageData.bannerPicture />
         <bread-nav />
         <div class="p-tit flash-move">合作伙伴</div>
+
+        <tabs v-model="titleIndex" :tabList=partnerList labelKey="classifyName" class="flash-move" />
         <div class="list-group clearfix layout flash-move">
-            <div class="list" v-for="item,index in pageData.logoList" :key="">
+            <div class="list" v-for="item,index in partnerList[titleIndex].logoList" :key="">
                 <img-box :url="item" class="full" />
             </div>
         </div>
@@ -12,6 +14,8 @@
 </template>
 
 <script>
+import Tabs from "base/Tabs"
+
 export default {
     data() {
         return {
@@ -31,14 +35,18 @@ export default {
                 { src: 'static/cooperation-logo.jpg', },
                 { src: 'static/cooperation-logo.jpg', },
             ],
-            pageData: {}
+            pageData: {},
+            titleIndex: 0,
+            partnerList: []
         }
     },
     created() {
         this.$api.cooperativePartner().then(data => {
-            console.log(data)
-            this.pageData = data
+            this.partnerList = data.partnerList
         })
+    },
+    components: {
+        Tabs
     }
 }
 </script>
