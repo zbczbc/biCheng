@@ -5,14 +5,15 @@
 为碧城智慧快速成长和高效运作提供保障。</div>
 
         <div class="layout">
-            <el-collapse class="list-group" v-model="activeNames" @change="handleChange" accordion>
-                <el-collapse-item name="1" class="flash-move" v-for="(item, i) in listData" :key="i">
+            <el-collapse class="list-group flash-move" v-model="activeNames" @change="handleChange" accordion>
+                <el-collapse-item name="1"  v-for="(item, i) in listData" :key="i">
                     <template slot="title">
                         <div class="list-title" >
                             <!-- 25*25 -->
-                            
-                            <div><img-icon type="job" w=25 h=25 class="ilm" m="0 10 0 0" />{{item.jobTitle}}</div>
-                            <div>查看详情</div>
+
+                            <div>
+                                <img-icon type="job" w=25 h=25 class="ilm" m="0 10 0 0" />{{item.jobTitle}}</div>
+                            <div>查看详情<img-icon type="job-more" w=25 h=25 class="ilm" m="0 0 0 10" /></div>
                         </div>
                     </template>
                     <div class="main-wrap">
@@ -136,9 +137,12 @@ $m_gap=10px;
         calcmedia('lh', 70px, 40px); color:$c45;
         &.is-active{
             color:#fff; background: $blue;
-        }
-        /deep/ .icon{
-            iconUrl_c('job-white.png');
+            /deep/ .icon.job{
+                iconUrl_c('job-white.png');
+            }
+            /deep/ .icon.job-more{
+                iconUrl_c('job-more-white.png');
+            }
         }
     }
     .el-collapse-item__arrow{

@@ -189,6 +189,9 @@ export default {
   &.job{
     iconUrl('job.png');
   }
+  &.job-more{
+    iconUrl('job-more.png');
+  }
 }
 
 </style>

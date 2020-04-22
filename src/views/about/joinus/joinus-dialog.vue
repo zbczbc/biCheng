@@ -54,12 +54,10 @@ export default {
             this.formModel.applyJobId = item.id
         },
         handleSubmit() {
-            
             this.$api.jobApply(this.formModel).then(() => {
-                this.$message.success('操作成功')
+                this.$message.success('提交成功')
                 this.visible = false
             })
-            
         },
         _initData() {
             this.formItems = [
@@ -75,7 +73,6 @@ export default {
                 { label: '验证码：', name: 'captcha', required: true, type: 'validate'},
             ]
             this.rules = this.getRules()
-            console.log(this.rules)
         }
     },
     watch: {
