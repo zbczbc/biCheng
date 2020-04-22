@@ -4,7 +4,7 @@
         <bread-nav />
         <tabs v-model="titleIndex" :tabList=titleTabList />
 
-        <template v-if="titleIndex==1">
+        <template v-if="titleIndex==0">
             <div class="info-box layout">
                 <div class="t1">
                     <!-- <div>SMART CITY</div> -->
@@ -46,11 +46,8 @@
             </div>
             <div class="map" ref="map"></div>
         </template>
-        <template v-else-if="titleIndex==0">
-            <inline-msg />
 
-        </template>
-
+        <inline-msg v-else />
     </div>
 </template>
 

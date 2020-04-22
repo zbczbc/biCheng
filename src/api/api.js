@@ -29,23 +29,22 @@ export const schemeDetails = fetchData('schemeDetails/{id}')
 
 export const technicalSupport = fetchData('technicalSupport')
 
-export const saveOnlineMsg = fetchData('saveOnlineMsg', { method: 'POST' })
+export const saveOnlineMsg = fetchData('saveOnlineMsg', { method: 'post' })
 
 //招聘
-export const getJoinInfoList = submitData('jobInfoList')
-export const jobApply = fetchData('jobApply', { method: 'POST' })
+export const getJoinInfoList = fetchData('jobInfoList')
+export const jobApply = submitData('jobApply')
 
 //新闻 /portal/addBrowseCount/{newsId}
 export const getNewsTypeList = fetchData('getNewsTypeList')
 export const getNewsList = fetchData('getNewsList')
 export const addBrowseCount = fetchData('addBrowseCount/{id}')
 
-//友情链接 
-export const getLinksList = fetchData(getLinksList)
+//友情链接
+export const getLinksList = fetchData('getLinksList')
 
 //留言类别
-//export const technicalSupport = fetchData('technicalSupport')
-
+export const getMsgTypeList = fetchData('getMsgTypeList')
 
 const getImg = (imgName) => {
     let src = imgName
@@ -56,8 +55,8 @@ const getImg = (imgName) => {
 }
 
 Vue.prototype.$api = {
-    technicalSupport, getNewsTypeList,  getNewsList,  addBrowseCount,  getLinksList, 
-    schemeDetails,
+    technicalSupport, getNewsTypeList,  getNewsList,  addBrowseCount,  getLinksList,
+    schemeDetails, getMsgTypeList,
     productDetails,
     organizational,
     menuList,

@@ -101,7 +101,9 @@ export default {
     },
     methods: {
         getList() {
-            this.$api.getLinksList()
+            this.$api.getLinksList().then(data => {
+
+            })
         }
     },
     created() {

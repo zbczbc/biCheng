@@ -11,22 +11,25 @@ export default {
     data(){
         return {
             formModel: {
-                cityName: "string",
-                companyName: "string",
-                msgClassifyId : "string",
-                msgContent: "string",
-                userEmail: "string",
-                userJob: "string",
-                userName: "string",
-                userTel: "string"
-            }
+                cityName: "",
+                companyName: "",
+                msgClassifyId : "",
+                msgContent: "",
+                userEmail: "",
+                userJob: "",
+                userName: "",
+                userTel: ""
+            },
+            formItems: []
         }
 
     },
     mixins: [MAdd],
     methods: {
         handleSubmit() {
-            this.$api.saveOnlineMsg(this.formModel)
+            this.$api.saveOnlineMsg(this.formModel).then(() => {
+                this.$message.success('留言成功')
+            })
         },
         _initData() {
             this.formItems = [
@@ -41,12 +44,28 @@ export default {
                 { label: '售后简述：', name: 'msgContent', required: true, width: "100%", type: 'textarea' },
                 { label: '验证码：', name: 'captcha', required: true, type: 'validate'},
             ]
+
+            this.typsItem = this.formItems[4]
             this.rules = this.getRules()
-            console.log(this.rules)
+        },
+        getTypes() {
+            this.$api.getMsgTypeList().then(data => {
+                console.log(data)
+
+                let opts = data.msgTypeList.map(item => {
+                    return {
+                        label: item.name,
+                        value: item.id
+                    }
+                })
+                this.$set(this.typsItem, 'options', opts)
+                console.log(this.typsItem)
+            })
         }
     },
     created() {
         this._initData()
+        this.getTypes()
     },
     components: {
     }

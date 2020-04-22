@@ -19,7 +19,7 @@
                          >
                 <template v-for="option in item.options" >
                     <!-- {{option.label}} {{option.value}} -->
-                    <el-option :label="option.label" :value="option.value" :key=option.value></el-option>
+                    <el-option class="my-option" :label="option.label" :value="option.value" :key=option.value></el-option>
                 </template>
             </el-select>
             <template v-else-if="item.type=='validate'">
@@ -118,7 +118,7 @@ export default {
             }
             this.codeImg = `api/portal/captcha.jpg?code=${str}`
 
-            
+
             let captcha = {
                 required: true,
                 trigger: 'blur',
@@ -154,8 +154,7 @@ export default {
         this.setCodeImg()
     },
     created() {
-        
-        console.log(random_string())
+
     },
     components: {
         CUpload
@@ -211,6 +210,9 @@ $label_w=100px;
     .el-input .el-select__caret{
         calcmedia('sz', 24px)
     }
+}
+.my-option{
+    padding-left: $label_w;
 }
 
 /deep/ .el-textarea{

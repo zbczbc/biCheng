@@ -20,13 +20,19 @@ export function fetchData( path , opts ) {
             n_path = path.replace('/{id}', '')
             url = url+'/'+params
         }
+        let method = opts && opts.method || 'get'
 
-        await axios({
-            method: opts && opts.method || 'get',
+        let temp = {
+            method,
             url,
-            //cache:false,
             params: params,
-        }).then(res => {
+        }
+
+        if(method == 'post') {
+            delete temp.params
+            temp.data = params
+        }
+        await axios(temp).then(res => {
             let data = res.data
             if(data.code == 0) {
                 ret = data.data
@@ -42,6 +48,14 @@ export function fetchData( path , opts ) {
     // return
 }
 
+export const http = axios.create({
+    timeout: 1000 * 30,
+    withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+})
+
 export function submitData( path ) {
 
     return (params) => {
@@ -54,14 +68,5 @@ export function submitData( path ) {
                     formData,
                         { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
     }
-    
+
 }
-
-
-export const http = axios.create({
-    timeout: 1000 * 30,
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8'
-    }
-})
