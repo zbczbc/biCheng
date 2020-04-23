@@ -17,8 +17,8 @@
                         <!-- <video :src=$api.getImg(item.fileName) v-else></video> -->
                     </template>
 
-                    <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10 abs" @onClick="$showDialog('video')"></img-icon>
-                    <img-icon v-else type="play" w=40 h=40 class="cp z10 abs abs" @onClick="$showDialog('video')"></img-icon>
+                    <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10 abs" @onClick="$showDialog('video', item.fileName)"></img-icon>
+                    <img-icon v-else type="play" w=40 h=40 class="cp z10 abs abs" @onClick="$showDialog('video', item.fileName)"></img-icon>
                 </template>
 
                 <div v-else class="bg-box" :style="{backgroundImage: 'url(' + $api.getImg(item.fileName) + ')'}"></div>

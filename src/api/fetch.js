@@ -5,7 +5,7 @@ import { isArray } from "common/js/util"
 
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
-let isDev = process.env.NODE_ENV == 'development'
+export let isDev = process.env.NODE_ENV == 'development'
 
 export let baseUrl = isDev ? '/api' : "/admin"
 

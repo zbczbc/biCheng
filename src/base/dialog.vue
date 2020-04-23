@@ -20,7 +20,7 @@
 
         <div class="video-container container" v-else-if="type=='video'">
             <img-icon type="close" w=30 h=30 class="por cp" @onClick="visible=false" m="0 -30 0 0" />
-            <video src='static/video.mp4' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
+            <video :src='videoSrc' autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
         </div>
 
         <div class="text-container layout container" v-else>
@@ -59,7 +59,8 @@ export default {
             images: [
                 'static/honor-pic.jpg', 'static/honor-pic.jpg', 'static/honor-pic.jpg','static/honor-pic.jpg'
             ],
-            imageClass: ""
+            imageClass: "",
+            videoSrc: 'static/video.mp4'
         }
     },
     methods: {
@@ -151,6 +152,7 @@ export default {
 
             if(type == "video") {
                 this.visible = true
+                if(opts) this.videoSrc = this.$api.getImg(opts)
             }
 
             if(type == "image") {

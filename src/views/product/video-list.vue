@@ -71,7 +71,8 @@ export default {
     computed: {
         videoSrc() {
             let src = this.$api.getImg(this.dataList[this.activeIndex].videoName)
-           
+
+            //src = 'http://120.77.220.34/file/QhTLNynN1587538791787_video.mp4'
             return src
         }
     },

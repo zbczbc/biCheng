@@ -19,12 +19,12 @@
             </div>
         </div>
         <div class="p-con" v-html="dataInfo.newsContent">
-           
+
         </div>
         <div class="oper-box">
             <div class="t-l fl">
-                <div class="prev">上一篇：碧城智慧智慧园区全场景解决方案亮相2019中国数交会</div>
-                <div class="next">下一篇：运营干货| 力合科创、三一集团、星河产业大咖共话产业园区精细化运营</div>
+                <div class="prev" @click="toOther('prev')" v-if="dataInfo.prev">上一篇：{{dataInfo.prev.newsTitle}}</div>
+                <div class="next" @click="toOther('next')" v-if="dataInfo.next">下一篇：{{dataInfo.next.newsTitle}}</div>
             </div>
             <div class="t-r fr">
                 <div class="return" @click="onReturn">
@@ -47,8 +47,14 @@ export default {
         }
     },
     methods: {
+        toOther(type) {
+            let isPrev = type == 'prev',
+                id = isPrev ? this.dataInfo.prev.id : this.dataInfo.next.id
+
+            this.$router.push(`/about?id=5&d=${id}`)
+        },
         onReturn() {
-            this.$router.go('-1')
+            this.$router.push(`/about`)
         },
         _getData() {
             this.$api.getNewsDetail(this.newsId).then(data => {
@@ -72,7 +78,7 @@ export default {
             return this.$route.query.d
         }
     },
-    
+
 }
 </script>
 <style lang="stylus" scoped>

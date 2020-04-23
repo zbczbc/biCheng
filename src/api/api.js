@@ -1,4 +1,4 @@
-import { fetchData, baseUrl, submitData } from "./fetch"
+import { fetchData, baseUrl, submitData, isDev } from "./fetch"
 import Vue from "vue"
 
 //公司简介
@@ -49,10 +49,14 @@ export const getIndexBanner = fetchData('indexBanner')
 
 export const getNewsDetail = fetchData('getNewsDetail/{id}')
 
+let isBGY = window.location.host.indexOf('bgysmartcity') > -1
+
 const getImg = (imgName) => {
-    let src = imgName
+
+    let host = isBGY ? 'http://www.bgysmartcity.com/' : 'http://120.77.220.34',
+        src = imgName
     if(!/static/.test(imgName)) {
-        src = `${baseUrl}/portal/getFileStream/${imgName}`
+        src = `${host}//file/${imgName}`
     }
     return src
 }

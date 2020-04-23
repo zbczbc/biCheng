@@ -145,13 +145,13 @@ export default {
                     if(data.solutionResults.length > 0) {
                         this.tabsList = [
                             { label: '产品介绍', },
-                            { label: '技术参数', },
+                            { label: '视频展示', },
                             { label: '解决成果', },
                         ]
                     } else {
                         this.tabsList = [
                             { label: '产品介绍', },
-                            { label: '技术参数', },
+                            { label: '视频展示', },
                         ]
                     }
                 })
