@@ -9,13 +9,20 @@
                 <img-icon type="case-address" class="ilm" w=36 h=36 m="0 5 0 0" />
                 <p class="ilm">项目地址： {{dataInfo.address}}</p>
             </div>
+
+            <div class="address" v-if="$device.isM">
+                <img-icon type="case-address" class="ilm" w=36 h=36 m="0 5 0 0" />
+                <p class="ilm mobile-p">项目面积： {{dataInfo.area}}</p>
+            </div>
+
         </div>
-        <div class="t-r pr">
+        <div class="t-r pr" v-if="$device.isPC">
             <div class="inner">
                 <img-icon type="case-area" class="ilm" w=36 h=36 />
                 <div class="ilm">项目面积： <br/><span>{{dataInfo.area}}</span>㎡</div>
             </div>
         </div>
+        <div class="clear"></div>
     </div>
 </template>
 
@@ -32,22 +39,29 @@ export default {
 <style lang="stylus" scoped>
 .introduce-box{
     calcmedia('m', 0 15px 30px, 0 10px 10px);
-    display: flex; border: 1px dashed $eb;
+     border: 1px dashed $eb;
     .t-l{
+        calcmedia('w', 75%, 100%); float: left;
         calcmedia('p', 30px 20px 15px, 10px);
-        width: 75%; border-right: 1px dashed $eb;
+         border-right: 1px dashed $eb;
         .info{
-            border-bottom: 1px dashed $eb; padding-bottom: 15px;
+            padding-bottom: 15px;
         }
         .tit{
             color: $blue; font-weight: bold; padding-bottom: 20px;
         }
         .address{
-            padding-top: 10px;
+            padding: 10px 0; display: flex; border-top: 1px dashed $eb;
+            .mobile-p{
+                line-height: 36px;
+            }
+        }
+        p{
+            line-height: 20px;
         }
     }
     .t-r{
-        flex:1;
+        width: 25%; float: left;
         .inner{
             text-align:center; position: absolute; top: 50%; transform: translateY(-50%); width:100%; text-align: center;
             span{

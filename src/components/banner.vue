@@ -43,7 +43,7 @@ export default {
     c(#fff); tc(); iconBg();
     .tit{
         calcmedia('sz', 36px, 18px);
-        calcmedia('p', 200px 0 px2vw(30) 0 , 70px 0 px2vw(30) 0);
+        calcmedia('p', 100px 0 px2vw(30) 0 , 70px 0 px2vw(30) 0);
     }
     .desc{
         calcmedia('sz', 18px, 14px);

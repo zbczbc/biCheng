@@ -62,7 +62,7 @@ const getImg = (imgName) => {
 }
 
 const getCode = (str) => {
-    return `${baseUrl}/captcha.jpg?code=${str}`
+    return `${baseUrl}/portal/captcha.jpg?code=${str}`
 }
 
 Vue.prototype.$api = {
