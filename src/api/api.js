@@ -61,9 +61,13 @@ const getImg = (imgName) => {
     return src
 }
 
+const getCode = (str) => {
+    return `${baseUrl}/captcha.jpg?code=${str}`
+}
+
 Vue.prototype.$api = {
     technicalSupport, getNewsTypeList,  getNewsList,  addBrowseCount,  getLinksList,
-    schemeDetails, getMsgTypeList, getIndexBanner, getNewsDetail,
+    schemeDetails, getMsgTypeList, getIndexBanner, getNewsDetail, getCode,
     productDetails,
     organizational,
     menuList,

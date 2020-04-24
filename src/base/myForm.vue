@@ -116,7 +116,7 @@ export default {
             for(let i=0; i<5; i++) {
                 str+=random_string()
             }
-            this.codeImg = `api/portal/captcha.jpg?code=${str}`
+            this.codeImg = this.$api.getCode(str)
 
 
             let captcha = {
