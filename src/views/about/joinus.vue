@@ -136,11 +136,11 @@ $m_gap=10px;
         calcmedia('h', 70px, 40px);
         calcmedia('lh', 70px, 40px); color:$c45;
         &.is-active{
-            color:#fff; background: $blue;
-            /deep/ .icon.job{
+            color:#fff !important; background: $blue;
+            .icon.job{
                 iconUrl_c('job-white.png');
             }
-            /deep/ .icon.job-more{
+            .icon.job-more{
                 iconUrl_c('job-more-white.png');
             }
         }

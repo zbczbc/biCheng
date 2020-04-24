@@ -183,7 +183,9 @@ $productWidth = 500px;
         .img-hover{
             position: absolute; left:0; top: 80%; transition:0.3s ease-out 0.1s; z-index: 2; opacity: 0;
         }
-        &:hover{
+    }
+    .list-inner:hover {
+        .img-box{
             .img-hover{
                 transform:translateY(-80%); opacity: 1;;
             }
@@ -191,7 +193,11 @@ $productWidth = 500px;
                 transform:translateY(-50%); opacity: 0; transition:0.4s;
             }
         }
+        p{
+            color: $blue;
+        }
     }
+
 }
 
 .product-page{

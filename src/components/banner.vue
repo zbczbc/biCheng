@@ -39,7 +39,7 @@ export default {
 
 <style lang="stylus" scoped>
 .banner{
-    calcmedia('h', 480px, 250px)
+    calcmedia('h', 300px, 200px)
     c(#fff); tc(); iconBg();
     .tit{
         calcmedia('sz', 36px, 18px);

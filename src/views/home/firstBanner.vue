@@ -9,7 +9,7 @@
             </div>
 
             <div class="icons-group">
-                <div class="list" v-for="(icon,index) in iconesGroup" :key="index" @click="onIconClick(icon)">
+                <div class="list cp" v-for="(icon,index) in iconesGroup" :key="index" @click="onIconClick(icon)">
                     <img-icon :type=icon.type class="ilm" :w=icon.w :h=icon.h m="0 5 0 0"/>
                     <span class="ilm">{{icon.label}}</span>
                 </div>

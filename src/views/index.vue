@@ -14,11 +14,9 @@
                     <template v-if="$device.isPC">
                         <div class="video-mask por"></div>
                         <video :src="$api.getImg(item.fileName)" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo"  controls ></video>
-                        <!-- <video :src=$api.getImg(item.fileName) v-else></video> -->
-                    </template>
 
-                    <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp z10 abs" @onClick="$showDialog('video', item.fileName)"></img-icon>
-                    <img-icon v-else type="play" w=40 h=40 class="cp z10 abs abs" @onClick="$showDialog('video', item.fileName)"></img-icon>
+                    </template>
+                    <video :src=$api.getImg(item.fileName) v-else></video>
                 </template>
 
                 <div v-else class="bg-box" :style="{backgroundImage: 'url(' + $api.getImg(item.fileName) + ')'}"></div>
@@ -28,6 +26,11 @@
                         <div class="tit">
                             <c-b :content=item.bannerTitle></c-b>
                         </div>
+                        <template v-if="item.fileType=='视频'">
+                            <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp ilm z10" @onClick="$showDialog('video', item.fileName)"></img-icon>
+                            <img-icon v-else type="play" w=40 h=40 class="cp ilm z10" @onClick="$showDialog('video', item.fileName)"></img-icon>
+                        </template>
+
                         <div class="desc">
                             <c-b :content=item.bannerDescribe></c-b>
                         </div>
@@ -148,20 +151,19 @@ export default {
     h(100%); right:0;
 }
 .text-box2{
-    calcmedia('w', 520px, 80%);
+    calcmedia('w', 100%, 80%);
     calcmedia('l', 0, 0);
     calcmedia('r', auto, 0);
     calcmedia('m', 0, 0 auto);
-    calcmedia('align', left, center);
-
+    calcmedia('align', center, center);
     topcenter();
+
     .tit{
         calcmedia('sz', px2vw(62), 30px, 26px);
         calcmedia('lh', 75px, 45px, 40px);
-
     }
     .desc{
-        calcmedia('mt', 35px, 20px);
+        calcmedia('mt', 20px, 10px);
         calcmedia('lh', 35px, 24px);
         size18();
     }

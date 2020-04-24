@@ -17,8 +17,7 @@ export default {
     methods: {
         _getPageData() {
             this.$api.organizational().then(data => {
-                console.log(data)
-                this.pageData = data
+                this.pageData = data.organizational
             })
         }
     },

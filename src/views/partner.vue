@@ -1,6 +1,6 @@
 <template>
     <div class="partner-page">
-        <banner :bannerPicture=pageData.bannerPicture />
+        <banner :bannerPicture=bannerPicture />
         <bread-nav />
         <div class="p-tit flash-move">合作伙伴</div>
 
@@ -19,30 +19,16 @@ import Tabs from "base/Tabs"
 export default {
     data() {
         return {
-            bannerInfo: {
-                title: '合作伙伴',
-                desc: '诚信合作 互惠共赢 稳步发展 ',
-                url: 'static/contact-banner.png'
-            },
-            list: [
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-                { src: 'static/cooperation-logo.jpg', },
-            ],
-            pageData: {},
             titleIndex: 0,
-            partnerList: []
+            partnerList: [],
+            bannerPicture: {}
         }
     },
     created() {
         this.$api.cooperativePartner().then(data => {
-            this.partnerList = data.partnerList
+            let  {partnerList, bannerPicture} = data
+            this.partnerList = partnerList
+            this.bannerPicture = bannerPicture
         })
     },
     components: {
