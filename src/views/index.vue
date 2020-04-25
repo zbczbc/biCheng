@@ -26,14 +26,13 @@
                         <div class="tit">
                             <c-b :content=item.bannerTitle></c-b>
                         </div>
-                        <template v-if="item.fileType=='视频'">
-                            <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp ilm z10" @onClick="$showDialog('video', item.fileName)"></img-icon>
-                            <img-icon v-else type="play" w=40 h=40 class="cp ilm z10" @onClick="$showDialog('video', item.fileName)"></img-icon>
-                        </template>
-
                         <div class="desc">
                             <c-b :content=item.bannerDescribe></c-b>
                         </div>
+                         <template v-if="item.fileType=='视频'">
+                            <img-icon v-if="$device.isPC" type="play" w=63 h=63 class="cp ilm z10" m="30 0 0 0" @onClick="$showDialog('video', item.fileName)"></img-icon>
+                            <img-icon v-else type="play" w=40 h=40 class="cp ilm z10" @onClick="$showDialog('video', item.fileName)"></img-icon>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -167,6 +166,13 @@ export default {
         calcmedia('lh', 35px, 24px);
         size18();
     }
+}
+
+.swiper-button-prev{
+    iconUrl('banner-icon-r.png')
+}
+.swiper-button-next{
+    iconUrl('banner-icon-l.png')
 }
 
 

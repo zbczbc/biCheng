@@ -183,6 +183,7 @@ export default {
 <style lang="stylus" scoped>
 
 .introduce-box{
+    calcmedia('p', false, 0 10px)
     .intro-box1{
         //mt(140, 'h')
         calcmedia('m', px2vw(140) auto px2vw(140), 20px auto 20px); pr();

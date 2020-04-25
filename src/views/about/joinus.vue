@@ -6,7 +6,7 @@
 
         <div class="layout">
             <el-collapse class="list-group flash-move" v-model="activeNames" @change="handleChange" accordion>
-                <el-collapse-item name="1"  v-for="(item, i) in listData" :key="i">
+                <el-collapse-item  v-for="(item, i) in listData" :key="i"  :name="`${i+1}`">
                     <template slot="title">
                         <div class="list-title" >
                             <!-- 25*25 -->
@@ -102,7 +102,7 @@ $l_gap=30px;
 $m_gap=10px;
 
 .list-group{
-    calcmedia('mt', 50px, 30px);
+    calcmedia('m', 50px 0 80px, 30px 0 40px);
     .list-title{
         calcmedia('p', 0 $l_gap, 0 $m_gap);
         display: block; size18(); display: flex; justify-content:space-between;

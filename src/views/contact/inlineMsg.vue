@@ -1,16 +1,13 @@
 <template>
     <div class="layout">
-        <my-form class="msg-form" :formItems=formItems :model="formModel" :rules=rules @handleSubmit="handleSubmit"></my-form>
+        <my-form class="msg-form" ref="myForm" :formItems=formItems :model="formModel" :rules=rules @handleSubmit="handleSubmit"></my-form>
     </div>
 </template>
 
 <script>
 import MAdd from "common/js/m-add"
 
-export default {
-    data(){
-        return {
-            formModel: {
+const DEFAULT_MODEL = {
                 cityName: "",
                 companyName: "",
                 msgClassifyId : "",
@@ -18,17 +15,26 @@ export default {
                 userEmail: "",
                 userJob: "",
                 userName: "",
-                userTel: ""
-            },
+                userTel: "",
+                captcha: ""
+            }
+
+export default {
+    data(){
+        return {
+            formModel: { ...DEFAULT_MODEL },
             formItems: []
         }
-
     },
     mixins: [MAdd],
     methods: {
         handleSubmit() {
             this.$api.saveOnlineMsg(this.formModel).then(() => {
                 this.$message.success('留言成功')
+                this.formModel = { ...DEFAULT_MODEL }
+                this.$nextTick(() => {
+                    this.$refs.myForm.clear()
+                })
             })
         },
         _initData() {

@@ -32,7 +32,7 @@
                     </div>
                 </template>
 
-                <div class="t4 tc" v-if="pageData.qcCode">
+                <div class="t4 tc" v-if="qrCode">
                     <img-box :url="qrCode" class="ilt" w=150 h=150></img-box>
                     <p>扫一扫关注碧城智慧</p>
                 </div>
@@ -134,6 +134,7 @@ export default {
         })
 
         this.$root.$on('getFooterSuccess', data => {
+            console.log(data)
             this.qrCode = data.qcCode
         })
     },

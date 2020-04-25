@@ -57,7 +57,8 @@ export default {
     .links-list{
         calcmedia('m', 0 -15px 60px, 0 0 20px);
         .list{
-            margin-bottom: 20px; cursor: pointer;
+            calcmedia('mb', 60px, 20px);
+            cursor: pointer;
             calcmedia('w', 33.33%, 100%);
             float: left;  padding: 0 15px;
             .list-inner{
@@ -80,7 +81,7 @@ export default {
                 border: 1px solid $eb; border-bottom: 0px none;background: #eff1f4;
                 .img-w{
                     width:40%; border: 1px solid $eb; position: absolute; left: 0; height: 100%;
-                    background: #fff;
+                    background: #fff; overflow: hidden;
                     img{
                         width: 100%;
                     }

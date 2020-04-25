@@ -111,6 +111,10 @@ export default {
         validateField (str) {
             this.$refs.elForm.validateField(str)
         },
+        clear() {
+            this.$refs.elForm.resetFields()
+            this.$refs.elForm.clearValidate()
+        },
         setCodeImg() {
             let str = ""
             for(let i=0; i<5; i++) {
@@ -177,7 +181,7 @@ $label_w=100px;
         padding: 0; line-height: 50px; height: 48px;
     }
     .el-input-group__append{
-        calcmedia('w', 160px);
+        calcmedia('w', 160px, 130px);
         padding: 0;
         background: transparent; border: 0; border-left: 1px solid $eb;
         img{
@@ -210,9 +214,6 @@ $label_w=100px;
     .el-input .el-select__caret{
         calcmedia('sz', 24px)
     }
-}
-.my-option{
-    padding-left: $label_w;
 }
 
 /deep/ .el-textarea{

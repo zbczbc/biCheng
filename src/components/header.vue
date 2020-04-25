@@ -180,10 +180,14 @@ export default {
             let item = this.navList.length && this.navList[this.hoverIndex]
             let childNav = item.children
             if(childNav) {
-                let height = 70
-                if(this.hoverIndex == 2 || childNav.length > 4) {
+                let height = 70, isAbout = this.hoverIndex==1
+                if(this.hoverIndex == 2 || (childNav.length > 4 && !isAbout)) {
                     height = Math.ceil(childNav.length/2) * 40 + 50
                     item.more = true
+                }
+
+                if(isAbout) {
+                    height = 2*40 + 50
                 }
 
                 return `height: ${height}px`

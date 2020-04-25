@@ -195,8 +195,8 @@ export default {
         }
     }
     .tab-content{
-        //calcmedia('m', 0 -15px, 0);
-        overflow: hidden; overflow: hidden;
+        calcmedia('m', false, 0 10px);
+        overflow: hidden; 
         .swiper-wrapper{
             //width: 100%;
             opacity: 0.01;

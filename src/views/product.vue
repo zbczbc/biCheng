@@ -202,7 +202,7 @@ $productWidth = 500px;
 
 .product-page{
     .detail{
-        border-bottom: 1px solid $border;
+        border-bottom: 1px solid $border; calcmedia('mt', 50px, 20px)
     }
     .image-content{
         width: 45%; float:left; border-right: 1px solid $border;

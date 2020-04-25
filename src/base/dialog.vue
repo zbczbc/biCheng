@@ -26,7 +26,7 @@
         <div class="text-container layout container" v-else>
             <div class="title-box pr">
                 {{title}}
-                <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" mm="26 0" />
+                <img-icon type="mClose" w=24 h=24 class="por cp" @onClick="visible=false" m="26 30 0 0" mm="26 13" />
             </div>
             <div class="content">
                 <scroll v-if="content" :mustShow=true>
@@ -178,7 +178,7 @@ export default {
             flexcenter();
             p(30px 30px 60px);
             .text{
-                pb(); w(100%); bottom: 30px;tc(); lhh(30px); fz(14px);
+                pb(); w(100%); bottom: 30px;tc(); lhh(30px); fz(14px); left: 0;
             }
             // img{
             //     calcmedia('mh', auto, 200px)
@@ -215,7 +215,7 @@ export default {
 }
 .text-container{
     h(400px);
-    calcmedia('w', auto, 90% !important);
+    calcmedia('w', 900px, 90% !important);
     >.content{
         calcmedia('m', 30px, 15px 0);
     }

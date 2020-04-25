@@ -23,11 +23,7 @@
 <script>
 import MAdd from "common/js/m-add"
 
-export default {
-    data() {
-        return {
-            visible: false,
-            formModel: {
+const DEFAULT_MODEL = {
                 "applyJobId": "",
                 "major": "",
                 "nativePlace": "",
@@ -36,8 +32,16 @@ export default {
                 "userAge": "",
                 "userEmail": "",
                 "userName": "",
-                "userTel": ""
-            },
+                "userTel": "",
+                captcha: "",
+                resumeFile: ""
+            }
+
+export default {
+    data() {
+        return {
+            visible: false,
+            formModel: { ...DEFAULT_MODEL },
             fileList: []
         }
     },
@@ -52,11 +56,19 @@ export default {
         init(item) {
             this.visible = true
             this.formModel.applyJobId = item.id
+
+            this.formModel = { ...DEFAULT_MODEL }
+            this.fileList = []
+
+            this.$nextTick(() => {
+                this.$refs.myForm.clear()
+            })
         },
         handleSubmit() {
             this.$api.jobApply(this.formModel).then(() => {
                 this.$message.success('提交成功')
                 this.visible = false
+                
             })
         },
         _initData() {
@@ -79,9 +91,16 @@ export default {
         fileList: {
             deep: true,
             handler(val) {
-                this.$set(this.formModel, 'resumeFile', val[0].fiLeData)
-                this.formModel.resumeFile = val[0].fiLeData
-                this.$refs.myForm.validateField('resumeFile')
+                console.log(val)
+                if(val.length > 0) {
+                    this.$set(this.formModel, 'resumeFile', val[0].fiLeData)
+                    this.formModel.resumeFile = val[0].fiLeData
+
+                    console.log(this.formModel)
+                    this.$nextTick(() => {
+                        this.$refs.myForm.validateField('resumeFile')
+                    })
+                }
             }
         }
     },

@@ -133,7 +133,7 @@ $gap_m=10px;
                 calcmedia('p', $gap_l, $gap_m);
                 border: 1px solid $eb; border-top: 0px none;
                 .sub-tit{
-                    size20(); color: $blue; line(1);
+                    size20(); line(1);
                 }
                 .p-txt{
                     calcmedia('h', 52px, 78px);
@@ -151,8 +151,8 @@ $gap_m=10px;
                 }
             }
 
-            &:hover{
-                box-shadow: 0 0 5px 0 rgba(0,0,0,.2);
+            &:hover{ 
+                box-shadow: 0 0 5px 0 rgba(0,0,0,.2); color: $blue;
                 .detail-btn{
                     background:$blue; color: #fff; border-color: $blue;
                 }

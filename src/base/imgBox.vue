@@ -41,6 +41,7 @@ export default {
 			}else if(this.url){
 				str = this.$api.getImg(this.url)
 			}
+			console.log(str)
 			return str
 		}
 	},
