@@ -178,7 +178,7 @@ $label_w=100px;
     //     }
     // }
     .el-input__inner{
-        padding: 0; line-height: 50px; height: 48px;
+        padding: 0; line-height: 50px; height: 48px; border: 0px none;
     }
     .el-input-group__append{
         calcmedia('w', 160px, 130px);

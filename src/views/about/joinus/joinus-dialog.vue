@@ -55,27 +55,26 @@ export default {
         },
         init(item) {
             this.visible = true
-            this.formModel.applyJobId = item.id
-
-            this.formModel = { ...DEFAULT_MODEL }
-            this.fileList = []
 
             this.$nextTick(() => {
                 this.$refs.myForm.clear()
+
+                this.formModel = { ...DEFAULT_MODEL, applyJobId: item.id }
+                this.fileList = []
             })
         },
         handleSubmit() {
             this.$api.jobApply(this.formModel).then(() => {
                 this.$message.success('提交成功')
                 this.visible = false
-                
+
             })
         },
         _initData() {
             this.formItems = [
                 { label: '姓名：', name: 'userName', required: true, width: "50%" },
                 { label: '籍贯：', name: 'nativePlace', required: true, width: "50%" },
-                { label: '年龄：', name: 'userAge', width: "50%" },
+                { label: '年龄：', name: 'userAge', width: "50%" , type:'number'},
                 { label: '电话：', name: 'userTel', required: true, width: "50%" },
                 { label: '学校：', name: 'school', required: true, width: "50%" },
                 { label: '专业：', name: 'major', required: true, width: "50%" },

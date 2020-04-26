@@ -56,9 +56,10 @@
                     <div class="list-con product-swiper">
                         <div class="swiper-wrapper">
                             <div class="list swiper-slide" v-for="item,index in productDetails.solutionResults" :key=index>
-                                <div class="list-in">
+                                <div class="list-in pr">
                                     <div class="stit size24">0{{index+1}}</div>
-                                    <p class="size16">{{item}}</p>
+                                    <img-box w=36 h=36 m="30 30 0 0" class="por" :url="item.imgName" />
+                                    <p class="size16">{{item.content}}</p>
                                 </div>
                             </div>
                         </div>
@@ -304,7 +305,7 @@ $productWidth = 500px;
         calcmedia('m', 30px 0 20px 0, ) ;
     }
     .tab-inner{
-        calcmedia('pt', 20px, 10px)
+        calcmedia('p', 20px 0 0 0, 10px);
     }
     .solve-box{
         // position: absolute; z-index: -1
