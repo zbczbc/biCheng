@@ -1,8 +1,8 @@
 <template>
 
     <div class="new-detail-wrapper layout">
-        <div class="title">碧城智慧助力云创广场完成资管数字化转型腾飞</div>
-        <div class="p-desc">
+        <div class="title">{{dataInfo.newsTitle}}</div>
+        <div class="title-desc">
             <div class="time">
                 <img-icon type="news-clock" class="ilm" w=14 h=14 m="0 0 0 10" />
                 {{dataInfo.createDate}}
@@ -11,14 +11,14 @@
                 浏览：{{dataInfo.browseCount}}
             </div>
 
-            <div class="bdsharebuttonbox" data-tag="share_1">
+            <div class="share-box" data-tag="share_1">
                 <span class="fl">分享到：</span>
-                <a href="#" title="分享到qq好友" class="popup_sqq" data-cmd="sqq"></a>
-                <a href="#" title="分享到qq空间" class="popup_qzone" data-cmd="qzone"></a>
-                <a href="#" title="分享到新浪微博" class="bds_tsina" data-cmd="tsina"></a>
+                <a :href="shareLinks.qq" target="blank" title="分享到qq好友" class="popup_sqq" data-cmd="sqq"></a>
+                <a :href="shareLinks.qzone" target="blank"  title="分享到qq空间" class="popup_qzone" data-cmd="qzone"></a>
+                <a :href="shareLinks.sina" target="blank"  title="分享到新浪微博" class="bds_tsina" data-cmd="tsina"></a>
             </div>
         </div>
-        <div class="p-con" v-html="dataInfo.newsContent">
+        <div class="p-con news-box" ref="pCon">
 
         </div>
         <div class="oper-box">
@@ -40,10 +40,17 @@
 
 
 <script>
+import ContentBr from "base/content-br"
+
 export default {
     data() {
         return {
-            dataInfo: {}
+            dataInfo: {},
+            shareLinks: {
+                qzone: 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.shao-ming.com',
+                qq: 'http://connect.qq.com/widget/shareqq/index.html?title=qqhaoyou&url=http://www.shao-ming.com&desc=还不错哦&pics=&site=优酷',
+                sina: 'http://v.t.sina.com.cn/share/share.php?url=http://www.shao-ming.com&title="分享内容"'
+            }
         }
     },
     methods: {
@@ -59,6 +66,7 @@ export default {
         _getData() {
             this.$api.getNewsDetail(this.newsId).then(data => {
                 this.dataInfo = data
+                this.$refs.pCon.innerHTML = data.newsContent
             })
             this.$api.addBrowseCount(this.newsId)
         }
@@ -78,6 +86,18 @@ export default {
             return this.$route.query.d
         }
     },
+    components: {
+        ContentBr
+    },
+    created() {
+        //手动分享 应该和域名有关
+        let href = window.location.href
+        this.shareLinks =  {
+            qzone: `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${href}&title=分享内容`,
+            qq: `http://connect.qq.com/widget/shareqq/index.html?title=qqhaoyou&url=${href}&title=分享内容`,
+            sina: `http://v.t.sina.com.cn/share/share.php?url=${href}&title=分享内容`
+        }
+    }
 
 }
 </script>
@@ -90,17 +110,20 @@ export default {
     .title{
         size24(); color: $c45; text-align: center; line-height: 25px;
     }
-    .p-desc{
+    .title-desc{
         calcmedia('mt', 30px, $s_30);
-        calcmedia('pb', 50px, $s_50);
+        calcmedia('pb', 50px, $s_50); text-align: center;
 
         color: #999; width: 100%;
         border-bottom: 1px solid $eb;
         >div{
-            display: inline-block; vertical-align: middle; margin: 0 20px;
+            display: inline-block; margin: 0 20px;
         }
-        .bdsharebuttonbox{
-            calcmedia('mt', 0px, 10px);
+        .time{
+            vertical-align: middle;
+        }
+        .share-box{
+            calcmedia('mt', 0px, 10px); vertical-align: middle; height: 36px;
         }
 
     }
@@ -130,11 +153,11 @@ export default {
     }
 }
 
-.bdsharebuttonbox{
+.share-box{
     calcmedia('mt', 0px, 10px);
     line-height: 36px;
-    >a{
-        width: 36px; height: 36px; iconBg(); margin: 0 5px;
+    a{
+        width: 36px; height: 36px; iconBg(); margin: 0 5px; display:inline-block;
         &.popup_sqq{
             iconUrl_cc('n-qq.png');
             &:hover{
@@ -154,5 +177,41 @@ export default {
             }
         }
     }
+}
+
+.news-box{
+  b,strong{ font-weight:bold; }
+  h1{
+    font-size: 36px;
+  }
+  h2{
+    font-size: 30px;
+  }
+  h3{
+    font-size: 26px;
+  }
+  h4{
+    font-size: 20px;
+  }
+  h5{
+    font-size: 16px;
+  }
+  h6{
+    font-size: 14px;
+  }
+  ol{
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+    li{
+      display: list-item;
+      text-align: -webkit-match-parent;
+    }
+  }
+
 }
 </style>
