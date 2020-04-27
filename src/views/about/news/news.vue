@@ -10,7 +10,7 @@
                     <div class="list flash-move" v-for="(item, i) in dataList"  @click="toDetail(item)" :key="i">
                         <div class="list-inner">
                             <div class="img-w  pr hid">
-                                <img src="static/about-pic.jpg" class="scale" />
+                                <img :src="$api.getImg(item.coverImg)" class="scale" />
                                 <div class="mask"></div>
                             </div>
                             <div class="word-box">
@@ -128,6 +128,13 @@ $gap_m=10px;
         .list-inner{
             calcmedia('p', false, 0 10px);
             cursor:pointer;
+            .img-w{
+                calcmedia('h', 300px, 200px);
+                 overflow: hidden;
+                img{
+                    min-width: 100%; min-height: 100%;
+                }
+            }
             .word-box{
                 calcmedia('p', $gap_l, $gap_m);
                 border: 1px solid $eb; border-top: 0px none;
@@ -135,10 +142,10 @@ $gap_m=10px;
                     size20(); line(1);
                 }
                 .p-txt{
-                    calcmedia('h', 52px, 78px);
+                    calcmedia('h', 52px, 52px);
                     calcmedia('dis', -webkit-box, block);
                     calcmedia('mt', $gap_l, $gap_m);
-                    line-height: 26px; line(2); height: 52px;
+                    line-height: 26px; line(2);
                 }
             }
             .detail-box{
