@@ -5,8 +5,8 @@
                 <div class="links">
                     <dl v-for="link,linkIndex in footerNavList">
                         <dt >{{link.name}}</dt>
-                        <dd v-for="item, itemIndex in link.children" v-if="itemIndex<5" @click="toPath(item, linkIndex, itemIndex)">{{item.name}}</dd>
-                        <dd v-if="link.children.length>5">更多产品></dd>
+                        <dd v-for="item, itemIndex in link.children" v-if="itemIndex<6" @click="toPath(item, linkIndex, itemIndex)">{{item.name}}</dd>
+                        <dd v-if="link.children.length>6">更多产品></dd>
                     </dl>
                 </div>
                 <div class="qr-code pr">

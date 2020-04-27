@@ -17,7 +17,7 @@
 
                         <transition name="height">
                             <ul class="ul-02"
-                                :class="{'ul-03':index==2||item.more}"
+                                :class="{'ul-03':index==2||index==1||item.more}"
                                 v-show="item.children&&hoverIndex==index">
                                 <li v-for="item02, indexSec in item.children"
                                     :class="{active: isActived(item02, index, indexSec)}"
@@ -181,14 +181,14 @@ export default {
             let childNav = item.children
             if(childNav) {
                 let height = 70, isAbout = this.hoverIndex==1
-                if(this.hoverIndex == 2 || (childNav.length > 4 && !isAbout)) {
+                if(this.hoverIndex == 2 || childNav.length > 4) {
                     height = Math.ceil(childNav.length/2) * 40 + 50
                     item.more = true
                 }
 
-                if(isAbout) {
-                    height = 2*40 + 50
-                }
+                // if(isAbout) {
+                //     height = 2*40 + 50
+                // }
 
                 return `height: ${height}px`
             }

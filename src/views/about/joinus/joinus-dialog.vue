@@ -74,7 +74,7 @@ export default {
             this.formItems = [
                 { label: '姓名：', name: 'userName', required: true, width: "50%" },
                 { label: '籍贯：', name: 'nativePlace', required: true, width: "50%" },
-                { label: '年龄：', name: 'userAge', width: "50%" , type:'number'},
+                { label: '年龄：', name: 'userAge', width: "50%",},
                 { label: '电话：', name: 'userTel', required: true, width: "50%" },
                 { label: '学校：', name: 'school', required: true, width: "50%" },
                 { label: '专业：', name: 'major', required: true, width: "50%" },

@@ -59,7 +59,7 @@ export default {
             let params = {
                 pageNo: this.pageNo,
                 pageSize: this.pageSize,
-                typeId: this.typeId
+                typeId: this.tabList[this.tabIndex].id
             }
             this.$api.getNewsList(params).then(data => {
                 let { list, totalCount } = data.newsInfoList
@@ -70,16 +70,11 @@ export default {
         _getData() {
             this.$api.getNewsTypeList().then(data => {
                 this.tabList = data.newsTypeList.map(item => {
-                    return { 
-                        label: item.name, 
-                        id: item.id 
+                    return {
+                        label: item.name,
+                        id: item.id
                     }
                 })
-
-                this.typeId = this.tabList[this.tabIndex].id
-
-                console.log(this.tabList)
-
                 this.getDataList()
             })
         },
@@ -101,6 +96,9 @@ export default {
             handler(val) {
                 let isDetail
             }
+        },
+        tabIndex(index) {
+            this.getDataList()
         }
     },
     computed: {
@@ -128,6 +126,7 @@ $gap_m=10px;
         calcmedia('w', 33.33%, 100%);
         width: 33.33%; padding:0 15px; margin-bottom: 30px; float:left;
         .list-inner{
+            calcmedia('p', false, 0 10px);
             cursor:pointer;
             .word-box{
                 calcmedia('p', $gap_l, $gap_m);
@@ -151,7 +150,7 @@ $gap_m=10px;
                 }
             }
 
-            &:hover{ 
+            &:hover{
                 box-shadow: 0 0 5px 0 rgba(0,0,0,.2); color: $blue;
                 .detail-btn{
                     background:$blue; color: #fff; border-color: $blue;

@@ -7,12 +7,12 @@
             </div>
             <div class="address">
                 <img-icon type="case-address" class="ilm" w=36 h=36 m="0 10 0 0" />
-                <p class="ilm">项目地址： {{dataInfo.address}}</p>
+                <p class="ilm p-text">项目地址： {{dataInfo.address}}</p>
             </div>
 
             <div class="address" v-if="$device.isM">
-                <img-icon type="case-address" class="ilm" w=36 h=36 m="0 10 0 0" />
-                <p class="ilm">项目面积： {{dataInfo.area}}</p>
+                <img-icon type="case-area" class="ilm" w=36 h=36 m="0 10 0 0" />
+                <p class="ilm p-text">项目面积： {{dataInfo.area}}</p>
             </div>
 
         </div>
@@ -53,7 +53,14 @@ export default {
         .address{
             padding: 10px 0; display: flex; border-top: 1px dashed $eb;
             .ilm{
-                calcmedia('lh', 36px, 24px)
+                calcmedia('lh', 36px, 24px !important);
+            }
+            .p-text{
+                 flex:1;
+            }
+            .img-icon{
+                calcmedia('lhh', 36px, 24px !important);
+                calcmedia('w', 36px, 24px !important)
             }
         }
         p{

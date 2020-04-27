@@ -129,7 +129,7 @@ export default {
                     }
                 })
 
-                
+
                     this.title = childs[this.activeIndex].name
                     this.breadList.push({
                         label: currentChild.name
@@ -144,7 +144,8 @@ export default {
 
 <style lang="stylus" scoped>
 .bread-nav{
-    calcmedia('lhh', 70px, 48px)
+    calcmedia('lhh', 70px, 48px);
+    calcmedia('p', false, 0 10px);
     background: #eee;
     .link{
         p(0 0px 0 5px); vertical-align middle; color: $color-text;

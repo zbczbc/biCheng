@@ -54,7 +54,7 @@ export default {
             this.$router.push(`/about?id=5&d=${id}`)
         },
         onReturn() {
-            this.$router.push(`/about`)
+            this.$router.push(`/about?id=5`)
         },
         _getData() {
             this.$api.getNewsDetail(this.newsId).then(data => {
@@ -85,7 +85,7 @@ export default {
 
 .new-detail-wrapper{
     calcmedia('p', 50px 5% 30px, 0 5% $s_30);
-    calcmedia('mt', 70px, $s_70);
+    calcmedia('m', 70px auto, $s_70 auto);
     calcmedia('bd', 1px solid $eb, 0px);
     .title{
         size24(); color: $c45; text-align: center; line-height: 25px;
