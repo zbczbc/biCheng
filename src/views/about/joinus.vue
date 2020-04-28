@@ -1,5 +1,5 @@
 <template>
-    <div class="joinus-wrapper">
+    <div class="joinus-wrapper" v-if="false">
         <div class="p-tit flash-move">人才招聘</div>
         <div class="p-desc flash-move">力求为每位员工创造一个良好的工作环境，最大限度地调动一切积极因素，做到人尽其才、才尽其用，
 为碧城智慧快速成长和高效运作提供保障。</div>

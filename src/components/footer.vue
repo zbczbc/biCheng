@@ -140,7 +140,7 @@ export default {
     .links-box
         height 70px; display flex; align-items center; width 40%;
         span
-            padding 0 4%; display inline-block;
+            padding 0 3%; display inline-block;
             &:first-child
                 border-right 1px solid #595959;
             &:hover
@@ -162,6 +162,9 @@ export default {
             }
             dd{
                 cursor: pointer;
+                &:hover{
+                    color: $blue;
+                }
             }
         }
     }

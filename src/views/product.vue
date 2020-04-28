@@ -33,6 +33,7 @@
                             <p>{{feature.imgTitle}}</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -43,8 +44,9 @@
                     @click="tabIndex=index"
                     :class="{active: index==tabIndex}"><span>{{item.label}}</span></li>
             </ul>
-            <div class="btn" @click="$router.push('/contact')">联系碧城</div>
+            <div v-if="$device.isPC" class="contact-btn" @click="$router.push('/contact')">联系碧城</div>
         </div>
+        <div v-if="$device.isM" class="contact-btn" @click="$router.push('/contact')">联系碧城</div>
         <div class="tab-content flash-move">
             <div class="tab-inner layout">
                 <template v-if="tabIndex==0" >
@@ -233,14 +235,16 @@ $productWidth = 500px;
         width: 55%; float:left; p(50px 0 0 px2vw(80));
         .tit{
             calcmedia('sz',24, 16);
+            calcmedia('m', 0, 0 10px);
         }
         .desc{
+            calcmedia('m', 0, 0 10px);
             line(3); lh(24px); calcmedia('sz', 14, 12); m(20px 0 30px 0); p(0 0 20px 0);  line(3); h(72px)
         }
         .feature-con {
-            calcmedia('m', 0, 0 -5px);
             .s-tit {
                 calcmedia('sz', 18, 14); m(0 0 30px 0); border-top: 1px solid $border; pt(28);
+                calcmedia('m', 0 0 30px, 0 10px 30px);
             }
             .list{
                 w(50%); calcmedia('h', 190px, 150px); float:left; p(0 10px 20px 10px); tc();
@@ -294,11 +298,12 @@ $productWidth = 500px;
             }
         }
     }
-    .btn{
-        calcmedia('pr', relative, fixed); bottom:0; right: 0; z-index: 100;
-        calcmedia('w',160px,70px); lhh(40px); c(#fff); tc(); f(right); mt(20px); bg($blue);
-    }
 }
+.contact-btn{
+    calcmedia('pr', relative, fixed); bottom:0; right: 0; z-index: 100;
+    calcmedia('w',160px,70px); lhh(40px); c(#fff); tc(); f(right); mt(20px); bg($blue);
+}
+
 .tab-content{
     bg($border); padding-bottom: 60px;
     .tit{
