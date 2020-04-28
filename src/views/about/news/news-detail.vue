@@ -18,7 +18,7 @@
                 <a :href="shareLinks.sina" target="blank"  title="分享到新浪微博" class="bds_tsina" data-cmd="tsina"></a>
             </div>
         </div>
-        <div class="p-con news-box" ref="pCon">
+        <div class="p-con news-box ql-editor" v-html="dataInfo.newsContent">
 
         </div>
         <div class="oper-box">
@@ -66,7 +66,6 @@ export default {
         _getData() {
             this.$api.getNewsDetail(this.newsId).then(data => {
                 this.dataInfo = data
-                this.$refs.pCon.innerHTML = data.newsContent
             })
             this.$api.addBrowseCount(this.newsId)
         }
@@ -179,39 +178,5 @@ export default {
     }
 }
 
-.news-box{
-  b,strong{ font-weight:bold; }
-  h1{
-    font-size: 36px;
-  }
-  h2{
-    font-size: 30px;
-  }
-  h3{
-    font-size: 26px;
-  }
-  h4{
-    font-size: 20px;
-  }
-  h5{
-    font-size: 16px;
-  }
-  h6{
-    font-size: 14px;
-  }
-  ol{
-    display: block;
-    list-style-type: decimal;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 40px;
-    li{
-      display: list-item;
-      text-align: -webkit-match-parent;
-    }
-  }
 
-}
 </style>
