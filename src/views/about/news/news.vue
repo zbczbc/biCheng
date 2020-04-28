@@ -158,9 +158,12 @@ $gap_m=10px;
             }
 
             &:hover{
-                box-shadow: 0 0 5px 0 rgba(0,0,0,.2); color: $blue;
+                box-shadow: 0 0 5px 0 rgba(0,0,0,.2); 
                 .detail-btn{
                     background:$blue; color: #fff; border-color: $blue;
+                }
+                .sub-tit{
+                    color: $blue;
                 }
                 /deep/ .img-icon .news-arrow{
                     iconUrl_cc('news-arrow-white.png')

@@ -37,17 +37,19 @@
                     <p>扫一扫关注碧城智慧</p>
                 </div>
             </div>
-            <div class="map-tab layout">
-                <ul>
-                    <li v-for="item,index in pageData.addressInfoList" :key="index"
-                        :class="{active: index==activeIndex}"
-                        @click="onChangeAddress(item, index)" >{{item.addressTitle}}</li>
-                </ul>
-            </div>
-            <div class="map" ref="map"></div>
+           
         </template>
 
         <inline-msg v-else />
+
+        <div class="map-tab layout">
+            <ul>
+                <li v-for="item,index in pageData.addressInfoList" :key="index"
+                    :class="{active: index==activeIndex}"
+                    @click="onChangeAddress(item, index)" >{{item.addressTitle}}</li>
+            </ul>
+        </div>
+        <div class="map" ref="map"></div>
     </div>
 </template>
 
