@@ -11,7 +11,7 @@
                 浏览：{{dataInfo.browseCount}}
             </div>
 
-            <div class="share-box" data-tag="share_1">
+            <div class="bdsharebuttonbox" data-tag="share_1">
                 <span class="fl">分享到：</span>
                 <a :href="shareLinks.qq" target="blank" title="分享到qq好友" class="popup_sqq" data-cmd="sqq"></a>
                 <a :href="shareLinks.qzone" target="blank"  title="分享到qq空间" class="popup_qzone" data-cmd="qzone"></a>
