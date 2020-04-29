@@ -66,9 +66,9 @@ export default {
     methods: {
         onShare(type) {
             //手动分享
-            let href = window.location.href,
-                addStr = `?url=${href}&title=${this.dataInfo.newsTitle}`
-
+            let href = window.location.href
+            let addStr = `?url=${href}&title=${this.dataInfo.newsTitle}`
+            
             this.shareLink =  {
                 qzone: `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey`,
                 qq: `http://connect.qq.com/widget/shareqq/index.html`,
@@ -77,7 +77,7 @@ export default {
             let url = this.shareLink[type]
 
             if(url) {
-                window.open(url)
+                window.open(`${url}${addStr}`)
             }else{
                 this.isShowQr = !this.isShowQr
 
