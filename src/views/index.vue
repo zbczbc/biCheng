@@ -8,15 +8,14 @@
 
                 <first-banner :item="firstBannerData" />
             </div>
-            <div class="swiper-slide"  v-for="(item, index) in pageData.bannerList" :key="item.index">
-
+            <div class="swiper-slide"  v-for="(item, index) in pageData.bannerList" :key="index">
                 <template v-if="item.fileType=='视频'">
-                    <template v-if="$device.isPC">
-                        <div class="video-mask por"></div>
-                        <video :src="$api.getImg(item.fileName)" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo"  controls ></video>
-
-                    </template>
-                    <video :src=$api.getImg(item.fileName) v-else></video>
+                    <div class="video-mask por"></div>
+                    <video :src="$api.getImg(item.fileName)" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
+                    <!-- <template v-if="$device.isPC">
+                        
+                        </template>
+                        <video :src=$api.getImg(item.fileName) v-else></video> -->
                 </template>
 
                 <div v-else class="bg-box" :style="{backgroundImage: 'url(' + $api.getImg(item.fileName) + ')'}"></div>
@@ -133,7 +132,7 @@ export default {
     .swiper-slide
         height 100%; overflow hidden;
         video
-            width 100%;
+            width 100%; 
         .video-mask
             width 100%; height 100%; top: 0; left: 0; background: rgba(0,0,0,0.3);
 .swiper-button-next
