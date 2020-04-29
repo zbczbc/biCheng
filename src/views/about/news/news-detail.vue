@@ -4,7 +4,7 @@
         <div class="title">{{dataInfo.newsTitle}}</div>
         <div class="title-desc">
             <div class="time">
-                <img-icon type="news-clock" class="ilm" w=14 h=14 m="0 0 0 10" />
+                <img-icon type="news-clock" class="ilt " w=14 h=14 m="0 0 0 10" />
                 {{dataInfo.createDate}}
             </div>
             <div class="look">
