@@ -11,12 +11,11 @@
                 浏览：{{dataInfo.browseCount}}
             </div>
             
-            <div class="bdsharebuttonbox">
-                <span class="fl">分享到：</span>
-                <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+            <div class="share-box">
+                <i class="fl">分享到：</i>
+                <span v-for="(item, i) in shareLinks" :key="i"  :class="item.className" @click="onShare(item.type)"></span>
+
+                <img v-if="isShowQr" :src="qrcode" class="qrCode">
             </div>
         </div>
         <div class="p-con news-box ql-editor" v-html="dataInfo.newsContent">
@@ -42,19 +41,48 @@
 
 <script>
 import ContentBr from "base/content-br"
+import { createQrCodeImg } from "common/js/qrCodeImg"
 
 export default {
     data() {
         return {
             dataInfo: {},
-            shareLinks: {
-                qzone: 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.shao-ming.com',
-                qq: 'http://connect.qq.com/widget/shareqq/index.html?title=qqhaoyou&url=http://www.shao-ming.com&desc=还不错哦&pics=&site=优酷',
-                sina: 'http://v.t.sina.com.cn/share/share.php?url=http://www.shao-ming.com&title="分享内容"'
-            }
+            shareLinks: [
+                { className:'s_weixin', type: 'weixin' },
+                { className:'s_qq', type: 'qq' },
+                { className:'s_qzone', type: 'qzone' },
+                { className:'s_sina', type: 'sina' },
+            ],
+            qrcode: "",
+            isShowQr: false
         }
     },
     methods: {
+        onShare(type) {
+            //手动分享
+            let href = window.location.href,
+                addStr = `?url=${href}&title=${this.dataInfo.newsTitle}`
+
+            this.shareLink =  {
+                qzone: `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey`,
+                qq: `http://connect.qq.com/widget/shareqq/index.html`,
+                sina: `http://v.t.sina.com.cn/share/share.php`
+            }
+            let url = this.shareLink[type]
+
+            if(url) {
+                window.open(url)
+            }else{
+                this.isShowQr = !this.isShowQr
+
+                if(this.isShowQr&&!this.qrcode) {
+                    this.qrcode = createQrCodeImg({
+                        text: href
+                    })
+                }
+            }
+
+        },
         toOther(type) {
             let isPrev = type == 'prev',
                 id = isPrev ? this.dataInfo.prev.id : this.dataInfo.next.id
@@ -70,6 +98,7 @@ export default {
 
                 //手动分享 应该和域名有关
                 let href = window.location.href
+                //href = "https://www.baidu.com/"
                 window._bd_share_config = {
                     common : {
                         bdText : data.newsTitle,
@@ -83,6 +112,9 @@ export default {
             })
             this.$api.addBrowseCount(this.newsId)
         }
+    },
+    created() {
+        
     },
     watch: {
         $route: {
@@ -101,13 +133,11 @@ export default {
     },
     components: {
         ContentBr
-    },
-    created() {
-        
     }
 
 }
 </script>
+
 <style lang="stylus" scoped>
 
 .new-detail-wrapper{
@@ -129,7 +159,7 @@ export default {
         .time{
             vertical-align: middle;
         }
-        .bdsharebuttonbox{
+        .share-box{
             calcmedia('mt', 0px, 10px); vertical-align: middle; height: 36px;
         }
 
@@ -160,36 +190,40 @@ export default {
     }
 }
 
-.bdsharebuttonbox{
+.share-box{
     calcmedia('mt', 0px, 10px);
-    line-height: 36px;
-    a{
+    line-height: 36px; position: relative;
+    span{
         width: 36px; height: 36px; iconBg(); margin: 0 5px; display:inline-block;
-        &.bds_sqq{
+        &.s_qq{
             iconUrl_cc('n-qq.png');
             &:hover{
                 iconUrl_cc('n-qq-pass.png');
             }
         }
-        &.bds_qzone{
+        &.s_qzone{
             iconUrl_cc('n-qzone.png');
             &:hover{
                 iconUrl_cc('n-qzone-pass.png');
             }
         }
-        &.bds_tsina{
+        &.s_sina{
             iconUrl_cc('n-weibo.png');
             &:hover{
                 iconUrl_cc('n-weibo-pass.png');
             }
         }
-        &.bds_weixin{
+        &.s_weixin{
             iconUrl_cc('n-weixin.jpg');
             &:hover{
                 iconUrl_cc('n-weixin-pass.jpg');
             }
         }
     }
+}
+
+.qrCode{
+    position: absolute; top:50px; left: 0; width: 200px;
 }
 
 
