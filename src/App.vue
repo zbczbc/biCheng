@@ -86,8 +86,6 @@ export default {
 					return item
 				})
 
-				console.log(this.footerNavList)
-
 				// 给breadnav用
 				this.$root.$emit('getNavSuccess', {
 					1: aboutList,
@@ -98,7 +96,6 @@ export default {
 				//给首页的首banner用
 				this.$root.$emit('getSchemeSuccess', schemeList)
 
-				console.log(qcCode)
 				this.$root.$emit('getFooterSuccess', { qcCode, copyright })
 
             })

@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.msg-form{
-
+.layout{
+    calcmedia('mb', 100px, 50px)
 }
 </style>

@@ -4,13 +4,13 @@
         <bread-nav />
         <tabs v-model="titleIndex" :tabList=titleTabList />
 
-        <template v-if="titleIndex==0">
+        <div v-show="titleIndex==0">
             <div class="info-box layout">
                 <div class="t1">
                     <!-- <div>SMART CITY</div> -->
                     <img-icon type="word" w=210 h=26 mw=100 mh=13 class="ilm"/>
                     <p>碧城智慧科技</p>
-                    <span>希望社会因我们的存在而变的更加美好</span>
+                    <span>科技,让城市更简单</span>
                 </div>
 
                 <template v-if="addressInfo">
@@ -37,12 +37,8 @@
                     <p>扫一扫关注碧城智慧</p>
                 </div>
             </div>
-           
-        </template>
 
-        <inline-msg v-else />
-
-        <div class="map-tab layout">
+            <div class="map-tab layout">
             <ul>
                 <li v-for="item,index in pageData.addressInfoList" :key="index"
                     :class="{active: index==activeIndex}"
@@ -50,6 +46,10 @@
             </ul>
         </div>
         <div class="map" ref="map"></div>
+        </div>
+
+        <inline-msg v-show="titleIndex==1"/>
+        
     </div>
 </template>
 

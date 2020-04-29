@@ -4,18 +4,24 @@
         <div class="title">{{dataInfo.newsTitle}}</div>
         <div class="title-desc">
             <div class="time">
-                <img-icon type="news-clock" class="ilt" w=14 h=14 m="0 0 0 10" />
+                <img-icon type="news-clock" class="ilt " w=14 h=14 m="0 0 0 10" />
                 {{dataInfo.createDate}}
             </div>
             <div class="look">
                 浏览：{{dataInfo.browseCount}}
             </div>
+            
+            <div class="share-box">
+                <i class="fl">分享到：</i>
+                <span v-for="(item, i) in shareLinks" :key="i"  :class="item.className" @click="onShare(item.type)"></span>
 
-            <div class="share-box" data-tag="share_1">
-                <span class="fl">分享到：</span>
-                <a :href="shareLinks.qq" target="blank" title="分享到qq好友" class="popup_sqq" data-cmd="sqq"></a>
-                <a :href="shareLinks.qzone" target="blank"  title="分享到qq空间" class="popup_qzone" data-cmd="qzone"></a>
-                <a :href="shareLinks.sina" target="blank"  title="分享到新浪微博" class="bds_tsina" data-cmd="tsina"></a>
+                <div class="qrCode-box" v-if="isShowQr" >
+                    分享到微信朋友圈 
+                    <img-icon type="mClose" w=20 h=20 class="por cp" @onClick="isShowQr=false" m="10 10 0 0" />
+                    <img :src="qrcode" class="qrCode">
+                    打开微信，点击底部的“发现”，<br/>
+                    使用“扫一扫”即可将网页分享至朋友圈。
+                </div>
             </div>
         </div>
         <div class="p-con news-box ql-editor" v-html="dataInfo.newsContent">
@@ -41,19 +47,48 @@
 
 <script>
 import ContentBr from "base/content-br"
+import { createQrCodeImg } from "common/js/qrCodeImg"
 
 export default {
     data() {
         return {
             dataInfo: {},
-            shareLinks: {
-                qzone: 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://www.shao-ming.com',
-                qq: 'http://connect.qq.com/widget/shareqq/index.html?title=qqhaoyou&url=http://www.shao-ming.com&desc=还不错哦&pics=&site=优酷',
-                sina: 'http://v.t.sina.com.cn/share/share.php?url=http://www.shao-ming.com&title="分享内容"'
-            }
+            shareLinks: [
+                { className:'s_weixin', type: 'weixin' },
+                { className:'s_qq', type: 'qq' },
+                { className:'s_qzone', type: 'qzone' },
+                { className:'s_sina', type: 'sina' },
+            ],
+            qrcode: "",
+            isShowQr: false
         }
     },
     methods: {
+        onShare(type) {
+            //手动分享
+            let href = window.location.href
+            let addStr = `?url=${href}&title=${this.dataInfo.newsTitle}`
+            
+            this.shareLink =  {
+                qzone: `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey`,
+                qq: `http://connect.qq.com/widget/shareqq/index.html`,
+                sina: `http://v.t.sina.com.cn/share/share.php`
+            }
+            let url = this.shareLink[type]
+
+            if(url) {
+                window.open(`${url}${addStr}`)
+            }else{
+                this.isShowQr = !this.isShowQr
+
+                if(this.isShowQr&&!this.qrcode) {
+                    this.qrcode = createQrCodeImg({
+                        text: href
+                    })
+                }
+            }
+
+        },
         toOther(type) {
             let isPrev = type == 'prev',
                 id = isPrev ? this.dataInfo.prev.id : this.dataInfo.next.id
@@ -66,9 +101,26 @@ export default {
         _getData() {
             this.$api.getNewsDetail(this.newsId).then(data => {
                 this.dataInfo = data
+
+                //手动分享 应该和域名有关
+                let href = window.location.href
+                //href = "https://www.baidu.com/"
+                window._bd_share_config = {
+                    common : {
+                        bdText : data.newsTitle,
+                        bdUrl : href,
+                        bdPic : data.coverImg
+                    },
+                    share : [{
+                        "bdSize" : 22
+                    }]
+                }
             })
             this.$api.addBrowseCount(this.newsId)
         }
+    },
+    created() {
+        
     },
     watch: {
         $route: {
@@ -87,19 +139,11 @@ export default {
     },
     components: {
         ContentBr
-    },
-    created() {
-        //手动分享 应该和域名有关
-        let href = window.location.href
-        this.shareLinks =  {
-            qzone: `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${href}&title=分享内容`,
-            qq: `http://connect.qq.com/widget/shareqq/index.html?title=qqhaoyou&url=${href}&title=分享内容`,
-            sina: `http://v.t.sina.com.cn/share/share.php?url=${href}&title=分享内容`
-        }
     }
 
 }
 </script>
+
 <style lang="stylus" scoped>
 
 .new-detail-wrapper{
@@ -154,27 +198,42 @@ export default {
 
 .share-box{
     calcmedia('mt', 0px, 10px);
-    line-height: 36px;
-    a{
+    line-height: 36px; position: relative;
+    span{
         width: 36px; height: 36px; iconBg(); margin: 0 5px; display:inline-block;
-        &.popup_sqq{
+        &.s_qq{
             iconUrl_cc('n-qq.png');
             &:hover{
                 iconUrl_cc('n-qq-pass.png');
             }
         }
-        &.popup_qzone{
+        &.s_qzone{
             iconUrl_cc('n-qzone.png');
             &:hover{
                 iconUrl_cc('n-qzone-pass.png');
             }
         }
-        &.bds_tsina{
+        &.s_sina{
             iconUrl_cc('n-weibo.png');
             &:hover{
                 iconUrl_cc('n-weibo-pass.png');
             }
         }
+        &.s_weixin{
+            iconUrl_cc('n-weixin.jpg');
+            &:hover{
+                iconUrl_cc('n-weixin-pass.jpg');
+            }
+        }
+    }
+}
+
+
+.qrCode-box{
+    position: absolute; top:50px; left: 0; width: 260px; border: 1px solid $eb; background: #fff;
+    line-height: 24px; text-align:left; padding:10px 20px;
+    img{
+        width: 200px; display: block; margin: 8px auto;
     }
 }
 

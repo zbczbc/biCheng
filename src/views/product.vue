@@ -232,13 +232,13 @@ $productWidth = 500px;
         }
     }
     .info-content{
-        width: 55%; float:left; p(50px 0 0 px2vw(80));
+        width: 55%; float:left; p(40px 0 0 px2vw(80));
         .tit{
             calcmedia('sz',24, 16);
             calcmedia('m', 0, 0 10px);
         }
         .desc{
-            calcmedia('m', 0, 0 10px);
+            calcmedia('m', 30px 0, 0 10px);
             line(3); lh(24px); calcmedia('sz', 14, 12); m(20px 0 30px 0); p(0 0 20px 0);  line(3); h(72px)
         }
         .feature-con {

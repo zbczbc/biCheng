@@ -60,7 +60,7 @@ export default {
         setWidth() {
             let W = this.$refs.playcon.offsetWidth, _w
             if(this.$device.isM) {
-                _w = Math.floor(W/ 3)
+                _w = Math.floor(W/ 2)
             }else{
                 _w = Math.floor(W/ 4)
             }
@@ -88,24 +88,25 @@ export default {
 <style lang="stylus" scoped>
 .video-box{
     .play-con{
-        calcmedia('h', 500px, 300px);
+        calcmedia('h', 500px, 200px);
         background: #000;
         video{
             width: 100%; max-height:100%;
         }
     }
     .cover-con{
-        height: 140px; margin: 20px -10px 0;
+        calcmedia('h', 140px, 80px);
+        margin: 20px -10px 0;
         .cover-list {
             calcmedia('p', 0 10px, 0 5px);
             float: left;
             .inner{}
             .img-w{
-                height: 150px;
+                calcmedia('h', 140px, 80px);
             }
             .text{
                 calcmedia('lhh', 40px, 30px); background:#ccc;
-                padding-left: 20px;
+                padding-left: 20px; line(1);
             }
             &.active, &:hover{
                 .text{
