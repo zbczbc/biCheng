@@ -10,12 +10,13 @@
             <div class="look">
                 浏览：{{dataInfo.browseCount}}
             </div>
-
-            <div class="bdsharebuttonbox" data-tag="share_1">
+            
+            <div class="bdsharebuttonbox">
                 <span class="fl">分享到：</span>
-                <a :href="shareLinks.qq" target="blank" title="分享到qq好友" class="popup_sqq" data-cmd="sqq"></a>
-                <a :href="shareLinks.qzone" target="blank"  title="分享到qq空间" class="popup_qzone" data-cmd="qzone"></a>
-                <a :href="shareLinks.sina" target="blank"  title="分享到新浪微博" class="bds_tsina" data-cmd="tsina"></a>
+                <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
             </div>
         </div>
         <div class="p-con news-box ql-editor" v-html="dataInfo.newsContent">
@@ -66,6 +67,19 @@ export default {
         _getData() {
             this.$api.getNewsDetail(this.newsId).then(data => {
                 this.dataInfo = data
+
+                //手动分享 应该和域名有关
+                let href = window.location.href
+                window._bd_share_config = {
+                    common : {
+                        bdText : data.newsTitle,
+                        bdUrl : href,
+                        bdPic : data.coverImg
+                    },
+                    share : [{
+                        "bdSize" : 22
+                    }]
+                }
             })
             this.$api.addBrowseCount(this.newsId)
         }
@@ -89,13 +103,7 @@ export default {
         ContentBr
     },
     created() {
-        //手动分享 应该和域名有关
-        let href = window.location.href
-        this.shareLinks =  {
-            qzone: `http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${href}&title=分享内容`,
-            qq: `http://connect.qq.com/widget/shareqq/index.html?title=qqhaoyou&url=${href}&title=分享内容`,
-            sina: `http://v.t.sina.com.cn/share/share.php?url=${href}&title=分享内容`
-        }
+        
     }
 
 }
@@ -121,7 +129,7 @@ export default {
         .time{
             vertical-align: middle;
         }
-        .share-box{
+        .bdsharebuttonbox{
             calcmedia('mt', 0px, 10px); vertical-align: middle; height: 36px;
         }
 
@@ -152,18 +160,18 @@ export default {
     }
 }
 
-.share-box{
+.bdsharebuttonbox{
     calcmedia('mt', 0px, 10px);
     line-height: 36px;
     a{
         width: 36px; height: 36px; iconBg(); margin: 0 5px; display:inline-block;
-        &.popup_sqq{
+        &.bds_sqq{
             iconUrl_cc('n-qq.png');
             &:hover{
                 iconUrl_cc('n-qq-pass.png');
             }
         }
-        &.popup_qzone{
+        &.bds_qzone{
             iconUrl_cc('n-qzone.png');
             &:hover{
                 iconUrl_cc('n-qzone-pass.png');
@@ -173,6 +181,12 @@ export default {
             iconUrl_cc('n-weibo.png');
             &:hover{
                 iconUrl_cc('n-weibo-pass.png');
+            }
+        }
+        &.bds_weixin{
+            iconUrl_cc('n-weixin.jpg');
+            &:hover{
+                iconUrl_cc('n-weixin-pass.jpg');
             }
         }
     }
