@@ -15,7 +15,13 @@
                 <i class="fl">分享到：</i>
                 <span v-for="(item, i) in shareLinks" :key="i"  :class="item.className" @click="onShare(item.type)"></span>
 
-                <img v-if="isShowQr" :src="qrcode" class="qrCode">
+                <div class="qrCode-box" v-if="isShowQr" >
+                    分享到微信朋友圈 
+                    <img-icon type="mClose" w=20 h=20 class="por cp" @onClick="isShowQr=false" m="10 10 0 0" />
+                    <img :src="qrcode" class="qrCode">
+                    打开微信，点击底部的“发现”，<br/>
+                    使用“扫一扫”即可将网页分享至朋友圈。
+                </div>
             </div>
         </div>
         <div class="p-con news-box ql-editor" v-html="dataInfo.newsContent">
@@ -222,8 +228,13 @@ export default {
     }
 }
 
-.qrCode{
-    position: absolute; top:50px; left: 0; width: 200px;
+
+.qrCode-box{
+    position: absolute; top:50px; left: 0; width: 260px; border: 1px solid $eb; background: #fff;
+    line-height: 24px; text-align:left; padding:10px 20px;
+    img{
+        width: 200px; display: block; margin: 8px auto;
+    }
 }
 
 
