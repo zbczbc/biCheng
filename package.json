@@ -14,7 +14,7 @@
     "core-js": "^3.3.2",
     "element-ui": "^2.13.1",
     "es6-promise": "^4.2.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "swiper": "^4.5.0",
     "vue": "^2.6.10",
     "vue-baidu-map": "^0.21.22",
