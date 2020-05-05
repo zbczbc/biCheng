@@ -11,11 +11,11 @@
             <div class="swiper-slide"  v-for="(item, index) in pageData.bannerList" :key="index">
                 <template v-if="item.fileType=='视频'">
                     <div class="video-mask por"></div>
-                    <video :src="$api.getImg(item.fileName)" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
-                    <!-- <template v-if="$device.isPC">
-                        
-                        </template>
-                        <video :src=$api.getImg(item.fileName) v-else></video> -->
+                    <video v-if="$device.isPC" :src="$api.getImg(item.fileName)" autoplay="autoplay" loop="loop" preload="true" id="indexBgVideo" controls></video>
+                    <template v-else>
+                       <!-- <video :src=$api.getImg(item.fileName)></video> -->
+                       <div class="bg-box" :style="{backgroundImage: 'url(' + $api.getImg(item.videoImg) + ')'}"></div>
+                    </template>
                 </template>
 
                 <div v-else class="bg-box" :style="{backgroundImage: 'url(' + $api.getImg(item.fileName) + ')'}"></div>
