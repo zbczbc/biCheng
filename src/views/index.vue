@@ -125,10 +125,10 @@ export default {
 <style lang="stylus" scoped>
 
 .index-banner
-    height calc(100vh - 171px); width 100%; color: #fff;
+    height calc(100vh - 171px); width 100%; color: #fff; 
 
 .swiper-wrapper
-    height 100%;
+    height 100%; 
     .swiper-slide
         height 100%; overflow hidden;
         video

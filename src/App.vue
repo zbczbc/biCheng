@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" :class="{index: isIndex}">
 		<m-header :navList=navList></m-header>
 		<router-view v-if="refreshing"></router-view>
 		<custom-dialog ref="dialog"></custom-dialog>
@@ -130,6 +130,12 @@ export default {
 		$(window).on('scroll', animate);
         animate();
 	},
+	computed: {
+		isIndex() {
+			console.log(this.$route.path)
+			return this.$route.path == "/"
+		}
+	},
 	created() {
 		this.onResize()
 		this._setNavList()
@@ -137,8 +143,6 @@ export default {
 		window.onresize = () => {
 			this.onResize()
 		}
-
-
 	},
 	components: {
 		MHeader, MFooter, CustomDialog
@@ -148,4 +152,7 @@ export default {
 
 <style lang="stylus">
 @import 'common/stylus/index.styl';
+#app.index {
+	overflow hidden
+}
 </style>
