@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-import router from "./router"
+// import router from "./router"
 import base from 'common/mixins/base'
 import baseComponent from "base/index"
 import api from "@/api/api"
@@ -19,7 +19,14 @@ Vue.use(baseComponent)
 Vue.use(animated)
 Vue.use(ElementUI);
 
-new Vue({
-  render: h => h(App),
-  router
-}).$mount('#app')
+import { createApp } from './createapp' 
+const { app, router } = createApp() 
+
+router.onReady(() => { 
+  app.$mount('#app') 
+})
+
+// new Vue({
+//   render: h => h(App),
+//   router
+// }).$mount('#app')
